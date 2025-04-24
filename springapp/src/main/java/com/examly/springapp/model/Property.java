@@ -58,5 +58,17 @@ public String getStatus() {
 public void setStatus(String status) {
     this.status = status;
 }
+public Property(long propertyId, String title, String description, String location, Double price, String type,
+        String status) {
+    this.propertyId = propertyId;
+    this.title = title;
+    this.description = description;
+    this.location = location;
+    this.price = price;
+    this.type = type;
+    this.status = status;
+}
+public Property() {
+}
 
 }
