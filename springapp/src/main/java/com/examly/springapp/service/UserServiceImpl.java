@@ -2,8 +2,9 @@ package com.examly.springapp.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import com.examly.springapp.exception.PasswordNotMatchedException;
-import com.examly.springapp.exception.UserAlreadyExistException;
+
+import com.examly.springapp.exceptions.PasswordNotMatchedException;
+import com.examly.springapp.exceptions.UserAlreadyExistException;
 import com.examly.springapp.model.User;
 import com.examly.springapp.repository.UserRepo;
 
