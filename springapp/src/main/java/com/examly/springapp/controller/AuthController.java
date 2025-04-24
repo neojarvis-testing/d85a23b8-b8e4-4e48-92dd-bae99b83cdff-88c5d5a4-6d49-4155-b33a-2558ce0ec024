@@ -9,12 +9,13 @@ import com.examly.springapp.model.User;
 import com.examly.springapp.service.UserServiceImpl;
 
 @RestController
+@RequestMapping("/api")
 public class AuthController {
     
     @Autowired
     UserServiceImpl userService;
 
-    @RequestMapping("/api")
+    
 
     @PostMapping("/register")
     public ResponseEntity<User>registration(@RequestBody User user){
