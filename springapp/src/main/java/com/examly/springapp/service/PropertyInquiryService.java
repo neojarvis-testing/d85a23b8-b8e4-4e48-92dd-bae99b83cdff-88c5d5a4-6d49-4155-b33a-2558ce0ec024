@@ -1,3 +1,5 @@
-public class PropertyInquiryService {
+package com.examly.springapp.service;
+
+public interface PropertyInquiryService {
     
 }
