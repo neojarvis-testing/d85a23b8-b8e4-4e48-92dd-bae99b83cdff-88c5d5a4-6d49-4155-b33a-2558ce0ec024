@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,12 +15,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.examly.springapp.model.PropertyInquiry;
 import com.examly.springapp.service.PropertyInquiryService;
+import com.examly.springapp.service.PropertyInquiryServiceImpl;
+
 
 @RestController
 @RequestMapping("/api/inquiries")
 public class PropertyInquiryController {
 @Autowired
-PropertyInquiryService  propertyInquiryService;
+PropertyInquiryServiceImpl  propertyInquiryService;
 @PostMapping
 public ResponseEntity<PropertyInquiry> addInquiry(@RequestBody PropertyInquiry propertyInquiry){
     propertyInquiry = propertyInquiryService.addInquiry(propertyInquiry);
@@ -55,8 +58,8 @@ public ResponseEntity<?> getAllInquiries(){
 
 
 @PutMapping("/{inquiryId}")
-public ResponseEntity<?> updateInquiryById(@PathVariable long inquiryId){
-    PropertyInquiry propertyInquiry = propertyInquiryService.updateInquiryById(inquiryId);
+public ResponseEntity<?> updateInquiryById(@PathVariable long inquiryId,@RequestBody PropertyInquiry inquiries){
+    PropertyInquiry propertyInquiry = propertyInquiryService.updateInquiryById(inquiryId,inquiries);
     if(propertyInquiry==null){
         return ResponseEntity.status(200).body(propertyInquiry);
     }
@@ -67,9 +70,9 @@ public ResponseEntity<?> updateInquiryById(@PathVariable long inquiryId){
 public ResponseEntity<String> deleteInquiryById(@PathVariable long inquiryId){
     boolean flag = propertyInquiryService.deleteInquiryById(inquiryId);
     if(flag){
-        return ResponseEntity.status(200).body("Deletion is successfull!")
+        return ResponseEntity.status(200).body("Deletion is successfull!");
     }
-    return ResponseEntity.status(404).body("Deletion is unsuccessfull!")
+    return ResponseEntity.status(404).body("Deletion is unsuccessfull!");
 }
 
 
