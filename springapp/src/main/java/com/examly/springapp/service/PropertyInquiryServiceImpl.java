@@ -10,7 +10,7 @@ import com.examly.springapp.model.User;
 import com.examly.springapp.repository.PropertyInquiryRepo;
 import com.examly.springapp.repository.UserRepo;
 @Service
-public class PropertyInquiryServiceImpl {
+public class PropertyInquiryServiceImpl implements PropertyInquiryService{
 @Autowired
 PropertyInquiryRepo propertyInquiryRepo;
 @Autowired

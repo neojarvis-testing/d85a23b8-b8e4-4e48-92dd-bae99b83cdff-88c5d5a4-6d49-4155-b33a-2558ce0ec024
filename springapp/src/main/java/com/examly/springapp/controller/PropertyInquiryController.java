@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.examly.springapp.model.PropertyInquiry;
-import com.examly.springapp.service.PropertyInquiryService;
 import com.examly.springapp.service.PropertyInquiryServiceImpl;
 
 
@@ -41,7 +40,7 @@ public ResponseEntity<?> getInquiryById(@PathVariable long inquiryId){
 @GetMapping("/user/{userId}")
 public ResponseEntity<?> getInquiriesByUser(@PathVariable long userId){
     List<PropertyInquiry> propertyInquiriesList = propertyInquiryService.getInquiriesByUser(userId);
-    if(propertyInquiriesList.size()!=0){
+    if(!propertyInquiriesList.isEmpty()){
     return ResponseEntity.status(200).body(propertyInquiriesList);
     }
     return ResponseEntity.status(404).body("No Inquiries found!");
@@ -50,7 +49,7 @@ public ResponseEntity<?> getInquiriesByUser(@PathVariable long userId){
 @GetMapping("")
 public ResponseEntity<?> getAllInquiries(){
     List<PropertyInquiry> propertyInquiriesList = propertyInquiryService.getAllInquiries();
-    if(propertyInquiriesList.size()!=0){
+    if(!propertyInquiriesList.isEmpty()){
     return ResponseEntity.status(200).body(propertyInquiriesList);
     }
     return ResponseEntity.status(404).body("No Inquiries found!");
