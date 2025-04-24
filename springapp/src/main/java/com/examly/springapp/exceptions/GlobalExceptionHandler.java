@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class GlobalExceptionHandler {
     @ExceptionHandler(UserAlreadyExistException.class)
-
     public ResponseEntity<?> handleUserAlreadyExistException(UserAlreadyExistException e){
         return ResponseEntity.status(404).body(e.getMessage()); // 404 - Not Found
     }
@@ -28,8 +27,17 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(400).body(e.getMessage()); // 400 - Bad Request
     }
 
+
     public ResponseEntity<?>method1(UserAlreadyExistException e){
         return ResponseEntity.status(404).body(e.getMessage());
     }
+  //property Exception
+  public ResponseEntity<?>DuplicateProperty(DuplicatePropertyException e){
+    return ResponseEntity.status(403).body(e.getMessage());
+}
+public ResponseEntity<?>PropertyException(PropertyException e){
+    return ResponseEntity.status(403).body(e.getMessage());
+}
+
 
 }

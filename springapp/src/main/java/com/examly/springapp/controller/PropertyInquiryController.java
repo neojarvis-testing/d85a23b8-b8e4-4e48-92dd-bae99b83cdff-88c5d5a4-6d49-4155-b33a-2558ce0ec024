@@ -31,7 +31,7 @@ public ResponseEntity<PropertyInquiry> addInquiry(@RequestBody PropertyInquiry p
 @GetMapping("/{inquiryId}")
 public ResponseEntity<?> getInquiryById(@PathVariable long inquiryId){
     PropertyInquiry propertyInquiry = propertyInquiryService.getInquiryById(inquiryId);
-    if(propertyInquiry==null){
+    if(propertyInquiry!=null){
     return ResponseEntity.status(200).body(propertyInquiry);
     }
     return ResponseEntity.status(404).body("Inquiry not found!");
@@ -49,20 +49,21 @@ public ResponseEntity<?> getInquiriesByUser(@PathVariable long userId){
 @GetMapping("")
 public ResponseEntity<?> getAllInquiries(){
     List<PropertyInquiry> propertyInquiriesList = propertyInquiryService.getAllInquiries();
-    if(!propertyInquiriesList.isEmpty()){
+    if(propertyInquiriesList!=null){
     return ResponseEntity.status(200).body(propertyInquiriesList);
     }
     return ResponseEntity.status(404).body("No Inquiries found!");
+    
 }
 
 
 @PutMapping("/{inquiryId}")
 public ResponseEntity<?> updateInquiryById(@PathVariable long inquiryId,@RequestBody PropertyInquiry inquiries){
     PropertyInquiry propertyInquiry = propertyInquiryService.updateInquiryById(inquiryId,inquiries);
-    if(propertyInquiry==null){
+    if(propertyInquiry!=null){
         return ResponseEntity.status(200).body(propertyInquiry);
     }
-        return ResponseEntity.status(404).body("Update is Unsuccessful!");
+    return ResponseEntity.status(404).body("Update is Unsuccessful!");
 }
 
 @DeleteMapping("/{inquiryId}")
