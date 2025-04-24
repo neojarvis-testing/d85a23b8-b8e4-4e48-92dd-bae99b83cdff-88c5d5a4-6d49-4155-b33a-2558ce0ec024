@@ -18,59 +18,59 @@ import com.examly.springapp.service.PropertyInquiryService;
 @RestController
 @RequestMapping("/api/inquiries")
 public class PropertyInquiryController {
-@Autowired
-PropertyInquiryService  propertyInquiryService;
-@PostMapping
-public ResponseEntity<PropertyInquiry> addInquiry(@RequestBody PropertyInquiry propertyInquiry){
-    propertyInquiry = propertyInquiryService.addInquiry(propertyInquiry);
-    return ResponseEntity.status(201).body(propertyInquiry);
-}
+// @Autowired
+// PropertyInquiryService  propertyInquiryService;
+// @PostMapping
+// public ResponseEntity<PropertyInquiry> addInquiry(@RequestBody PropertyInquiry propertyInquiry){
+//     propertyInquiry = propertyInquiryService.addInquiry(propertyInquiry);
+//     return ResponseEntity.status(201).body(propertyInquiry);
+// }
 
-@GetMapping("/{inquiryId}")
-public ResponseEntity<?> getInquiryById(@PathVariable long inquiryId){
-    PropertyInquiry propertyInquiry = propertyInquiryService.getInquiryById(inquiryId);
-    if(propertyInquiry==null){
-    return ResponseEntity.status(200).body(propertyInquiry);
-    }
-    return ResponseEntity.status(404).body("Inquiry not found!");
-}
+// @GetMapping("/{inquiryId}")
+// public ResponseEntity<?> getInquiryById(@PathVariable long inquiryId){
+//     PropertyInquiry propertyInquiry = propertyInquiryService.getInquiryById(inquiryId);
+//     if(propertyInquiry==null){
+//     return ResponseEntity.status(200).body(propertyInquiry);
+//     }
+//     return ResponseEntity.status(404).body("Inquiry not found!");
+// }
 
-@GetMapping("/user/{userId}")
-public ResponseEntity<?> getInquiriesByUser(@PathVariable long userId){
-    List<PropertyInquiry> propertyInquiriesList = propertyInquiryService.getInquiriesByUser(userId);
-    if(propertyInquiriesList.size()!=0){
-    return ResponseEntity.status(200).body(propertyInquiriesList);
-    }
-    return ResponseEntity.status(404).body("No Inquiries found!");
-}
+// @GetMapping("/user/{userId}")
+// public ResponseEntity<?> getInquiriesByUser(@PathVariable long userId){
+//     List<PropertyInquiry> propertyInquiriesList = propertyInquiryService.getInquiriesByUser(userId);
+//     if(propertyInquiriesList.size()!=0){
+//     return ResponseEntity.status(200).body(propertyInquiriesList);
+//     }
+//     return ResponseEntity.status(404).body("No Inquiries found!");
+// }
 
-@GetMapping("")
-public ResponseEntity<?> getAllInquiries(){
-    List<PropertyInquiry> propertyInquiriesList = propertyInquiryService.getAllInquiries();
-    if(propertyInquiriesList.size()!=0){
-    return ResponseEntity.status(200).body(propertyInquiriesList);
-    }
-    return ResponseEntity.status(404).body("No Inquiries found!");
-}
+// @GetMapping("")
+// public ResponseEntity<?> getAllInquiries(){
+//     List<PropertyInquiry> propertyInquiriesList = propertyInquiryService.getAllInquiries();
+//     if(propertyInquiriesList.size()!=0){
+//     return ResponseEntity.status(200).body(propertyInquiriesList);
+//     }
+//     return ResponseEntity.status(404).body("No Inquiries found!");
+// }
 
 
-@PutMapping("/{inquiryId}")
-public ResponseEntity<?> updateInquiryById(@PathVariable long inquiryId){
-    PropertyInquiry propertyInquiry = propertyInquiryService.updateInquiryById(inquiryId);
-    if(propertyInquiry==null){
-        return ResponseEntity.status(200).body(propertyInquiry);
-    }
-        return ResponseEntity.status(404).body("Update is Unsuccessful!");
-}
+// @PutMapping("/{inquiryId}")
+// public ResponseEntity<?> updateInquiryById(@PathVariable long inquiryId){
+//     PropertyInquiry propertyInquiry = propertyInquiryService.updateInquiryById(inquiryId);
+//     if(propertyInquiry==null){
+//         return ResponseEntity.status(200).body(propertyInquiry);
+//     }
+//         return ResponseEntity.status(404).body("Update is Unsuccessful!");
+// }
 
-@DeleteMapping("/{inquiryId}")
-public ResponseEntity<String> deleteInquiryById(@PathVariable long inquiryId){
-    boolean flag = propertyInquiryService.deleteInquiryById(inquiryId);
-    if(flag){
-        return ResponseEntity.status(200).body("Deletion is successfull!")
-    }
-    return ResponseEntity.status(404).body("Deletion is unsuccessfull!")
-}
+// @DeleteMapping("/{inquiryId}")
+// public ResponseEntity<String> deleteInquiryById(@PathVariable long inquiryId){
+//     boolean flag = propertyInquiryService.deleteInquiryById(inquiryId);
+//     if(flag){
+//         return ResponseEntity.status(200).body("Deletion is successfull!")
+//     }
+//     return ResponseEntity.status(404).body("Deletion is unsuccessfull!")
+// }
 
 
 
