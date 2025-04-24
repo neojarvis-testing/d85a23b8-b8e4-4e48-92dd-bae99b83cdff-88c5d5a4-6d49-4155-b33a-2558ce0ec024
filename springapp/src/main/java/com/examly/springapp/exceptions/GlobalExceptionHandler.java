@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class GlobalExceptionHandler {
     @ExceptionHandler(UserAlreadyExistException.class)
-
     public ResponseEntity<?> handleUserAlreadyExistException(UserAlreadyExistException e){
         return ResponseEntity.status(404).body(e.getMessage()); // 404 - Not Found
     }
@@ -28,18 +27,6 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(400).body(e.getMessage()); // 400 - Bad Request
     }
 
-    // Generic handler for unexpected errors
-    @ExceptionHandler(Exception.class) 
-    public ResponseEntity<String> handleGlobalException(Exception e) {
-        return ResponseEntity.status(500).body("An unexpected error occurred: " + e.getMessage()); // 500 - Internal Server Error
-    }
-    public ResponseEntity<?>method1(UserAlreadyExistException e){
-        return ResponseEntity.status(404).body(e.getMessage());
-    }
-
-    @ExceptionHandler(PasswordNotMatchedException.class)
-    public ResponseEntity<?>method2(PasswordNotMatchedException e){
-        return ResponseEntity.status(409).body(e.getMessage());
-    }
+   
 
 }
