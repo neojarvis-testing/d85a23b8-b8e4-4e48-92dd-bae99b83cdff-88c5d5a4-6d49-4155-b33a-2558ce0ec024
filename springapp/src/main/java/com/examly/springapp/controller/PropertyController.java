@@ -50,11 +50,9 @@ public class PropertyController {
     @GetMapping
     public ResponseEntity<List<Property>> getAllProperties() {
         List<Property> propertyList = propertyservice.getAllProperties(); // Call service to fetch all properties
-        if (!propertyList.isEmpty()) {
-            return ResponseEntity.status(201).body(propertyList); // Return 201 OK with list of properties
-        } else {
-            return ResponseEntity.status(404).body(null); // Return 404 Not Found if no properties exist
-        }
+
+            return ResponseEntity.ok(propertyList); // Return 200 OK with list of properties
+   
     }
 
     // Update Property: Updates an existing property by ID
