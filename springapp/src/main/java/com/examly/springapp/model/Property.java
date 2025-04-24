@@ -5,10 +5,10 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-@Entity
+@Entity  //Maps the class with database
 public class Property {
-@Id
-@GeneratedValue(strategy= GenerationType.IDENTITY)
+@Id  //Defines the primary Key
+@GeneratedValue(strategy= GenerationType.IDENTITY)  //Auto-Generated ID
 private long propertyId;
 private String title;
 private String description;
@@ -16,6 +16,7 @@ private String location;
 private Double price;
 private String type;
 private String status;
+//Generate Getters and Setters
 public long getPropertyId() {
     return propertyId;
 }
@@ -59,7 +60,7 @@ public void setStatus(String status) {
     this.status = status;
 }
 public Property(long propertyId, String title, String description, String location, Double price, String type,
-        String status) {
+        String status) { 
     this.propertyId = propertyId;
     this.title = title;
     this.description = description;

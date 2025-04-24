@@ -8,7 +8,7 @@ import com.examly.springapp.model.Property;
 public interface PropertyService {
     Property addProperty(Property property);
 
-    Optional<Property> getPropertyById(Long propertyId);
+    Property getPropertyById(Long propertyId);
 
     List<Property> getAllProperties();
 

@@ -8,25 +8,27 @@ import org.springframework.web.bind.annotation.RestController;
 import com.examly.springapp.model.User;
 import com.examly.springapp.service.UserServiceImpl;
 
-@RestController
-@RequestMapping("/api")
+@RestController //Defines this class as a REST controller
+
+@RequestMapping("/api") // Sets base URL
+
 public class AuthController {
     
     @Autowired
-    UserServiceImpl userService;
+    UserServiceImpl userService;   //Injecting the service
 
     
 
-    @PostMapping("/register")
+    @PostMapping("/register") // Handles POST requests for user registration
     public ResponseEntity<User>registration(@RequestBody User user){
-        user=userService.registration(user);
+        user=userService.registration(user); // Calls registration method
         return ResponseEntity.status(201).body(user);
     }
 
-    @PostMapping("/login")
+    @PostMapping("/login")  //Handles POST requests for user login
     public ResponseEntity<User> loginUser(@RequestBody User user){
         user=userService.loginUser(user);
-        user.setPassword(null);
+        user.setPassword(null);  // Encrypting the password
         return ResponseEntity.status(201).body(user);           
     }
 }

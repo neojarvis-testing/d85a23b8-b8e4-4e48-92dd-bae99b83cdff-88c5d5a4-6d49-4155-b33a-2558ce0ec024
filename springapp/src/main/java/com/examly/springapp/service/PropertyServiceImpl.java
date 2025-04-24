@@ -30,8 +30,8 @@ public class PropertyServiceImpl implements PropertyService {
      * @return An Optional containing the property if found, otherwise empty.
      */
     @Override
-    public Optional<Property> getPropertyById(Long propertyId) {
-        return propertyRepo.findById(propertyId); // Fetch the property object by ID
+    public Property getPropertyById(Long propertyId) {
+        return propertyRepo.findById(propertyId).orElse(null); // Fetch the property object by ID
     }
 
     /**
