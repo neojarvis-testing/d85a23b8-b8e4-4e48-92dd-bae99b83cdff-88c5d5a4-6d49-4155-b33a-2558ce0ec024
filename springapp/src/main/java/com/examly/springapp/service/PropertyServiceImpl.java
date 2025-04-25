@@ -50,8 +50,6 @@ public class PropertyServiceImpl implements PropertyService {
         }
         return property;
 
-        return propertyRepo.findById(propertyId).orElse(null); // Fetch the property object by ID
-
     }
 
     /**
