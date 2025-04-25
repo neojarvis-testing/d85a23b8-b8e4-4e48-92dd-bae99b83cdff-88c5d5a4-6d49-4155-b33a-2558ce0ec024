@@ -1,4 +1,4 @@
-package com.examly.springapp.DTOs;
+package com.examly.springapp.dtos;
 
 
 public class UserDTO {

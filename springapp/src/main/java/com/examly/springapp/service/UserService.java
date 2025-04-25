@@ -1,7 +1,7 @@
 package com.examly.springapp.service;
 
-import com.examly.springapp.DTOs.LoginDTO;
-import com.examly.springapp.DTOs.UserDTO;
+import com.examly.springapp.dtos.LoginDTO;
+import com.examly.springapp.dtos.UserDTO;
 import com.examly.springapp.model.User;
 
 public interface UserService {
