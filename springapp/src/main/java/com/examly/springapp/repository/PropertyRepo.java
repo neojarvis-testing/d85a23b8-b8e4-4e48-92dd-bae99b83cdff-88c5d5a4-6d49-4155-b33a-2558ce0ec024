@@ -7,5 +7,5 @@ import com.examly.springapp.model.Property;
 
 @Repository
 public interface PropertyRepo extends JpaRepository<Property,Long>{
-    
+    Property findByTitle(String title);
 }

@@ -10,26 +10,27 @@ import com.examly.springapp.model.LoginDTO;
 import com.examly.springapp.model.User;
 import com.examly.springapp.service.UserServiceImpl;
 
-@RestController
-@RequestMapping("/api")
+@RestController //Defines this class as a REST controller
+
+@RequestMapping("/api") // Sets base URL
+
 public class AuthController {
     
     @Autowired
-    UserServiceImpl userService;
+    UserServiceImpl userService;   //Injecting the service
 
     
 
     @PostMapping("/register")
-    public ResponseEntity<LoginDTO>registration(@RequestBody User user){
+    public ResponseEntity<User>registration(@RequestBody User user){
         user=userService.registration(user);
-        LoginDTO loginDto=new LoginDTO(user.getUserId(),user.getEmail(),user.getUsername(),user.getUserRole());
-        return ResponseEntity.status(201).body(loginDto);
+        return ResponseEntity.status(201).body(user);
     }
 
-    @PostMapping("/login")
+    @PostMapping("/login")  //Handles POST requests for user login
     public ResponseEntity<User> loginUser(@RequestBody User user){
         user=userService.loginUser(user);
-        user.setPassword(null);
+        user.setPassword(null);  // Encrypting the password
         return ResponseEntity.status(201).body(user);           
     }
 }
