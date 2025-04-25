@@ -3,8 +3,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.examly.springapp.DTOs.LoginDTO;
+import com.examly.springapp.DTOs.RowMapper;
+import com.examly.springapp.DTOs.UserDTO;
 import com.examly.springapp.exceptions.PasswordNotMatchedException;
 import com.examly.springapp.exceptions.UserAlreadyExistException;
+import com.examly.springapp.exceptions.UserNotFoundException;
 import com.examly.springapp.model.User;
 import com.examly.springapp.repository.UserRepo;
 
@@ -26,17 +30,17 @@ public class UserServiceImpl implements UserService {
         return userRepo.save(user);
     }
 
-    public User loginUser(User user) {
-        User userexist = userRepo.findByEmail(user.getEmail());
+    public UserDTO loginUser(LoginDTO loginDTO) {
+        User userexist = userRepo.findByEmail(loginDTO.getEmail());
         if (userexist == null) {
-
-             System.out.println("User not found");
+            
+            System.out.println("User not found");
         }
 
-        if (!encoder.matches(user.getPassword(), userexist.getPassword()))
+        if (!encoder.matches(loginDTO.getPassword(), userexist.getPassword()))
             throw new PasswordNotMatchedException("Password is Incorrect!");
 
-        return userexist;
+        return RowMapper.mapToUserDTO(userexist);
     }
 
 }
