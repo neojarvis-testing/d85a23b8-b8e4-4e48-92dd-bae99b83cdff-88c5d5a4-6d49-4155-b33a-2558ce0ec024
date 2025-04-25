@@ -15,14 +15,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.examly.springapp.model.Property;
-import com.examly.springapp.service.PropertyServiceImpl;
+import com.examly.springapp.service.PropertyService;
 
 @RestController
 @RequestMapping("/api/properties")
 public class PropertyController {
 
     @Autowired 
-    private PropertyServiceImpl propertyservice; // Service layer to handle business logic
+    private PropertyService propertyservice; // Service layer to handle business logic
 
     // Add Property: Adds a new property to the system
     @PostMapping

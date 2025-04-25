@@ -32,9 +32,12 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(404).body(e.getMessage());
     }
   //property Exception
+
+  @ExceptionHandler(DuplicatePropertyException.class)
   public ResponseEntity<?>DuplicateProperty(DuplicatePropertyException e){
     return ResponseEntity.status(403).body(e.getMessage());
 }
+@ExceptionHandler(PropertyException.class)
 public ResponseEntity<?>PropertyException(PropertyException e){
     return ResponseEntity.status(403).body(e.getMessage());
 }

@@ -71,7 +71,7 @@ public class PropertyServiceImpl implements PropertyService {
     public Property updateProperty(Long propertyId, Property property) {
         // Check if the property exists
         Property existingProperty= propertyRepo.findById(propertyId).orElse(null);
-        if(property==null){
+        if(existingProperty==null){
             throw new PropertyException("Property with ID " + propertyId + " not found.");
     }
 
