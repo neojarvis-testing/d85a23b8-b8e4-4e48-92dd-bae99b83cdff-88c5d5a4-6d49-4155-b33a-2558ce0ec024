@@ -11,8 +11,6 @@ import com.examly.springapp.model.Feedback;
 import com.examly.springapp.model.User;
 
 
-
-
 import org.springframework.stereotype.Repository;
 @Repository
 public interface FeedbackRepo extends JpaRepository<Feedback,Long>{

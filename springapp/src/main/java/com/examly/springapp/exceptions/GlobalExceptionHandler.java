@@ -27,6 +27,20 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(400).body(e.getMessage()); // 400 - Bad Request
     }
 
-   
+
+    public ResponseEntity<?>method1(UserAlreadyExistException e){
+        return ResponseEntity.status(404).body(e.getMessage());
+    }
+  //property Exception
+
+  @ExceptionHandler(DuplicatePropertyException.class)
+  public ResponseEntity<?>DuplicateProperty(DuplicatePropertyException e){
+    return ResponseEntity.status(403).body(e.getMessage());
+}
+@ExceptionHandler(PropertyException.class)
+public ResponseEntity<?>PropertyException(PropertyException e){
+    return ResponseEntity.status(403).body(e.getMessage());
+}
+
 
 }
