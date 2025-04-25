@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.examly.springapp.model.LoginDTO;
 import com.examly.springapp.model.User;
 import com.examly.springapp.service.UserServiceImpl;
 
@@ -18,9 +20,10 @@ public class AuthController {
     
 
     @PostMapping("/register")
-    public ResponseEntity<User>registration(@RequestBody User user){
+    public ResponseEntity<LoginDTO>registration(@RequestBody User user){
         user=userService.registration(user);
-        return ResponseEntity.status(201).body(user);
+        LoginDTO loginDto=new LoginDTO(user.getUserId(),user.getEmail(),user.getUsername(),user.getUserRole());
+        return ResponseEntity.status(201).body(loginDto);
     }
 
     @PostMapping("/login")
