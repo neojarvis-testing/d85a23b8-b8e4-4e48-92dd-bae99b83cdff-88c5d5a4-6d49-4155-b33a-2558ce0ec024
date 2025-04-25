@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.examly.springapp.DTOs.LoginDTO;
-import com.examly.springapp.DTOs.UserDTO;
+import com.examly.springapp.dtos.LoginDTO;
+import com.examly.springapp.dtos.UserDTO;
 import com.examly.springapp.model.User;
 import com.examly.springapp.service.UserServiceImpl;
 

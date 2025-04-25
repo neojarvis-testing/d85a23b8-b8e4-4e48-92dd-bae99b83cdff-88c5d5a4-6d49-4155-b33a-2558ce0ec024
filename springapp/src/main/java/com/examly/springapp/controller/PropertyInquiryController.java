@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.examly.springapp.dtos.PropertyInquiryInput;
 import com.examly.springapp.model.PropertyInquiry;
 import com.examly.springapp.service.PropertyInquiryServiceImpl;
 
@@ -24,8 +25,8 @@ public class PropertyInquiryController {
 PropertyInquiryServiceImpl  propertyInquiryService; //Injecting the service
 
 @PostMapping    // Handles HTTP POST requests for adding a new property inquiry
-public ResponseEntity<PropertyInquiry> addInquiry(@RequestBody PropertyInquiry propertyInquiry){
-    propertyInquiry = propertyInquiryService.addInquiry(propertyInquiry);
+public ResponseEntity<PropertyInquiry> addInquiry(@RequestBody PropertyInquiryInput propertyInquiryInput){
+    PropertyInquiry propertyInquiry = propertyInquiryService.addInquiry(propertyInquiryInput);
     return ResponseEntity.status(201).body(propertyInquiry);
 }
 

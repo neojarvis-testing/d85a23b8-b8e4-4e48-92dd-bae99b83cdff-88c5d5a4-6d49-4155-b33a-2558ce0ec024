@@ -1,5 +1,6 @@
-package com.examly.springapp.DTOs;
+package com.examly.springapp.dtos;
 
+import com.examly.springapp.model.PropertyInquiry;
 import com.examly.springapp.model.User;
 
 public class RowMapper {
@@ -11,5 +12,6 @@ public class RowMapper {
     userDTO.setEmail(user.getEmail());
     return userDTO;
   }
+
 
 }
