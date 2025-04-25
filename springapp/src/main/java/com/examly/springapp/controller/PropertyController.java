@@ -37,11 +37,8 @@ public class PropertyController {
     @GetMapping("/{propertyId}")
     public ResponseEntity<Property> getPropertyById(@PathVariable long propertyId) {
 
-        Property property = propertyservice.getPropertyById(propertyId); // Call service to fetch property by ID
-
-
+       
     Property property = propertyservice.getPropertyById(propertyId); // Call service to fetch property by ID
-        if (property != null) {
 
             return ResponseEntity.status(201).body(property); // Return 201 OK with property if found
   
