@@ -16,7 +16,11 @@ PropertyInquiryRepo propertyInquiryRepo;
 @Autowired
 UserRepo userRepo;
     public PropertyInquiry addInquiry(PropertyInquiry propertyInquiry) {
+       User user = userRepo.findById(propertyInquiry.getUser().getUserId()).orElse(null);
+       if(user!=null){
        return propertyInquiryRepo.save(propertyInquiry);
+       }
+    
     }
 
     public PropertyInquiry getInquiryById(long inquiryId) {
