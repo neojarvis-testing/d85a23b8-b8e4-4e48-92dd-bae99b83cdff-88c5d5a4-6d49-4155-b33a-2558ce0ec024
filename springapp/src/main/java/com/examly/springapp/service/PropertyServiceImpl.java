@@ -1,8 +1,10 @@
 package com.examly.springapp.service;
 
 import java.util.List;
-import java.util.Optional;
 
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,7 @@ import com.examly.springapp.repository.PropertyRepo;
 
 @Service
 public class PropertyServiceImpl implements PropertyService {
+    private Logger logger = LoggerFactory.getLogger(PropertyServiceImpl.class);
 
     @Autowired
     private PropertyRepo propertyRepo; // Repository to handle database operations
@@ -24,9 +27,11 @@ public class PropertyServiceImpl implements PropertyService {
      * @throws DuplicatePropertyException If a property with the same title already exists.
      */
     public Property addProperty(Property property) {
+        logger.info("Attempting to add property: {}", property.getTitle());
         // Check for duplicate property title
         Property existingProperty = propertyRepo.findByTitle(property.getTitle());
         if (existingProperty != null) {
+            logger.warn("Duplicate property detected: {}", property.getTitle());
             throw new DuplicatePropertyException("Property with the title '" + property.getTitle() + "' already exists.");
         }
         // Save and return the new property object
@@ -42,12 +47,15 @@ public class PropertyServiceImpl implements PropertyService {
      */
     @Override
     public Property getPropertyById(Long propertyId) {
+        logger.info("Fetching property with ID: {}", propertyId);
 
         // Fetch the property object by ID, or throw an exception if not found
         Property property= propertyRepo.findById(propertyId).orElse(null);
         if(property==null){
+            logger.error("Property not found: ID {}", propertyId);
                 throw new PropertyException("Property with ID " + propertyId + " not found.");
         }
+        logger.info("Property retrieved successfully:");
         return property;
 
     }
@@ -58,6 +66,7 @@ public class PropertyServiceImpl implements PropertyService {
      */
     @Override
     public List<Property> getAllProperties() {
+        logger.info("Fetching all properties");
         // Fetch and return all property objects
         return propertyRepo.findAll();
     }
@@ -71,9 +80,11 @@ public class PropertyServiceImpl implements PropertyService {
      */
     @Override
     public Property updateProperty(Long propertyId, Property property) {
+        logger.info("Attempting to update property with ID: {}", propertyId);
         // Check if the property exists
         Property existingProperty= propertyRepo.findById(propertyId).orElse(null);
         if(existingProperty==null){
+            logger.error("Property update failed, not found:");
             throw new PropertyException("Property with ID " + propertyId + " not found.");
     }
 
@@ -86,6 +97,7 @@ public class PropertyServiceImpl implements PropertyService {
         existingProperty.setStatus(property.getStatus());
 
         // Save and return the updated property object
+        logger.info("Property updated successfully:");
         return propertyRepo.save(existingProperty);
     }
 
@@ -96,15 +108,19 @@ public class PropertyServiceImpl implements PropertyService {
      * @throws PropertyException If the property does not exist.
      */
     public boolean deleteProperty(Long propertyId) {
+        logger.info("Attempting to delete property with ID: {}", propertyId);
         // Check if the property exists
         Property property= propertyRepo.findById(propertyId).orElse(null);
         if(property==null){
+            logger.error("Property deletion failed, not found: ID {}", propertyId);
                 throw new PropertyException("Property with ID " + propertyId + " not found.");
         }
       property.setIsdeleted(false);
       propertyRepo.save(property);
+      logger.info("Property marked as deleted: ID {}", propertyId);
         // Perform a logical deletion by toggling the isDeleted status (if applicable)
        // Physically delete the property (or toggle isDeleted if needed)
+       
         return true;
     }
 }
