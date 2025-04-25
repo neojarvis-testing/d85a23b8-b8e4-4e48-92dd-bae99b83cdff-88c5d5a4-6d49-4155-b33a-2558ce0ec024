@@ -9,20 +9,21 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
-@Entity
+@Entity  //Maps the class with database
 public class Feedback {
-@Id
-@GeneratedValue(strategy= GenerationType.IDENTITY)
+@Id //Defines the primary Key
+@GeneratedValue(strategy= GenerationType.IDENTITY) //Auto-Generated ID
 private long feedbackId;
 private String feedbackText;
 private LocalDate date;
-@ManyToOne
-@JoinColumn(name = "userId",nullable=false)
+@ManyToOne  // Establishes a many-to-one relationship with the User entity
+@JoinColumn(name = "userId",nullable=false)  //Setting the foreign key name
 private User user;
-@ManyToOne
-@JoinColumn(name = "propertyId",nullable=false)
+@ManyToOne  // Establishes a many-to-one relationship with the Property entity
+@JoinColumn(name = "propertyId",nullable=false)  //Setting the foreign key name
 private Property property;
 private String category;
+//Generate the setter and getter methods-:
 public long getFeedbackId() {
     return feedbackId;
 }

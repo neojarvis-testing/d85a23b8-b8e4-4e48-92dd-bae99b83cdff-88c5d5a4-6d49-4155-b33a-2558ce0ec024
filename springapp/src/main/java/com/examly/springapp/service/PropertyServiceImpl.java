@@ -42,12 +42,16 @@ public class PropertyServiceImpl implements PropertyService {
      */
     @Override
     public Property getPropertyById(Long propertyId) {
+
         // Fetch the property object by ID, or throw an exception if not found
         Property property= propertyRepo.findById(propertyId).orElse(null);
         if(property==null){
                 throw new PropertyException("Property with ID " + propertyId + " not found.");
         }
         return property;
+
+        return propertyRepo.findById(propertyId).orElse(null); // Fetch the property object by ID
+
     }
 
     /**
