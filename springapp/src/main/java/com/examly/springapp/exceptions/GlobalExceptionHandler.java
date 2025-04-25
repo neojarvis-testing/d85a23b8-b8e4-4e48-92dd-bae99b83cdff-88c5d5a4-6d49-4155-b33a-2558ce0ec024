@@ -42,5 +42,13 @@ public ResponseEntity<?>PropertyException(PropertyException e){
     return ResponseEntity.status(403).body(e.getMessage());
 }
 
+@ExceptionHandler(UserNotFoundException.class)
+public ResponseEntity<?> userNotFound(UserNotFoundException e){
+    return ResponseEntity.status(500).body(e.getMessage());
+}
 
+@ExceptionHandler(InquiryNotFound.class)
+public ResponseEntity<?> inquiryNotFound(InquiryNotFound e){
+    return ResponseEntity.status(500).body(e.getMessage());
+}
 }
