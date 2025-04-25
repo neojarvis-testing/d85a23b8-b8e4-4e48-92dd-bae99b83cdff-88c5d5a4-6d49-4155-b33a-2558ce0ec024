@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.examly.springapp.dtos.PropertyInquiryInput;
 import com.examly.springapp.exceptions.InquiryNotFound;
 import com.examly.springapp.exceptions.PropertyException;
 import com.examly.springapp.exceptions.UserNotFoundException;
@@ -22,16 +23,26 @@ PropertyInquiryRepo propertyInquiryRepo;
 UserRepo userRepo;
 @Autowired
 PropertyRepo propertyRepo;
-    public PropertyInquiry addInquiry(PropertyInquiry propertyInquiry) {
-       User user = userRepo.findById(propertyInquiry.getUser().getUserId()).orElse(null);
-       Property property = propertyRepo.findById(propertyInquiry.getProperty().getPropertyId()).orElse(null);
+    public PropertyInquiry addInquiry(PropertyInquiryInput propertyInquiry) {
+       User user = userRepo.findById(propertyInquiry.getUserId()).orElse(null);
+       Property property = propertyRepo.findById(propertyInquiry.getPropertyId()).orElse(null);
        if(user==null){
        throw new UserNotFoundException("User not found!");
        }
        if(property==null){
        throw new PropertyException("Property not found!");
        }
-       return propertyInquiryRepo.save(propertyInquiry);
+       PropertyInquiry newPropertyInquiry = new PropertyInquiry();
+       newPropertyInquiry.setUser(user);
+       newPropertyInquiry.setProperty(property);
+       newPropertyInquiry.setAdminResponse(propertyInquiry.getAdminResponse());
+       newPropertyInquiry.setContactDetails(propertyInquiry.getContactDetails());
+       newPropertyInquiry.setInquiryDate(propertyInquiry.getInquiryDate());
+       newPropertyInquiry.setResponseDate(propertyInquiry.getResponseDate());
+       newPropertyInquiry.setMessage(propertyInquiry.getMessage());
+       newPropertyInquiry.setPriority(propertyInquiry.getPriority());
+       newPropertyInquiry.setStatus(propertyInquiry.getStatus());
+       return propertyInquiryRepo.save(newPropertyInquiry);
     }
 
     public PropertyInquiry getInquiryById(long inquiryId) {

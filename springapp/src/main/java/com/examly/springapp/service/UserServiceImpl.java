@@ -3,12 +3,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.examly.springapp.DTOs.LoginDTO;
-import com.examly.springapp.DTOs.RowMapper;
-import com.examly.springapp.DTOs.UserDTO;
+import com.examly.springapp.dtos.LoginDTO;
+import com.examly.springapp.dtos.RowMapper;
+import com.examly.springapp.dtos.UserDTO;
 import com.examly.springapp.exceptions.PasswordNotMatchedException;
 import com.examly.springapp.exceptions.UserAlreadyExistException;
-import com.examly.springapp.exceptions.UserNotFoundException;
 import com.examly.springapp.model.User;
 import com.examly.springapp.repository.UserRepo;
 
