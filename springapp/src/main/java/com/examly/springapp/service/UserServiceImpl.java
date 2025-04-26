@@ -17,7 +17,7 @@ import com.examly.springapp.repository.UserRepo;
 @Service
 public class UserServiceImpl implements UserService {
 
-private Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
+private Logger logger = LoggerFactory.getLogger(UserServiceImpl.class); 
     @Autowired
     UserRepo userRepo;
     @Autowired
