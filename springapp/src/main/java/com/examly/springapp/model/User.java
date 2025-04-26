@@ -16,7 +16,7 @@ private String email;
 private String  password;
 private String username;
 private String mobileNumber;
-private String UserRole;
+private String userRole;
 //Generate Getters and Setters
 public long getUserId() {
     return userId;
@@ -49,10 +49,10 @@ public void setMobileNumber(String mobileNumber) {
     this.mobileNumber = mobileNumber;
 }
 public String getUserRole() {
-    return UserRole;
+    return userRole;
 }
 public void setUserRole(String userRole) {
-    UserRole = userRole;
+    this.userRole = userRole;
 }
 
 

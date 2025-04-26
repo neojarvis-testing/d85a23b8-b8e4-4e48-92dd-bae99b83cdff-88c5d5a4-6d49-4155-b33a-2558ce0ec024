@@ -1,54 +1,57 @@
 package com.examly.springapp.service;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import com.examly.springapp.dtos.LoginDTO;
-import com.examly.springapp.dtos.RowMapper;
-import com.examly.springapp.dtos.UserDTO;
-import com.examly.springapp.exceptions.PasswordNotMatchedException;
-import com.examly.springapp.exceptions.UserAlreadyExistException;
+ 
+import com.examly.springapp.config.UserPrinciple;
+import com.examly.springapp.exceptions.UserNotFoundException;
 import com.examly.springapp.model.User;
 import com.examly.springapp.repository.UserRepo;
-
+ 
 @Service
-public class UserServiceImpl implements UserService {
 
-private Logger logger = LoggerFactory.getLogger(UserServiceImpl.class); 
+
+public class UserServiceImpl implements UserService, UserDetailsService {
+ 
+    private UserRepo userRepo;
+
     @Autowired
-    UserRepo userRepo;
+    public UserServiceImpl(UserRepo userRepo) {
+        this.userRepo = userRepo;
+    }
+ 
     @Autowired
-    PasswordEncoder encoder;
-
-    public User registration(User user) {
-        logger.info("User registration started for email: {}", user.getEmail());
-    
-
-        if (userRepo.findByEmail(user.getEmail()) != null) {
-            logger.warn("User with email {} already exists!", user.getEmail());
-
-            throw new UserAlreadyExistException("User with Same email:" + user.getEmail() + " already exists!!");
-        }
+    private PasswordEncoder encoder;
+    private Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
+    public User registerUser(User user) {
+    	//logger.info("Attempting to create new feedback"+user.getUserRole());
         user.setPassword(encoder.encode(user.getPassword()));
-        return userRepo.save(user);
+        user=userRepo.save(user);
+        return user;
     }
-
-    public UserDTO loginUser(LoginDTO loginDTO) {
-        logger.info("Method login started for email: {}", loginDTO.getEmail());
-        User userexist = userRepo.findByEmail(loginDTO.getEmail());
-        if (userexist == null) {
-            
-            System.out.println("User not found");
+   
+ 
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        User existingUser = userRepo.findByEmail(email);
+        if (existingUser == null) {
+            throw new UsernameNotFoundException("User name not found");
         }
-
-        if (!encoder.matches(loginDTO.getPassword(), userexist.getPassword())) {
-            logger.error("Password mismatch for email: {}", loginDTO.getEmail());
-            throw new PasswordNotMatchedException("Password is Incorrect!");
-        }
-        logger.info("User login successful for email: {}", loginDTO.getEmail());
-        return RowMapper.mapToUserDTO(userexist);
+        return UserPrinciple.build(existingUser);
     }
-
+ 
+    public User loginUser(User user) {
+        User existingUser = userRepo.findByEmail(user.getEmail());
+        if (existingUser == null) {
+            throw new UserNotFoundException("User not found");
+        }
+        // No need to encode the password again here
+        return existingUser;
+    }
 }
