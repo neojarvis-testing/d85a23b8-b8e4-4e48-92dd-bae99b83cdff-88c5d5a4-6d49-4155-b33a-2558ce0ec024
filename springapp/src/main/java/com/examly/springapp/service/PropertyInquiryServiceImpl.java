@@ -28,26 +28,23 @@ UserRepo userRepo;
 @Autowired
 PropertyRepo propertyRepo;
 
-    public PropertyInquiry addInquiry(PropertyInquiry propertyInquiry) {
-        logger.info("Adding new inquiry for property ID:");
-       User user = userRepo.findById(propertyInquiry.getUser().getUserId()).orElse(null);
-       Property property = propertyRepo.findById(propertyInquiry.getProperty().getPropertyId()).orElse(null);
+   
 
     public PropertyInquiry addInquiry(PropertyInquiryInput propertyInquiry) {
        User user = userRepo.findById(propertyInquiry.getUserId()).orElse(null);
        Property property = propertyRepo.findById(propertyInquiry.getPropertyId()).orElse(null);
 
        if(user==null){
-        logger.warn("User not found for ID: {}", propertyInquiry.getUser().getUserId());
+        logger.warn("User not found for ID: {}", propertyInquiry.getUserId());
        throw new UserNotFoundException("User not found!");
        }
        if(property==null){
-        logger.warn("Property not found for ID: {}", propertyInquiry.getProperty().getPropertyId());
+        logger.warn("Property not found for ID: {}", propertyInquiry.getPropertyId());
        throw new PropertyException("Property not found!");
        }
 
        logger.info("Inquiry added successfully");
-       return propertyInquiryRepo.save(propertyInquiry);
+       
 
        PropertyInquiry newPropertyInquiry = new PropertyInquiry();
        newPropertyInquiry.setUser(user);
