@@ -7,6 +7,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.examly.springapp.dtos.FeedbackDTO;
+import com.examly.springapp.dtos.RowMapper;
 import com.examly.springapp.exceptions.FeedbackNotFoundException;
 import com.examly.springapp.exceptions.InvalidFeedbackException;
 import com.examly.springapp.model.Feedback;
@@ -30,20 +32,21 @@ private Logger logger = LoggerFactory.getLogger(FeedbackServiceImpl.class);
      * Creates a new feedback entry.
      * Throws an exception if validation fails.
      */
-    public Feedback createFeedback(Feedback feedback) {
+    public Feedback createFeedback(FeedbackDTO feedbackDTO) {
         logger.info("Attempting to create new feedback");
 
-        if (feedback == null) {
+        if (feedbackDTO == null) {
             logger.error("Feedback creation failed: Feedback is null.");
 
             throw new InvalidFeedbackException("Feedback cannot be null.");
         }
-        if (feedback.getFeedbackText() == null || feedback.getFeedbackText().trim().isEmpty()) {
+        if (feedbackDTO.getFeedbackText() == null || feedbackDTO.getFeedbackText().trim().isEmpty()) {
             logger.warn("Feedback creation failed: Empty feedback text.");
             throw new InvalidFeedbackException("Feedback text cannot be empty.");
         }
 
         logger.info("Feedback created successfully.");
+        Feedback feedback = RowMapper.mapToFeedbackDTO(feedbackDTO);
         return feedbackRepo.save(feedback);
     }
 

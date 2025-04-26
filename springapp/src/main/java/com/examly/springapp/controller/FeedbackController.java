@@ -6,8 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.examly.springapp.dtos.FeedbackDTO;
 import com.examly.springapp.model.Feedback;
 import com.examly.springapp.service.FeedbackServiceImpl;
+
+import jakarta.validation.Valid;
 
 @RequestMapping("/api/feedback")
 @RestController
@@ -17,11 +20,12 @@ public class FeedbackController {
     private FeedbackServiceImpl feedbackservice; // Using the requested service name
 
     // Create a new feedback entry
-    @PostMapping
-    public ResponseEntity<Feedback> createFeedback(@RequestBody Feedback feedback) {
-        Feedback savedFeedback = feedbackservice.createFeedback(feedback);
-        return ResponseEntity.status(201).body(savedFeedback); // Returns 201 Created
+     @PostMapping
+    public ResponseEntity<Feedback> createFeedback(@Valid @RequestBody  FeedbackDTO feedbackDTO) {
+    	Feedback feedback = feedbackservice.createFeedback(feedbackDTO);
+        return ResponseEntity.status(201).body(feedback); // Returns 201 Created
     }
+
 
     // Get feedback by ID
     @GetMapping("/{feedbackId}")
