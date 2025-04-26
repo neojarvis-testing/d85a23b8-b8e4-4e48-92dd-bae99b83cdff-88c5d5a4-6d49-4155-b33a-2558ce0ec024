@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
  
 import com.examly.springapp.config.JwtUtils;
 import com.examly.springapp.dtos.LoginDTO;
+import com.examly.springapp.dtos.UserLoginDTO;
 import com.examly.springapp.model.User;
 import com.examly.springapp.service.UserServiceImpl;
  
@@ -40,13 +41,13 @@ public class AuthController {
     }
  
     @PostMapping("/api/login")
-    public ResponseEntity<?> loginUser(@Valid @RequestBody User user) {
+    public ResponseEntity<?> loginUser(@Valid @RequestBody UserLoginDTO loginDTO) {
         Authentication authentication = authenticationManager.authenticate(
-            new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword())
+            new UsernamePasswordAuthenticationToken(loginDTO.getEmail(), loginDTO.getPassword())
         );
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String token = jwtUtils.generateToken(authentication);
-        User existingUser = userService.loginUser(user);
+        User existingUser = userService.loginUser(loginDTO);
         System.out.print("User Role "+existingUser.getUserRole());
         System.out.println("User Id "+existingUser.getUserId());
         if (existingUser == null) {

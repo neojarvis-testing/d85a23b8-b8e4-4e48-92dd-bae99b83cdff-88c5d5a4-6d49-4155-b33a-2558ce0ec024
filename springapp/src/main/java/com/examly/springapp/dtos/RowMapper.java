@@ -34,4 +34,10 @@ public class RowMapper {
 	  return feedback;
   }
 
+  public static User mapToUserLoginDTO(UserLoginDTO loginDTO){
+	User user=new User();
+	user.setEmail(loginDTO.getEmail());
+	user.setPassword(loginDTO.getPassword());
+	return user;
+  }
 }
