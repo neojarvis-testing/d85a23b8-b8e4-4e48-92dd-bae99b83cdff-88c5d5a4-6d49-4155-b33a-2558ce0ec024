@@ -17,6 +17,8 @@ import com.examly.springapp.dtos.PropertyInquiryInput;
 import com.examly.springapp.model.PropertyInquiry;
 import com.examly.springapp.service.PropertyInquiryServiceImpl;
 
+import jakarta.validation.Valid;
+
 
 @RestController   //Defines this class as a REST controller
 @RequestMapping("/api/inquiries")  //Set Base URL
@@ -25,7 +27,7 @@ public class PropertyInquiryController {
 PropertyInquiryServiceImpl  propertyInquiryService; //Injecting the service
 
 @PostMapping    // Handles HTTP POST requests for adding a new property inquiry
-public ResponseEntity<PropertyInquiry> addInquiry(@RequestBody PropertyInquiryInput propertyInquiryInput){
+public ResponseEntity<PropertyInquiry> addInquiry(@Valid @RequestBody PropertyInquiryInput propertyInquiryInput){
     PropertyInquiry propertyInquiry = propertyInquiryService.addInquiry(propertyInquiryInput);
     return ResponseEntity.status(201).body(propertyInquiry);
 }
