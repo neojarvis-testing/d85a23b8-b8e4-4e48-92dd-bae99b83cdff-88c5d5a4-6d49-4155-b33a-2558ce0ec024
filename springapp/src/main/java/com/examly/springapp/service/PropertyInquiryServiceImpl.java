@@ -28,7 +28,10 @@ UserRepo userRepo;
 @Autowired
 PropertyRepo propertyRepo;
 
-   
+    public PropertyInquiry addInquiry(PropertyInquiry propertyInquiry) {
+        logger.info("Adding new inquiry for property ID:");
+       User user = userRepo.findById(propertyInquiry.getUser().getUserId()).orElse(null);
+       Property property = propertyRepo.findById(propertyInquiry.getProperty().getPropertyId()).orElse(null);
 
     public PropertyInquiry addInquiry(PropertyInquiryInput propertyInquiry) {
        User user = userRepo.findById(propertyInquiry.getUserId()).orElse(null);
@@ -44,7 +47,7 @@ PropertyRepo propertyRepo;
        }
 
        logger.info("Inquiry added successfully");
-       
+       return propertyInquiryRepo.save(propertyInquiry);
 
        PropertyInquiry newPropertyInquiry = new PropertyInquiry();
        newPropertyInquiry.setUser(user);
