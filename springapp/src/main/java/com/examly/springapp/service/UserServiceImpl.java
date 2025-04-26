@@ -16,10 +16,12 @@ import com.examly.springapp.model.User;
 import com.examly.springapp.repository.UserRepo;
  
 @Service
+
+
 public class UserServiceImpl implements UserService, UserDetailsService {
  
     private UserRepo userRepo;
- 
+
     @Autowired
     public UserServiceImpl(UserRepo userRepo) {
         this.userRepo = userRepo;
