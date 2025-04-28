@@ -10,6 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
  
 import com.examly.springapp.config.UserPrinciple;
+import com.examly.springapp.dtos.UserLoginDTO;
 import com.examly.springapp.exceptions.UserNotFoundException;
 import com.examly.springapp.model.User;
 import com.examly.springapp.repository.UserRepo;
@@ -44,7 +45,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return UserPrinciple.build(existingUser);
     }
  
-    public User loginUser(User user) {
+    public User loginUser(UserLoginDTO user) {
         User existingUser = userRepo.findByEmail(user.getEmail());
         if (existingUser == null) {
             throw new UserNotFoundException("User not found");

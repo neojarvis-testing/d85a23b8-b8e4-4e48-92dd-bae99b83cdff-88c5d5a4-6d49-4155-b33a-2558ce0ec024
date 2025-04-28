@@ -26,7 +26,6 @@ public class FeedbackController {
         return ResponseEntity.status(201).body(feedback); // Returns 201 Created
     }
 
-
     // Get feedback by ID
     @GetMapping("/{feedbackId}")
     public ResponseEntity<Feedback> getFeedbackById(@PathVariable Long feedbackId) {

@@ -11,13 +11,9 @@ public class LoginDTO {
     private String token;
     @NotNull(message = "User ID cannot be null")
     private long userId;
- 
-    @NotBlank(message = "Username cannot be empty")
-    @Size(min = 3, max = 20, message = "Username must be between 3 and 20 characters")
+
     private String username;
- 
-    @NotBlank(message = "User role cannot be empty")
-    //@Pattern(regexp = "^(ADMIN|USER)$", message = "Invalid user role")
+    
     private String userRole;
  
     public LoginDTO(String token, long userId, String username, String userRole) {
