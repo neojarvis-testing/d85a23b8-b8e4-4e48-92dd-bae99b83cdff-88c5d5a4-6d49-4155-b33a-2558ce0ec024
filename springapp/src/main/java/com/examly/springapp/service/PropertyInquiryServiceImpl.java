@@ -38,6 +38,9 @@ PropertyRepo propertyRepo;
         logger.warn("Property not found for ID: {}", propertyInquiry.getPropertyId());
        throw new PropertyException("Property not found!");
        }
+
+       
+
        PropertyInquiry newPropertyInquiry = new PropertyInquiry();
        newPropertyInquiry.setUser(user);
        newPropertyInquiry.setProperty(property);
@@ -50,6 +53,7 @@ PropertyRepo propertyRepo;
        newPropertyInquiry.setStatus(propertyInquiry.getStatus());
        logger.info("Inquiry added successfully");
        return propertyInquiryRepo.save(newPropertyInquiry);
+       
 
     }
 
