@@ -29,7 +29,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
  
     @Autowired
     private PasswordEncoder encoder;
-    private Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
+    private Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);  // Logger for logging events
+    // Registers a new user by encrypting their password and saving them to the database
     public User registerUser(User user) {
     	//logger.info("Attempting to create new feedback"+user.getUserRole());
         user.setPassword(encoder.encode(user.getPassword()));
@@ -39,6 +40,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
    
  
     @Override
+    // Loads a user from the database based on their email for authentication purposes
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User existingUser = userRepo.findByEmail(email);
         if (existingUser == null) {
@@ -46,7 +48,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         }
         return UserPrinciple.build(existingUser);
     }
- 
+    
+    // Authenticates a user by finding them in the database using email
     public User loginUser(UserLoginDTO user) {
         User existingUser = userRepo.findByEmail(user.getEmail());
         if (existingUser == null) {

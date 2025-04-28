@@ -24,14 +24,14 @@ public class AuthController {
  
     private UserServiceImpl userService;
  
-    @Autowired
+    @Autowired // Automatically injects UserServiceImpl dependency
     public AuthController(UserServiceImpl uServiceImpl){
         this.userService=uServiceImpl;
     }
  
     @Autowired
-    private AuthenticationManager authenticationManager;
-    @Autowired
+    private AuthenticationManager authenticationManager; //Handles Authentication request
+    @Autowired  //Injects Jwtutils for token generation
     private JwtUtils jwtUtils;
  
    
@@ -46,10 +46,11 @@ public class AuthController {
             new UsernamePasswordAuthenticationToken(loginDTO.getEmail(), loginDTO.getPassword())
         );
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        String token = jwtUtils.generateToken(authentication);
+        String token = jwtUtils.generateToken(authentication); //Token generation  
         User existingUser = userService.loginUser(loginDTO);
         System.out.print("User Role "+existingUser.getUserRole());
         System.out.println("User Id "+existingUser.getUserId());
+        // Return unauthorized response if login fails
         if (existingUser == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
         }
