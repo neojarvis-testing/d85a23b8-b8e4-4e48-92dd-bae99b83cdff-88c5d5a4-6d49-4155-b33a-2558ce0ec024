@@ -49,7 +49,7 @@ public class SecurityConfig {
         http.csrf(csrf->csrf.disable())
         .cors(cors->cors.disable())
         .authorizeHttpRequests(auth->auth
-        //.requestMatchers(HttpMethod.GET, "/api/properties").hasAnyRole("USER","ADMIN")
+        .requestMatchers(HttpMethod.GET, "/api/properties").hasAnyRole("USER","ADMIN")
         .requestMatchers(HttpMethod.GET, "/api/properties/{propertyId}").hasAnyRole("ADMIN")
         .requestMatchers(HttpMethod.POST, "/api/properties").hasRole("ADMIN")
         .requestMatchers(HttpMethod.PUT, "/api/properties/{propertyId}").hasAnyRole("ADMIN")
@@ -57,7 +57,7 @@ public class SecurityConfig {
         .requestMatchers(HttpMethod.POST, "/api/feedback").hasAnyRole("USER")
         .requestMatchers(HttpMethod.GET, "/api/feedback/user/{userId}").hasAnyRole("USER")
         .requestMatchers(HttpMethod.DELETE,"/api/feedback/{feedbackId}").hasAnyRole("USER")
-        //.requestMatchers(HttpMethod.GET,"/api/feedback").hasAnyRole("ADMIN")
+        .requestMatchers(HttpMethod.GET,"/api/feedback").hasAnyRole("ADMIN")
         .requestMatchers(HttpMethod.GET,"/api/feedback/user/{userId}").hasAnyRole("USER")
         .requestMatchers(HttpMethod.GET,"/api/feedback/{feedbackId}").hasAnyRole("USER","ADMIN")
         .requestMatchers(HttpMethod.POST,"/api/inquiries").hasAnyRole("USER")
