@@ -2,13 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Property } from '../models/property.model';
 import { Observable } from 'rxjs';
-import { ApiUrl } from '../constant/ApiUrl';
+import { apiUrl } from '../constant/ApiUrl';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PropertyService {
-  apiUrl: string = ApiUrl;
+  apiUrl:any=apiUrl;
 
   constructor(private http: HttpClient) {}
 
