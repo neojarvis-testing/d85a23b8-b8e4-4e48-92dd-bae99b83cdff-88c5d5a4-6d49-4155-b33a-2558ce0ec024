@@ -29,5 +29,8 @@ export class AuthService {
     let role=localStorage.getItem("userRole")
     return role!=null
   }
+  getUserById(id:number){
+    this.http.get(`${apiUrl}/user/${id}`)
+  }
   constructor(private http:HttpClient) { }
 }
