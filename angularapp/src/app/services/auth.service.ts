@@ -29,8 +29,14 @@ export class AuthService {
     let role=localStorage.getItem("userRole")
     return role!=null
   }
-  getUserById(id:number){
-    this.http.get(`${apiUrl}/user/${id}`)
-  }
+  getUserById(userId: number): Observable<User> {
+    console.log(userId)
+    if (!userId) {
+        console.error('User ID is missing.');
+        return new Observable<User>(); // Avoid making an incorrect API call
+    }
+    return this.http.get<User>(`${apiUrl}/user/${userId}`);
+}
+
   constructor(private http:HttpClient) { }
 }

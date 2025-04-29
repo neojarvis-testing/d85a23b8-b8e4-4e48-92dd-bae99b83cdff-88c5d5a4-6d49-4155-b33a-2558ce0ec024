@@ -16,6 +16,7 @@ export class AdminViewFeedbackComponent implements OnInit {
   filteredFeedbacks: Feedback[] = []; // Stores filtered feedbacks based on category selection
   selectedCategory: string = 'All'; // Default filter selection
   categories: string[] = ['Service', 'Pricing', 'Quality']; // Predefined categories
+  
 
   selectedUser: any = null; // Stores selected user details for modal display
   selectedProperty: any = null; // Stores selected property details for modal display
@@ -38,6 +39,7 @@ export class AdminViewFeedbackComponent implements OnInit {
   getAllFeedbacks(): void {
     this.feedbackService.getFeedbacks().subscribe(
       (data) => {
+        console.log(data)
         this.feedbacks = data;
         this.filteredFeedbacks = data; // Default to displaying all feedbacks
       },
@@ -67,11 +69,18 @@ export class AdminViewFeedbackComponent implements OnInit {
    * @param userId - Unique identifier for the user
    */
   showUserDetails(userId: number): void {
-    // this.authService.getUserById(userId).subscribe(
-    //   (user) => this.selectedUser = user,
-    //   (error) => console.error('Error fetching user details:', error)
-    // );
-  }
+    this.authService.getUserById(userId).subscribe(
+      (user) => {
+        if (user) {
+          this.selectedUser = user;
+        } else {
+          console.error('User not found.');
+        }
+      },
+      (error) => console.error('Error fetching user details:', error)
+    );
+}
+
 
   /**
    * Fetches and displays property details when "View Property Info" is clicked.

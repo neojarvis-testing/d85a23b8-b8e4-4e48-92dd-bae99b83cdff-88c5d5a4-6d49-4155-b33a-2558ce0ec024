@@ -22,14 +22,14 @@
         <tbody>
             <tr *ngFor="let feedback of filteredFeedbacks; let i = index">
                 <td>{{ i + 1 }}</td> <!-- Serial number auto-generated from index -->
-                <td>{{ feedback.user.username }}</td> <!-- Display username -->
+                <td>{{ feedback.user.username }}| {{feedback.user.userId}}</td> <!-- Display username -->
                 <td>{{ feedback.feedbackText }}</td> <!-- Display feedback message -->
                 <td>{{ feedback.date | date:'dd-MM-yyyy' }}</td> <!-- Format date in dd-MM-yyyy -->
                 <td>
                     <!-- Button to show user profile information -->
-                    <button (click)="showUserDetails(feedback.userId)">Show Profile</button>
+                    <button (click)="showUserDetails(feedback.user.userId)">Show Profile</button>
                     <!-- Button to view property details associated with feedback -->
-                    <button (click)="showPropertyDetails(feedback.propertyId)">View Property Info</button>
+                    <button (click)="showPropertyDetails(feedback.property.propertyId)">View Property Info</button>
                 </td>
             </tr>
         </tbody>
@@ -46,7 +46,7 @@
             <h3>User Details</h3>
             <p><strong>Username:</strong> {{ selectedUser.username }}</p> <!-- Display username -->
             <p><strong>Email:</strong> {{ selectedUser.email }}</p> <!-- Display email -->
-            <p><strong>Mobile Number:</strong> {{ selectedUser.mobile }}</p> <!-- Display mobile number -->
+            <p><strong>Mobile Number:</strong> {{ selectedUser.mobileNumber}}</p> <!-- Display mobile number -->
             <button (click)="closeUserDetails()">Close</button> <!-- Button to close modal -->
         </div>
     </div>

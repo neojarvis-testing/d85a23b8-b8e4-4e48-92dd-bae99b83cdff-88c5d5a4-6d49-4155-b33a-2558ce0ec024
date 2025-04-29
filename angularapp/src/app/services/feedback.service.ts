@@ -26,7 +26,7 @@ export class FeedbackService {
    * @param userId - The user's unique identifier
    * @returns Observable<Feedback[]> - List of feedback submitted by the user
    */
-  getAllFeedbacksByUserId(userId:number): Observable<Feedback[]> {
+  getAllFeedbacksByUserId(userId:any): Observable<Feedback[]> {
     return this.http.get<Feedback[]>(`${apiUrl}/feedback/user/${userId}`);
   }
 
