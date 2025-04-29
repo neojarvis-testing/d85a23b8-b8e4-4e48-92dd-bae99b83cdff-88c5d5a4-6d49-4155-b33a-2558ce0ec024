@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Login } from '../models/login.model';
-import { ApiUrl } from '../constant/ApiUrl';
+import { apiUrl } from '../constant/ApiUrl';
 import { User } from '../models/user.model';
 
 @Injectable({
@@ -10,13 +10,34 @@ import { User } from '../models/user.model';
 })
 export class AuthService {
 
+
   apiUrl:string = ApiUrl;
   
    login(login:Login):Observable<Login>{
+
+  apiUrl:any=apiUrl
+
+  login(login:Login):Observable<Login>{
+
     return this.http.post<Login>(`${this.apiUrl}/login`,login);
   }
   register(user:User):Observable<User>{
     return this.http.post<User>(`${this.apiUrl}/register`,user);
+  }
+
+  loggedOut(): void {
+    localStorage.removeItem("userId")
+    localStorage.removeItem("userRole");
+    localStorage.removeItem("token");
+    localStorage.removeItem("username");
+  }
+
+  isLoggedUser():boolean{
+    let role=localStorage.getItem("userRole")
+    return role!=null
+  }
+  getUserById(id:number){
+    this.http.get(`${apiUrl}/user/${id}`)
   }
   constructor(private http:HttpClient) { }
 }

@@ -20,7 +20,7 @@ import com.examly.springapp.repository.UserRepo;
 @Service
 public class PropertyInquiryServiceImpl implements PropertyInquiryService{
 
-    private Logger logger = LoggerFactory.getLogger(PropertyInquiryServiceImpl.class);
+    private Logger logger = LoggerFactory.getLogger(PropertyInquiryServiceImpl.class); // Logger for logging events
 @Autowired
 PropertyInquiryRepo propertyInquiryRepo;
 @Autowired
@@ -28,13 +28,17 @@ UserRepo userRepo;
 @Autowired
 PropertyRepo propertyRepo;
 
+    // Adds a new property inquiry
     public PropertyInquiry addInquiry(PropertyInquiryInput propertyInquiry) {
+        //Retrieve user by Id 
        User user = userRepo.findById(propertyInquiry.getUserId()).orElse(null);
        Property property = propertyRepo.findById(propertyInquiry.getPropertyId()).orElse(null);
+       // Validate if user exists, else throw an exception
        if(user==null){
         logger.warn("User not found for ID: {}", propertyInquiry.getUserId());
        throw new UserNotFoundException("User not found!");
        }
+       // Validate if property exists, else throw an exception
        if(property==null){
         logger.warn("Property not found for ID: {}", propertyInquiry.getPropertyId());
        throw new PropertyException("Property not found!");
@@ -42,6 +46,10 @@ PropertyRepo propertyRepo;
 
 
        logger.info("Inquiry added successfully");
+
+
+       
+       // Create new property inquiry and set properties
 
        PropertyInquiry newPropertyInquiry = new PropertyInquiry();
        newPropertyInquiry.setUser(user);
@@ -62,6 +70,7 @@ PropertyRepo propertyRepo;
     public PropertyInquiry getInquiryById(long inquiryId) {
         logger.info("Fetching inquiry with ID: {}", inquiryId);
        PropertyInquiry propertyInquiry =  propertyInquiryRepo.findById(inquiryId).orElse(null);
+       // Check if inquiry exists, else throw an exception
        if(propertyInquiry==null){
         logger.warn("Inquiry not found for ID:");
         throw new InquiryNotFound("Inquiry not found!");
@@ -70,7 +79,7 @@ PropertyRepo propertyRepo;
 
        return propertyInquiry;
     }
-
+    // Retrieves all inquiries related to a user using user ID 
     public List<PropertyInquiry> getInquiriesByUser(long userId) {
         logger.info("Fetching inquiries for user ID:");
        User user = userRepo.findById(userId).orElse(null);
@@ -80,12 +89,12 @@ PropertyRepo propertyRepo;
        }
        return propertyInquiryRepo.findInquiryByUser(userId);
     }
-
+    // Retrieves all inquiries from the database 
     public List<PropertyInquiry> getAllInquiries() {
         logger.info("Fetching all inquiries");
         return propertyInquiryRepo.findAll();
     }
-
+     // Updates an existing inquiry using inquiry ID
     public PropertyInquiry updateInquiryById(long inquiryId, PropertyInquiry inquiries) {
         logger.info("Attempting to update inquiry");
         PropertyInquiry propertyInquiry = propertyInquiryRepo.findById(inquiryId).orElse(null);
@@ -97,10 +106,12 @@ PropertyRepo propertyRepo;
         inquiries.setInquiryId(inquiryId);
         return propertyInquiryRepo.save(inquiries);
     }
-
+     
+    // Deletes an inquiry using inquiry ID
     public boolean deleteInquiryById(long inquiryId) {
         logger.info("Attempting to delete inquiry ID:");
         PropertyInquiry propertyInquiry = propertyInquiryRepo.findById(inquiryId).orElse(null);
+        // Validate if inquiry exists, else throw an exception
         if(propertyInquiry==null){
             logger.warn("Inquiry not found for ID: {}", inquiryId);
 
