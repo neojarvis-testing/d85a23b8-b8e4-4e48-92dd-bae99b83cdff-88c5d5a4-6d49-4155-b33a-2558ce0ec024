@@ -10,12 +10,15 @@ public class LoginDTO {
     @NotBlank(message = "Token cannot be empty")
     private String token;
     @NotNull(message = "User ID cannot be null")
+    // User ID must not be null to ensure valid identification
+
     private long userId;
 
     private String username;
     
     private String userRole;
  
+    // Constructor 
     public LoginDTO(String token, long userId, String username, String userRole) {
         this.token = token;
         this.userId = userId;
