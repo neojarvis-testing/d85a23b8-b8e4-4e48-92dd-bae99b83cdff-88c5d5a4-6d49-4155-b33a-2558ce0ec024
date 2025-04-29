@@ -23,6 +23,7 @@ import { UserViewPropertiesComponent } from './components/user-view-properties/u
 import { UsernavComponent } from './components/usernav/usernav.component';
 import { AuthguardComponent } from './components/authguard/authguard.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EditInquiryComponent } from './components/edit-inquiry/edit-inquiry.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     UserViewInquiryComponent,
     UserViewPropertiesComponent,
     UsernavComponent,
-    AuthguardComponent
+    AuthguardComponent,
+    EditInquiryComponent
   ],
   imports: [
     BrowserModule,
