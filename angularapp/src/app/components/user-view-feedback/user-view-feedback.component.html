@@ -16,7 +16,7 @@
             <!-- Loop through filtered feedback list and display each entry -->
             <tr *ngFor="let feedback of filteredFeedbacks; let i = index">
                 <td>{{ i + 1 }}</td> <!-- Auto-incremented row number -->
-                <td>{{ feedback.message }}</td> <!-- Feedback message text -->
+                <td>{{ feedback.feedbackText }}</td> <!-- Feedback message text -->
                 <td>{{ feedback.date | date:'dd-MM-yyyy' }}</td> <!-- Format date in DD-MM-YYYY -->
                 <td>{{ feedback.category }}</td> <!-- Feedback category text -->
                 <td>{{ feedback.property }}</td> <!-- Property linked to the feedback -->

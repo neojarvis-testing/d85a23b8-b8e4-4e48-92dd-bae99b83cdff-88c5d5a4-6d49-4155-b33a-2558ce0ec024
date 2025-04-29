@@ -10,7 +10,7 @@ import { User } from '../models/user.model';
   providedIn: 'root'
 })
 export class AuthService {
-  
+
   login(login:Login):Observable<Login>{
     return this.http.post<Login>(`${apiUrl}/login`,login);
   }

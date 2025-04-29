@@ -22,8 +22,8 @@
         <tbody>
             <tr *ngFor="let feedback of filteredFeedbacks; let i = index">
                 <td>{{ i + 1 }}</td> <!-- Serial number auto-generated from index -->
-                <td>{{ feedback.userName }}</td> <!-- Display username -->
-                <td>{{ feedback.message }}</td> <!-- Display feedback message -->
+                <td>{{ feedback.user.username }}</td> <!-- Display username -->
+                <td>{{ feedback.feedbackText }}</td> <!-- Display feedback message -->
                 <td>{{ feedback.date | date:'dd-MM-yyyy' }}</td> <!-- Format date in dd-MM-yyyy -->
                 <td>
                     <!-- Button to show user profile information -->

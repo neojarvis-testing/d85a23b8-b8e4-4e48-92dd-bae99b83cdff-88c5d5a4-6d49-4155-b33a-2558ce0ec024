@@ -35,10 +35,10 @@
 
         <!-- Property dropdown (Populated dynamically from Property Component) -->
         <label for="property">Property:</label><br>
-        <select id="property" formControlName="property" [disabled]="properties.length === 0">
+        <select id="property" formControlName="property">
             <option value="">Select a property</option>
             <option *ngFor="let property of properties" [value]="property.id">{{ property.name }}</option>
-        </select><br>
+        </select>
         <!-- Validation message for property selection -->
         <div *ngIf="f.property.invalid && (f.property.dirty || f.property.touched)" class="error">
             Property selection is required.

@@ -3,13 +3,12 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Feedback } from '../models/feedback.model';
 import { apiUrl } from '../constant/ApiUrl';
-
+import { User } from '../models/user.model';
 @Injectable({
   providedIn: 'root' // Singleton service across the application
 })
 export class FeedbackService {
   
-
   constructor(private http: HttpClient) {
   }
 
@@ -27,7 +26,7 @@ export class FeedbackService {
    * @param userId - The user's unique identifier
    * @returns Observable<Feedback[]> - List of feedback submitted by the user
    */
-  getAllFeedbacksByUserId(userId: number): Observable<Feedback[]> {
+  getAllFeedbacksByUserId(userId:number): Observable<Feedback[]> {
     return this.http.get<Feedback[]>(`${apiUrl}/feedback/user/${userId}`);
   }
 

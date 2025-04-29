@@ -10,7 +10,7 @@ import { FeedbackService } from 'src/app/services/feedback.service';
 export class UserViewFeedbackComponent implements OnInit {
 
   feedbacks: Feedback[] = []; // Stores feedbacks specific to the logged-in user
-  userId: number; // Stores the user ID for fetching relevant feedback
+  userId:any= localStorage.getItem('userId')// Stores the user ID for fetching relevant feedback
 
   constructor(private feedbackService: FeedbackService) {} // Injects the FeedbackService for API calls
 
