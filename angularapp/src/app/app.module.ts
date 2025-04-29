@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule} from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,7 +23,7 @@ import { UserViewPropertiesComponent } from './components/user-view-properties/u
 import { UsernavComponent } from './components/usernav/usernav.component';
 import { AuthguardComponent } from './components/authguard/authguard.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { EditInquiryComponent } from './components/edit-inquiry/edit-inquiry.component';
+import { AuthInterceptor } from './auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -45,8 +45,7 @@ import { EditInquiryComponent } from './components/edit-inquiry/edit-inquiry.com
     UserViewInquiryComponent,
     UserViewPropertiesComponent,
     UsernavComponent,
-    AuthguardComponent,
-    EditInquiryComponent
+    AuthguardComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +54,13 @@ import { EditInquiryComponent } from './components/edit-inquiry/edit-inquiry.com
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

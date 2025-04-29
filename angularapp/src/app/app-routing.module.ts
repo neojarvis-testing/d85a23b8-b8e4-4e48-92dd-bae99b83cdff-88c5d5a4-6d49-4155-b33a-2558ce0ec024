@@ -1,9 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { EditInquiryComponent } from './components/edit-inquiry/edit-inquiry.component';
+import { HomePageComponent } from './components/home-page/home-page.component';
+import { LoginComponent } from './components/login/login.component';
+import { SignupComponent } from './components/signup/signup.component';
+import { AdminnavComponent } from './components/adminnav/adminnav.component';
+import { UsernavComponent } from './components/usernav/usernav.component';
 
 const routes: Routes = [
-  {path:'editInquiry/:id',component:EditInquiryComponent}
+  {path:'',component:HomePageComponent},
+  {path:'login',component:LoginComponent},
+  {path:'register',component:SignupComponent},
+  {path:'adminnav',component:AdminnavComponent},
+  {path:'usernav',component:UsernavComponent}
 ];
 
 @NgModule({

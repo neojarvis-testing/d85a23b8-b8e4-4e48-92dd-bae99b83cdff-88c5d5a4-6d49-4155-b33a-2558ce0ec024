@@ -7,6 +7,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,14 +26,14 @@ public class AuthController {
  
     private UserServiceImpl userService;
  
-    @Autowired
+    @Autowired // Automatically injects UserServiceImpl dependency
     public AuthController(UserServiceImpl uServiceImpl){
         this.userService=uServiceImpl;
     }
  
     @Autowired
-    private AuthenticationManager authenticationManager;
-    @Autowired
+    private AuthenticationManager authenticationManager; //Handles Authentication request
+    @Autowired  //Injects Jwtutils for token generation
     private JwtUtils jwtUtils;
  
    
@@ -46,10 +48,11 @@ public class AuthController {
             new UsernamePasswordAuthenticationToken(loginDTO.getEmail(), loginDTO.getPassword())
         );
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        String token = jwtUtils.generateToken(authentication);
+        String token = jwtUtils.generateToken(authentication); //Token generation  
         User existingUser = userService.loginUser(loginDTO);
         System.out.print("User Role "+existingUser.getUserRole());
         System.out.println("User Id "+existingUser.getUserId());
+        // Return unauthorized response if login fails
         if (existingUser == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
         }
@@ -57,4 +60,9 @@ public class AuthController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
  
+    @GetMapping("/api/user/{userId}")
+    public ResponseEntity<?>getUserById(@PathVariable Long userId){
+        User user=userService.getUserById(userId);
+        return ResponseEntity.status(200).body(user);
+    }
 }
