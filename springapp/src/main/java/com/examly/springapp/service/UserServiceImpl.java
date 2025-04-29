@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     private Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);  // Logger for logging events
     // Registers a new user by encrypting their password and saving them to the database
     public User registerUser(User user) {
-    	//logger.info("Attempting to create new feedback"+user.getUserRole());
+    	logger.info("Attempting to create new registration"+user.getUserRole());
         user.setPassword(encoder.encode(user.getPassword()));
         user=userRepo.save(user);
         return user;
@@ -55,7 +55,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         if (existingUser == null) {
             throw new UserNotFoundException("User not found");
         }
-        // No need to encode the password again here
         return existingUser;
     }
 

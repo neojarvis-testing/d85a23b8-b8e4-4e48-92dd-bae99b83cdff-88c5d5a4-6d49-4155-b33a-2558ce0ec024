@@ -64,7 +64,7 @@ public ResponseEntity<?> getAllInquiries(){
 
 
 @PutMapping("/{inquiryId}")  // Handles HTTP PUT requests for updating a specific inquiry by ID
-public ResponseEntity<?> updateInquiryById(@PathVariable long inquiryId,@RequestBody PropertyInquiry inquiries){
+public ResponseEntity<?> updateInquiryById(@PathVariable long inquiryId,@RequestBody PropertyInquiryInput inquiries){
     PropertyInquiry propertyInquiry = propertyInquiryService.updateInquiryById(inquiryId,inquiries);
     if(propertyInquiry!=null){  // Returns updated inquiry if successful
         return ResponseEntity.status(200).body(propertyInquiry);

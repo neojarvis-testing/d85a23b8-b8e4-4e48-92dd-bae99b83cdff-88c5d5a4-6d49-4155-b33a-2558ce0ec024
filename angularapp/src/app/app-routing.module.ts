@@ -11,6 +11,12 @@ import { UserViewPropertiesComponent } from './components/user-view-properties/u
 
 import { AdminnavComponent } from './components/adminnav/adminnav.component';
 import { UsernavComponent } from './components/usernav/usernav.component';
+import { MyInquiryComponent } from './components/my-inquiry/my-inquiry.component';
+import { AdminAddPropertyComponent } from './components/admin-add-property/admin-add-property.component';
+import { AdminViewInquiryComponent } from './components/admin-view-inquiry/admin-view-inquiry.component';
+import { AdminViewFeedbackComponent } from './components/admin-view-feedback/admin-view-feedback.component';
+import { UserViewPropertiesComponent } from './components/user-view-properties/user-view-properties.component';
+import { UserAddFeedbackComponent } from './components/user-add-feedback/user-add-feedback.component';
 
 
 const routes: Routes = [
@@ -18,7 +24,13 @@ const routes: Routes = [
   {path:'login',component:LoginComponent},
   {path:'register',component:SignupComponent},
   {path:'adminnav',component:AdminnavComponent},
-  {path:'usernav',component:UsernavComponent}
+  {path:'usernav',component:UsernavComponent},
+  {path:'myinquiries',component:MyInquiryComponent},
+  {path:'admin-add-property',component:AdminAddPropertyComponent},
+  {path:'inquiries',component:AdminViewInquiryComponent},
+  {path:'viewfeedback',component:AdminViewFeedbackComponent},
+  {path:'viewproperties',component:UserViewPropertiesComponent},
+  {path:'addfeedback',component:UserAddFeedbackComponent}
 ];
 
 @NgModule({

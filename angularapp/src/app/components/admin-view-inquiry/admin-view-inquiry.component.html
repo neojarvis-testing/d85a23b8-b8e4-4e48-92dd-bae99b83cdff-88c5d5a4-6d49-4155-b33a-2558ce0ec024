@@ -1,1 +1,41 @@
-<p>admin-view-inquiry works!</p>
+<h1>Inquiry details</h1>
+<div *ngIf="inquiries?.length > 0; else noData">
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Inquiry ID</th>
+          <th>User</th>
+          <th>Property</th>
+          <th>Message</th>
+          <th>Status</th>
+          <th>Inquiry Date</th>
+          <th>Response Date</th>
+          <th>Admin Response</th>
+          <th>Priority</th>
+          <th>Contact Details</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let inquiry of inquiries">
+          <td>{{ inquiry.inquiryId }}</td>
+          <td>{{ inquiry.user?.userId }}</td>
+          <td>{{ inquiry.property?.propertyId }}</td>
+          <td>{{ inquiry.message }}</td>
+          <td>{{ inquiry.status }}</td>
+          <td>{{ inquiry.inquiryDate | date}}</td>
+          <td>{{ inquiry.responseDate |date }}</td>
+          <td>{{ inquiry.adminResponse }}</td>
+          <td>{{ inquiry.priority }}</td>
+          <td>{{ inquiry.contactDetails }}</td>
+          <td><button (click)="deleteInquiry(inquiry.inquiryId)">Delete</button>
+              <button (click)="updateInquiry(inquiry.inquiryId)">Update</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <ng-template #noData>
+    <p>No property inquiries available.</p>
+  </ng-template>

@@ -1,15 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { PropertyInquiryService } from 'src/app/services/property-inquery.service';
 
 @Component({
-  selector: 'app-user-add-inquiry',
-  templateUrl: './user-add-inquiry.component.html',
-  styleUrls: ['./user-add-inquiry.component.css']
+  selector: 'app-edit-inquiry',
+  templateUrl: './edit-inquiry.component.html',
+  styleUrls: ['./edit-inquiry.component.css']
 })
-export class UserAddInquiryComponent implements OnInit {
+export class EditInquiryComponent implements OnInit {
+
   inquiryForm:FormGroup
+  inquiryId:number
   userId:number
   propertyId:number
   constructor(private service:PropertyInquiryService,private fb:FormBuilder,private activatedRoute:ActivatedRoute) { 
@@ -24,16 +26,19 @@ export class UserAddInquiryComponent implements OnInit {
   })
 
   }
-
   ngOnInit(): void {
-  this.propertyId= this.activatedRoute.snapshot.params['id']
+    this.inquiryId = this.activatedRoute.snapshot.params['id']
+    this.service.getPropertyInquiryById(this.inquiryId).subscribe((data)=>{
+      this.inquiryForm.patchValue({...data})
+    })
   }
-  addInquiry(){
-    this.inquiryForm.value.userId = localStorage.getItem('userId')
-    this.inquiryForm.value.propertyId = this.propertyId
-    console.log(this.inquiryForm.value)
-    this.service.addPropertyInquiry(this.inquiryForm.value).subscribe((data)=>{
-      alert("Inquiry posted successfully!")
+
+
+  save(){
+    this.inquiryForm.value.userId = 1
+    this.inquiryForm.value.propertyId = 2
+    this.service.editPropertyInquiryById(this.inquiryId,this.inquiryForm.value).subscribe((data)=>{
+      alert("edited inquiry!")
     })
   }
 }

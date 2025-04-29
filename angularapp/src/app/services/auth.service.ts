@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Login } from '../models/login.model';
 import { User } from '../models/user.model';
 import { apiUrl } from '../constant/ApiUrl';
- 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -33,13 +33,13 @@ export class AuthService {
   getUserById(id:number){
     this.http.get(`${apiUrl}/user/${id}`)
   }
- 
+
   isAdmin():boolean{
    let role = localStorage.getItem("userRole")
    console.log(role)
    return role=='ADMIN'
   }
- 
+
   isUser():boolean{
     let role = localStorage.getItem("userRole")
     console.log(role)

@@ -27,8 +27,6 @@ PropertyInquiryRepo propertyInquiryRepo;
 UserRepo userRepo;
 @Autowired
 PropertyRepo propertyRepo;
-
-    // Adds a new property inquiry
     public PropertyInquiry addInquiry(PropertyInquiryInput propertyInquiry) {
         //Retrieve user by Id 
        User user = userRepo.findById(propertyInquiry.getUserId()).orElse(null);
@@ -94,8 +92,8 @@ PropertyRepo propertyRepo;
         logger.info("Fetching all inquiries");
         return propertyInquiryRepo.findAll();
     }
-     // Updates an existing inquiry using inquiry ID
-    public PropertyInquiry updateInquiryById(long inquiryId, PropertyInquiry inquiries) {
+
+    public PropertyInquiry updateInquiryById(long inquiryId, PropertyInquiryInput inquiries) {
         logger.info("Attempting to update inquiry");
         PropertyInquiry propertyInquiry = propertyInquiryRepo.findById(inquiryId).orElse(null);
         if(propertyInquiry==null){
@@ -103,8 +101,21 @@ PropertyRepo propertyRepo;
 
             throw new InquiryNotFound("Inquiry not found!"); 
         }
-        inquiries.setInquiryId(inquiryId);
-        return propertyInquiryRepo.save(inquiries);
+        PropertyInquiry newPropertyInquiry = new PropertyInquiry();
+            User user = userRepo.findById(inquiries.getUserId()).orElse(null);
+            Property property = propertyRepo.findById(inquiries.getPropertyId()).orElse(null);
+        newPropertyInquiry.setUser(user);
+        newPropertyInquiry.setProperty(property);
+        newPropertyInquiry.setAdminResponse(inquiries.getAdminResponse());
+        newPropertyInquiry.setContactDetails(inquiries.getContactDetails());
+        newPropertyInquiry.setInquiryDate(inquiries.getInquiryDate());
+        newPropertyInquiry.setResponseDate(inquiries.getResponseDate());
+        newPropertyInquiry.setMessage(inquiries.getMessage());
+        newPropertyInquiry.setPriority(inquiries.getPriority());
+        newPropertyInquiry.setStatus(inquiries.getStatus());
+        newPropertyInquiry.setInquiryId(inquiryId);
+        
+        return propertyInquiryRepo.save(newPropertyInquiry);
     }
      
     // Deletes an inquiry using inquiry ID
