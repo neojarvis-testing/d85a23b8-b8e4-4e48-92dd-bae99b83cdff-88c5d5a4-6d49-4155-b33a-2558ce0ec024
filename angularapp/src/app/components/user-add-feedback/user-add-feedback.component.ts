@@ -27,7 +27,7 @@ export class UserAddFeedbackComponent implements OnInit {
       message: ['', [Validators.required, Validators.minLength(10)]], // Message is required & min 10 chars
       date: ['', Validators.required], // Date is required
       category: ['', Validators.required], // Must select a category
-      property: ['', Validators.required] // Must select a property
+      property: [{ value: '', disabled: true }, Validators.required] // Set disabled inside TypeScript
     });
 
   }

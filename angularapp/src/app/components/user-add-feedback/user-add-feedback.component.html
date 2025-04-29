@@ -23,7 +23,7 @@
         <!-- Category dropdown selection -->
         <label for="category">Category:</label><br>
         <select id="category" formControlName="category">
-            <option value="" disabled>Select a category</option>
+            <option value="">Select a category</option>
             <option value="Service">Service</option>
             <option value="Pricing">Pricing</option>
             <option value="Quality">Quality</option>
@@ -36,7 +36,7 @@
         <!-- Property dropdown (Populated dynamically from Property Component) -->
         <label for="property">Property:</label><br>
         <select id="property" formControlName="property" [disabled]="properties.length === 0">
-            <option value="" disabled>Select a property</option>
+            <option value="">Select a property</option>
             <option *ngFor="let property of properties" [value]="property.id">{{ property.name }}</option>
         </select><br>
         <!-- Validation message for property selection -->

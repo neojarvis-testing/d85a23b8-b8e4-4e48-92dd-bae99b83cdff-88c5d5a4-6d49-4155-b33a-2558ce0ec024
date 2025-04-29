@@ -2,17 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Feedback } from '../models/feedback.model';
-import { ApiUrl } from '../constant/ApiUrl';
+import { apiUrl } from '../constant/ApiUrl';
 
 @Injectable({
   providedIn: 'root' // Singleton service across the application
 })
 export class FeedbackService {
   
-  private apiUrl: string;
 
   constructor(private http: HttpClient) {
-    this.apiUrl = `${ApiUrl.apiUrl}/feedback`; // Base API endpoint
   }
 
   /**
@@ -21,7 +19,7 @@ export class FeedbackService {
    * @returns Observable<Feedback> - The created feedback response
    */
   sendFeedback(feedback: Feedback): Observable<Feedback> {
-    return this.http.post<Feedback>(this.apiUrl, feedback);
+    return this.http.post<Feedback>(`${apiUrl}/feedback`, feedback);
   }
 
   /**
@@ -30,7 +28,7 @@ export class FeedbackService {
    * @returns Observable<Feedback[]> - List of feedback submitted by the user
    */
   getAllFeedbacksByUserId(userId: number): Observable<Feedback[]> {
-    return this.http.get<Feedback[]>(`${this.apiUrl}/user/${userId}`);
+    return this.http.get<Feedback[]>(`${apiUrl}/feedback/user/${userId}`);
   }
 
   /**
@@ -38,7 +36,7 @@ export class FeedbackService {
    * @returns Observable<Feedback[]> - List of all feedback
    */
   getFeedbacks(): Observable<Feedback[]> {
-    return this.http.get<Feedback[]>(this.apiUrl);
+    return this.http.get<Feedback[]>(`${apiUrl}/feedback`);
   }
 
   /**
@@ -47,6 +45,6 @@ export class FeedbackService {
    * @returns Observable<void> - Observable indicating completion (no returned data)
    */
   deleteFeedback(feedbackId: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${feedbackId}`);
+    return this.http.delete<void>(`${apiUrl}/feedback/${feedbackId}`);
   }
 }
