@@ -1,1 +1,65 @@
-<p>admin-view-feedback works!</p>
+<div class="admin-feedback-container">
+    <h2>Feedback Received</h2>
+
+    <!-- Dropdown for filtering feedback by category -->
+    <label for="categoryFilter">Filter by Category:</label>
+    <select id="categoryFilter" [(ngModel)]="selectedCategory" (change)="filterByCategory()">
+        <option value="All">All Categories</option>
+        <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+    </select>
+
+    <!-- Feedback table (Displays feedback when available) -->
+    <table *ngIf="filteredFeedbacks.length > 0">
+        <thead>
+            <tr>
+                <th>S.No.</th> <!-- Serial number for feedback entries -->
+                <th>User Name</th> <!-- Displays feedback submitter's name -->
+                <th>Feedback</th> <!-- Displays feedback message -->
+                <th>Posted Date</th> <!-- Displays date of feedback submission -->
+                <th>Actions</th> <!-- Actions for viewing additional details -->
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let feedback of filteredFeedbacks; let i = index">
+                <td>{{ i + 1 }}</td> <!-- Serial number auto-generated from index -->
+                <td>{{ feedback.userName }}</td> <!-- Display username -->
+                <td>{{ feedback.message }}</td> <!-- Display feedback message -->
+                <td>{{ feedback.date | date:'dd-MM-yyyy' }}</td> <!-- Format date in dd-MM-yyyy -->
+                <td>
+                    <!-- Button to show user profile information -->
+                    <button (click)="showUserDetails(feedback.userId)">Show Profile</button>
+                    <!-- Button to view property details associated with feedback -->
+                    <button (click)="showPropertyDetails(feedback.propertyId)">View Property Info</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Show "No Feedbacks Found" if no feedback exists -->
+    <div *ngIf="filteredFeedbacks.length === 0" class="no-data">
+        No Feedbacks Found
+    </div>
+
+    <!-- Modal for displaying user details -->
+    <div *ngIf="selectedUser" class="modal">
+        <div class="modal-content">
+            <h3>User Details</h3>
+            <p><strong>Username:</strong> {{ selectedUser.username }}</p> <!-- Display username -->
+            <p><strong>Email:</strong> {{ selectedUser.email }}</p> <!-- Display email -->
+            <p><strong>Mobile Number:</strong> {{ selectedUser.mobile }}</p> <!-- Display mobile number -->
+            <button (click)="closeUserDetails()">Close</button> <!-- Button to close modal -->
+        </div>
+    </div>
+
+    <!-- Modal for displaying property details -->
+    <div *ngIf="selectedProperty" class="modal">
+        <div class="modal-content">
+            <h3>Property Details</h3>
+            <p><strong>Title:</strong> {{ selectedProperty.title }}</p> <!-- Property title -->
+            <p><strong>Location:</strong> {{ selectedProperty.location }}</p> <!-- Property location -->
+            <p><strong>Price:</strong> {{ selectedProperty.price | currency }}</p> <!-- Property price formatted -->
+            <p><strong>Description:</strong> {{ selectedProperty.description }}</p> <!-- Property description -->
+            <button (click)="closePropertyDetails()">Close</button> <!-- Button to close modal -->
+        </div>
+    </div>
+</div>
