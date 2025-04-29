@@ -1,1 +1,42 @@
-<p>admin-edit-property works!</p>
+<h2>Edit Property</h2>
+
+<form *ngIf="property" (ngSubmit)="updateProperty()">
+  <div>
+    <label for="title">Title:</label>
+    <input id="title" [(ngModel)]="property.title" name="title" required>
+  </div>
+
+  <div>
+    <label for="description">Description:</label>
+    <textarea id="description" [(ngModel)]="property.description" name="description"></textarea>
+  </div>
+
+  <div>
+    <label for="location">Location:</label>
+    <input id="location" [(ngModel)]="property.location" name="location">
+  </div>
+
+  <div>
+    <label for="price">Price:</label>
+    <input id="price" [(ngModel)]="property.price" name="price" type="number">
+  </div>
+
+  <div>
+    <label for="type">Type:</label>
+    <input id="type" [(ngModel)]="property.type" name="type">
+  </div>
+
+  <div>
+    <label for="status">Status:</label>
+    <select id="status" [(ngModel)]="property.status" name="status">
+      <option value="Available">Available</option>
+      <option value="Sold">Sold</option>
+      <option value="Pending">Pending</option>
+    </select>
+  </div>
+
+  <div>
+    <button type="submit">Update Property</button>
+    <button type="button" (click)="router.navigate(['/admin-view-property'])">Cancel</button>
+  </div>
+</form>

@@ -35,7 +35,7 @@ public class PropertyServiceImpl implements PropertyService {
             throw new DuplicatePropertyException("Property with the title '" + property.getTitle() + "' already exists.");
         }
         // Save and return the new property object
-        property.setIsdeleted(true);
+        property.setDeleted(0);
         return propertyRepo.save(property);
     }
 
@@ -67,8 +67,10 @@ public class PropertyServiceImpl implements PropertyService {
     @Override
     public List<Property> getAllProperties() {
         logger.info("Fetching all properties");
+        List<Property> list = propertyRepo.findAll();
+        logger.info("List: {}",list);
         // Fetch and return all property objects
-        return propertyRepo.findAll();
+        return list;
     }
 
     /**
@@ -115,8 +117,10 @@ public class PropertyServiceImpl implements PropertyService {
             logger.error("Property deletion failed, not found: ID {}", propertyId);
                 throw new PropertyException("Property with ID " + propertyId + " not found.");
         }
-      property.setIsdeleted(false);
-      propertyRepo.save(property);
+      System.out.println("property:"+property);
+      property.setDeleted(1);
+      property = propertyRepo.save(property);
+      System.out.println("property:"+property);
       logger.info("Property marked as deleted: ID {}", propertyId);
         // Perform a logical deletion by toggling the isDeleted status (if applicable)
        // Physically delete the property (or toggle isDeleted if needed)
