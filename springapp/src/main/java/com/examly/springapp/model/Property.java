@@ -16,8 +16,7 @@ private String location;
 private Double price;
 private String type;
 private String status;
-
-private boolean isdeleted;
+private int deleted=0;
 
 //Generate Getters and Setters
 public long getPropertyId() {
@@ -44,6 +43,12 @@ public String getLocation() {
 public void setLocation(String location) {
     this.location = location;
 }
+public int getDeleted() {
+    return this.deleted;
+}
+public void setDeleted(int deleted) {
+    this.deleted = deleted;
+}
 public Double getPrice() {
     return price;
 }
@@ -65,13 +70,8 @@ public void setStatus(String status) {
 
 public Property() {
 }
-public boolean isIsdeleted() {
-    return isdeleted;
-}
-public void setIsdeleted(boolean isdeleted) {
-    this.isdeleted = isdeleted;
-}
-public Property(long propertyId, String title, String description, String location, Double price, String type,String status, boolean isdeleted) {
+
+public Property(long propertyId, String title, String description, String location, Double price, String type,String status, int deleted) {
 
     this.propertyId = propertyId;
     this.title = title;
@@ -80,9 +80,11 @@ public Property(long propertyId, String title, String description, String locati
     this.price = price;
     this.type = type;
     this.status = status;
-    this.isdeleted = isdeleted;
+    this.deleted = deleted;
 }
 
-
+public String toString(){
+    return this.propertyId+" "+this.title+ " "+this.deleted;
+}
 
 }

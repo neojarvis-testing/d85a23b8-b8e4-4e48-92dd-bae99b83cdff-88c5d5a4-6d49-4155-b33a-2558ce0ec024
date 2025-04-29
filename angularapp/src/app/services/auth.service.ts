@@ -10,9 +10,15 @@ import { User } from '../models/user.model';
 })
 export class AuthService {
 
+
+  apiUrl:string = ApiUrl;
+  
+   login(login:Login):Observable<Login>{
+
   apiUrl:any=apiUrl
 
   login(login:Login):Observable<Login>{
+
     return this.http.post<Login>(`${this.apiUrl}/login`,login);
   }
   register(user:User):Observable<User>{

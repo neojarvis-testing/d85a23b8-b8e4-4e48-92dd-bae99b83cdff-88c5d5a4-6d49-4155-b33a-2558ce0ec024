@@ -44,8 +44,13 @@ PropertyRepo propertyRepo;
        throw new PropertyException("Property not found!");
        }
 
+
+       logger.info("Inquiry added successfully");
+
+
        
        // Create new property inquiry and set properties
+
        PropertyInquiry newPropertyInquiry = new PropertyInquiry();
        newPropertyInquiry.setUser(user);
        newPropertyInquiry.setProperty(property);
