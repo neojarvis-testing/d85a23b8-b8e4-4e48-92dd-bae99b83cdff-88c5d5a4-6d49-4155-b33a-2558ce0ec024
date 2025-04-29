@@ -2,14 +2,15 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Login } from '../models/login.model';
-import { apiUrl } from '../constant/ApiUrl';
 import { User } from '../models/user.model';
-
+import { apiUrl } from '../constant/ApiUrl';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+
+  apiUrl:any=apiUrl
 
   login(login:Login):Observable<Login>{
     return this.http.post<Login>(`${apiUrl}/login`,login);
@@ -17,26 +18,22 @@ export class AuthService {
   register(user:User):Observable<User>{
     return this.http.post<User>(`${apiUrl}/register`,user);
   }
-
+ 
   loggedOut(): void {
     localStorage.removeItem("userId")
     localStorage.removeItem("userRole");
     localStorage.removeItem("token");
     localStorage.removeItem("username");
   }
-
+ 
   isLoggedUser():boolean{
     let role=localStorage.getItem("userRole")
     return role!=null
   }
-  getUserById(userId: number): Observable<User> {
-    console.log(userId)
-    if (!userId) {
-        console.error('User ID is missing.');
-        return new Observable<User>(); // Avoid making an incorrect API call
-    }
-    return this.http.get<User>(`${apiUrl}/user/${userId}`);
-}
-
+  getUserById(id:number){
+    this.http.get(`${apiUrl}/user/${id}`)
+  }
   constructor(private http:HttpClient) { }
 }
+ 
+ 

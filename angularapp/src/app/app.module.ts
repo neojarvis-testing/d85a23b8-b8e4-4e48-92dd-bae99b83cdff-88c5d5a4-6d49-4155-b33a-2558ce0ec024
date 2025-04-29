@@ -24,6 +24,7 @@ import { UsernavComponent } from './components/usernav/usernav.component';
 import { AuthguardComponent } from './components/authguard/authguard.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthInterceptor } from './auth.interceptor';
+import { MyInquiryComponent } from './components/my-inquiry/my-inquiry.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { AuthInterceptor } from './auth.interceptor';
     UserViewInquiryComponent,
     UserViewPropertiesComponent,
     UsernavComponent,
-    AuthguardComponent
+    AuthguardComponent,
+    MyInquiryComponent
   ],
   imports: [
     BrowserModule,

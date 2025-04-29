@@ -14,7 +14,7 @@ logout() {
 
 }
 
-  constructor(private service:AuthService,private router:Router) { }
+  constructor(public service:AuthService,private router:Router) { }
 
   ngOnInit(): void {
   }

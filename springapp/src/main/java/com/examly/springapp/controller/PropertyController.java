@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.examly.springapp.model.Property;
 import com.examly.springapp.service.PropertyService;
-
+import  com.examly.springapp.dtos.ApiResponse;
 @RestController
 @RequestMapping("/api/properties")
 public class PropertyController {
@@ -48,8 +48,8 @@ public class PropertyController {
     @GetMapping
     public ResponseEntity<List<Property>> getAllProperties() {
         List<Property> propertyList = propertyservice.getAllProperties(); // Call service to fetch all properties
-
-            return ResponseEntity.ok(propertyList); // Return 200 OK with list of properties
+            
+            return ResponseEntity.status(200).body(propertyList);// Return 200 OK with list of properties
    
     }
 
@@ -62,8 +62,9 @@ public class PropertyController {
 
     // Delete Property: Deletes a property by its ID
     @DeleteMapping("/{propertyId}")
-    public ResponseEntity<String> deleteProperty(@PathVariable Long propertyId) {
+    public ResponseEntity<ApiResponse> deleteProperty(@PathVariable Long propertyId) {
         boolean isDeleted = propertyservice.deleteProperty(propertyId); // Call service to delete property
-            return ResponseEntity.status(200).body("Deleted Successfully"); // Return 200 OK if deletion is successful
+        ApiResponse response = new ApiResponse("Deleted Successfully")   ;
+        return ResponseEntity.status(200).body(response); // Return 200 OK if deletion is successful
     }
 }
