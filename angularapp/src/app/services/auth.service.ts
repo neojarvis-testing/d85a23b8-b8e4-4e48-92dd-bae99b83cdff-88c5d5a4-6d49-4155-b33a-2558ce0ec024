@@ -9,23 +9,23 @@ import { apiUrl } from '../constant/ApiUrl';
   providedIn: 'root'
 })
 export class AuthService {
-
+ 
   apiUrl:any=apiUrl
-
+ 
   login(login:Login):Observable<Login>{
     return this.http.post<Login>(`${this.apiUrl}/login`,login);
   }
   register(user:User):Observable<User>{
     return this.http.post<User>(`${this.apiUrl}/register`,user);
   }
-
+ 
   loggedOut(): void {
     localStorage.removeItem("userId")
     localStorage.removeItem("userRole");
     localStorage.removeItem("token");
     localStorage.removeItem("username");
   }
-
+ 
   isLoggedUser():boolean{
     let role=localStorage.getItem("userRole")
     return role!=null
@@ -47,3 +47,5 @@ export class AuthService {
    }
   constructor(private http:HttpClient) { }
 }
+ 
+ 

@@ -1,1 +1,51 @@
-<p>admin-add-property works!</p>
+<p>Admin Add Property Works!</p>
+
+<div class="add-property-form">
+  <h2>Add New Property</h2>
+  <form (ngSubmit)="addProperty()">
+    <!-- Title Field -->
+    <div class="form-group">
+      <label for="title">Title:</label>
+      <input id="title" type="text" [(ngModel)]="newProperty.title" name="title" required placeholder="Enter property title" />
+    </div>
+
+    <!-- Description Field -->
+    <div class="form-group">
+      <label for="description">Description:</label>
+      <textarea id="description" [(ngModel)]="newProperty.description" name="description" placeholder="Enter property description"></textarea>
+    </div>
+
+    <!-- Location Field -->
+    <div class="form-group">
+      <label for="location">Location:</label>
+      <input id="location" type="text" [(ngModel)]="newProperty.location" name="location" required placeholder="Enter property location" />
+    </div>
+
+    <!-- Price Field -->
+    <div class="form-group">
+      <label for="price">Price:</label>
+      <input id="price" type="number" [(ngModel)]="newProperty.price" name="price" required placeholder="Enter property price" />
+    </div>
+
+    <!-- Type Field (Dropdown) -->
+    <div class="form-group">
+      <label for="type">Type:</label>
+      <select id="type" [(ngModel)]="newProperty.type" name="type" required>
+        <option value="Residential">Residential</option>
+        <option value="Commercial">Commercial</option>
+      </select>
+    </div>
+
+    <!-- Status Field (Dropdown) -->
+    <div class="form-group">
+      <label for="status">Status:</label>
+      <select id="status" [(ngModel)]="newProperty.status" name="status" required>
+        <option value="Available">Available</option>
+        <option value="Sold">Sold</option>
+      </select>
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" class="btn btn-primary">Add Property</button>
+  </form>
+</div>

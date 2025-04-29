@@ -6,4 +6,5 @@ location:string;
 price:number;
 type:string;
 status:string;
+deleted?:number;
 }
