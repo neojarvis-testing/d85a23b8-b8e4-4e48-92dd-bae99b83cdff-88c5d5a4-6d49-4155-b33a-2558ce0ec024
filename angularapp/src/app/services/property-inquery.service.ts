@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { PropertyInquiry } from '../models/property-inquiry.model';
-import { apiUrl } from '../constant/app.constant';
+import { apiUrl } from '../constant/ApiUrl';
 
 @Injectable({
   providedIn: 'root'
