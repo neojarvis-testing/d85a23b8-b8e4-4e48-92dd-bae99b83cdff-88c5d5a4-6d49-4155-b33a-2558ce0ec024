@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -9,23 +10,28 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  form:FormGroup
+  form: FormGroup
 
-  constructor(private service:AuthService,private fb:FormBuilder) { 
-    this.form=this.fb.group({
-      email:['',[Validators.required,Validators.email]],
-      password:['',[Validators.required]]
+  constructor(private service: AuthService, private fb: FormBuilder, private router: Router) {
+    this.form = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]]
     })
   }
 
-  onSubmit(){
+  onSubmit() {
     if (this.form.valid) {
       this.service.login(this.form.value).subscribe((response: any) => {
         if (response.token) {
           // Store the token securely (e.g., in local storage or a cookie)
           localStorage.setItem('token', response.token);
+          localStorage.setItem('username', response.username);
+          localStorage.setItem('userRole', response.userRole);
           alert("Login successful");
-          // Navigate to a different route if needed
+          if (response.userRole === 'ADMIN')
+            this.router.navigate(['/adminnav'])
+          else if (response.userRole === 'USER')
+            this.router.navigate(['/usernav'])
         }
       }, (error) => {
         alert("Login failed");
@@ -34,7 +40,7 @@ export class LoginComponent implements OnInit {
       alert("Invalid user input");
     }
   }
-  
+
   ngOnInit(): void {
   }
 
