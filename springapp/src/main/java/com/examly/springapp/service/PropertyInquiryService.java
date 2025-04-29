@@ -11,6 +11,6 @@ public interface PropertyInquiryService {
     public PropertyInquiry getInquiryById(long inquiryId);
     public List<PropertyInquiry> getInquiriesByUser(long userId);
     public List<PropertyInquiry> getAllInquiries();
-    public PropertyInquiry updateInquiryById(long inquiryId, PropertyInquiry inquiries);
+    public PropertyInquiry updateInquiryById(long inquiryId, PropertyInquiryInput inquiries);
     public boolean deleteInquiryById(long inquiryId);
 }
