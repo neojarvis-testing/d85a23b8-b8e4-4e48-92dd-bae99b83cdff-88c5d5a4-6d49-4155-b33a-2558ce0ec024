@@ -58,5 +58,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         // No need to encode the password again here
         return existingUser;
     }
+
+
+    public User getUserById(Long userId) {
+       return userRepo.findById(userId).orElse(null);
+    }
 }
   
