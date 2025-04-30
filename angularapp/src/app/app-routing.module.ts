@@ -12,7 +12,7 @@ import { UsernavComponent } from './components/usernav/usernav.component';
 import { MyInquiryComponent } from './components/my-inquiry/my-inquiry.component';
 import { AdminViewInquiryComponent } from './components/admin-view-inquiry/admin-view-inquiry.component';
 import { AdminViewFeedbackComponent } from './components/admin-view-feedback/admin-view-feedback.component';
-import { UserViewPropertiesComponent } from './components/user-view-properties/user-view-properties.component';
+
 import { UserAddFeedbackComponent } from './components/user-add-feedback/user-add-feedback.component';
 import { UserViewFeedbackComponent } from './components/user-view-feedback/user-view-feedback.component';
 
