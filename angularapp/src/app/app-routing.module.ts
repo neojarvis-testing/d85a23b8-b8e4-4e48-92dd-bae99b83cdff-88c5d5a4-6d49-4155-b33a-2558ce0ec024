@@ -35,7 +35,7 @@ const routes: Routes = [
   {path:"admin-view-property",component:AdminViewPropertyComponent},
   { path: 'admin-edit-property/:id', component: AdminEditPropertyComponent },
   {path:'user-view-property',component:UserViewPropertiesComponent},
-  {path:'user-add-inquiry',component:UserAddInquiryComponent}
+  {path:'user-add-inquiry/:id',component:UserAddInquiryComponent}
   
 ];
 

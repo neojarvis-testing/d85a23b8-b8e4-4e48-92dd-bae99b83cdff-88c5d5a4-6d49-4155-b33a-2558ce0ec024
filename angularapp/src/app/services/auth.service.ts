@@ -36,13 +36,11 @@ export class AuthService {
 
   isAdmin():boolean{
    let role = localStorage.getItem("userRole")
-   console.log(role)
    return role=='ADMIN'
   }
 
   isUser():boolean{
     let role = localStorage.getItem("userRole")
-    console.log(role)
     return role=='USER'
    }
   constructor(private http:HttpClient) { }
