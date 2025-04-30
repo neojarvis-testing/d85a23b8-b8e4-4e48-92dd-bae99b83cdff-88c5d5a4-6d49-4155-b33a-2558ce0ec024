@@ -7,6 +7,7 @@ body, html {
     padding: 0;
     overflow-x: hidden; /* Fix unwanted right scroll */
     width: 100%;
+    font-family: 'Montserrat', sans-serif; /* Apply Montserrat */
 }
 
 /* Ensure elements fit within the viewport */
@@ -55,7 +56,7 @@ body, html {
 /* Title styling */
 .brand-title {
     font-size: 52px; /* Slightly larger */
-    font-weight: 700;
+    font-weight: 600;
     font-family: 'Montserrat', sans-serif;
     color: yellow;
     margin-bottom: 20px;
@@ -91,8 +92,8 @@ body, html {
 
 .feature-title {
     font-size: 36px;
-    font-weight: 700;
-    color: #ffd700; /* Gold title */
+    font-weight: 500;
+    color: yellow; /* Gold title */
     margin-bottom: 30px;
 }
 
@@ -108,7 +109,7 @@ body, html {
 
 /* Hover effect - Increase size and color change */
 .feature-card:hover {
-    transform: scale(1.15);
+    transform: scale(1.03);
     background-color: #ffd700;
     color: black;
 }
@@ -123,4 +124,118 @@ body, html {
 .feature-card:hover i {
     color: black;
 }
+/* About Us Section */
+.about-us {
+    background-color: black;
+    padding: 60px 0;
+    text-align: center;
+    color: white;
+}
 
+.about-content {
+    max-width: 800px;
+    margin: auto;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+/* Section Titles */
+.section-title {
+    font-size: 36px;
+    font-weight: 700;
+    color: yellow;
+    margin-bottom: 20px;
+}
+
+/* Testimonials Section */
+/* Testimonials Section */
+.testimonials {
+    padding: 60px 0;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Testimonial Card Layout */
+.testimonial-cards {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+/* Individual Testimonial Card */
+.testimonial-card {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    transition: all 0.3s ease-in-out;
+    text-align: center;
+}
+
+/* Rounded Images */
+.testimonial-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+/* Hover Effect */
+.testimonial-card:hover {
+    transform: scale(1.05);
+    background-color: yellow;
+    color: black;
+}
+
+
+/* Footer Section */
+.footer-section {
+    background: black;
+    padding: 30px;
+    text-align: center;
+    color: white;
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Footer Content */
+.footer-content h2 {
+    font-size: 28px;
+    color: yellow;
+    margin-bottom: 10px;
+}
+
+/* Social Media Icons */
+.footer-links {
+    margin-bottom: 15px;
+}
+
+.footer-links a {
+    color: yellow;
+    font-size: 24px;
+    margin: 0 10px;
+    transition: transform 0.3s, color 0.3s;
+}
+
+.footer-links a:hover {
+    transform: scale(1.2);
+    color: white;
+}
+
+/* Contact Details */
+.footer-content p {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.footer-content i {
+    margin-right: 10px;
+    color: #ffcc00;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}

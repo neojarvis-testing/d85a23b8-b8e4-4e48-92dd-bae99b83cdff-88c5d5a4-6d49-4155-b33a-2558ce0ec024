@@ -1,21 +1,48 @@
-<h1>Control Panel</h1>
-<div>
-    <h2>Total Inquiries</h2>
-    <p>{{allInquiries}}</p>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+<!-- Control Panel Section -->
+<h1 class="control-panel-title"><i class="fas fa-cogs"></i> Control Panel</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 mb-3">
+            <div class="control-panel-card">
+                <i class="fas fa-envelope-open-text fa-3x"></i>
+                <h2>Total Inquiries</h2>
+                <p>{{allInquiries}}</p>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="control-panel-card">
+                <i class="fas fa-comments fa-3x"></i>
+                <h2>Total Feedbacks</h2>
+                <p>{{allFeedbacks}}</p>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="control-panel-card">
+                <i class="fas fa-building fa-3x"></i>
+                <h2>Total Properties</h2>
+                <p>{{allProperties}}</p>
+            </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <div class="control-panel-card">
+                <i class="fas fa-exclamation-circle fa-3x"></i>
+                <h2>Unresolved Inquiries</h2>
+                <p>{{allUnresolvedInquiries}}</p>
+            </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <div class="control-panel-card">
+                <i class="fas fa-flag fa-3x"></i>
+                <h2>High Priority Inquiries</h2>
+                <p>{{allHighPriorityInquiries}}</p>
+            </div>
+        </div>
+    </div>
 </div>
-<div>
-    <h2>Total Feedbacks</h2>
-    <p>{{allFeedbacks}}</p>
-</div>
-<div>
-    <h2>Total Properties</h2>
-    <p>{{allProperties}}</p>
-</div>
-<div>
-    <h2>Unresolved Inquiries</h2>
-    <p>{{allUnresolvedInquiries}}</p>
-</div>
-<div>
-    <h2>High Priority Inquiries</h2>
-    <p>{{allHighPriorityInquiries}}</p>
-</div>
+
+</body>
