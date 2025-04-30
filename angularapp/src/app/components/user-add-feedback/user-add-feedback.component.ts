@@ -1,4 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { PropertyService } from 'src/app/services/property.service';
+import { FeedbackService } from 'src/app/services/feedback.service';
+import { Property } from 'src/app/models/property.model';
+import { Feedback } from 'src/app/models/feedback.model';
+import { User } from 'src/app/models/user.model';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-user-add-feedback',
@@ -6,10 +13,52 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user-add-feedback.component.css']
 })
 export class UserAddFeedbackComponent implements OnInit {
+  properties: Property[] = []; // Available properties
+  propertyId: number;
+  successMessage: string = '';
+  errorMessage: string = '';
 
-  constructor() { }
+  feedback: Feedback = {
+    feedbackText: '',
+    category: '',
+    property: 
+    +{ propertyId: 0 } as Property,
+    user: { userId: 0 } as User
+  };
+
+  constructor(
+    private router: Router,
+    private feedbackService: FeedbackService,
+    private propertyService: PropertyService
+  ) {}
 
   ngOnInit(): void {
+    this.getProperties();
+    const userId = Number(localStorage.getItem('userId'));
+    if (!isNaN(userId) && userId > 0) {
+      this.feedback.user.userId = userId;
+    } else {
+      this.errorMessage = 'User not logged in. Please log in to submit feedback.';
+    }
   }
 
+  getProperties(): void {
+    this.propertyService.getAllProperties().subscribe({
+      next: (data) => {
+        this.properties = data || [];
+      },
+      error: () => {
+        this.errorMessage = 'Failed to load property list.';
+      }
+    });
+  }
+
+  onSubmit(feedbackForm: NgForm): void {
+    feedbackForm.value.userId = localStorage.getItem('userId')
+    feedbackForm.value.propertyId = +this.propertyId
+    console.log(feedbackForm.value)
+    this.feedbackService.sendFeedback(feedbackForm.value).subscribe((data)=>{
+      alert("feedback added!")
+    })
+  }
 }
