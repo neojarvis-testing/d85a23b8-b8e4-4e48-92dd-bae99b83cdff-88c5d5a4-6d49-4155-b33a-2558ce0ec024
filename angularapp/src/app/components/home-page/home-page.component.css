@@ -1,6 +1,19 @@
 /* Import Bootstrap */
 @import "~bootstrap/dist/css/bootstrap.min.css";
 
+/* Prevent horizontal scrolling */
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Fix unwanted right scroll */
+    width: 100%;
+}
+
+/* Ensure elements fit within the viewport */
+* {
+    box-sizing: border-box;
+}
+
 /* Set background image */
 .home-container {
     background: url('https://images.pexels.com/photos/302769/pexels-photo-302769.jpeg') no-repeat center center;
@@ -11,18 +24,19 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100%;
     position: relative;
     animation: fadeIn 1s ease-in-out; /* Smooth entrance */
 }
 
-/* Apply blur effect only behind the square */
+/* Transparent blur effect */
 .overlay::before {
     content: "";
     position: absolute;
     width: 100%;
     height: 100%;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(15px); /* Stronger blur effect */
+    -webkit-backdrop-filter: blur(15px);
     border-radius: 10px;
     z-index: -1;
 }
@@ -34,23 +48,24 @@
     border-radius: 10px;
     text-align: center;
     position: relative;
+    width: 100%;
     animation: slideUp 1s ease-out; /* Smooth pop-up effect */
 }
 
 /* Title styling */
 .brand-title {
-    font-size: 48px;
-    font-weight: 400;
+    font-size: 52px; /* Slightly larger */
+    font-weight: 700;
     font-family: 'Montserrat', sans-serif;
     color: yellow;
     margin-bottom: 20px;
-    animation: textGlow 2s infinite alternate ease-in-out; /* Subtle glowing effect */
+    animation: textGlow 2s infinite alternate ease-in-out; /* Glowing effect */
 }
 
 /* Subtitle styling */
 .brand-subtitle {
-    font-size: 24px;
-    font-weight: 400;
+    font-size: 26px; /* Slightly larger */
+    font-weight: 500;
     font-family: 'Montserrat', sans-serif;
     color: white;
     animation: fadeIn 2s ease-in-out; /* Soft fade-in */
@@ -58,30 +73,54 @@
 
 /* Define animations */
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 @keyframes slideUp {
-    from {
-        transform: translateY(50px);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
+    from { transform: translateY(50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+/* Feature Section */
+.feature-section {
+    padding: 60px 0;
+    text-align: center;
+    background-color: black;
+    width: 100%;
 }
 
-@keyframes textGlow {
-    from {
-        text-shadow: 0 0 10px rgba(255, 255, 0, 0.7);
-    }
-    to {
-        text-shadow: 0 0 20px rgba(255, 255, 0, 1);
-    }
+.feature-title {
+    font-size: 36px;
+    font-weight: 700;
+    color: #ffd700; /* Gold title */
+    margin-bottom: 30px;
 }
+
+/* Feature Cards */
+.feature-card {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+/* Hover effect - Increase size and color change */
+.feature-card:hover {
+    transform: scale(1.15);
+    background-color: #ffd700;
+    color: black;
+}
+
+/* Icon Color */
+.feature-card i {
+    color: #ffcc00;
+    transition: 0.3s;
+}
+
+/* Icon Hover Effect */
+.feature-card:hover i {
+    color: black;
+}
+

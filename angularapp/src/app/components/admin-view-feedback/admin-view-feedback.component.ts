@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './admin-view-feedback.component.html',
   styleUrls: ['./admin-view-feedback.component.css']
 })
+
 export class AdminViewFeedbackComponent implements OnInit {
 
   feedbacks: Feedback[] = []; // Stores all feedbacks submitted by users
