@@ -1,0 +1,17 @@
+.table-dark {
+    background-color: black;
+    color: yellow;
+  }
+  
+  .btn-warning {
+    background-color: yellow;
+    color: black;
+  }
+  
+  .modal-content {
+    border: 2px solid yellow;
+  }
+  
+  .modal h3 {
+    font-weight: bold;
+  }

@@ -10,12 +10,12 @@ import { PropertyInquiryService } from 'src/app/services/property-inquery.servic
 })
 export class EditInquiryComponent implements OnInit {
 
-  inquiryForm:FormGroup
+  form:FormGroup
   inquiryId:number
   userId:number
   propertyId:number
   constructor(private service:PropertyInquiryService,private fb:FormBuilder,private activatedRoute:ActivatedRoute) { 
-  this.inquiryForm = fb.group({
+  this.form = fb.group({
   message:['',[Validators.required]],
   status:['',[Validators.required]],
   inquiryDate:['',[Validators.required]],
@@ -29,15 +29,15 @@ export class EditInquiryComponent implements OnInit {
   ngOnInit(): void {
     this.inquiryId = this.activatedRoute.snapshot.params['id']
     this.service.getPropertyInquiryById(this.inquiryId).subscribe((data)=>{
-      this.inquiryForm.patchValue({...data})
+      this.form.patchValue({...data})
     })
   }
 
 
   save(){
-    this.inquiryForm.value.userId = 1
-    this.inquiryForm.value.propertyId = 2
-    this.service.editPropertyInquiryById(this.inquiryId,this.inquiryForm.value).subscribe((data)=>{
+    this.form.value.userId = 1
+    this.form.value.propertyId = 2
+    this.service.editPropertyInquiryById(this.inquiryId,this.form.value).subscribe((data)=>{
       alert("edited inquiry!")
     })
   }
