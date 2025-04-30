@@ -1,0 +1,38 @@
+/* Navbar styling */
+#admin-nav {
+    background-color: #0b0b0b !important; /* Dark navbar background */
+    padding: 15px;
+}
+
+/* Ensure navbar brand (EstateConnect) is left-aligned */
+.navbar-brand {
+    color: #dba622 !important; /* Gold color for branding */
+    font-size: 20px;
+    font-weight: bold;
+    margin-right: auto; /* Keeps it on the left */
+}
+
+/* Align navbar links to the right */
+.navbar-nav {
+    justify-content: flex-end;
+}
+
+/* Styling for all links except EstateConnect */
+.navbar-nav .nav-link {
+    color: white !important; /* White text */
+    font-size: 14px; /* Smaller size */
+    font-weight: 500;
+}
+
+/* Logout button styling */
+.btn-outline-light {
+    border-radius: 20px; /* Rounded corners */
+    padding: 8px 15px;
+    font-size: 14px;
+}
+
+/* Hover effects for Logout button */
+.btn-outline-light:hover {
+    background-color: white;
+    color: #0b0b0b !important;
+}

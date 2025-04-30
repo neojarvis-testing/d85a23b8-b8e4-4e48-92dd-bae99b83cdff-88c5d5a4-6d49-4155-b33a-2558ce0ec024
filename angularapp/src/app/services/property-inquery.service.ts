@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { PropertyInquiry } from '../models/property-inquiry.model';
 import { apiUrl } from '../constant/ApiUrl';
+import { PropertyInquiryInput } from '../models/propertyInquiryInput.model';
 
 @Injectable({
   providedIn: 'root'

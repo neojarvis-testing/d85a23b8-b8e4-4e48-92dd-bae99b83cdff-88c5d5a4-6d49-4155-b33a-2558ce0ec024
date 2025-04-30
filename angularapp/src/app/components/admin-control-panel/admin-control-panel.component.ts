@@ -13,7 +13,8 @@ export class AdminControlPanelComponent implements OnInit {
   inquiries:any[]=[]
 
   allInquiries=this.inquiries.length
-  allFeedbacks:any[]=[]
+  totalFeedbacks:any[]=[]
+  allFeedbacks=this.totalFeedbacks.length
   totalProperties:any[]=[]
   allProperties=this.totalProperties.length
   unresolvedInquiries:any[]=[]
@@ -28,7 +29,10 @@ export class AdminControlPanelComponent implements OnInit {
     })
   }
   getAllFeedbacks(){
-    this.feedbackService
+    this.feedbackService.getFeedbacks().subscribe((data)=>{
+      this.totalFeedbacks=data
+      this.allFeedbacks=this.totalFeedbacks.length
+    })
   }
   
   getHighPriorityInquiries(){

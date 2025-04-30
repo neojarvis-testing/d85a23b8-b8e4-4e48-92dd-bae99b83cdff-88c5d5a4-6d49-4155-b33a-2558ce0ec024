@@ -1,59 +1,48 @@
-<form [formGroup]="inquiryForm" (ngSubmit)="addInquiry()">
-    <div>
-      <label for="message">Message:</label>
-      <input id="message" type="text" formControlName="message" required />
-      <div *ngIf="inquiryForm.get('message')?.invalid && inquiryForm.get('message')?.touched">
-        Message is required.
-      </div>
+<form
+  class="container p-4 border rounded bg-black text-light shadow-sm"
+  [formGroup]="inquiryForm"
+  (ngSubmit)="addInquiry()"
+>
+  <div class="mb-3">
+    <label for="message" class="form-label text-warning">Message:</label>
+    <input
+      id="message"
+      type="text"
+      formControlName="message"
+      class="form-control bg-dark text-light border-warning"
+      required
+    />
+    <div
+      class="text-danger mt-1"
+      *ngIf="
+        inquiryForm.get('message')?.invalid &&
+        inquiryForm.get('message')?.touched
+      "
+    >
+      Message is required.
     </div>
-  
-    <div>
-      <label for="status">Status:</label>
-      <input id="status" type="text" formControlName="status" required />
-      <div *ngIf="inquiryForm.get('status')?.invalid && inquiryForm.get('status')?.touched">
-        Status is required.
-      </div>
-    </div>
-  
-    <div>
-      <label for="inquiryDate">Inquiry Date:</label>
-      <input id="inquiryDate" type="date" formControlName="inquiryDate" required />
-      <div *ngIf="inquiryForm.get('inquiryDate')?.invalid && inquiryForm.get('inquiryDate')?.touched">
-        Inquiry Date is required.
-      </div>
-    </div>
-  
-    <div>
-      <label for="responseDate">Response Date:</label>
-      <input id="responseDate" type="date" formControlName="responseDate" required />
-      <div *ngIf="inquiryForm.get('responseDate')?.invalid && inquiryForm.get('responseDate')?.touched">
-        Response Date is required.
-      </div>
-    </div>
-  
-    <div>
-      <label for="adminResponse">Admin Response:</label>
-      <textarea id="adminResponse" formControlName="adminResponse" required></textarea>
-      <div *ngIf="inquiryForm.get('adminResponse')?.invalid && inquiryForm.get('adminResponse')?.touched">
-        Admin Response is required.
-      </div>
-    </div>
-  
-    <div>
-      <label for="priority">Priority:</label>
-      <input id="priority" type="text" formControlName="priority" required />
-      <div *ngIf="inquiryForm.get('priority')?.invalid && inquiryForm.get('priority')?.touched">
-        Priority is required.
-      </div>
-    </div>
-  
-    <div>
-      <label for="contactDetails">Contact Details:</label>
-      <input id="contactDetails" type="text" formControlName="contactDetails" required />
-      <div *ngIf="inquiryForm.get('contactDetails')?.invalid && inquiryForm.get('contactDetails')?.touched">
-        Contact Details are required.
-      </div>
-    </div>
-  
-    <button type="submit" [disabled]="inquiryForm.invalid">Submit</button>
-  </form>
+  </div>
+
+  <div class="mb-3">
+    <label for="priority" class="form-label text-warning">Priority:</label>
+    <select
+      id="priority"
+      formControlName="priority"
+      name="priority"
+      class="form-select bg-dark text-light border-warning"
+    >
+      <option selected disabled>Select Priority</option>
+      <option value="High">High</option>
+      <option value="Low">Low</option>
+      <option value="Medium">Medium</option>
+    </select>
+  </div>
+
+  <button
+    type="submit"
+    class="btn btn-warning text-dark fw-bold"
+    [disabled]="inquiryForm.invalid"
+  >
+    Submit
+  </button>
+</form>

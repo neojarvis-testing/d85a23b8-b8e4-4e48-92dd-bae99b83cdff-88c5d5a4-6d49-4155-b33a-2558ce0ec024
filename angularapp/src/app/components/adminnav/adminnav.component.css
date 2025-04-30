@@ -1,0 +1,84 @@
+/* Import Bootstrap */
+@import "~bootstrap/dist/css/bootstrap.min.css";
+
+/* Import Montserrat font */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap');
+
+/* Sticky Navbar */
+#admin-nav {
+    position: sticky;
+    top: 0;
+    z-index: 1000; /* Keeps navbar above other content */
+    background-color: #0b0b0b !important;
+    padding: 15px;
+    font-family: 'Montserrat', sans-serif; /* Apply Montserrat font */
+}
+
+/* EstateConnect brand styling */
+.navbar-brand {
+    color: yellow !important; /* Yellow font */
+    font-size: 20px;
+    font-weight: 600; /* Thicker font */
+    margin-right: auto; /* Keeps it aligned to the left */
+}
+
+/* Align navbar items to the right */
+.navbar-nav {
+    justify-content: flex-end;
+}
+
+/* Styling for all links */
+.navbar-nav .nav-link {
+    color: white !important; /* White text */
+    font-size: 14px; /* Smaller size */
+    font-weight: 300; /* Thinner font */
+}
+
+/* Logout button with gradient effect */
+.btn-gradient {
+    background: linear-gradient(45deg, yellow, orange);
+    border: 2px solid transparent;
+    color: black; /* Text color */
+    padding: 5px 10px; /* Reduced padding for smaller button */
+    font-size: 14px; /* Font size */
+    font-weight: 600; /* Slightly thicker font */
+    border-radius: 4px; /* Less curve for a more rectangular look */
+    transition: all 0.3s ease;
+    font-family: 'Montserrat', sans-serif; /* Apply Montserrat font */
+}
+
+/* Hover effect - Maintain orange-yellow gradient */
+.btn-gradient:hover {
+    background: linear-gradient(45deg, orange, yellow);
+    border-color: orange; /* Ensures border color changes */
+    color: black;
+}
+
+/* Admin user info */
+.admin {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid white;
+    border-radius: 6px; /* Reduce border radius for a more refined look */
+    padding: 4px 8px; /* Adjust padding for balanced spacing */
+    font-size: 14px; /* Maintain readability */
+    color: yellow; /* Keeps it visually distinct */
+    text-align: center;
+}
+
+/* User info box with circular shape */
+.user-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px; /* Fixed width to maintain shape */
+    height: 40px; /* Fixed height to maintain shape */
+    border: 2px solid yellow; /* Adds a border */
+    border-radius: 50%; /* Makes it a perfect circle */
+    padding: 5px;
+    font-size: 14px; /* Readable size */
+    color: yellow; /* Highlights username */
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.1); /* Light transparent background */
+}

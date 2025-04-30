@@ -30,22 +30,29 @@ export class AuthService {
     let role=localStorage.getItem("userRole")
     return role!=null
   }
-  getUserById(id:number){
-    this.http.get(`${apiUrl}/user/${id}`)
+  getUserById(id: number): Observable<User> {
+    return this.http.get<User>(`${apiUrl}/user/${id}`);
   }
-
+  getRole():string | null{
+    return localStorage.getItem('userRole')
+  }
+  getUsername():string | null{
+    return localStorage.getItem('username')
+  }
   isAdmin():boolean{
    let role = localStorage.getItem("userRole")
-   console.log(role)
    return role=='ADMIN'
   }
 
   isUser():boolean{
     let role = localStorage.getItem("userRole")
-    console.log(role)
     return role=='USER'
    }
+
+
   constructor(private http:HttpClient) { }
 }
  
+ 
+
  

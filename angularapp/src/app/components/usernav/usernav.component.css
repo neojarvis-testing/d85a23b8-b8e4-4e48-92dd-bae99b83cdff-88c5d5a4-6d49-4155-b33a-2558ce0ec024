@@ -1,0 +1,45 @@
+/* Ensure navbar items have consistent height */
+.navbar-nav {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 15px; /* Adds uniform spacing between navbar items */
+}
+
+/* Standard padding for all navbar items */
+.navbar-nav .nav-item {
+    padding: 8px 12px; /* Ensures uniform spacing */
+}
+
+/* Fix alignment for username display */
+.user-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: auto; /* Allows flexible width */
+    min-width: 120px; /* Ensures proper sizing */
+    height: 40px; /* Matches navbar item size */
+    border: 2px solid white; /* Border to enhance visibility */
+    border-radius: 12px; /* Slight curve */
+    padding: 5px 10px; /* Uniform padding */
+    font-size: 16px; /* Readable size */
+    color: yellow;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.1); /* Light transparent background */
+}
+
+/* Logout button - Ensure uniform size */
+.btn-gradient {
+    padding: 8px 12px; /* Matching navbar item size */
+    font-size: 14px;
+}
+
+/* Adjust navbar brand spacing */
+.navbar-brand {
+    margin-right: 30px; /* Ensure space from other items */
+}
+
+/* Fix hover effect for user-info */
+.user-info a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}

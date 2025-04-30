@@ -12,8 +12,10 @@ import com.examly.springapp.dtos.RowMapper;
 import com.examly.springapp.exceptions.FeedbackNotFoundException;
 import com.examly.springapp.exceptions.InvalidFeedbackException;
 import com.examly.springapp.model.Feedback;
+import com.examly.springapp.model.Property;
 import com.examly.springapp.model.User;
 import com.examly.springapp.repository.FeedbackRepo;
+import com.examly.springapp.repository.PropertyRepo;
 import com.examly.springapp.repository.UserRepo;
 
 @Service
@@ -27,27 +29,39 @@ private Logger logger = LoggerFactory.getLogger(FeedbackServiceImpl.class);
 
     @Autowired
     private UserRepo userRepo;
-
-    /**
-     * Creates a new feedback entry.
-     * Throws an exception if validation fails.
-     */
+    @Autowired 
+    private PropertyRepo propertyRepo;
+    
     public Feedback createFeedback(FeedbackDTO feedbackDTO) {
         logger.info("Attempting to create new feedback");
-
+    
+        // Validate FeedbackDTO
         if (feedbackDTO == null) {
             logger.error("Feedback creation failed: Feedback is null.");
-
             throw new InvalidFeedbackException("Feedback cannot be null.");
         }
         if (feedbackDTO.getFeedbackText() == null || feedbackDTO.getFeedbackText().trim().isEmpty()) {
             logger.warn("Feedback creation failed: Empty feedback text.");
             throw new InvalidFeedbackException("Feedback text cannot be empty.");
         }
-
-        logger.info("Feedback created successfully.");
+    
+        // Convert DTO to Entity
         Feedback feedback = RowMapper.mapToFeedbackDTO(feedbackDTO);
-        return feedbackRepo.save(feedback);
+    
+        // Fetch Property Entity
+        Property property = propertyRepo.findById(feedback.getProperty().getPropertyId()).orElse(null);
+        // Fetch User Entity
+        User user = userRepo.findById(feedback.getUser().getUserId()).orElse(null);
+    
+        // Set Property and User entities before saving
+        feedback.setProperty(property);
+        feedback.setUser(user);
+    
+        // Save Feedback Entity
+        Feedback savedFeedback = feedbackRepo.save(feedback);
+        logger.info("Feedback created successfully: {}", savedFeedback);
+        
+        return savedFeedback;
     }
 
     /**

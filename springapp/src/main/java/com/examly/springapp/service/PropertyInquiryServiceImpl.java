@@ -93,7 +93,7 @@ PropertyRepo propertyRepo;
         return propertyInquiryRepo.findAll();
     }
 
-    public PropertyInquiry updateInquiryById(long inquiryId, PropertyInquiryInput inquiries) {
+    public PropertyInquiry updateInquiryById(long inquiryId, PropertyInquiry inquiries) {
         logger.info("Attempting to update inquiry");
         PropertyInquiry propertyInquiry = propertyInquiryRepo.findById(inquiryId).orElse(null);
         if(propertyInquiry==null){
@@ -102,20 +102,22 @@ PropertyRepo propertyRepo;
             throw new InquiryNotFound("Inquiry not found!"); 
         }
         PropertyInquiry newPropertyInquiry = new PropertyInquiry();
-            User user = userRepo.findById(inquiries.getUserId()).orElse(null);
-            Property property = propertyRepo.findById(inquiries.getPropertyId()).orElse(null);
-        newPropertyInquiry.setUser(user);
-        newPropertyInquiry.setProperty(property);
-        newPropertyInquiry.setAdminResponse(inquiries.getAdminResponse());
-        newPropertyInquiry.setContactDetails(inquiries.getContactDetails());
-        newPropertyInquiry.setInquiryDate(inquiries.getInquiryDate());
-        newPropertyInquiry.setResponseDate(inquiries.getResponseDate());
-        newPropertyInquiry.setMessage(inquiries.getMessage());
-        newPropertyInquiry.setPriority(inquiries.getPriority());
-        newPropertyInquiry.setStatus(inquiries.getStatus());
-        newPropertyInquiry.setInquiryId(inquiryId);
-        
-        return propertyInquiryRepo.save(newPropertyInquiry);
+            User user = userRepo.findById(inquiries.getUser().getUserId()).orElse(null);
+            Property property = propertyRepo.findById(inquiries.getProperty().getPropertyId()).orElse(null);
+        // newPropertyInquiry.setUser(user);
+        // newPropertyInquiry.setProperty(property);
+        // newPropertyInquiry.setAdminResponse(inquiries.getAdminResponse());
+        // newPropertyInquiry.setContactDetails(inquiries.getContactDetails());
+        // newPropertyInquiry.setInquiryDate(inquiries.getInquiryDate());
+        // newPropertyInquiry.setResponseDate(inquiries.getResponseDate());
+        // newPropertyInquiry.setMessage(inquiries.getMessage());
+        // newPropertyInquiry.setPriority(inquiries.getPriority());
+        // newPropertyInquiry.setStatus(inquiries.getStatus());
+        // newPropertyInquiry.setInquiryId(inquiryId);
+        inquiries.setInquiryId(inquiryId);
+        inquiries.setUser(user);
+        inquiries.setProperty(property);
+        return propertyInquiryRepo.save(inquiries); 
     }
      
     // Deletes an inquiry using inquiry ID
