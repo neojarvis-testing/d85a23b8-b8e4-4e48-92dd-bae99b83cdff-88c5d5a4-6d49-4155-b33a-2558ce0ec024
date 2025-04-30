@@ -11,6 +11,7 @@ import { Property } from 'src/app/models/property.model';
 export class AdminEditPropertyComponent implements OnInit {
   property: Property | null = null;
   propertyId: number = 0;
+  showSuccessPopup: boolean = false; // Controls success message display
 
   constructor(
     private propertyService: PropertyService,
@@ -19,7 +20,6 @@ export class AdminEditPropertyComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Extract property ID from the route
     this.propertyId = Number(this.route.snapshot.paramMap.get('id'));
     this.getPropertyDetails();
   }
@@ -41,16 +41,18 @@ export class AdminEditPropertyComponent implements OnInit {
     if (this.property) {
       this.propertyService.updateProperty(this.propertyId, this.property).subscribe(
         () => {
-          alert('Property updated successfully.');
-          this.router.navigate(['/admin-view-property']); // Redirect to view page
+          this.showSuccessPopup = true; // Show popup message
         },
         (error) => {
           console.error('Error updating property:', error);
-          alert('Failed to update property.');
         }
       );
-    } else {
-      alert('Property details are missing!');
     }
+  }
+
+  // Close success popup and navigate back
+  closePopup(): void {
+    this.showSuccessPopup = false;
+    this.router.navigate(['/admin-view-property']);
   }
 }

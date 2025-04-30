@@ -2,6 +2,28 @@
     <div class="container-fluid">
         <a class="navbar-brand fw-bold text-white" routerLink="/">EstateConnect</a>
 
+
+<nav id="admin-nav">
+<div>
+<ul>
+<li><a routerLink="/">EstateConnect</a></li>
+<li><a routerLink="/">Home</a></li>
+<li *ngIf="service.isAdmin()"><a routerLink="/controlpanel" >Control Panel</a></li>
+<li *ngIf="service.isAdmin()"><a routerLink="/admin-add-property" >Add Property</a></li>
+<li *ngIf="service.isAdmin()"><a routerLink="/admin-view-property" >View Property</a></li>
+<li *ngIf="service.isAdmin()"><a routerLink="/inquiries" >Inquiries</a></li>
+<li *ngIf="service.isAdmin()"><a routerLink="/viewfeedback" >Feedback</a></li>
+<li *ngIf="service.isUser()"><a routerLink="/user-view-property" >Properties</a></li>
+<li *ngIf="service.isUser()"><a routerLink="/myinquiries" >My Inquiries</a></li>
+<li *ngIf="service.isUser()"><a routerLink="/addfeedback">Feedback</a></li>
+<li *ngIf="!service.isLoggedUser()"><a routerLink="/login" >Login</a></li>
+<li *ngIf="!service.isLoggedUser()"><a routerLink="/register" >Register</a></li>
+<button (click) = "logout()" *ngIf="service.isLoggedUser()">Logout</button>
+</ul>
+</div>
+</nav>
+    
+
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -32,3 +54,4 @@
         </div>
     </div>
 </nav>
+
