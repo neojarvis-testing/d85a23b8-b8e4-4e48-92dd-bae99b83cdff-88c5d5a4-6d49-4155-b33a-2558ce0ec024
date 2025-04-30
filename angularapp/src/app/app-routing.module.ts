@@ -18,6 +18,7 @@ import { UserAddFeedbackComponent } from './components/user-add-feedback/user-ad
 import { EditInquiryComponent } from './components/edit-inquiry/edit-inquiry.component';
 
 import { UserViewFeedbackComponent } from './components/user-view-feedback/user-view-feedback.component';
+import { UserViewPropertiesComponent } from './components/user-view-properties/user-view-properties.component';
 
 
 const routes: Routes = [
@@ -32,9 +33,8 @@ const routes: Routes = [
 
   {path:'viewfeedback',component:AdminViewFeedbackComponent},
 
-  {path:'viewproperties',component:UserViewPropertiesComponent},
   {path:'addfeedback',component:UserAddFeedbackComponent},
-  {path:'editInquiry/:id',component:EditInquiryComponent}
+  {path:'editInquiry/:id',component:EditInquiryComponent},
 
   {path:'addfeedback',component:UserAddFeedbackComponent},
   {path:'user-view-feedback',component:UserViewFeedbackComponent},
