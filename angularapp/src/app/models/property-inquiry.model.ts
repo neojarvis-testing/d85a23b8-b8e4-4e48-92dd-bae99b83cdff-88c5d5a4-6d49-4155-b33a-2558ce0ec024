@@ -3,8 +3,8 @@ import { User } from "./user.model";
 
 export interface PropertyInquiry {
 inquiryId?:number;
-user:Partial<User>;
-property:Partial<Property>;
+user:User;
+property:Property;
 message:string;
 status?:string;
 inquiryDate?:string;

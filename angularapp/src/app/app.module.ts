@@ -53,8 +53,8 @@ import { MyInquiryComponent } from './components/my-inquiry/my-inquiry.component
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [
     {

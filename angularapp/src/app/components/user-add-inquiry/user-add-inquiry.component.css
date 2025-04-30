@@ -1,0 +1,28 @@
+.bg-black {
+    background-color: black;
+  }
+  
+  .text-warning {
+    color: yellow;
+  }
+  
+  .bg-dark {
+    background-color: #333;
+  }
+  
+  .border-warning {
+    border-color: yellow;
+  }
+  
+  .btn-warning {
+    background-color: yellow;
+    color: black;
+  }
+  
+  .shadow-sm {
+    box-shadow: 0 2px 4px rgba(255, 255, 0, 0.5);
+  }
+  
+  .fw-bold {
+    font-weight: bold;
+  }

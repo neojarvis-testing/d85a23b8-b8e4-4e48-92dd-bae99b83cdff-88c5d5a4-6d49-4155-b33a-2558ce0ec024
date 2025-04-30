@@ -13,24 +13,20 @@ public class Feedback {
     @GeneratedValue(strategy= GenerationType.IDENTITY) // Auto-Generated ID
     private long feedbackId;
 
-    @NotBlank(message = "Feedback text cannot be empty") // Ensures non-empty feedback
-    @Size(max = 800, message = "Feedback text cannot exceed 800 characters") // Limits text size
+    
     private String feedbackText;
 
-    @NotNull(message = "Date cannot be null") // Prevents null values
     private LocalDate date;
 
     @ManyToOne  // Establishes a many-to-one relationship with the User entity
     @JoinColumn(name = "userId", nullable = false) // Setting the foreign key name
-    @NotNull(message = "User must be specified") // Ensures feedback is linked to a user
     private User user;
 
     @ManyToOne  // Establishes a many-to-one relationship with the Property entity
     @JoinColumn(name = "propertyId", nullable = false) // Setting the foreign key name
-    @NotNull(message = "Property must be specified") // Ensures feedback is linked to a property
     private Property property;
 
-    @NotBlank(message = "Category cannot be empty") // Ensures non-empty category
+    
     private String category;
 
     // Generate setter and getter methods:

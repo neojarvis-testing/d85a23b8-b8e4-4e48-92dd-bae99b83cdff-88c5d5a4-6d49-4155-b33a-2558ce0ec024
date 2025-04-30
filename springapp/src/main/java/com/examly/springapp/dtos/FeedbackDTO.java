@@ -14,11 +14,11 @@ public class FeedbackDTO {
     @PastOrPresent(message = "Date cannot be in the future") // Ensure date is not in the future
     private LocalDate date;
 
-    @Positive(message = "User ID must be a positive number") // Ensure userId is positive
-    private long userId;
+    // @Positive(message = "User ID must be a positive number") // Ensure userId is positive
+    private Long userId;
 
-    @Positive(message = "Property ID must be a positive number") // Ensure propertyId is positive
-    private long propertyId;
+    // @Positive(message = "Property ID must be a positive number") // Ensure propertyId is positive
+    private Long propertyId;
 
     @NotBlank(message = "Category cannot be blank") // Ensure category is not blank
     private String category;
@@ -48,7 +48,7 @@ public class FeedbackDTO {
         this.date = date;
     }
 
-    public long getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
@@ -56,7 +56,7 @@ public class FeedbackDTO {
         this.userId = userId;
     }
 
-    public long getPropertyId() {
+    public Long getPropertyId() {
         return propertyId;
     }
 
