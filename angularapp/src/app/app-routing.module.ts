@@ -3,8 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
-
-import { AdminAddPropertyComponent } from './components/admin-add-property/admin-add-property.component';
 import { AdminEditPropertyComponent } from './components/admin-edit-property/admin-edit-property.component';
 import { AdminViewPropertyComponent } from './components/admin-view-property/admin-view-property.component';
 import { AdminnavComponent } from './components/adminnav/adminnav.component';
@@ -14,6 +12,9 @@ import { AdminViewInquiryComponent } from './components/admin-view-inquiry/admin
 import { AdminViewFeedbackComponent } from './components/admin-view-feedback/admin-view-feedback.component';
 
 import { UserAddFeedbackComponent } from './components/user-add-feedback/user-add-feedback.component';
+import { AdminAddPropertyComponent } from './components/admin-add-property/admin-add-property.component';
+import { UserViewPropertiesComponent } from './components/user-view-properties/user-view-properties.component';
+import { AdminControlPanelComponent } from './components/admin-control-panel/admin-control-panel.component';
 
 import { EditInquiryComponent } from './components/edit-inquiry/edit-inquiry.component';
 
@@ -34,7 +35,10 @@ const routes: Routes = [
 
   {path:'viewproperties',component:UserViewPropertiesComponent},
   {path:'addfeedback',component:UserAddFeedbackComponent},
-  {path:'editInquiry/:id',component:EditInquiryComponent}
+
+  {path:'controlpanel',component:AdminControlPanelComponent},
+
+  {path:'editInquiry/:id',component:EditInquiryComponent},
 
   {path:'addfeedback',component:UserAddFeedbackComponent},
   {path:'user-view-feedback',component:UserViewFeedbackComponent},
@@ -43,7 +47,6 @@ const routes: Routes = [
   {path:"admin-view-property",component:AdminViewPropertyComponent},
   { path: 'admin-edit-property/:id', component: AdminEditPropertyComponent },
   {path:'user-view-property',component:UserViewPropertiesComponent}
-
 ];
 
 @NgModule({
