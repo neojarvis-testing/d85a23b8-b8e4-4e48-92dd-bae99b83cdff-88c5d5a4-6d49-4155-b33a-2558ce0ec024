@@ -1,1 +1,58 @@
-<p>user-add-feedback works!</p>
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Submit Your Property Feedback</h2>
+
+  <!-- Success & Error Messages -->
+  <div *ngIf="errorMessage" class="alert alert-danger text-center">{{ errorMessage }}</div>
+  <div *ngIf="successMessage" class="alert alert-success text-center">{{ successMessage }}</div>
+
+  <!-- Feedback Form -->
+  <form #feedbackForm="ngForm" (ngSubmit)="onSubmit(feedbackForm)">
+
+      <!-- Dropdown for Property Selection -->
+      <div class="form-group">
+          <label for="property">Select Property</label>
+          <select id="propertyId" class="form-control" [(ngModel)]="propertyId" name="propertyId" required>
+              <option value="" disabled>Select a property</option>
+              <option *ngFor="let property of properties" [value]="property.propertyId">
+                  {{ property.title }}
+              </option>
+          </select>
+          <div *ngIf="!propertyId" class="text-danger">Please select a property.</div>
+      </div>
+
+      <!-- Feedback Text -->
+      <div class="form-group">
+          <label for="feedbackText">Feedback</label>
+          <textarea
+              id="feedbackText"
+              class="form-control"
+              [(ngModel)]="feedback.feedbackText"
+              name="feedbackText"
+              rows="3"
+              required
+              minlength="10"
+          ></textarea>
+          <div *ngIf="feedback.feedbackText.length < 10" class="text-danger">
+              Feedback must be at least 10 characters long.
+          </div>
+      </div>
+
+      <!-- Category Selection -->
+      <div class="form-group">
+          <label for="category">Category</label>
+          <select id="category" class="form-control" [(ngModel)]="feedback.category" name="category" required>
+              <option value="">Select a category</option>
+              <option value="Service">Service</option>
+              <option value="Pricing">Pricing</option>
+              <option value="Quality">Quality</option>
+          </select>
+          <div *ngIf="!feedback.category" class="text-danger">Category selection is required.</div>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit" class="btn btn-primary"
+          [disabled]="!propertyId || feedback.feedbackText.length < 10 || !feedback.category">
+          Submit Feedback
+      </button>
+  </form>
+</div>
