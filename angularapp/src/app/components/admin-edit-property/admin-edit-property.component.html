@@ -1,42 +1,70 @@
-<h2>Edit Property</h2>
+<!-- Edit Property Container -->
+<div class="edit-property-container" style="background-color: black; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(255, 255, 0, 0.2); width: 50%; margin: auto;">
+  <h2 style="color: yellow; text-align: center;">Edit Property</h2>
 
-<form *ngIf="property" (ngSubmit)="updateProperty()">
-  <div>
-    <label for="title">Title:</label>
-    <input id="title" [(ngModel)]="property.title" name="title" required>
-  </div>
+  <form *ngIf="property" (ngSubmit)="updateProperty()" style="display: flex; flex-direction: column; gap: 15px;">
+    
+   
 
-  <div>
-    <label for="description">Description:</label>
-    <textarea id="description" [(ngModel)]="property.description" name="description"></textarea>
-  </div>
-
-  <div>
-    <label for="location">Location:</label>
-    <input id="location" [(ngModel)]="property.location" name="location">
-  </div>
-
-  <div>
-    <label for="price">Price:</label>
-    <input id="price" [(ngModel)]="property.price" name="price" type="number">
-  </div>
-
-  <div>
-    <label for="type">Type:</label>
-    <input id="type" [(ngModel)]="property.type" name="type">
-  </div>
-
-  <div>
-    <label for="status">Status:</label>
-    <select id="status" [(ngModel)]="property.status" name="status">
+    <!-- Title Field -->
+    <label for="title" style="color: yellow; font-weight: bold;">Title:</label>
+    <input id="title" type="text" [(ngModel)]="property.title" name="title" required
+      style="width: 90%; max-width: 1300px; padding: 8px; margin-bottom: 10px; border: 1px solid yellow; border-radius: 4px; background-color: black; color: white;" />
+    
+    <!-- Description Field -->
+    <label for="description" style="color: yellow; font-weight: bold;">Description:</label>
+    <textarea id="description" [(ngModel)]="property.description" name="description"
+      style="width: 90%; max-width: 1300px; padding: 8px; margin-bottom: 10px; border: 1px solid yellow; border-radius: 4px; background-color: black; color: white;"></textarea>
+    
+    <!-- Location Field -->
+    <label for="location" style="color: yellow; font-weight: bold;">Location:</label>
+    <input id="location" type="text" [(ngModel)]="property.location" name="location"
+      style="width: 90%; max-width: 1300px; padding: 8px; margin-bottom: 10px; border: 1px solid yellow; border-radius: 4px; background-color: black; color: white;" />
+    
+    <!-- Price Field -->
+    <label for="price" style="color: yellow; font-weight: bold;">Price:</label>
+    <input id="price" type="number" [(ngModel)]="property.price" name="price"
+      style="width: 90%; max-width: 1300px; padding: 8px; margin-bottom: 10px; border: 1px solid yellow; border-radius: 4px; background-color: black; color: white;" />
+    
+    <!-- Type Field (Dropdown) -->
+    <label for="type" style="color: yellow; font-weight: bold;">Type:</label>
+    <select id="type" [(ngModel)]="property.type" name="type" required
+      style="width: 90%; max-width: 1300px; padding: 8px; margin-bottom: 10px; border: 1px solid yellow; border-radius: 4px; background-color: black; color: white;">
+      <option value="Residential">Residential</option>
+      <option value="Commercial">Commercial</option>
+    </select>
+    
+    <!-- Status Field (Dropdown) -->
+    <label for="status" style="color: yellow; font-weight: bold;">Status:</label>
+    <select id="status" [(ngModel)]="property.status" name="status" required
+      style="width: 90%; max-width: 1300px; padding: 8px; margin-bottom: 10px; border: 1px solid yellow; border-radius: 4px; background-color: black; color: white;">
       <option value="Available">Available</option>
       <option value="Sold">Sold</option>
       <option value="Pending">Pending</option>
     </select>
-  </div>
+     <!-- Submit Button (Reduced Width) -->
+     <button type="submit" class="btn btn-primary"
+     style="background-color: yellow; color: black; border: 2px solid white;
+     padding: 10px 30px; border-radius: 4px; cursor: pointer; font-size: 16px;
+     width: 200px; margin-bottom: 10px; text-align: left;">
+     Update Property
+   </button>
 
-  <div>
-    <button type="submit">Update Property</button>
-    <button type="button" (click)="router.navigate(['/admin-view-property'])">Cancel</button>
+  </form>
+</div>
+
+<!-- Success Popup -->
+<div class="modal" *ngIf="showSuccessPopup" style="position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); display: block; width: 50%; max-width: 600px;">
+  <div class="modal-dialog">
+    <div class="modal-content" style="border-radius: 8px; background-color: black; text-align: center; padding: 20px;">
+      <div class="modal-body" style="color: white; font-size: 22px; padding: 20px;">
+        Property Updated Successfully!
+      </div>
+      <div class="modal-footer" style="justify-content: center; padding: 15px;">
+        <button (click)="closePopup()" style="background-color: yellow; color: black; padding: 10px 25px; font-size: 16px; cursor: pointer;">
+          Close
+        </button>
+      </div>
+    </div>
   </div>
-</form>
+</div>
