@@ -71,6 +71,7 @@ export class AdminViewFeedbackComponent implements OnInit {
   showUserDetails(userId: number): void {
     this.authService.getUserById(userId).subscribe(
       (user) => {
+        console.log("Fetched User Data:", user); // Debugging user data
         if (user) {
           this.selectedUser = user;
         } else {
@@ -82,17 +83,22 @@ export class AdminViewFeedbackComponent implements OnInit {
 }
 
 
+
   /**
    * Fetches and displays property details when "View Property Info" is clicked.
    * If data retrieval fails, an error message is logged.
    * @param propertyId - Unique identifier for the property
    */
   showPropertyDetails(propertyId: number): void {
-    // this.propertyService.getPropertyById(propertyId).subscribe(
-    //   (property) => this.selectedProperty = property,
-    //   (error) => console.error('Error fetching property details:', error)
-    // );
-  }
+    this.propertyService.getPropertyById(propertyId).subscribe(
+      (property) => {
+        console.log("Fetched Property Data:", property); // Debugging property data
+        this.selectedProperty = property;
+      },
+      (error) => console.error('Error fetching property details:', error)
+    );
+}
+
 
   /**
    * Closes the user details modal.

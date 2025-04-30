@@ -18,6 +18,7 @@ export class FeedbackService {
    * @returns Observable<Feedback> - The created feedback response
    */
   sendFeedback(feedback: Feedback): Observable<Feedback> {
+    console.log(feedback)
     return this.http.post<Feedback>(`${apiUrl}/feedback`, feedback);
   }
 

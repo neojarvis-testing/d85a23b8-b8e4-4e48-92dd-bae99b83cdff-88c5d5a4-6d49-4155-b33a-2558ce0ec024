@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PropertyService } from 'src/app/services/property.service';
+import { FeedbackService } from 'src/app/services/feedback.service';
 import { Property } from 'src/app/models/property.model';
 import { Feedback } from 'src/app/models/feedback.model';
-import { FeedbackService } from 'src/app/services/feedback.service';
+import { User } from 'src/app/models/user.model';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-user-add-feedback',
@@ -12,65 +13,52 @@ import { FeedbackService } from 'src/app/services/feedback.service';
   styleUrls: ['./user-add-feedback.component.css']
 })
 export class UserAddFeedbackComponent implements OnInit {
+  properties: Property[] = []; // Available properties
+  propertyId: number;
+  successMessage: string = '';
+  errorMessage: string = '';
 
-  feedbackForm!: FormGroup;
-  properties: Property[] = []; // Stores available properties added by admin
+  feedback: Feedback = {
+    feedbackText: '',
+    category: '',
+    property: 
+    +{ propertyId: 0 } as Property,
+    user: { userId: 0 } as User
+  };
 
   constructor(
-    private fb: FormBuilder,
     private router: Router,
-    private feedbackService:FeedbackService, // Inject Feedback Service
-    private propertyService: PropertyService // Inject Property Service
-  ) {
-    // Initialize form
-    this.feedbackForm = this.fb.group({
-      message: ['', [Validators.required, Validators.minLength(10)]], // Message is required & min 10 chars
-      date: ['', Validators.required], // Date is required
-      category: ['', Validators.required], // Must select a category
-      property: [{ value: '', disabled: true }, Validators.required] // Set disabled inside TypeScript
-    });
-
-  }
+    private feedbackService: FeedbackService,
+    private propertyService: PropertyService
+  ) {}
 
   ngOnInit(): void {
-    // Fetch properties from Property component
     this.getProperties();
-  }
-
-  // Getter for easy access to form controls
-  get f() { return this.feedbackForm.controls; }
-
-  /**
-   * Fetches properties added by the admin from the Property component
-   */
-  getProperties(): void {
-    // this.propertyService.getAllProperties().subscribe(
-    //   (data) => {
-    //     this.properties = data; // Populate dropdown with available properties
-    //   },
-    //   (error) => {
-    //     console.error('Error fetching properties:', error);
-    //   }
-    // );
-  }
-
-  /**
-   * Handles form submission
-   */
-  sendNewFeedback(): void {
-    if (this.feedbackForm.valid) {
-      const feedback: Feedback = this.feedbackForm.value;
-      
-      this.feedbackService.sendFeedback(feedback).subscribe(
-        () => {
-          alert('Feedback Submitted Successfully!');
-          this.router.navigate(['/user-view-feedback']); // Redirect to feedback list
-        },
-        (error) => {
-          console.error('Error submitting feedback:', error);
-          alert('Failed to submit feedback. Please try again.');
-        }
-      );
+    const userId = Number(localStorage.getItem('userId'));
+    if (!isNaN(userId) && userId > 0) {
+      this.feedback.user.userId = userId;
+    } else {
+      this.errorMessage = 'User not logged in. Please log in to submit feedback.';
     }
+  }
+
+  getProperties(): void {
+    this.propertyService.getAllProperties().subscribe({
+      next: (data) => {
+        this.properties = data || [];
+      },
+      error: () => {
+        this.errorMessage = 'Failed to load property list.';
+      }
+    });
+  }
+
+  onSubmit(feedbackForm: NgForm): void {
+    feedbackForm.value.userId = localStorage.getItem('userId')
+    feedbackForm.value.propertyId = +this.propertyId
+    console.log(feedbackForm.value)
+    this.feedbackService.sendFeedback(feedbackForm.value).subscribe((data)=>{
+      alert("feedback added!")
+    })
   }
 }

@@ -1,0 +1,87 @@
+/* Import Bootstrap */
+@import "~bootstrap/dist/css/bootstrap.min.css";
+
+/* Set background image */
+.home-container {
+    background: url('https://images.pexels.com/photos/302769/pexels-photo-302769.jpeg') no-repeat center center;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    animation: fadeIn 1s ease-in-out; /* Smooth entrance */
+}
+
+/* Apply blur effect only behind the square */
+.overlay::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 10px;
+    z-index: -1;
+}
+
+/* Transparent black overlay */
+.overlay {
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 50px;
+    border-radius: 10px;
+    text-align: center;
+    position: relative;
+    animation: slideUp 1s ease-out; /* Smooth pop-up effect */
+}
+
+/* Title styling */
+.brand-title {
+    font-size: 48px;
+    font-weight: 400;
+    font-family: 'Montserrat', sans-serif;
+    color: yellow;
+    margin-bottom: 20px;
+    animation: textGlow 2s infinite alternate ease-in-out; /* Subtle glowing effect */
+}
+
+/* Subtitle styling */
+.brand-subtitle {
+    font-size: 24px;
+    font-weight: 400;
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+    animation: fadeIn 2s ease-in-out; /* Soft fade-in */
+}
+
+/* Define animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes textGlow {
+    from {
+        text-shadow: 0 0 10px rgba(255, 255, 0, 0.7);
+    }
+    to {
+        text-shadow: 0 0 20px rgba(255, 255, 0, 1);
+    }
+}

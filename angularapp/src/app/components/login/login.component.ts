@@ -30,9 +30,9 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('userId', response.userId);
           alert("Login successful");
           if (response.userRole === 'ADMIN')
-            this.router.navigate(['/adminnav'])
+            this.router.navigate(['/'])
           else if (response.userRole === 'USER')
-            this.router.navigate(['/usernav'])
+            this.router.navigate(['/'])
         }
       }, (error) => {
         alert("Login failed");

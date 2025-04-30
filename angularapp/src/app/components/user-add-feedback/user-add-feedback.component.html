@@ -1,54 +1,58 @@
-<div class="feedback-container">
-    <h2>Submit Feedback</h2>
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Submit Your Property Feedback</h2>
 
-    <!-- Feedback submission form using Angular's Reactive Forms -->
-    <form [formGroup]="feedbackForm" (ngSubmit)="sendNewFeedback()">
+  <!-- Success & Error Messages -->
+  <div *ngIf="errorMessage" class="alert alert-danger text-center">{{ errorMessage }}</div>
+  <div *ngIf="successMessage" class="alert alert-success text-center">{{ successMessage }}</div>
 
-        <!-- Textarea for feedback message -->
-        <label for="message">Message:</label><br>
-        <textarea id="message" formControlName="message" rows="4"></textarea><br>
-        <!-- Validation message for feedback input -->
-        <div *ngIf="f.message.invalid && (f.message.dirty || f.message.touched)" class="error">
-            Message is required.
-        </div>
+  <!-- Feedback Form -->
+  <form #feedbackForm="ngForm" (ngSubmit)="onSubmit(feedbackForm)">
 
-        <!-- Date selection field -->
-        <label for="date">Date:</label><br>
-        <input type="date" id="date" formControlName="date"><br>
-        <!-- Validation message for date input -->
-        <div *ngIf="f.date.invalid && (f.date.dirty || f.date.touched)" class="error">
-            Date is required.
-        </div>
+      <!-- Dropdown for Property Selection -->
+      <div class="form-group">
+          <label for="property">Select Property</label>
+          <select id="propertyId" class="form-control" [(ngModel)]="propertyId" name="propertyId" required>
+              <option value="" disabled>Select a property</option>
+              <option *ngFor="let property of properties" [value]="property.propertyId">
+                  {{ property.title }}
+              </option>
+          </select>
+          <div *ngIf="!propertyId" class="text-danger">Please select a property.</div>
+      </div>
 
-        <!-- Category dropdown selection -->
-        <label for="category">Category:</label><br>
-        <select id="category" formControlName="category">
-            <option value="">Select a category</option>
-            <option value="Service">Service</option>
-            <option value="Pricing">Pricing</option>
-            <option value="Quality">Quality</option>
-        </select><br>
-        <!-- Validation message for category selection -->
-        <div *ngIf="f.category.invalid && (f.category.dirty || f.category.touched)" class="error">
-            Category is required.
-        </div>
+      <!-- Feedback Text -->
+      <div class="form-group">
+          <label for="feedbackText">Feedback</label>
+          <textarea
+              id="feedbackText"
+              class="form-control"
+              [(ngModel)]="feedback.feedbackText"
+              name="feedbackText"
+              rows="3"
+              required
+              minlength="10"
+          ></textarea>
+          <div *ngIf="feedback.feedbackText.length < 10" class="text-danger">
+              Feedback must be at least 10 characters long.
+          </div>
+      </div>
 
-        <!-- Property dropdown (Populated dynamically from Property Component) -->
-        <label for="property">Property:</label><br>
-        <select id="property" formControlName="property">
-            <option value="">Select a property</option>
-            <option *ngFor="let property of properties" [value]="property.id">{{ property.name }}</option>
-        </select>
-        <!-- Validation message for property selection -->
-        <div *ngIf="f.property.invalid && (f.property.dirty || f.property.touched)" class="error">
-            Property selection is required.
-        </div>
-        <!-- Display loading message if property list is empty -->
-        <div *ngIf="properties.length === 0" class="loading-message">
-            Loading properties, please wait...
-        </div>
+      <!-- Category Selection -->
+      <div class="form-group">
+          <label for="category">Category</label>
+          <select id="category" class="form-control" [(ngModel)]="feedback.category" name="category" required>
+              <option value="">Select a category</option>
+              <option value="Service">Service</option>
+              <option value="Pricing">Pricing</option>
+              <option value="Quality">Quality</option>
+          </select>
+          <div *ngIf="!feedback.category" class="text-danger">Category selection is required.</div>
+      </div>
 
-        <!-- Submit Button (Disabled if form is invalid) -->
-        <button type="submit" [disabled]="feedbackForm.invalid">Submit Feedback</button>
-    </form>
+      <!-- Submit Button -->
+      <button type="submit" class="btn btn-primary"
+          [disabled]="!propertyId || feedback.feedbackText.length < 10 || !feedback.category">
+          Submit Feedback
+      </button>
+  </form>
 </div>
