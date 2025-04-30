@@ -10,21 +10,23 @@ import { Router } from '@angular/router';
 })
 export class AdminViewPropertyComponent implements OnInit {
   properties: Property[] = [];
-  selectedProperty: Property | null = null;
-  deletePropertyId: number | null = null; // To store the property ID for deletion
+  filteredProperties: Property[] = [];
+  searchTerm: string = ''; // Stores user input for search
+  selectedType: string = ''; // Stores selected type for filtering
+  deletePropertyId: number | null = null; // Fix: Proper declaration
 
   constructor(private propertyService: PropertyService, private router: Router) {}
 
   ngOnInit(): void {
-    this.getAllProperties(); // Load properties when component initializes
+    this.getAllProperties();
   }
 
   // Fetch all properties
   getAllProperties(): void {
     this.propertyService.getAllProperties().subscribe(
       (response) => {
-        console.log(response);
         this.properties = response.filter(property => property.deleted === 0);
+        this.filteredProperties = [...this.properties]; // Initialize filtered properties
       },
       (error) => {
         console.error('Error fetching properties:', error);
@@ -32,17 +34,30 @@ export class AdminViewPropertyComponent implements OnInit {
     );
   }
 
-  // Open confirmation modal for delete
+  // **Updated Filter Function** (Ensures proper filtering)
+  filterProperties(): void {
+    this.filteredProperties = this.properties.filter(property =>
+      (this.selectedType === '' || property.type === this.selectedType) &&
+      property.title.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
+  }
+
+  // Edit a property
+  editProperty(propertyId: number): void {
+    this.router.navigate(['admin-edit-property', propertyId]);
+  }
+
+  // Confirm delete action
   confirmDelete(propertyId: number): void {
     this.deletePropertyId = propertyId;
   }
 
-  // Delete a property after confirmation
+  // Delete property after confirmation
   deleteProperty(): void {
     if (this.deletePropertyId !== null) {
       this.propertyService.deleteProperty(this.deletePropertyId).subscribe(
         () => {
-          this.getAllProperties(); // Refresh property list
+          this.getAllProperties();
           this.deletePropertyId = null; // Reset delete state
         },
         (error) => {
@@ -50,20 +65,5 @@ export class AdminViewPropertyComponent implements OnInit {
         }
       );
     }
-  }
-
-  // Cancel delete action
-  cancelDelete(): void {
-    this.deletePropertyId = null;
-  }
-
-  // Edit a property (Navigate to edit property page)
-  editProperty(propertyId: number): void {
-    this.router.navigate(['admin-edit-property', propertyId]); // Redirect to edit property page
-  }
-
-  // Close property details
-  closeDetails(): void {
-    this.selectedProperty = null;
   }
 }
