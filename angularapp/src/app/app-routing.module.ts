@@ -8,10 +8,10 @@ import { AdminViewPropertyComponent } from './components/admin-view-property/adm
 import { AdminnavComponent } from './components/adminnav/adminnav.component';
 import { UsernavComponent } from './components/usernav/usernav.component';
 import { MyInquiryComponent } from './components/my-inquiry/my-inquiry.component';
-import { AdminAddPropertyComponent } from './components/admin-add-property/admin-add-property.component';
+
 import { AdminViewInquiryComponent } from './components/admin-view-inquiry/admin-view-inquiry.component';
 import { AdminViewFeedbackComponent } from './components/admin-view-feedback/admin-view-feedback.component';
-import { UserViewPropertiesComponent } from './components/user-view-properties/user-view-properties.component';
+
 import { UserAddFeedbackComponent } from './components/user-add-feedback/user-add-feedback.component';
 
 
