@@ -13,6 +13,9 @@ import { AdminViewInquiryComponent } from './components/admin-view-inquiry/admin
 import { AdminViewFeedbackComponent } from './components/admin-view-feedback/admin-view-feedback.component';
 
 import { UserAddFeedbackComponent } from './components/user-add-feedback/user-add-feedback.component';
+import { AdminAddPropertyComponent } from './components/admin-add-property/admin-add-property.component';
+import { UserViewPropertiesComponent } from './components/user-view-properties/user-view-properties.component';
+import { AdminControlPanelComponent } from './components/admin-control-panel/admin-control-panel.component';
 
 
 const routes: Routes = [
@@ -26,7 +29,8 @@ const routes: Routes = [
   {path:'inquiries',component:AdminViewInquiryComponent},
   {path:'viewfeedback',component:AdminViewFeedbackComponent},
   {path:'viewproperties',component:UserViewPropertiesComponent},
-  {path:'addfeedback',component:UserAddFeedbackComponent}
+  {path:'addfeedback',component:UserAddFeedbackComponent},
+  {path:'controlpanel',component:AdminControlPanelComponent},
 ];
 
 @NgModule({

@@ -24,6 +24,7 @@ export class AdminControlPanelComponent implements OnInit {
   getAllPropertyInquiries(){
     this.service.getAllPropertyInquiry().subscribe((data)=>{
       this.inquiries=data;
+      this.allInquiries=this.inquiries.length
     })
   }
   getAllFeedbacks(){
@@ -32,15 +33,18 @@ export class AdminControlPanelComponent implements OnInit {
   
   getHighPriorityInquiries(){
     this.highPriorityInquiries=this.inquiries.filter((i)=>i.priority=="High")
+    this.allHighPriorityInquiries=this.highPriorityInquiries.length
   }
 
   getUnresolvedInquiries(){
     this.unresolvedInquiries=this.inquiries.filter((i)=>i.status=="Pending")
+    this.allUnresolvedInquiries = this.unresolvedInquiries.length;
   }
 
   getAllProperties(){
     this.propertyService.getAllProperties().subscribe((data)=>{
       this.totalProperties=data;
+      this.allProperties=this.totalProperties.length
     })
   }
   constructor(private service:PropertyInquiryService,private feedbackService:FeedbackService,private propertyService:PropertyService) { }
