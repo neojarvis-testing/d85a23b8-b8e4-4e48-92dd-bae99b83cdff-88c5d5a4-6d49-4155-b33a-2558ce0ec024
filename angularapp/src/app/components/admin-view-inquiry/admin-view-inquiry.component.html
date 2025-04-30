@@ -1,41 +1,96 @@
-<h1>Inquiry details</h1>
-<div *ngIf="inquiries?.length > 0; else noData">
-    <table border="1">
-      <thead>
-        <tr>
-          <th>Inquiry ID</th>
-          <th>User</th>
-          <th>Property</th>
-          <th>Message</th>
-          <th>Status</th>
-          <th>Inquiry Date</th>
-          <th>Response Date</th>
-          <th>Admin Response</th>
-          <th>Priority</th>
-          <th>Contact Details</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let inquiry of inquiries">
-          <td>{{ inquiry.inquiryId }}</td>
-          <td>{{ inquiry.user?.userId }}</td>
-          <td>{{ inquiry.property?.propertyId }}</td>
-          <td>{{ inquiry.message }}</td>
-          <td>{{ inquiry.status }}</td>
-          <td>{{ inquiry.inquiryDate | date}}</td>
-          <td>{{ inquiry.responseDate |date }}</td>
-          <td>{{ inquiry.adminResponse }}</td>
-          <td>{{ inquiry.priority }}</td>
-          <td>{{ inquiry.contactDetails }}</td>
-          <td><button (click)="deleteInquiry(inquiry.inquiryId)">Delete</button>
-              <button (click)="updateInquiry(inquiry.inquiryId)">Update</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+<div class="filters container mt-3">
+  <input
+    [(ngModel)]="searchProperty"
+    class="form-control mb-2"
+    placeholder="Search by property"
+    (input)="applyFilters()"
+  />
+  <div class="d-flex justify-content-between">
+    <select
+      class="form-select me-2"
+      [(ngModel)]="filterPriority"
+      (change)="applyFilters()"
+    >
+      <option *ngFor="let p of priorities" [value]="p">{{ p }}</option>
+    </select>
+    <select
+      class="form-select"
+      [(ngModel)]="filterStatus"
+      (change)="applyFilters()"
+    >
+      <option *ngFor="let s of statuses" [value]="s">{{ s }}</option>
+    </select>
   </div>
-  
-  <ng-template #noData>
-    <p>No property inquiries available.</p>
-  </ng-template>
+</div>
+
+<table class="table table-striped table-hover mt-3">
+  <thead class="table-dark">
+    <tr>
+      <th>ID</th>
+      <th>User</th>
+      <th>Property</th>
+      <th>Message</th>
+      <th>Status</th>
+      <th>Priority</th>
+      <th>Inquiry Date</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let inquiry of filteredInquiries">
+      <td>{{ inquiry.inquiryId }}</td>
+      <td>{{ inquiry.user.username }}</td>
+      <td>{{ inquiry.property.title }}</td>
+      <td>{{ inquiry.message }}</td>
+      <td>{{ inquiry.status }}</td>
+      <td>{{ inquiry.priority }}</td>
+      <td>{{ inquiry.inquiryDate | date }}</td>
+      <td>
+        <button
+          class="btn btn-warning btn-sm me-2"
+          (click)="openResponseModal(inquiry)"
+        >
+          Add Response
+        </button>
+        <button
+          class="btn btn-danger btn-sm"
+          (click)="deleteInquiry(inquiry.inquiryId)"
+        >
+          Delete
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div *ngIf="selectedInquiry" class="modal fade show d-block" tabindex="-1">
+  <form
+    class="modal-content p-4 bg-dark text-light"
+    [formGroup]="responseForm"
+    (ngSubmit)="submitResponse()"
+  >
+    <h3 class="text-warning">Respond to Inquiry</h3>
+    <label>Response:</label>
+    <textarea
+      formControlName="adminResponse"
+      class="form-control mb-3"
+      rows="3"
+    ></textarea>
+    <label>Contact Details:</label>
+    <input
+      type="text"
+      class="form-control mb-3"
+      formControlName="contactDetails"
+    />
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-success me-2" type="submit">Submit</button>
+      <button
+        class="btn btn-secondary"
+        type="button"
+        (click)="selectedInquiry = null"
+      >
+        Cancel
+      </button>
+    </div>
+  </form>
+</div>

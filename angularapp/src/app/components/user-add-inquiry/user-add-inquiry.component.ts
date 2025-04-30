@@ -14,13 +14,13 @@ export class UserAddInquiryComponent implements OnInit {
   propertyId:number
   constructor(private service:PropertyInquiryService,private fb:FormBuilder,private activatedRoute:ActivatedRoute) { 
   this.inquiryForm = fb.group({
-  message:['',[Validators.required]],
-  status:['',[Validators.required]],
-  inquiryDate:['',[Validators.required]],
-  responseDate:['',[Validators.required]],
-  adminResponse:['',[Validators.required]],
-  priority:['',[Validators.required]],
-  contactDetails:['',[Validators.required]]
+  message:[''],
+  status:[''],
+  inquiryDate:[''],
+  responseDate:[''],
+  adminResponse:[''],
+  priority:[''],
+  contactDetails:['']
   })
 
   }
@@ -31,6 +31,8 @@ export class UserAddInquiryComponent implements OnInit {
   addInquiry(){
     this.inquiryForm.value.userId = localStorage.getItem('userId')
     this.inquiryForm.value.propertyId = this.propertyId
+    this.inquiryForm.value.status = 'Pending'
+    this.inquiryForm.value.inquiryDate = new Date()
     console.log(this.inquiryForm.value)
     this.service.addPropertyInquiry(this.inquiryForm.value).subscribe((data)=>{
       alert("Inquiry posted successfully!")

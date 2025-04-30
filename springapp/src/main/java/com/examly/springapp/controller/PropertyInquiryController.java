@@ -27,7 +27,7 @@ public class PropertyInquiryController {
 PropertyInquiryServiceImpl  propertyInquiryService; //Injecting the service
 
 @PostMapping    // Handles HTTP POST requests for adding a new property inquiry
-public ResponseEntity<PropertyInquiry> addInquiry(@Valid @RequestBody PropertyInquiryInput propertyInquiryInput){
+public ResponseEntity<PropertyInquiry> addInquiry(@RequestBody PropertyInquiryInput propertyInquiryInput){
     PropertyInquiry propertyInquiry = propertyInquiryService.addInquiry(propertyInquiryInput);
     return ResponseEntity.status(201).body(propertyInquiry);
 }
@@ -64,7 +64,7 @@ public ResponseEntity<?> getAllInquiries(){
 
 
 @PutMapping("/{inquiryId}")  // Handles HTTP PUT requests for updating a specific inquiry by ID
-public ResponseEntity<?> updateInquiryById(@PathVariable long inquiryId,@RequestBody PropertyInquiryInput inquiries){
+public ResponseEntity<?> updateInquiryById(@PathVariable long inquiryId,@RequestBody PropertyInquiry inquiries){
     PropertyInquiry propertyInquiry = propertyInquiryService.updateInquiryById(inquiryId,inquiries);
     if(propertyInquiry!=null){  // Returns updated inquiry if successful
         return ResponseEntity.status(200).body(propertyInquiry);
