@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { Router } from '@angular/router';
 import { PropertyInquiry } from 'src/app/models/property-inquiry.model';
-import { PropertyInquiryInput } from 'src/app/models/propertyInquiryInput.model';
 import { PropertyInquiryService } from 'src/app/services/property-inquery.service';
 
 @Component({
@@ -21,7 +19,7 @@ export class AdminViewInquiryComponent implements OnInit {
 
   filterPriority = 'All';
   filterStatus = 'All';
-  searchProperty = '';
+  searchInquiry = ''; // Search field for filtering inquiries dynamically
 
   constructor(
     private inquiryService: PropertyInquiryService,
@@ -34,44 +32,73 @@ export class AdminViewInquiryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.inquiryService.getAllPropertyInquiry().subscribe((data) => {
-      this.inquiries = data;
-      console.log(data)
-      this.applyFilters();
-    });
+    this.loadInquiries();
   }
 
+  /**
+   * Fetches all inquiries for admin view.
+   * Populates both inquiries and filteredInquiries on successful retrieval.
+   */
+  loadInquiries(): void {
+    this.inquiryService.getAllPropertyInquiry().subscribe(
+      (data) => {
+        this.inquiries = data;
+        this.applyFilters(); // Apply filters to update the view
+      },
+      (error) => {
+        console.error('Error fetching inquiries:', error);
+        this.inquiries = [];
+        this.filteredInquiries = [];
+      }
+    );
+  }
+
+  /**
+   * Applies filters for priority, status, and search.
+   */
   applyFilters(): void {
     this.filteredInquiries = this.inquiries.filter(inquiry =>
       (this.filterPriority === 'All' || inquiry.priority === this.filterPriority) &&
       (this.filterStatus === 'All' || inquiry.status === this.filterStatus) &&
-      inquiry.property.title.toLowerCase().includes(this.searchProperty.toLowerCase())
+      inquiry.property.title.toLowerCase().includes(this.searchInquiry.toLowerCase())
     );
   }
 
+  /**
+   * Opens the inquiry response modal.
+   * @param inquiry The selected inquiry for response.
+   */
   openResponseModal(inquiry: PropertyInquiry): void {
     this.selectedInquiry = inquiry;
     this.responseForm.reset();
   }
 
+  /**
+   * Submits an admin response to the selected inquiry.
+   */
   submitResponse(): void {
     if (this.selectedInquiry) {
       const updatedInquiry: PropertyInquiry = {
         ...this.selectedInquiry,
         ...this.responseForm.value,
-        inquiryId: this.selectedInquiry.inquiryId, // Ensuring ID is included
         status: 'Resolved',
         responseDate: new Date()
       };
   
-      this.inquiryService.editPropertyInquiryById(updatedInquiry.inquiryId,updatedInquiry).subscribe(() => {
+      this.inquiryService.editPropertyInquiryById(updatedInquiry.inquiryId, updatedInquiry).subscribe(() => {
         this.selectedInquiry = null;
-        this.ngOnInit(); // Refresh list
+        this.loadInquiries(); // Refresh the inquiry list
       });
     }
   }
 
+  /**
+   * Deletes an inquiry by ID.
+   * @param id The ID of the inquiry to be deleted.
+   */
   deleteInquiry(id: number): void {
-    this.inquiryService.deletePropertyInquiryById(id).subscribe(() => this.ngOnInit());
+    this.inquiryService.deletePropertyInquiryById(id).subscribe(() => {
+      this.loadInquiries(); // Refresh list after deletion
+    });
   }
 }

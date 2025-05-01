@@ -1,65 +1,76 @@
-<!-- List of Properties -->
-<div *ngIf="filteredProperties.length > 0" style="background-color: black; padding: 20px;">
-  <h2 style="color: yellow; text-align: center; margin-bottom: 20px;">Manage Properties</h2>
-  <hr style="border: 1px solid yellow; margin-bottom: 20px;"> <!-- Yellow line separator -->
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
 
-  <!-- Search Bar & Filter Dropdown Swapped -->
-  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-    <!-- Search Bar (Left) -->
-    <div>
-      <label for="search" style="color: yellow; font-size: 18px; margin-right: 10px;">Search by:</label>
-      <input id="search" type="text" [(ngModel)]="searchTerm" (input)="filterProperties()" placeholder="Property Title"
-        style="padding: 8px; width: 30%; border-radius: 4px; border: 1px solid yellow; background-color: black; color: white;">
+<body>
+<div class="container mt-5">
+  <div class="property-management">
+    <h2 class="text-center">Manage Properties</h2>
+    <hr>
+
+    <!-- Search Bar & Filter Dropdown -->
+    <div class="filter-section">
+      <!-- Search Bar -->
+      <div class="search-box">
+        <label for="search"><i class="fas fa-search"></i> Search by:</label>
+        <input id="search" type="text" class="form-control" [(ngModel)]="searchTerm" (input)="filterProperties()" placeholder="Property Title">
+      </div>
+
+      <!-- Filter Dropdown -->
+      <div class="filter-box">
+        <label for="filter"><i class="fas fa-filter"></i> Filter by Type:</label>
+        <select id="filter" class="form-select" [(ngModel)]="selectedType" (change)="filterProperties()">
+          <option value="">All Types</option>
+          <option value="Residential">Residential</option>
+          <option value="Commercial">Commercial</option>
+        </select>
+      </div>
     </div>
 
-    <!-- Filter Dropdown (Right) -->
-    <div>
-      <label for="filter" style="color: yellow; font-size: 18px; margin-right: 10px;">Filter by Type:</label>
-      <select id="filter" [(ngModel)]="selectedType" (change)="filterProperties()"
-        style="padding: 8px; border-radius: 4px; border: 1px solid yellow; background-color: black; color: white;">
-        <option value="">All Types</option>
-        <option value="Residential">Residential</option>
-        <option value="Commercial">Commercial</option>
-      </select>
+    <!-- Property Table -->
+    <div *ngIf="filteredProperties.length > 0">
+      <table class="table table-striped">
+        <thead>
+          <tr class="table-header">
+            <th>S.No</th>
+            <th>Title</th>
+            <th>Location</th>
+            <th>Price</th>
+            <th>Type</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let property of filteredProperties; index as i">
+            <td>{{ i + 1 }}</td>
+            <td>{{ property.title }}</td>
+            <td>{{ property.location }}</td>
+            <td>{{ property.price | currency }}</td>
+            <td>{{ property.type }}</td>
+            <td>
+              <span [ngClass]="{'status-available': property.status === 'Available', 'status-sold': property.status === 'Sold'}">
+                {{ property.status }}
+              </span>
+            </td>
+            <td>
+              <button class="btn btn-warning btn-sm" (click)="editProperty(property.propertyId)">
+                <i class="fas fa-edit"></i> Edit
+              </button>
+              <button class="btn btn-danger btn-sm" (click)="confirmDelete(property.propertyId)">
+                <i class="fas fa-trash-alt"></i> Delete
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- No Matching Properties Message -->
+    <div *ngIf="filteredProperties.length === 0">
+      <p class="no-properties-message">🚫 No properties match your search.</p>
     </div>
   </div>
-
-  <table style="width: 100%; border-collapse: collapse;">
-    <thead>
-      <tr style="background-color: yellow; color: black;">
-        <th style="padding: 10px; border: 1px solid black;">S.No</th>
-        <th style="padding: 10px; border: 1px solid black;">Title</th>
-        <th style="padding: 10px; border: 1px solid black;">Location</th>
-        <th style="padding: 10px; border: 1px solid black;">Price</th>
-        <th style="padding: 10px; border: 1px solid black;">Type</th>
-        <th style="padding: 10px; border: 1px solid black;">Status</th>
-        <th style="padding: 10px; border: 1px solid black;">Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let property of filteredProperties; index as i" style="color: white; background-color: black; text-align: center;">
-        <td style="padding: 10px; border: 1px solid yellow;">{{ i + 1 }}</td>
-        <td style="padding: 10px; border: 1px solid yellow;">{{ property.title }}</td>
-        <td style="padding: 10px; border: 1px solid yellow;">{{ property.location }}</td>
-        <td style="padding: 10px; border: 1px solid yellow;">{{ property.price | currency }}</td>
-        <td style="padding: 10px; border: 1px solid yellow;">{{ property.type }}</td>
-        <td style="padding: 10px; border: 1px solid yellow;">{{ property.status }}</td>
-        <td style="padding: 10px; border: 1px solid yellow;">
-          <button (click)="editProperty(property.propertyId)"
-            style="background-color: yellow; color: black; padding: 8px 12px; border: none; cursor: pointer; margin-right: 10px;">
-            Edit
-          </button>
-          <button (click)="confirmDelete(property.propertyId)"
-            style="background-color: red; color: white; padding: 8px 12px; border: 1px solid yellow; cursor: pointer;">
-            Delete
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
 </div>
-
-<!-- Message if no matching properties -->
-<div *ngIf="filteredProperties.length === 0" style="color: white; text-align: center; padding: 20px;">
-  <p style="font-size: 18px;">No properties match your search.</p>
-</div>
+  
+</body>

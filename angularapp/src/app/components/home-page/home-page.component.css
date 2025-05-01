@@ -5,9 +5,9 @@
 body, html {
     margin: 0;
     padding: 0;
-    overflow-x: hidden; /* Fix unwanted right scroll */
+    overflow-x: hidden;
     width: 100%;
-    font-family: 'Montserrat', sans-serif; /* Apply Montserrat */
+    font-family: 'Montserrat', sans-serif;
 }
 
 /* Ensure elements fit within the viewport */
@@ -27,61 +27,42 @@ body, html {
     justify-content: center;
     width: 100%;
     position: relative;
-    animation: fadeIn 1s ease-in-out; /* Smooth entrance */
+    animation: fadeIn 1s ease-in-out;
 }
 
-/* Transparent blur effect */
-.overlay::before {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    backdrop-filter: blur(15px); /* Stronger blur effect */
-    -webkit-backdrop-filter: blur(15px);
-    border-radius: 10px;
-    z-index: -1;
-}
-
-/* Transparent black overlay */
+/* Centered overlay without blur */
 .overlay {
     background-color: rgba(0, 0, 0, 0.7);
     padding: 50px;
     border-radius: 10px;
     text-align: center;
-    position: relative;
-    width: 100%;
-    animation: slideUp 1s ease-out; /* Smooth pop-up effect */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: auto;
+    animation: slideUp 1s ease-out;
 }
 
-/* Title styling */
+/* Title styling with Avenir font */
 .brand-title {
-    font-size: 52px; /* Slightly larger */
-    font-weight: 600;
+    font-size: 52px;
+    font-weight: 500;
     font-family: 'Montserrat', sans-serif;
     color: yellow;
     margin-bottom: 20px;
-    animation: textGlow 2s infinite alternate ease-in-out; /* Glowing effect */
+    animation: textGlow 2s infinite alternate ease-in-out;
 }
 
 /* Subtitle styling */
 .brand-subtitle {
-    font-size: 26px; /* Slightly larger */
+    font-size: 20px;
     font-weight: 500;
     font-family: 'Montserrat', sans-serif;
     color: white;
-    animation: fadeIn 2s ease-in-out; /* Soft fade-in */
+    animation: fadeIn 2s ease-in-out;
 }
 
-/* Define animations */
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-@keyframes slideUp {
-    from { transform: translateY(50px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-}
 /* Feature Section */
 .feature-section {
     padding: 60px 0;
@@ -93,7 +74,7 @@ body, html {
 .feature-title {
     font-size: 36px;
     font-weight: 500;
-    color: yellow; /* Gold title */
+    color: yellow;
     margin-bottom: 30px;
 }
 
@@ -107,7 +88,7 @@ body, html {
     cursor: pointer;
 }
 
-/* Hover effect - Increase size and color change */
+/* Hover effect */
 .feature-card:hover {
     transform: scale(1.03);
     background-color: #ffd700;
@@ -124,6 +105,7 @@ body, html {
 .feature-card:hover i {
     color: black;
 }
+
 /* About Us Section */
 .about-us {
     background-color: black;
@@ -147,7 +129,6 @@ body, html {
     margin-bottom: 20px;
 }
 
-/* Testimonials Section */
 /* Testimonials Section */
 .testimonials {
     padding: 60px 0;
@@ -188,7 +169,6 @@ body, html {
     background-color: yellow;
     color: black;
 }
-
 
 /* Footer Section */
 .footer-section {

@@ -2,28 +2,7 @@
     <div class="container-fluid">
         <a class="navbar-brand fw-bold text-white" routerLink="/">EstateConnect</a>
 
-
-<nav id="admin-nav">
-<div>
-<ul>
-<li><a routerLink="/">EstateConnect</a></li>
-<li><a routerLink="/">Home</a></li>
-<li *ngIf="service.isAdmin()"><a routerLink="/controlpanel" >Control Panel</a></li>
-<li *ngIf="service.isAdmin()"><a routerLink="/admin-add-property" >Add Property</a></li>
-<li *ngIf="service.isAdmin()"><a routerLink="/admin-view-property" >View Property</a></li>
-<li *ngIf="service.isAdmin()"><a routerLink="/inquiries" >Inquiries</a></li>
-<li *ngIf="service.isAdmin()"><a routerLink="/viewfeedback" >Feedback</a></li>
-<li *ngIf="service.isUser()"><a routerLink="/user-view-property" >Properties</a></li>
-<li *ngIf="service.isUser()"><a routerLink="/myinquiries" >My Inquiries</a></li>
-<li *ngIf="service.isUser()"><a routerLink="/addfeedback">Feedback</a></li>
-<li *ngIf="!service.isLoggedUser()"><a routerLink="/login" >Login</a></li>
-<li *ngIf="!service.isLoggedUser()"><a routerLink="/register" >Register</a></li>
-<button (click) = "logout()" *ngIf="service.isLoggedUser()">Logout</button>
-</ul>
-</div>
-</nav>
-    
-
+        <!-- Navbar toggler for responsiveness -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -36,22 +15,31 @@
                         {{ service.getUsername() | titlecase }} / {{ service.getRole() | uppercase }}
                     </a>
                 </li>
+
+                <!-- Navigation Links -->
                 <li class="nav-item"><a class="nav-link text-white" routerLink="/">Home</a></li>
+
+                <!-- Admin Links -->
                 <li class="nav-item" *ngIf="service.isAdmin()"><a class="nav-link text-white" routerLink="/controlpanel">Control Panel</a></li>
-                <li class="nav-item" *ngIf="service.isAdmin()"><a class="nav-link text-white" routerLink="/admin-view-property">View Properties</a></li>
                 <li class="nav-item" *ngIf="service.isAdmin()"><a class="nav-link text-white" routerLink="/admin-add-property">Add Property</a></li>
+                <li class="nav-item" *ngIf="service.isAdmin()"><a class="nav-link text-white" routerLink="/admin-view-property">View Property</a></li>
                 <li class="nav-item" *ngIf="service.isAdmin()"><a class="nav-link text-white" routerLink="/inquiries">Inquiries</a></li>
                 <li class="nav-item" *ngIf="service.isAdmin()"><a class="nav-link text-white" routerLink="/viewfeedback">Feedback</a></li>
+
+                <!-- User Links -->
                 <li class="nav-item" *ngIf="service.isUser()"><a class="nav-link text-white" routerLink="/user-view-property">View Properties</a></li>
                 <li class="nav-item" *ngIf="service.isUser()"><a class="nav-link text-white" routerLink="/myinquiries">My Inquiries</a></li>
                 <li class="nav-item" *ngIf="service.isUser()"><a class="nav-link text-white" routerLink="/addfeedback">Feedback</a></li>
+
+                <!-- Authentication Links -->
                 <li class="nav-item" *ngIf="!service.isLoggedUser()"><a class="nav-link text-white" routerLink="/login">Login</a></li>
                 <li class="nav-item" *ngIf="!service.isLoggedUser()"><a class="nav-link text-white" routerLink="/register">Register</a></li>
+
+                <!-- Logout Button -->
                 <li class="nav-item" *ngIf="service.isLoggedUser()">
-                    <button class="btn btn-gradient" (click)="logout()">Logout</button>
+                    <button class="btn btn-warning text-dark fw-bold" (click)="logout()">Logout</button>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
-

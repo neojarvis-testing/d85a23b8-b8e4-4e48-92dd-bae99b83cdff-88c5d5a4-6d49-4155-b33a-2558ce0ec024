@@ -2,17 +2,7 @@
     <div class="container-fluid">
         <a class="navbar-brand fw-bold text-warning" routerLink="/">EstateConnect</a>
 
-
-<nav id="user-nav">
-    <ul>
-    <li><a routerLink="/">EstateConnect</a></li>
-    <li><a routerLink="/user-view-property">Properties</a></li>
-    <li><a routerLink="">My Inquiries</a></li>
-    <li><a routerLink="">view Properties</a></li>
-    <li><a routerLink="">Feedback</a></li>
-    <button (click) = "logout()">Logout</button>
-    </ul>
-
+        <!-- Navbar toggler for responsiveness -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#userNavbar">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -20,24 +10,23 @@
         <div class="collapse navbar-collapse justify-content-end" id="userNavbar">
             <ul class="navbar-nav">
                 <!-- Display username and role for logged-in users -->
-                <li class="user-info nav-item" *ngIf="service.isLoggedUser()">
+                <li class="nav-item user-info" *ngIf="service.isLoggedUser()">
                     <a class="nav-link text-warning">
                         {{ service.getUsername() | titlecase }} / {{ service.getRole() | uppercase }}
                     </a>
                 </li>
 
                 <!-- Navbar Links -->
-                <li class="nav-item"><a class="nav-link text-white" routerLink="">Properties</a></li>
+                <li class="nav-item"><a class="nav-link text-white" routerLink="/user-view-property">Properties</a></li>
                 <li class="nav-item"><a class="nav-link text-white" routerLink="">My Inquiries</a></li>
                 <li class="nav-item"><a class="nav-link text-white" routerLink="">View Properties</a></li>
                 <li class="nav-item"><a class="nav-link text-white" routerLink="">Feedback</a></li>
 
                 <!-- Logout Button -->
                 <li class="nav-item">
-                    <button class="btn btn-gradient" (click)="logout()">Logout</button>
+                    <button class="btn btn-warning text-dark fw-bold" (click)="logout()">Logout</button>
                 </li>
             </ul>
         </div>
     </div>
-
 </nav>
