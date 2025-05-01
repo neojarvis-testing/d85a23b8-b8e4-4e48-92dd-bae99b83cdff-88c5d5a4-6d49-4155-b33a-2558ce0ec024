@@ -15,7 +15,7 @@ export class AdminViewPropertyComponent implements OnInit {
   selectedType: string = ''; // Stores selected type for filtering
   deletePropertyId: number | null = null; // Fix: Proper declaration
 
-  constructor(private propertyService: PropertyService, private router: Router) {}
+  constructor(private readonly propertyService: PropertyService, private readonly router: Router) {}
 
   ngOnInit(): void {
     this.getAllProperties();

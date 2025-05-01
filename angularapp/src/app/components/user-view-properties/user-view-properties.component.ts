@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 export class UserViewPropertiesComponent implements OnInit {
   properties: Property[] = [];
 
-  constructor(private propertyService: PropertyService, private router: Router) {}
+  constructor(private readonly propertyService: PropertyService, private readonly router: Router) {}
 
   ngOnInit(): void {
     this.getAllProperties();

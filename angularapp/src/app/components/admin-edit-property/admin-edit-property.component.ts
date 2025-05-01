@@ -14,9 +14,9 @@ export class AdminEditPropertyComponent implements OnInit {
   showSuccessPopup: boolean = false; // Controls success message display
 
   constructor(
-    private propertyService: PropertyService,
-    private route: ActivatedRoute,
-    private router: Router
+    private readonly propertyService: PropertyService,
+    private readonly route: ActivatedRoute,
+    private readonly router: Router
   ) {}
 
   ngOnInit(): void {
