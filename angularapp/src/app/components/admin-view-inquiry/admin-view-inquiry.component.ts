@@ -22,8 +22,8 @@ export class AdminViewInquiryComponent implements OnInit {
   searchInquiry = ''; // Search field for filtering inquiries dynamically
 
   constructor(
-    private inquiryService: PropertyInquiryService,
-    private fb: FormBuilder
+    private readonly inquiryService: PropertyInquiryService,
+    private readonly fb: FormBuilder
   ) {
     this.responseForm = this.fb.group({
       adminResponse: [''],

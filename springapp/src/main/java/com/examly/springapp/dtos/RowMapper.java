@@ -4,11 +4,10 @@ import java.time.LocalDate;
 
 import com.examly.springapp.model.Feedback;
 import com.examly.springapp.model.Property;
-import com.examly.springapp.model.PropertyInquiry;
 import com.examly.springapp.model.User;
 
 public class RowMapper {
-
+    private RowMapper(){}
 	public static UserDTO mapToUserDTO(User user) {
 		UserDTO userDTO = new UserDTO();
 		userDTO.setUserId(user.getUserId());

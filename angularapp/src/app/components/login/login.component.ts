@@ -12,7 +12,7 @@ export class LoginComponent implements OnInit {
 
   form: FormGroup
 
-  constructor(private service: AuthService, private fb: FormBuilder, private router: Router) {
+  constructor(private readonly service: AuthService, private readonly fb: FormBuilder, private readonly router: Router) {
     this.form = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]]
@@ -29,10 +29,7 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('userRole', response.userRole);
           localStorage.setItem('userId', response.userId);
           alert("Login successful");
-          if (response.userRole === 'ADMIN')
-            this.router.navigate(['/'])
-          else if (response.userRole === 'USER')
-            this.router.navigate(['/'])
+          this.router.navigate(['/'])
         }
       }, (error) => {
         alert("Login failed");
@@ -43,6 +40,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    throw new Error("notImplemented()")
   }
 
 }

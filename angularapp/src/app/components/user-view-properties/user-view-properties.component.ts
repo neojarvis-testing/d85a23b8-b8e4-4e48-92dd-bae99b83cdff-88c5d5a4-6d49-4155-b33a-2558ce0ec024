@@ -16,7 +16,8 @@ export class UserViewPropertiesComponent implements OnInit {
   propertyTypes: string[] = ['All', 'Residential', 'Commercial']; // Property type filter options
   propertyStatuses: string[] = ['All', 'Available', 'Sold']; // Property status filter options
 
-  constructor(private propertyService: PropertyService) {}
+
+  constructor(private readonly propertyService: PropertyService, private readonly router: Router) {}
 
   ngOnInit(): void {
     this.loadProperties();

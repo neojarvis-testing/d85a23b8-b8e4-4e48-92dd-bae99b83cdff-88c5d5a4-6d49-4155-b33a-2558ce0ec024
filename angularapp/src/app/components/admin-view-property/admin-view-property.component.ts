@@ -10,12 +10,16 @@ import { Router } from '@angular/router';
 })
 export class AdminViewPropertyComponent implements OnInit {
   properties: Property[] = [];
+
+  selectedProperty: Property | null = null;
+  constructor(private readonly propertyService: PropertyService, private router:Router) {}
   filteredProperties: Property[] = [];
   searchTerm: string = ''; // Stores user input for search
   selectedType: string = ''; // Stores selected type for filtering
   deletePropertyId: number | null = null; // Fix: Proper declaration
 
-  constructor(private propertyService: PropertyService, private router: Router) {}
+  constructor(private readonly propertyService: PropertyService, private readonly router: Router) {}
+
 
   ngOnInit(): void {
     this.getAllProperties();

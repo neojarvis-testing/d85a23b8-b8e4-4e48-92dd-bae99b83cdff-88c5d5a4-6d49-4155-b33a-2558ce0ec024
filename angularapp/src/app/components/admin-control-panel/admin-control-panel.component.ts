@@ -51,7 +51,7 @@ export class AdminControlPanelComponent implements OnInit {
       this.allProperties=this.totalProperties.length
     })
   }
-  constructor(private service:PropertyInquiryService,private feedbackService:FeedbackService,private propertyService:PropertyService) { }
+  constructor(private readonly service:PropertyInquiryService,private readonly feedbackService:FeedbackService,private readonly propertyService:PropertyService) { }
 
   ngOnInit(): void {
     this.getAllPropertyInquiries()

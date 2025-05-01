@@ -17,6 +17,7 @@ import { UserViewPropertiesComponent } from './components/user-view-properties/u
 import { AdminControlPanelComponent } from './components/admin-control-panel/admin-control-panel.component';
 import { EditInquiryComponent } from './components/edit-inquiry/edit-inquiry.component';
 import { UserViewFeedbackComponent } from './components/user-view-feedback/user-view-feedback.component';
+import { UserViewInquiryComponent } from './components/user-view-inquiry/user-view-inquiry.component';
 
 
 
@@ -39,8 +40,8 @@ const routes: Routes = [
   {path:'addfeedback',component:UserAddFeedbackComponent},
   {path:'user-view-feedback',component:UserViewFeedbackComponent},
   { path: 'admin-add-property', component: AdminAddPropertyComponent},
-  {path:"admin-view-property",component:AdminViewPropertyComponent},
-  { path: 'admin-edit-property/:id', component: AdminEditPropertyComponent },
+  {path:'user-view-inquiry',component:UserViewInquiryComponent},
+
   {path:'user-view-property',component:UserViewPropertiesComponent}
 
 ];

@@ -14,7 +14,7 @@ export class EditInquiryComponent implements OnInit {
   inquiryId:number
   userId:number
   propertyId:number
-  constructor(private service:PropertyInquiryService,private fb:FormBuilder,private activatedRoute:ActivatedRoute) { 
+  constructor(private readonly service:PropertyInquiryService,private readonly fb:FormBuilder,private readonly activatedRoute:ActivatedRoute) { 
   this.form = fb.group({
   message:['',[Validators.required]],
   status:['',[Validators.required]],

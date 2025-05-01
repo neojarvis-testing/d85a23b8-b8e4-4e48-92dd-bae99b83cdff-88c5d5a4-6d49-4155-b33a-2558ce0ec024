@@ -10,6 +10,7 @@ export class AuthguardComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    throw new Error("notImplemented()")
   }
 
 }
