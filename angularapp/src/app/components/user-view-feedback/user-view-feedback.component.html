@@ -1,1 +1,31 @@
-<p>user-view-feedback works!</p>
+<div class="feedback-container">
+    <h2>My Feedback</h2>
+
+    <!-- Feedback table to display user-submitted feedback -->
+    <table *ngIf="feedbacks.length > 0">
+        <thead>
+            <tr>
+                <th>#</th> <!-- Serial number for each feedback entry -->
+                <th>Message</th> <!-- Displays feedback content -->
+                <th>Date</th> <!-- Displays the date the feedback was submitted -->
+                <th>Category</th> <!-- Displays the feedback category -->
+                <th>Property</th> <!-- Displays the associated property for the feedback -->
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Loop through filtered feedback list and display each entry -->
+            <tr *ngFor="let feedback of filteredFeedbacks; let i = index">
+                <td>{{ i + 1 }}</td> <!-- Auto-incremented row number -->
+                <td>{{ feedback.feedbackText }}</td> <!-- Feedback message text -->
+                <td>{{ feedback.date | date:'dd-MM-yyyy' }}</td> <!-- Format date in DD-MM-YYYY -->
+                <td>{{ feedback.category }}</td> <!-- Feedback category text -->
+                <td>{{ feedback.property }}</td> <!-- Property linked to the feedback -->
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Display a message when no feedback exists -->
+    <div *ngIf="feedbacks.length === 0" class="no-data">
+        No Feedbacks Found
+    </div>
+</div>

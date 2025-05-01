@@ -1,1 +1,30 @@
-<p>user-view-properties works!</p>
+<h2>Available Properties</h2>
+
+<!-- Show properties if available -->
+<div *ngIf="properties.length > 0">
+  <table>
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Location</th>
+        <th>Price</th>
+        <th>Type</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let property of properties">
+        <td>{{ property.title }}</td>
+        <td>{{ property.location }}</td>
+        <td>{{ property.price | currency }}</td>
+        <td>{{ property.type }}</td>
+        <td>{{ property.status }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Message if no properties available -->
+<div *ngIf="properties.length === 0">
+  <p>No properties available at the moment.</p>
+</div>

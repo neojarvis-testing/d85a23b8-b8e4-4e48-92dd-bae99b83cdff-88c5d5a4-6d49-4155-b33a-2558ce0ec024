@@ -9,41 +9,50 @@ import { apiUrl } from '../constant/ApiUrl';
   providedIn: 'root'
 })
 export class AuthService {
-
+ 
   apiUrl:any=apiUrl
-
+ 
   login(login:Login):Observable<Login>{
     return this.http.post<Login>(`${this.apiUrl}/login`,login);
   }
   register(user:User):Observable<User>{
     return this.http.post<User>(`${this.apiUrl}/register`,user);
   }
-
+ 
   loggedOut(): void {
     localStorage.removeItem("userId")
     localStorage.removeItem("userRole");
     localStorage.removeItem("token");
     localStorage.removeItem("username");
   }
-
+ 
   isLoggedUser():boolean{
     let role=localStorage.getItem("userRole")
     return role!=null
   }
-  getUserById(id:number){
-    this.http.get(`${apiUrl}/user/${id}`)
+  getUserById(id: number): Observable<User> {
+    return this.http.get<User>(`${apiUrl}/user/${id}`);
   }
-
+  getRole():string | null{
+    return localStorage.getItem('userRole')
+  }
+  getUsername():string | null{
+    return localStorage.getItem('username')
+  }
   isAdmin():boolean{
    let role = localStorage.getItem("userRole")
-   console.log(role)
    return role=='ADMIN'
   }
 
   isUser():boolean{
     let role = localStorage.getItem("userRole")
-    console.log(role)
     return role=='USER'
    }
+
+
   constructor(private http:HttpClient) { }
 }
+ 
+ 
+
+ 
