@@ -1,30 +1,30 @@
-<h2>Available Properties</h2>
+<!-- Main Container -->
+<div style="background-color: black; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(255, 255, 0, 0.2);">
 
-<!-- Show properties if available -->
-<div *ngIf="properties.length > 0">
-  <table>
-    <thead>
-      <tr>
-        <th>Title</th>
-        <th>Location</th>
-        <th>Price</th>
-        <th>Type</th>
-        <th>Status</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let property of properties">
-        <td>{{ property.title }}</td>
-        <td>{{ property.location }}</td>
-        <td>{{ property.price | currency }}</td>
-        <td>{{ property.type }}</td>
-        <td>{{ property.status }}</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+  <h2 style="color: yellow; text-align: center;">Explore Properties</h2>
 
-<!-- Message if no properties available -->
-<div *ngIf="properties.length === 0">
-  <p>No properties available at the moment.</p>
+  <!-- Show properties if available -->
+  <div *ngIf="properties.length > 0" style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
+    <div *ngFor="let property of properties" style="background-color: black; padding: 20px; border: 1px solid yellow; border-radius: 8px; width: 300px;">
+      
+      <h3 style="color: yellow;">{{ property.title }}</h3>
+      <p style="color: white;">{{ property.description }}</p>
+      <p style="color: white;"><strong>Location:</strong> {{ property.location }}</p>
+      <p style="color: white;"><strong>Price:</strong> {{ property.price | currency }}</p>
+      <p style="color: white;"><strong>Type:</strong> {{ property.type }}</p>
+      <p style="color: white;"><strong>Status:</strong> {{ property.status }}</p>
+      
+      <button (click)="inquireProperty(property.propertyId)"
+        style="background-color: yellow; color: black; padding: 8px 12px; border-radius: 4px; cursor: pointer; display: block; margin-top: 10px;">
+        Inquire
+      </button>
+
+    </div>
+  </div>
+
+  <!-- Message if no properties available -->
+  <div *ngIf="properties.length === 0" style="color: white; text-align: center; padding: 20px;">
+    <p style="font-size: 18px;">No properties available at the moment. Please check back later.</p>
+  </div>
+
 </div>

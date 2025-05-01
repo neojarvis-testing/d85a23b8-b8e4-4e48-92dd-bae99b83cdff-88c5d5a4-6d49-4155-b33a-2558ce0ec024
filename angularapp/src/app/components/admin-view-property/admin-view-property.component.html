@@ -1,48 +1,65 @@
-<p>Admin View Property Works!</p>
-
-<!-- Button to Fetch All Properties -->
-<button (click)="getAllProperties()" class="btn btn-primary">View All Properties</button>
-
 <!-- List of Properties -->
-<div *ngIf="properties.length > 0">
-  <h2>All Properties</h2>
-  <table>
+<div *ngIf="filteredProperties.length > 0" style="background-color: black; padding: 20px;">
+  <h2 style="color: yellow; text-align: center; margin-bottom: 20px;">Manage Properties</h2>
+  <hr style="border: 1px solid yellow; margin-bottom: 20px;"> <!-- Yellow line separator -->
+
+  <!-- Search Bar & Filter Dropdown Swapped -->
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+    <!-- Search Bar (Left) -->
+    <div>
+      <label for="search" style="color: yellow; font-size: 18px; margin-right: 10px;">Search by:</label>
+      <input id="search" type="text" [(ngModel)]="searchTerm" (input)="filterProperties()" placeholder="Property Title"
+        style="padding: 8px; width: 30%; border-radius: 4px; border: 1px solid yellow; background-color: black; color: white;">
+    </div>
+
+    <!-- Filter Dropdown (Right) -->
+    <div>
+      <label for="filter" style="color: yellow; font-size: 18px; margin-right: 10px;">Filter by Type:</label>
+      <select id="filter" [(ngModel)]="selectedType" (change)="filterProperties()"
+        style="padding: 8px; border-radius: 4px; border: 1px solid yellow; background-color: black; color: white;">
+        <option value="">All Types</option>
+        <option value="Residential">Residential</option>
+        <option value="Commercial">Commercial</option>
+      </select>
+    </div>
+  </div>
+
+  <table style="width: 100%; border-collapse: collapse;">
     <thead>
-      <tr>
-        <th>Title</th>
-        <th>Location</th>
-        <th>Price</th>
-        <th>Type</th>
-        <th>Status</th>
-        <th>Actions</th>
+      <tr style="background-color: yellow; color: black;">
+        <th style="padding: 10px; border: 1px solid black;">S.No</th>
+        <th style="padding: 10px; border: 1px solid black;">Title</th>
+        <th style="padding: 10px; border: 1px solid black;">Location</th>
+        <th style="padding: 10px; border: 1px solid black;">Price</th>
+        <th style="padding: 10px; border: 1px solid black;">Type</th>
+        <th style="padding: 10px; border: 1px solid black;">Status</th>
+        <th style="padding: 10px; border: 1px solid black;">Actions</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let property of properties">
-       <td>{{ property.title }}</td>
-        <td>{{ property.location }}</td>
-        <td>{{ property.price | currency }}</td>
-        <td>{{ property.type }}</td>
-        <td>{{ property.status }}</td>
-        <td>
-          <button (click)="viewProperty(property.propertyId)">View Details</button>
-          <button (click)="editProperty(property.propertyId)">Update</button> 
-
-          <button (click)="deleteProperty(property.propertyId)">Delete</button>
+      <tr *ngFor="let property of filteredProperties; index as i" style="color: white; background-color: black; text-align: center;">
+        <td style="padding: 10px; border: 1px solid yellow;">{{ i + 1 }}</td>
+        <td style="padding: 10px; border: 1px solid yellow;">{{ property.title }}</td>
+        <td style="padding: 10px; border: 1px solid yellow;">{{ property.location }}</td>
+        <td style="padding: 10px; border: 1px solid yellow;">{{ property.price | currency }}</td>
+        <td style="padding: 10px; border: 1px solid yellow;">{{ property.type }}</td>
+        <td style="padding: 10px; border: 1px solid yellow;">{{ property.status }}</td>
+        <td style="padding: 10px; border: 1px solid yellow;">
+          <button (click)="editProperty(property.propertyId)"
+            style="background-color: yellow; color: black; padding: 8px 12px; border: none; cursor: pointer; margin-right: 10px;">
+            Edit
+          </button>
+          <button (click)="confirmDelete(property.propertyId)"
+            style="background-color: red; color: white; padding: 8px 12px; border: 1px solid yellow; cursor: pointer;">
+            Delete
+          </button>
         </td>
       </tr>
     </tbody>
   </table>
 </div>
 
-<!-- Property Details -->
-<div *ngIf="selectedProperty">
-  <h3>Property Details</h3>
-  <p><strong>Title:</strong> {{ selectedProperty.title }}</p>
-  <p><strong>Description:</strong> {{ selectedProperty.description }}</p>
-  <p><strong>Location:</strong> {{ selectedProperty.location }}</p>
-  <p><strong>Price:</strong> {{ selectedProperty.price | currency }}</p>
-  <p><strong>Type:</strong> {{ selectedProperty.type }}</p>
-  <p><strong>Status:</strong> {{ selectedProperty.status }}</p>
-  <button (click)="closeDetails()">Close</button>
+<!-- Message if no matching properties -->
+<div *ngIf="filteredProperties.length === 0" style="color: white; text-align: center; padding: 20px;">
+  <p style="font-size: 18px;">No properties match your search.</p>
 </div>

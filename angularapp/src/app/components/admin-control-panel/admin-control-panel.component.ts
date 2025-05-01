@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FeedbackService } from 'src/app/services/feedback.service';
+import { PropertyInquiryService } from 'src/app/services/property-inquery.service';
+import { PropertyService } from 'src/app/services/property.service';
 
 @Component({
   selector: 'app-admin-control-panel',
@@ -7,9 +10,53 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminControlPanelComponent implements OnInit {
 
-  constructor() { }
+  inquiries:any[]=[]
+
+  allInquiries=this.inquiries.length
+  totalFeedbacks:any[]=[]
+  allFeedbacks=this.totalFeedbacks.length
+  totalProperties:any[]=[]
+  allProperties=this.totalProperties.length
+  unresolvedInquiries:any[]=[]
+  allUnresolvedInquiries=this.unresolvedInquiries.length
+  highPriorityInquiries:any[]=[]
+  allHighPriorityInquiries=this.highPriorityInquiries.length
+
+  getAllPropertyInquiries(){
+    this.service.getAllPropertyInquiry().subscribe((data)=>{
+      this.inquiries=data;
+      this.allInquiries=this.inquiries.length
+    })
+  }
+  getAllFeedbacks(){
+    this.feedbackService.getFeedbacks().subscribe((data)=>{
+      this.totalFeedbacks=data
+      this.allFeedbacks=this.totalFeedbacks.length
+    })
+  }
+  
+  getHighPriorityInquiries(){
+    this.highPriorityInquiries=this.inquiries.filter((i)=>i.priority=="High")
+    this.allHighPriorityInquiries=this.highPriorityInquiries.length
+  }
+
+  getUnresolvedInquiries(){
+    this.unresolvedInquiries=this.inquiries.filter((i)=>i.status=="Pending")
+    this.allUnresolvedInquiries = this.unresolvedInquiries.length;
+  }
+
+  getAllProperties(){
+    this.propertyService.getAllProperties().subscribe((data)=>{
+      this.totalProperties=data;
+      this.allProperties=this.totalProperties.length
+    })
+  }
+  constructor(private service:PropertyInquiryService,private feedbackService:FeedbackService,private propertyService:PropertyService) { }
 
   ngOnInit(): void {
+    this.getAllPropertyInquiries()
+    this.getAllFeedbacks()
+    this.getAllProperties()
   }
 
 }

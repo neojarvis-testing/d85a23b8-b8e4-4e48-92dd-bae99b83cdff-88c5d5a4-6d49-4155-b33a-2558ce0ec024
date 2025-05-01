@@ -2,6 +2,17 @@
     <div class="container-fluid">
         <a class="navbar-brand fw-bold text-warning" routerLink="/">EstateConnect</a>
 
+
+<nav id="user-nav">
+    <ul>
+    <li><a routerLink="/">EstateConnect</a></li>
+    <li><a routerLink="/user-view-property">Properties</a></li>
+    <li><a routerLink="">My Inquiries</a></li>
+    <li><a routerLink="">view Properties</a></li>
+    <li><a routerLink="">Feedback</a></li>
+    <button (click) = "logout()">Logout</button>
+    </ul>
+
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#userNavbar">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -28,4 +39,5 @@
             </ul>
         </div>
     </div>
+
 </nav>

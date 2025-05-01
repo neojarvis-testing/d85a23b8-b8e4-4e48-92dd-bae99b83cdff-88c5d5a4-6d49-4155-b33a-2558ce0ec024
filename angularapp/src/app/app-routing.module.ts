@@ -3,8 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
-
-import { AdminAddPropertyComponent } from './components/admin-add-property/admin-add-property.component';
 import { AdminEditPropertyComponent } from './components/admin-edit-property/admin-edit-property.component';
 import { AdminViewPropertyComponent } from './components/admin-view-property/admin-view-property.component';
 import { AdminnavComponent } from './components/adminnav/adminnav.component';
@@ -15,9 +13,16 @@ import { AdminViewFeedbackComponent } from './components/admin-view-feedback/adm
 
 import { UserAddFeedbackComponent } from './components/user-add-feedback/user-add-feedback.component';
 
+import { UserAddInquiryComponent } from './components/user-add-inquiry/user-add-inquiry.component';
+
+import { AdminAddPropertyComponent } from './components/admin-add-property/admin-add-property.component';
+import { UserViewPropertiesComponent } from './components/user-view-properties/user-view-properties.component';
+import { AdminControlPanelComponent } from './components/admin-control-panel/admin-control-panel.component';
+
 import { EditInquiryComponent } from './components/edit-inquiry/edit-inquiry.component';
 
 import { UserViewFeedbackComponent } from './components/user-view-feedback/user-view-feedback.component';
+
 
 
 const routes: Routes = [
@@ -34,7 +39,17 @@ const routes: Routes = [
 
   {path:'viewproperties',component:UserViewPropertiesComponent},
   {path:'addfeedback',component:UserAddFeedbackComponent},
-  {path:'editInquiry/:id',component:EditInquiryComponent}
+
+  {path:"admin-view-property",component:AdminViewPropertyComponent},
+  { path: 'admin-edit-property/:id', component: AdminEditPropertyComponent },
+  {path:'user-view-property',component:UserViewPropertiesComponent},
+  {path:'user-add-inquiry/:id',component:UserAddInquiryComponent}
+  
+
+
+  {path:'controlpanel',component:AdminControlPanelComponent},
+
+  {path:'editInquiry/:id',component:EditInquiryComponent},
 
   {path:'addfeedback',component:UserAddFeedbackComponent},
   {path:'user-view-feedback',component:UserViewFeedbackComponent},

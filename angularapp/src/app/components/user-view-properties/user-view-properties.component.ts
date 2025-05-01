@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PropertyService } from 'src/app/services/property.service';
 import { Property } from 'src/app/models/property.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-view-properties',
@@ -10,7 +11,7 @@ import { Property } from 'src/app/models/property.model';
 export class UserViewPropertiesComponent implements OnInit {
   properties: Property[] = [];
 
-  constructor(private propertyService: PropertyService) {}
+  constructor(private propertyService: PropertyService, private router: Router) {}
 
   ngOnInit(): void {
     this.getAllProperties();
@@ -19,13 +20,15 @@ export class UserViewPropertiesComponent implements OnInit {
   getAllProperties(): void {
     this.propertyService.getAllProperties().subscribe(
       (response) => {
-        this.properties = response;
-        this.properties=this.properties.filter(property=>property.deleted==0)
+        this.properties = response.filter(property => property.deleted === 0);
       },
       (error) => {
         console.error('Error fetching properties:', error);
-        alert('Failed to load properties.');
       }
     );
+  }
+
+  inquireProperty(propertyId: number): void {
+    this.router.navigate(['user-add-inquiry', propertyId]); // Redirects user to the inquiry page
   }
 }
