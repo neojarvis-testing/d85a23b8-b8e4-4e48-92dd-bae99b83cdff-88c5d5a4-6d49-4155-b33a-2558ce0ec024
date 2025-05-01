@@ -117,10 +117,10 @@ public class PropertyServiceImpl implements PropertyService {
             logger.error("Property deletion failed, not found: ID {}", propertyId);
                 throw new PropertyException("Property with ID " + propertyId + " not found.");
         }
-      System.out.println("property:"+property);
+        logger.info("Property found: {}", property);
       property.setDeleted(1);
       property = propertyRepo.save(property);
-      System.out.println("property:"+property);
+      logger.info("Property after marking as deleted: {}", property);
       logger.info("Property marked as deleted: ID {}", propertyId);
         // Perform a logical deletion by toggling the isDeleted status (if applicable)
        // Physically delete the property (or toggle isDeleted if needed)

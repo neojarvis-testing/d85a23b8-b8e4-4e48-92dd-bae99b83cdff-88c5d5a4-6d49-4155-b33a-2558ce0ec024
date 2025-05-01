@@ -101,19 +101,10 @@ PropertyRepo propertyRepo;
 
             throw new InquiryNotFound("Inquiry not found!"); 
         }
-        PropertyInquiry newPropertyInquiry = new PropertyInquiry();
+        
             User user = userRepo.findById(inquiries.getUser().getUserId()).orElse(null);
             Property property = propertyRepo.findById(inquiries.getProperty().getPropertyId()).orElse(null);
-        // newPropertyInquiry.setUser(user);
-        // newPropertyInquiry.setProperty(property);
-        // newPropertyInquiry.setAdminResponse(inquiries.getAdminResponse());
-        // newPropertyInquiry.setContactDetails(inquiries.getContactDetails());
-        // newPropertyInquiry.setInquiryDate(inquiries.getInquiryDate());
-        // newPropertyInquiry.setResponseDate(inquiries.getResponseDate());
-        // newPropertyInquiry.setMessage(inquiries.getMessage());
-        // newPropertyInquiry.setPriority(inquiries.getPriority());
-        // newPropertyInquiry.setStatus(inquiries.getStatus());
-        // newPropertyInquiry.setInquiryId(inquiryId);
+        
         inquiries.setInquiryId(inquiryId);
         inquiries.setUser(user);
         inquiries.setProperty(property);
