@@ -50,7 +50,7 @@ export class AuthService {
    }
 
 
-  constructor(private http:HttpClient) { }
+  constructor(private readonly http:HttpClient) { }
 }
  
  

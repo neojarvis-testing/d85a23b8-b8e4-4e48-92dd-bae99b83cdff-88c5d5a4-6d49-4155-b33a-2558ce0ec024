@@ -10,7 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class SignupComponent implements OnInit {
 
   form: FormGroup
-  constructor(private service: AuthService, private fb: FormBuilder,) {
+  constructor(private readonly service: AuthService, private readonly fb: FormBuilder,) {
     this.form = this.fb.group({
       email: ['', [Validators.required]],
       password: ['', [Validators.required]],
@@ -35,6 +35,7 @@ export class SignupComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    throw new Error("notImplemented()")
   }
   
 }
