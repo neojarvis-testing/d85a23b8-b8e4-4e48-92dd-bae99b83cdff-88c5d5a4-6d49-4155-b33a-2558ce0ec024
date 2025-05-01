@@ -30,21 +30,27 @@ export class AdminAddPropertyComponent implements OnInit {
 
   addProperty(): void {
     if (!this.newProperty.title || !this.newProperty.location || this.newProperty.price <= 0) {
-      this.showErrorModal = true;
-      return;
+        this.showErrorModal = true;
+        return;
     }
 
     this.propertyService.addProperty(this.newProperty).subscribe(
-      (response) => {
-        console.log('Property added successfully:', response);
-        this.showSuccessModal = true; // Show success modal
-      },
-      (error) => {
-        console.error('Error adding property:', error);
-        this.showErrorModal = true; // Show error modal
-      }
+        (response) => {
+            console.log('Property added successfully:', response);
+            this.showSuccessModal = true; // Show success modal
+
+            setTimeout(() => {
+                this.closeModal();
+                this.router.navigate(['admin-view-property']); // Navigate after showing the message
+            }, 2000); // Display success message for 2 seconds before navigation
+        },
+        (error) => {
+            console.error('Error adding property:', error);
+            this.showErrorModal = true; // Show error modal
+        }
     );
-  }
+}
+
 
   closeModal(): void {
     this.showSuccessModal = false;

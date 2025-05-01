@@ -1,96 +1,96 @@
-<div class="filters container mt-3">
-  <input
-    [(ngModel)]="searchProperty"
-    class="form-control mb-2"
-    placeholder="Search by property"
-    (input)="applyFilters()"
-  />
-  <div class="d-flex justify-content-between">
-    <select
-      class="form-select me-2"
-      [(ngModel)]="filterPriority"
-      (change)="applyFilters()"
-    >
-      <option *ngFor="let p of priorities" [value]="p">{{ p }}</option>
-    </select>
-    <select
-      class="form-select"
-      [(ngModel)]="filterStatus"
-      (change)="applyFilters()"
-    >
-      <option *ngFor="let s of statuses" [value]="s">{{ s }}</option>
-    </select>
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+<div class="container mt-5">
+  <div class="admin-inquiry-container">
+    <h2 class="text-center"><i class="fas fa-question-circle"></i> Manage Inquiries</h2>
+    <hr>
+
+    <!-- Search & Filter Section -->
+    <div class="filters container mt-3">
+      <!-- Search Box -->
+      <div class="search-box">
+        <label for="search"><i class="fas fa-search"></i> Search Inquiry By Property:</label>
+        <input id="search" type="text" class="form-control mb-2" [(ngModel)]="searchInquiry" (input)="applyFilters()" placeholder="Search by property">
+      </div>
+
+      <div class="d-flex justify-content-between">
+        <!-- Priority Filter -->
+        <div class="filter-box">
+          <label for="priorityFilter"><i class="fas fa-exclamation-circle"></i> Filter by Priority:</label>
+          <select id="priorityFilter" class="form-select me-2" [(ngModel)]="filterPriority" (change)="applyFilters()">
+            <option *ngFor="let p of priorities" [value]="p">{{ p }}</option>
+          </select>
+        </div>
+
+        <!-- Status Filter -->
+        <div class="filter-box">
+          <label for="statusFilter"><i class="fas fa-check-circle"></i> Filter by Status:</label>
+          <select id="statusFilter" class="form-select" [(ngModel)]="filterStatus" (change)="applyFilters()">
+            <option *ngFor="let s of statuses" [value]="s">{{ s }}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Inquiry Table -->
+    <div *ngIf="filteredInquiries.length > 0">
+      <table class="table table-striped table-hover mt-3">
+        <thead class="table-dark">
+          <tr class="table-header">
+            <th>ID</th>
+            <th>User</th>
+            <th>Property</th>
+            <th>Message</th>
+            <th>Status</th>
+            <th>Priority</th>
+            <th>Inquiry Date</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let inquiry of filteredInquiries">
+            <td>{{ inquiry.inquiryId }}</td>
+            <td>{{ inquiry.user.username }}</td>
+            <td>{{ inquiry.property.title }}</td>
+            <td>{{ inquiry.message }}</td>
+            <td>{{ inquiry.status }}</td>
+            <td>{{ inquiry.priority }}</td>
+            <td>{{ inquiry.inquiryDate | date:'dd-MM-yyyy' }}</td>
+            <td>
+              <button class="btn btn-warning btn-sm me-2" (click)="openResponseModal(inquiry)">
+                <i class="fas fa-reply"></i> Add Response
+              </button>
+              <button class="btn btn-danger btn-sm" (click)="deleteInquiry(inquiry.inquiryId)">
+                <i class="fas fa-trash"></i> Delete
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- No Inquiry Found Message -->
+    <div *ngIf="filteredInquiries.length === 0">
+      <p class="no-inquiry-message">🚫 No inquiries found.</p>
+    </div>
+
+    <!-- Inquiry Response Modal -->
+    <div *ngIf="selectedInquiry" class="modal fade show d-block" tabindex="-1">
+      <form class="modal-content p-4 bg-dark text-light" [formGroup]="responseForm" (ngSubmit)="submitResponse()">
+        <h3 class="text-warning"><i class="fas fa-envelope"></i> Respond to Inquiry</h3>
+        <label>Response:</label>
+        <textarea formControlName="adminResponse" class="form-control mb-3" rows="3"></textarea>
+        <label>Contact Details:</label>
+        <input type="text" class="form-control mb-3" formControlName="contactDetails"/>
+        <div class="d-flex justify-content-end">
+          <button class="btn btn-success me-2" type="submit">Submit</button>
+          <button class="btn btn-secondary" type="button" (click)="selectedInquiry = null">Cancel</button>
+        </div>
+      </form>
+    </div>
   </div>
 </div>
-
-<table class="table table-striped table-hover mt-3">
-  <thead class="table-dark">
-    <tr>
-      <th>ID</th>
-      <th>User</th>
-      <th>Property</th>
-      <th>Message</th>
-      <th>Status</th>
-      <th>Priority</th>
-      <th>Inquiry Date</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let inquiry of filteredInquiries">
-      <td>{{ inquiry.inquiryId }}</td>
-      <td>{{ inquiry.user.username }}</td>
-      <td>{{ inquiry.property.title }}</td>
-      <td>{{ inquiry.message }}</td>
-      <td>{{ inquiry.status }}</td>
-      <td>{{ inquiry.priority }}</td>
-      <td>{{ inquiry.inquiryDate | date }}</td>
-      <td>
-        <button
-          class="btn btn-warning btn-sm me-2"
-          (click)="openResponseModal(inquiry)"
-        >
-          Add Response
-        </button>
-        <button
-          class="btn btn-danger btn-sm"
-          (click)="deleteInquiry(inquiry.inquiryId)"
-        >
-          Delete
-        </button>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-<div *ngIf="selectedInquiry" class="modal fade show d-block" tabindex="-1">
-  <form
-    class="modal-content p-4 bg-dark text-light"
-    [formGroup]="responseForm"
-    (ngSubmit)="submitResponse()"
-  >
-    <h3 class="text-warning">Respond to Inquiry</h3>
-    <label>Response:</label>
-    <textarea
-      formControlName="adminResponse"
-      class="form-control mb-3"
-      rows="3"
-    ></textarea>
-    <label>Contact Details:</label>
-    <input
-      type="text"
-      class="form-control mb-3"
-      formControlName="contactDetails"
-    />
-    <div class="d-flex justify-content-end">
-      <button class="btn btn-success me-2" type="submit">Submit</button>
-      <button
-        class="btn btn-secondary"
-        type="button"
-        (click)="selectedInquiry = null"
-      >
-        Cancel
-      </button>
-    </div>
-  </form>
-</div>
+</body>

@@ -1,36 +1,43 @@
 <nav id="admin-nav" class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
     <div class="container-fluid">
         <a class="navbar-brand fw-bold text-white" routerLink="/">EstateConnect</a>
-        
+
+        <!-- Navbar toggler for responsiveness -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
-            <!-- Main Navigation Links -->
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav">
-                <li><a class="nav-link text-white" routerLink="/">Home</a></li>
-                <li *ngIf="service.isAdmin()"><a class="nav-link text-white" routerLink="/controlpanel">Control Panel</a></li>
-                <li *ngIf="service.isAdmin()"><a class="nav-link text-white" routerLink="/admin-add-property">Add Property</a></li>
-                <li *ngIf="service.isAdmin()"><a class="nav-link text-white" routerLink="/admin-view-property">View Property</a></li>
-                <li *ngIf="service.isAdmin()"><a class="nav-link text-white" routerLink="/inquiries">Inquiries</a></li>
-                <li *ngIf="service.isAdmin()"><a class="nav-link text-white" routerLink="/viewfeedback">Feedback</a></li>
-                <li *ngIf="service.isUser()"><a class="nav-link text-white" routerLink="/user-view-property">Properties</a></li>
-                <li *ngIf="service.isUser()"><a class="nav-link text-white" routerLink="/myinquiries">My Inquiries</a></li>
-                <li *ngIf="service.isUser()"><a class="nav-link text-white" routerLink="/addfeedback">Feedback</a></li>
-                <li *ngIf="!service.isLoggedUser()"><a class="nav-link text-white" routerLink="/login">Login</a></li>
-                <li *ngIf="!service.isLoggedUser()"><a class="nav-link text-white" routerLink="/register">Register</a></li>
-                <li *ngIf="service.isLoggedUser()">
-                    <button class="btn btn-gradient" (click)="logout()">Logout</button>
-                </li>
-            </ul>
-
-            <!-- User Info -->
-            <ul class="navbar-nav">
-                <li class="nav-item" *ngIf="service.isLoggedUser()">
+                <!-- Display username and role for logged-in users -->
+                <li class="admin" *ngIf="service.isLoggedUser()">
                     <a class="nav-link text-warning">
                         {{ service.getUsername() | titlecase }} / {{ service.getRole() | uppercase }}
                     </a>
+                </li>
+
+                <!-- Navigation Links -->
+                <li class="nav-item"><a class="nav-link text-white" routerLink="/">Home</a></li>
+
+                <!-- Admin Links -->
+                <li class="nav-item" *ngIf="service.isAdmin()"><a class="nav-link text-white" routerLink="/controlpanel">Control Panel</a></li>
+                <li class="nav-item" *ngIf="service.isAdmin()"><a class="nav-link text-white" routerLink="/admin-add-property">Add Property</a></li>
+                <li class="nav-item" *ngIf="service.isAdmin()"><a class="nav-link text-white" routerLink="/admin-view-property">View Property</a></li>
+                <li class="nav-item" *ngIf="service.isAdmin()"><a class="nav-link text-white" routerLink="/inquiries">Inquiries</a></li>
+                <li class="nav-item" *ngIf="service.isAdmin()"><a class="nav-link text-white" routerLink="/viewfeedback">Feedback</a></li>
+
+                <!-- User Links -->
+                <li class="nav-item" *ngIf="service.isUser()"><a class="nav-link text-white" routerLink="/user-view-property">View Properties</a></li>
+                <li class="nav-item" *ngIf="service.isUser()"><a class="nav-link text-white" routerLink="/myinquiries">My Inquiries</a></li>
+                <li class="nav-item" *ngIf="service.isUser()"><a class="nav-link text-white" routerLink="/addfeedback">Feedback</a></li>
+
+                <!-- Authentication Links -->
+                <li class="nav-item" *ngIf="!service.isLoggedUser()"><a class="nav-link text-white" routerLink="/login">Login</a></li>
+                <li class="nav-item" *ngIf="!service.isLoggedUser()"><a class="nav-link text-white" routerLink="/register">Register</a></li>
+
+                <!-- Logout Button -->
+                <li class="nav-item" *ngIf="service.isLoggedUser()">
+                    <button class="btn btn-warning text-dark fw-bold" (click)="logout()">Logout</button>
                 </li>
             </ul>
         </div>

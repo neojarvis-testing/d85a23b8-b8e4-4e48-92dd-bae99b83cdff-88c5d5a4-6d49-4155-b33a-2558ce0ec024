@@ -1,38 +1,197 @@
-/* Navbar styling */
-#admin-nav {
-    background-color: #0b0b0b !important; /* Dark navbar background */
-    padding: 15px;
+/* General Styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #ffffff; /* White background */
+    color: #000;
+    margin: 0;
+    padding: 0;
 }
 
-/* Ensure navbar brand (EstateConnect) is left-aligned */
-.navbar-brand {
-    color: #dba622 !important; /* Gold color for branding */
+/* Ensure container does not have unintended background */
+.container {
+    background: transparent;
+    padding: 0;
+    margin: auto;
+}
+
+/* Form Container */
+.feedback-form-container {
+    background: #000000; /* Black form background */
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 12px rgba(255, 255, 255, 0.2);
+    max-width: 600px;
+    margin: auto;
+    color: #fff;
+}
+
+/* Header Styling */
+h2 {
+    color: #FFC107;
+    font-weight: bold;
+}
+
+/* Subheading Styling */
+.subheading {
+    font-size: 16px;
+    font-weight: 500;
+    color: #FFD54F; /* Slightly lighter yellow */
+    margin-bottom: 20px;
+}
+
+/* Form Styling */
+.feedback-form .form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    font-size: 16px;
+    font-weight: bold;
+    color: #FFC107;
+}
+
+.form-control {
+    border-radius: 6px;
+    padding: 10px;
+    background: #333333; /* Darker shade for input fields */
+    border: 1px solid #888888;
+    color: #fff;
+}
+
+/* Dropdown Styling */
+select.form-control {
+    color: #fff;
+    background: #333333;
+    border: 1px solid #888888;
+    padding: 10px;
+    border-radius: 6px;
+}
+
+/* Ensure default option text is visible */
+select.form-control option:first-child {
+    color: #fff;
+}
+
+/* Button Styling */
+.btn-warning {
+    background-color: #FFC107;
+    border: none;
+    color: #000;
+    font-size: 18px;
+    padding: 10px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.btn-warning:hover {
+    background-color: #E0A800;
+    color: #000;
+}
+
+/* Error & Success Messages */
+.error-message, .success-message {
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.error-message {
+    color: #FF0000;
+}
+
+.success-message {
+    color: #00FF00;
+}
+
+/* Error Text */
+.error-text {
+    color: #FF0000;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+/* Fix Background Issues */
+html, body {
+    background-color: #ffffff !important; /* Ensures full-page white background */
+}
+
+/* Responsive Layout */
+@media (max-width: 768px) {
+    .feedback-form-container {
+        padding: 20px;
+    }
+}
+/* Overlay Background */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* Darker overlay for emphasis */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Popup Content */
+.modal-content {
+    background: #222222; /* Sleek dark background */
+    padding: 25px;
+    border-radius: 12px;
+    text-align: center;
+    color: #fff;
+    box-shadow: 0px 6px 15px rgba(255, 255, 255, 0.2);
+    max-width: 400px;
+    width: 90%;
+}
+
+/* Popup Header */
+.modal-content h3 {
     font-size: 20px;
     font-weight: bold;
-    margin-right: auto; /* Keeps it on the left */
+    color: #FFC107; /* Yellow for emphasis */
+    margin-bottom: 15px;
 }
 
-/* Align navbar links to the right */
-.navbar-nav {
-    justify-content: flex-end;
+/* Popup Buttons */
+.modal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
 }
 
-/* Styling for all links except EstateConnect */
-.navbar-nav .nav-link {
-    color: white !important; /* White text */
-    font-size: 14px; /* Smaller size */
-    font-weight: 500;
+/* Success Button */
+.btn-success {
+    background: #28a745; /* Green for confirmation */
+    color: white;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
 }
 
-/* Logout button styling */
-.btn-outline-light {
-    border-radius: 20px; /* Rounded corners */
-    padding: 8px 15px;
-    font-size: 14px;
+.btn-success:hover {
+    background: #218838;
 }
 
-/* Hover effects for Logout button */
-.btn-outline-light:hover {
-    background-color: white;
-    color: #0b0b0b !important;
+/* Cancel Button */
+.btn-danger {
+    background: #dc3545; /* Red for cancellation */
+    color: white;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+}
+
+.btn-danger:hover {
+    background: #c82333;
 }

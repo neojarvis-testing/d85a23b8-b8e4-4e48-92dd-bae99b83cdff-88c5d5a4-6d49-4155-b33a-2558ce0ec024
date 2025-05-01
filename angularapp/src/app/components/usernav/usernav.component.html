@@ -1,33 +1,30 @@
 <nav id="user-nav" class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
     <div class="container-fluid">
-        <!-- Brand Name -->
         <a class="navbar-brand fw-bold text-warning" routerLink="/">EstateConnect</a>
 
-        <!-- Toggler for mobile view -->
+        <!-- Navbar toggler for responsiveness -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#userNavbar">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <!-- Collapsible Navbar Content -->
-        <div class="collapse navbar-collapse justify-content-between" id="userNavbar">
-            <!-- Main Navigation Links -->
+        <div class="collapse navbar-collapse justify-content-end" id="userNavbar">
             <ul class="navbar-nav">
-                <li><a class="nav-link text-white" routerLink="/">EstateConnect</a></li>
-                <li><a class="nav-link text-white" routerLink="/user-view-property">Properties</a></li>
-                <li><a class="nav-link text-white" routerLink="/myinquiries">My Inquiries</a></li>
-                <li><a class="nav-link text-white" routerLink="/view-properties">View Properties</a></li>
-                <li><a class="nav-link text-white" routerLink="/feedback">Feedback</a></li>
-                <li>
-                    <button class="btn btn-gradient" (click)="logout()">Logout</button>
-                </li>
-            </ul>
-
-            <!-- User Info Section -->
-            <ul class="navbar-nav">
+                <!-- Display username and role for logged-in users -->
                 <li class="nav-item user-info" *ngIf="service.isLoggedUser()">
                     <a class="nav-link text-warning">
                         {{ service.getUsername() | titlecase }} / {{ service.getRole() | uppercase }}
                     </a>
+                </li>
+
+                <!-- Navbar Links -->
+                <li class="nav-item"><a class="nav-link text-white" routerLink="/user-view-property">Properties</a></li>
+                <li class="nav-item"><a class="nav-link text-white" routerLink="">My Inquiries</a></li>
+                <li class="nav-item"><a class="nav-link text-white" routerLink="">View Properties</a></li>
+                <li class="nav-item"><a class="nav-link text-white" routerLink="">Feedback</a></li>
+
+                <!-- Logout Button -->
+                <li class="nav-item">
+                    <button class="btn btn-warning text-dark fw-bold" (click)="logout()">Logout</button>
                 </li>
             </ul>
         </div>
