@@ -14,9 +14,10 @@ logout() {
 
 }
 
-  constructor(public service:AuthService,private router:Router) { }
+  constructor(public readonly service:AuthService,private readonly router:Router) { }
 
   ngOnInit(): void {
+    throw new Error("notImplemented()")
   }
 
 }

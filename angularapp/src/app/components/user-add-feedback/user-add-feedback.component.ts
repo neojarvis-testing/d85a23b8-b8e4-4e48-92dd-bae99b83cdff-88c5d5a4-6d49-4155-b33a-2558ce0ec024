@@ -27,9 +27,9 @@ export class UserAddFeedbackComponent implements OnInit {
   };
 
   constructor(
-    private router: Router,
-    private feedbackService: FeedbackService,
-    private propertyService: PropertyService
+    private readonly router: Router,
+    private readonly feedbackService: FeedbackService,
+    private readonly propertyService: PropertyService
   ) {}
 
   ngOnInit(): void {
@@ -45,7 +45,7 @@ export class UserAddFeedbackComponent implements OnInit {
   getProperties(): void {
     this.propertyService.getAllProperties().subscribe({
       next: (data) => {
-        this.properties = data || [];
+        this.properties = data;
       },
       error: () => {
         this.errorMessage = 'Failed to load property list.';

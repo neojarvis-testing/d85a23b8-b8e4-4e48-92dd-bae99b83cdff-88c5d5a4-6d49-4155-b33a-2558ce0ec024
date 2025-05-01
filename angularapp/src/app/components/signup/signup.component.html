@@ -95,6 +95,46 @@
               <button type="submit" [disabled]="form.invalid">Register</button>
             </div>
           </form>
+
+      </div>
+  
+      <!-- Password Field -->
+      <div>
+        <label for="password">Password:</label>
+        <input type="password" id="password" formControlName="password" placeholder="Enter your password" />
+        <div *ngIf="form.controls.password.touched && form.controls.password.invalid">
+          <small *ngIf="form.controls.password.errors?.required">Password is required.</small>
+        </div>
+      </div>
+  
+      <!-- Username Field -->
+      <div>
+        <label for="userName">Username:</label>
+        <input type="text" id="username" formControlName="username" placeholder="Enter your username" />
+        <div *ngIf="form.controls.username.touched && form.controls.username.invalid">
+          <small *ngIf="form.controls.username.errors?.required">Username is required.</small>
+        </div>
+      </div>
+  
+      <!-- Number Field -->
+      <div>
+        <label for="number">Number:</label>
+        <input type="text" id="number" formControlName="number" placeholder="Enter your number" />
+        <div *ngIf="form.controls.number.touched && form.controls.number.invalid">
+          <small *ngIf="form.controls.number.errors?.required">Number is required.</small>
+        </div>
+      </div>
+  
+      <!-- User Role Field -->
+      <div>
+        <label for="userRole">User Role:</label>
+        <select id="userRole" formControlName="userRole">
+          <option value="USER">User</option>
+          <option value="ADMIN">Admin</option>
+        </select>
+        <div *ngIf="form.controls.userRole.touched && form.controls.userRole.invalid">
+          <small *ngIf="form.controls.userRole.errors?.required">User role is required.</small>
+
         </div>
       </div>
     </div>

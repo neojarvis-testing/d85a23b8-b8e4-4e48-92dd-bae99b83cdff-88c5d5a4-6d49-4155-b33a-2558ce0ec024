@@ -9,6 +9,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class SignupComponent implements OnInit {
 
+
   form: FormGroup;
 
   constructor(private service: AuthService, private fb: FormBuilder) {
@@ -33,6 +34,17 @@ export class SignupComponent implements OnInit {
     return password && confirmPassword && password !== confirmPassword
       ? { passwordMismatch: true }
       : null;
+
+  form: FormGroup
+  constructor(private readonly service: AuthService, private readonly fb: FormBuilder,) {
+    this.form = this.fb.group({
+      email: ['', [Validators.required]],
+      password: ['', [Validators.required]],
+      username: ['', [Validators.required]],
+      number: ['', [Validators.required]],
+      userRole: ['USER', [Validators.required]]
+    })
+
   }
 
   onSubmit() {
@@ -53,4 +65,9 @@ export class SignupComponent implements OnInit {
   }
 
   ngOnInit(): void { }
+
+  ngOnInit(): void {
+    throw new Error("notImplemented()")
+  }
+
 }

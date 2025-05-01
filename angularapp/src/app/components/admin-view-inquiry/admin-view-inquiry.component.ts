@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { Router } from '@angular/router';
 import { PropertyInquiry } from 'src/app/models/property-inquiry.model';
-import { PropertyInquiryInput } from 'src/app/models/propertyInquiryInput.model';
 import { PropertyInquiryService } from 'src/app/services/property-inquery.service';
 
 @Component({
@@ -24,8 +22,8 @@ export class AdminViewInquiryComponent implements OnInit {
   searchProperty = '';
 
   constructor(
-    private inquiryService: PropertyInquiryService,
-    private fb: FormBuilder
+    private readonly inquiryService: PropertyInquiryService,
+    private readonly fb: FormBuilder
   ) {
     this.responseForm = this.fb.group({
       adminResponse: [''],
