@@ -11,8 +11,7 @@ import { Router } from '@angular/router';
 export class AdminViewPropertyComponent implements OnInit {
   properties: Property[] = [];
   selectedProperty: Property | null = null;
-
-  constructor(private propertyService: PropertyService, private router:Router) {}
+  constructor(private readonly propertyService: PropertyService, private router:Router) {}
 
   ngOnInit(): void {
     this.getAllProperties(); // Load properties when component initializes

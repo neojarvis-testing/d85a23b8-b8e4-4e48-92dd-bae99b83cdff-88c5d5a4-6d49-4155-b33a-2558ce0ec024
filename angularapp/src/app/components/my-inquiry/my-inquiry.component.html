@@ -1,1 +1,31 @@
-<p>my-inquiry works!</p>
+<div class="container">
+  <h2>Your Inquiries</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Property</th>
+        <th>Message</th>
+        <th>Priority</th>
+        <th>Status</th>
+        <th>Admin Response</th>
+      </tr>
+    </thead>
+    
+<tbody>
+<tr *ngFor="let inquiry of inquiries">
+<td>{{ inquiry.property }}</td>
+<td>{{ inquiry.message }}</td>
+<td>{{ inquiry.priority }}</td>
+<td>{{ inquiry.status }}</td>
+<td>{{ inquiry.adminResponse }}</td>
+</tr>
+</tbody>
+
+  </table>
+</div>
+
+
+
+  
+
+

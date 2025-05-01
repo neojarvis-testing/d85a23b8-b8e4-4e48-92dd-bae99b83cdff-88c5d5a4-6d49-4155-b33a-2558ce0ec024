@@ -18,11 +18,6 @@
             <level>INFO</level>
             
         </filter>
-       <!-- <filter class="ch.qos.logback.classic.filter.LevelFilter">
-            <level>ERROR</level>
-            <onMatch>ACCEPT</onMatch>
-            <onMismatch>DENY</onMismatch>
-        </filter>-->
     </appender>
     <root level="INFO">
       <appender-ref ref="CONSOLE"/>

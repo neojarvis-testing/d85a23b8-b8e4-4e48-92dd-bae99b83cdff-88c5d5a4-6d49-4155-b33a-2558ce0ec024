@@ -1,0 +1,110 @@
+/* Wrapper to center all content */
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f9f9f9;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+  }
+  
+  /* Overall content section */
+  .content {
+    width: 100%;
+    max-width: 1000px; /* Adjusted width for page alignment */
+  }
+  
+  /* Form heading */
+  .form-heading {
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    color: #333;
+  }
+  
+  /* Container for image and form */
+  .container {
+    display: flex;
+    flex-direction: row; /* Align image and form side-by-side */
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+  }
+  
+  /* Image styling */
+  .image-container img {
+    width: 400px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Form section styling */
+  .form-container {
+    width: 400px;
+  }
+  
+  /* Input and error styling */
+  .input-icon {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .input-icon i {
+    font-size: 18px;
+    color: #555;
+  }
+  
+  input, select {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    padding: 5px;
+    box-sizing: border-box;
+    outline: none;
+  }
+  
+  input:focus, select:focus {
+    border-bottom: 1px solid #007bff;
+  }
+  
+  .error {
+    color: red;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  form div {
+    margin-bottom: 15px;
+  }
+  
+  form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  form button {
+    background-color: #ffcc00;
+    color: #000;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  form button:hover {
+    background-color: #e6b800;
+  }
+  
