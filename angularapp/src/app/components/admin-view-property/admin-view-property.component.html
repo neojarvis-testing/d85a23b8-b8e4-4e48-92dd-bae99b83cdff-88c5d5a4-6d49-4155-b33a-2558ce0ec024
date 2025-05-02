@@ -1,22 +1,14 @@
-<head>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-</head>
-
-<body>
 <div class="container mt-5">
   <div class="property-management">
     <h2 class="text-center">Manage Properties</h2>
     <hr>
 
-    <!-- Search Bar & Filter Dropdown -->
+    <!-- Search & Filter Section -->
     <div class="filter-section">
-      <!-- Search Bar -->
       <div class="search-box">
         <label for="search"><i class="fas fa-search"></i> Search by:</label>
         <input id="search" type="text" class="form-control" [(ngModel)]="searchTerm" (input)="filterProperties()" placeholder="Property Title">
       </div>
-
-      <!-- Filter Dropdown -->
       <div class="filter-box">
         <label for="filter"><i class="fas fa-filter"></i> Filter by Type:</label>
         <select id="filter" class="form-select" [(ngModel)]="selectedType" (change)="filterProperties()">
@@ -66,11 +58,28 @@
       </table>
     </div>
 
-    <!-- No Matching Properties Message -->
+    <!-- No Properties Message -->
     <div *ngIf="filteredProperties.length === 0">
       <p class="no-properties-message">🚫 No properties match your search.</p>
     </div>
   </div>
 </div>
-  
-</body>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-labelledby="deleteConfirmLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Confirm Deletion</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete this property?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="deleteProperty()">Yes, Delete</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>

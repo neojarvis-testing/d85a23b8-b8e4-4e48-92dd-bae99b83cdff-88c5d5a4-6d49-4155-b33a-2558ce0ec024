@@ -1,38 +1,131 @@
-.container {
-    width: 80%;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: yellowgreen; 
-  }
-  
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-  }
-  
-  th, td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  th {
-    background-color: yellow; /* Changed to yellow */
-  }
-  
-  tr:hover {
-    background-color: #f1f1f1;
-  }
-  
 
-/* styles to be added */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f8f9fa;
+}
+
+.container h2 {
+  font-weight: bold;
+}
+
+.table {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.table-hover tbody tr:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .table-responsive {
+    overflow-x: auto;
+  }
+}
+
+/* General Styling */
+.container {
+  max-width: 1000px;
+  font-family: 'Poppins', sans-serif;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Header Styling */
+h2 {
+  font-weight: 600;
+  font-size: 28px;
+  text-align: center;
+  color: #212529;
+  margin-bottom: 20px;
+}
+
+/* Table Styling */
+.table-dark {
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #343a40; /* Dark grey */
+  color: #f8f9fa;
+}
+
+thead {
+  background: linear-gradient(to right, #FFA000, #FFC107);
+  color: #212529;
+  font-weight: bold;
+}
+
+th, td {
+  padding: 12px;
+  text-align: left;
+}
+
+tbody tr:hover {
+  background-color: #6c757d; /* Hover effect for better readability */
+}
+
+/* Pagination Styling */
+.pagination .page-item .page-link {
+  background-color: #343a40;
+  color: #FFC107;
+  border: 1px solid #343a40;
+  transition: all 0.3s ease-in-out;
+}
+
+.pagination .page-item .page-link:hover {
+  background-color: #FFC107;
+  color: black;
+}
+
+/* Search & Filter Styling */
+.input-group-text {
+  border: 1px solid #FFC107;
+  background-color: #FFC107;
+  color: #212529;
+}
+
+.form-control, .form-select {
+  border: 1px solid #FFC107;
+  background-color: #ffffff;
+  color: #212529;
+}
+
+.form-control::placeholder {
+  color: #6c757d;
+}
+
+.form-select option {
+  color: black;
+}
+
+/* No Data Styling */
+.no-data {
+  margin-top: 20px;
+  font-weight: 500;
+  font-size: 20px;
+  text-align: center;
+  padding: 15px;
+  border-radius: 8px;
+  background-color: #343a40;
+  color: #FFC107;
+}
+/* Status Colors */
+.text-success {
+  color: #28a745 !important; /* Green for resolved inquiries & admin response */
+}
+
+.text-danger {
+  color: #dc3545 !important; /* Red for pending inquiries & no admin response */
+}
+
+/* Colorful Font Awesome Icons */
+.fa-building { color: #4CAF50; }   /* Green for Property */
+.fa-comment-dots { color: #2196F3; }  /* Blue for Messages */
+.fa-star { color: #FF9800; } /* Orange for Priority */
+.fa-spinner { color: #E91E63; } /* Pink for Status */
+.fa-calendar-day { color: #9C27B0; } /* Purple for Inquiry Date */
+.fa-user-check { color: #009688; } /* Teal for Admin Response */
+.fa-phone { color: #F44336; } /* Red for Contact Details */
 

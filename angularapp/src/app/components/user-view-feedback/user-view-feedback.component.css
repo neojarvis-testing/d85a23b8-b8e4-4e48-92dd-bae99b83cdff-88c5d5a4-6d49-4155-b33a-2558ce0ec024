@@ -1,1 +1,88 @@
-/* throw new Error("notImplemented()") */
+/* General Styling */
+.container {
+    max-width: 1000px;
+    font-family: 'Poppins', sans-serif;
+    padding: 20px;
+}
+
+/* Header Styling */
+h2 {
+    font-weight: 600;
+    font-size: 28px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Table Styling */
+.table-dark {
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #1E1E1E; /* Refined dark tone */
+    color: #f8f9fa;
+}
+
+thead {
+    background: linear-gradient(to right, #FFA000, #FFC107); /* Improved gradient */
+    color: #212529;
+    font-weight: bold;
+}
+
+th, td {
+    padding: 12px;
+}
+
+/* Pagination Styling */
+.pagination {
+    margin-top: 20px;
+}
+
+.pagination .page-item .page-link {
+    background-color: #212529; /* Default black */
+    color: #FFC107;
+    border: 1px solid #212529;
+    transition: all 0.3s ease-in-out;
+}
+
+.pagination .page-item .page-link:hover {
+    background-color: #FFC107; /* Yellow on hover */
+    color: black;
+    border: 1px solid #FFC107;
+}
+
+/* Delete Button Styling */
+.btn-danger {
+    background-color: #dc3545;
+    border: none;
+    transition: background 0.3s ease-in-out;
+}
+
+.btn-danger:hover {
+    background-color: #a71d2a;
+}
+
+/* Search & Filter Styling */
+.form-control, .form-select {
+    border: 1px solid #FFC107;
+    background-color: #212529;
+    color: #f8f9fa;
+}
+
+.form-control::placeholder {
+    color: #b3b3b3;
+}
+
+.form-select option {
+    color: black;
+}
+
+/* No Data Styling */
+.no-data {
+    margin-top: 20px;
+    font-weight: 500;
+    font-size: 20px;
+    text-align: center;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #333; /* Subtle contrast */
+    color: #FFC107;
+}

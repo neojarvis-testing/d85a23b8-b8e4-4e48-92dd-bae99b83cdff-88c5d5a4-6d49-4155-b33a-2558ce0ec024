@@ -2,7 +2,6 @@ package com.examly.springapp.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -20,15 +19,23 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 public class SecurityConfig {
  
-    @Autowired
-    JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
-    @Autowired
-    UserDetailsService userDetailsService;
-    @Autowired
-    PasswordEncoder passwordEncoder;
-    @Autowired
-    JwtAuthenticationFilter jwtAuthenticationFilter;
- 
+    private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+    private final UserDetailsService userDetailsService;
+    private final PasswordEncoder passwordEncoder;
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
+
+    // Constructor-based injection
+    public SecurityConfig(JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint, 
+                          UserDetailsService userDetailsService, 
+                          PasswordEncoder passwordEncoder, 
+                          JwtAuthenticationFilter jwtAuthenticationFilter) {
+        this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;
+        this.userDetailsService = userDetailsService;
+        this.passwordEncoder = passwordEncoder;
+        this.jwtAuthenticationFilter = jwtAuthenticationFilter;
+    }
+
+
      @Autowired
     public void configure(AuthenticationManagerBuilder authority)throws Exception{
         authority.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);

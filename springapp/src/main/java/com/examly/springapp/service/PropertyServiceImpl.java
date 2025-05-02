@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.examly.springapp.exceptions.DuplicatePropertyException;
@@ -17,8 +16,13 @@ import com.examly.springapp.repository.PropertyRepo;
 public class PropertyServiceImpl implements PropertyService {
     private Logger logger = LoggerFactory.getLogger(PropertyServiceImpl.class);
 
-    @Autowired
-    private PropertyRepo propertyRepo; // Repository to handle database operations
+    private final PropertyRepo propertyRepo; // Repository to handle database operations
+
+    // Constructor-based injection
+    public PropertyServiceImpl(PropertyRepo propertyRepo) {
+        this.propertyRepo = propertyRepo;
+    }
+
 
     /**
      * Adds a new property to the system.

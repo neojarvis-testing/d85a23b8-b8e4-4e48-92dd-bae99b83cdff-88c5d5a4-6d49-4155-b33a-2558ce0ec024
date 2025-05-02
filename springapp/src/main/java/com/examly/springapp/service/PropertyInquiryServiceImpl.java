@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.examly.springapp.dtos.PropertyInquiryInput;
@@ -21,12 +20,16 @@ import com.examly.springapp.repository.UserRepo;
 public class PropertyInquiryServiceImpl implements PropertyInquiryService{
 
     private Logger logger = LoggerFactory.getLogger(PropertyInquiryServiceImpl.class); // Logger for logging events
-@Autowired
-PropertyInquiryRepo propertyInquiryRepo;
-@Autowired
-UserRepo userRepo;
-@Autowired
-PropertyRepo propertyRepo;
+    private final PropertyInquiryRepo propertyInquiryRepo;
+    private final UserRepo userRepo;
+    private final PropertyRepo propertyRepo;
+
+    // Constructor-based injection
+    public PropertyInquiryServiceImpl(PropertyInquiryRepo propertyInquiryRepo, UserRepo userRepo, PropertyRepo propertyRepo) {
+        this.propertyInquiryRepo = propertyInquiryRepo;
+        this.userRepo = userRepo;
+        this.propertyRepo = propertyRepo;
+    }
     public PropertyInquiry addInquiry(PropertyInquiryInput propertyInquiry) {
         //Retrieve user by Id 
        User user = userRepo.findById(propertyInquiry.getUserId()).orElse(null);
