@@ -1,0 +1,169 @@
+/* Wrapper to center content */
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f9f9f9;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+  }
+ 
+  /* Container for image & form */
+  .container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    max-width: 1000px;
+    width: 100%;
+    gap: 40px;
+  }
+ 
+  /* Image Section */
+  .property-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+ 
+  .property-image img {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    object-fit: cover;
+  }
+ 
+  /* Form Section */
+  .property-form {
+    flex: 1;
+    width: 100%;
+    padding: 20px;
+  }
+ 
+  /* Input Styling */
+  .input-icon {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+ 
+  .input-icon i {
+    font-size: 18px;
+    color: #555;
+  }
+ 
+  input, select, textarea {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    padding: 10px;
+    box-sizing: border-box;
+    outline: none;
+  }
+ 
+  input:focus, select:focus, textarea:focus {
+    border-bottom: 1px solid #007bff;
+  }
+ 
+  /* Button Styling */
+  button {
+    background-color: #ffcc00;
+    color: #000;
+    border: none;
+    padding: 12px;
+    width: 100%;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+  }
+ 
+  button:hover {
+    background-color: #e6b800;
+  }
+ 
+  /* Error Styling */
+  .error-message {
+    color: red;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-weight: bold;
+  }
+ 
+  .error-message i {
+    color: red;
+    font-size: 14px;
+  }
+ 
+  /* Success Modal Styling */
+  .success-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #28a745;
+    color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    width: 400px;
+  }
+ 
+  /* Modal Content */
+  .success-modal .modal-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+ 
+  .success-modal i {
+    font-size: 40px;
+    margin-bottom: 15px;
+  }
+ 
+  .success-modal p {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+ 
+  .success-modal button {
+    background-color: #fff;
+    color: #28a745;
+    padding: 12px 24px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+ 
+  .success-modal button:hover {
+    background-color: #f8f9fa;
+  }
+ 
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        gap: 20px;
+        padding: 20px;
+    }
+ 
+    .property-image img {
+        max-width: 100%;
+    }
+  }
+ 
+ 

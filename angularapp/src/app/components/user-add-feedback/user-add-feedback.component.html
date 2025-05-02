@@ -1,58 +1,81 @@
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
 <div class="container mt-5">
-  <h2 class="text-center mb-4">Submit Your Property Feedback</h2>
+    <div class="feedback-form-container">
+        <h2 class="text-center"><i class="fas fa-comment-dots"></i> Your Opinion Matters</h2>
+        <p class="text-center subheading">Help us improve! Share your thoughts on our services and properties—your feedback drives our excellence.</p>
+        <hr>
 
-  <!-- Success & Error Messages -->
-  <div *ngIf="errorMessage" class="alert alert-danger text-center">{{ errorMessage }}</div>
-  <div *ngIf="successMessage" class="alert alert-success text-center">{{ successMessage }}</div>
+        <!-- Success & Error Messages -->
+        <div *ngIf="errorMessage" class="error-message" role="alert">{{ errorMessage }}</div>
+        <div *ngIf="successMessage" class="success-message" role="alert">{{ successMessage }}</div>
 
-  <!-- Feedback Form -->
-  <form #feedbackForm="ngForm" (ngSubmit)="onSubmit(feedbackForm)">
+        <!-- Feedback Form -->
+        <form #feedbackForm="ngForm" class="feedback-form" (ngSubmit)="openPopup()">
 
-      <!-- Dropdown for Property Selection -->
-      <div class="form-group">
-          <label for="property">Select Property</label>
-          <select id="propertyId" class="form-control" [(ngModel)]="propertyId" name="propertyId" required>
-              <option value="" disabled>Select a property</option>
-              <option *ngFor="let property of properties" [value]="property.propertyId">
-                  {{ property.title }}
-              </option>
-          </select>
-          <div *ngIf="!propertyId" class="text-danger">Please select a property.</div>
-      </div>
+            <!-- Property Selection -->
+            <div class="form-group">
+                <label for="property"><i class="fas fa-building"></i> Select Property:</label>
+                <select id="propertyId" [(ngModel)]="propertyId" name="propertyId" required class="form-control" #propertyIdCtrl="ngModel">
+                    <option value="" disabled selected>Select a property</option>
+                    <option *ngFor="let property of properties" [value]="property.propertyId">
+                        {{ property.title }}
+                    </option>
+                </select>
+                <div *ngIf="propertyIdCtrl.invalid && propertyIdCtrl.touched" class="error-text">Please select a property.</div>
+            </div>
 
-      <!-- Feedback Text -->
-      <div class="form-group">
-          <label for="feedbackText">Feedback</label>
-          <textarea
-              id="feedbackText"
-              class="form-control"
-              [(ngModel)]="feedback.feedbackText"
-              name="feedbackText"
-              rows="3"
-              required
-              minlength="10"
-          ></textarea>
-          <div *ngIf="feedback.feedbackText.length < 10" class="text-danger">
-              Feedback must be at least 10 characters long.
-          </div>
-      </div>
+            <!-- Feedback Text -->
+            <div class="form-group">
+                <label for="feedbackText"><i class="fas fa-comments"></i> Your Feedback:</label>
+                <textarea
+                    id="feedbackText"
+                    [(ngModel)]="feedback.feedbackText"
+                    name="feedbackText"
+                    rows="4"
+                    required
+                    minlength="10"
+                    class="form-control"
+                    #feedbackCtrl="ngModel"
+                ></textarea>
+                <div *ngIf="feedbackCtrl.invalid && feedbackCtrl.touched" class="error-text">
+                    Feedback must be at least 10 characters long.
+                </div>
+            </div>
 
-      <!-- Category Selection -->
-      <div class="form-group">
-          <label for="category">Category</label>
-          <select id="category" class="form-control" [(ngModel)]="feedback.category" name="category" required>
-              <option value="">Select a category</option>
-              <option value="Service">Service</option>
-              <option value="Pricing">Pricing</option>
-              <option value="Quality">Quality</option>
-          </select>
-          <div *ngIf="!feedback.category" class="text-danger">Category selection is required.</div>
-      </div>
+            <!-- Category Selection -->
+            <div class="form-group">
+                <label for="category"><i class="fas fa-tags"></i> Category:</label>
+                <select id="category" [(ngModel)]="feedback.category" name="category" required class="form-control" #categoryCtrl="ngModel">
+                    <option value="">Select a category</option>
+                    <option value="Service">Service</option>
+                    <option value="Pricing">Pricing</option>
+                    <option value="Quality">Quality</option>
+                </select>
+                <div *ngIf="categoryCtrl.invalid && categoryCtrl.touched" class="error-text">Category selection is required.</div>
+            </div>
 
-      <!-- Submit Button -->
-      <button type="submit" class="btn btn-primary"
-          [disabled]="!propertyId || feedback.feedbackText.length < 10 || !feedback.category">
-          Submit Feedback
-      </button>
-  </form>
+            <!-- Submit Button -->
+            <div class="text-center">
+                <button type="submit" class="btn btn-warning">
+                    <i class="fas fa-paper-plane"></i> Submit Feedback
+                </button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<!-- Feedback Confirmation Popup -->
+<div *ngIf="showPopup" class="modal-overlay" role="dialog">
+    <div class="modal-content">
+        <h3>Confirm Feedback Submission</h3>
+        <p>Are you sure you want to submit this feedback?</p>
+        
+        <div class="modal-buttons">
+            <button class="btn btn-success" (click)="confirmSubmit(feedbackForm)">Yes, Submit</button>
+            <button class="btn btn-danger" (click)="closePopup()">Cancel</button>
+        </div>
+    </div>
 </div>

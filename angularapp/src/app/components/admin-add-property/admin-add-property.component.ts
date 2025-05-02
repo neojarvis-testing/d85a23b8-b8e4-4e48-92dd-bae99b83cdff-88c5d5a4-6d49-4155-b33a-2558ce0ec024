@@ -19,23 +19,42 @@ export class AdminAddPropertyComponent implements OnInit {
     status: ''
   };
 
-  constructor(private propertyService: PropertyService, private router: Router) {} // Inject Router
+  showSuccessModal = false;
+  showErrorModal = false;
 
-  ngOnInit(): void {}
+  constructor(private readonly propertyService: PropertyService, private readonly router: Router) {}
+
+  ngOnInit(): void {
+    throw new Error("notImplemented()")
+  }
 
   addProperty(): void {
+    if (!this.newProperty.title || !this.newProperty.location || this.newProperty.price <= 0) {
+        this.showErrorModal = true;
+        return;
+    }
+
     this.propertyService.addProperty(this.newProperty).subscribe(
-      (response) => {
-        console.log('Property added successfully:', response);
-        alert('Property added successfully!');
-        
-        // Redirect to Admin View Property page
-        this.router.navigate(['/admin-view-property']);
-      },
-      (error) => {
-        console.error('Error adding property:', error);
-        alert('Failed to add property!');
-      }
+        (response) => {
+            console.log('Property added successfully:', response);
+            this.showSuccessModal = true; // Show success modal
+
+            setTimeout(() => {
+                this.closeModal();
+                this.router.navigate(['admin-view-property']); // Navigate after showing the message
+            }, 2000); // Display success message for 2 seconds before navigation
+        },
+        (error) => {
+            console.error('Error adding property:', error);
+            this.showErrorModal = true; // Show error modal
+        }
     );
+}
+
+
+  closeModal(): void {
+    this.showSuccessModal = false;
+    this.showErrorModal = false;
+    this.newProperty = { propertyId: null, title: '', description: '', location: '', price: 0, type: '', status: '' };
   }
 }

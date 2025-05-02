@@ -1,101 +1,137 @@
 .wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh; /* Full viewport height for vertical centering */
-    background-color: #f9f9f9;
-    font-family: Arial, sans-serif;
-  }
-  
-  .container {
-    display: flex;
-    flex-direction: row; /* Align image and form side-by-side */
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-    background-color: #ffffff;
-    width: 600px; /* Set a width to balance spacing */
-    max-width: 90%; /* Ensure responsiveness */
-  }
-  
-  .image-container img {
-    width: 200px; /* Adjust image size */
-    height: auto;
-    border-radius: 10px;
-  }
-  
-  .form-container {
-    width: 300px; /* Ensure consistent form size */
-  }
-  
-  form div {
-    margin-bottom: 15px;
-  }
-  
-  form label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-  }
-  
-  form input {
-    width: 100%;
-    border: none;
-    border-bottom: 1px solid #ccc;
-    padding: 5px;
-    box-sizing: border-box;
-    outline: none;
-  }
-  
-  form input:focus {
-    border-bottom: 1px solid #007bff;
-  }
-  
-  form button {
-    background-color: #ffcc00;
-    color: #000;
-    border: none;
-    padding: 10px;
-    width: 100%;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: bold;
-  }
-  
-  form button:hover {
-    background-color: #e6b800;
-  }
-  .error {
-    color: red; /* Set validation message text color */
-    font-size: 12px;
-    display: flex;
-    align-items: center;
-    gap: 5px; /* Space between the icon and text */
-  }
-  .input-icon {
-    display: flex;
-    align-items: center;
-    gap: 10px; /* Space between icon and input field */
-  }
-  
-  .input-icon i {
-    font-size: 18px;
-    color: #555;
-  }
-  
-  input {
-    width: 100%;
-    border: none;
-    border-bottom: 1px solid #ccc;
-    padding: 5px;
-    box-sizing: border-box;
-    outline: none;
-  }
-  
-  input:focus {
-    border-bottom: 1px solid #007bff;
-  }
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f9f9f9;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  width: 600px;
+  max-width: 90%;
+}
+
+.image-container img {
+  width: 200px;
+  height: auto;
+  border-radius: 10px;
+}
+
+.form-container {
+  width: 300px;
+}
+
+form div {
+  margin-bottom: 15px;
+}
+
+form label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.input-icon {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.input-icon i {
+  font-size: 18px;
+  color: #555;
+}
+
+input {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  padding: 5px;
+  box-sizing: border-box;
+  outline: none;
+}
+
+input:focus {
+  border-bottom: 1px solid #007bff;
+}
+
+button {
+  background-color: #ffcc00;
+  color: #000;
+  border: none;
+  padding: 10px;
+  width: 100%;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+button:hover {
+  background-color: #e6b800;
+}
+
+/* Popup Overlay */
+.popup-overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(3px); /* Slight blur for depth */
+  background: rgba(0, 0, 0, 0.4); /* Softer black overlay */
+}
+
+/* Popup Content */
+.popup-content {
+  background: #000; /* Black background */
+  color: #fff; /* White text */
+  padding: 15px; /* Reduced padding */
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1); /* Softer shadow */
+  width: 280px; /* Slightly narrower */
+}
+
+/* Popup Header */
+.popup-content h2 {
+  font-size: 18px; /* Reduced size */
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+/* OK Button */
+.btn-ok {
+  background-color: #fff; /* White button */
+  color: #000; /* Black text */
+  padding: 8px 18px; /* Slightly smaller */
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px; /* Reduced font size */
+  margin-top: 8px;
+  border: none;
+  font-weight: 500;
+}
+
+.btn-ok:hover {
+  background-color: #eaeaea; /* Subtle hover effect */
+}
+.error {
+  color: red;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}

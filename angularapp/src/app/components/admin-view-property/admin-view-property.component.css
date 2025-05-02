@@ -1,0 +1,71 @@
+body {
+  font-family: 'Arial', sans-serif;
+  color: #fff;
+}
+
+h2 {
+  color: #FFC107;
+  font-weight: bold;
+}
+
+.property-management {
+  background: #222222;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 12px rgba(17, 17, 17, 0.2);
+  max-width: 1000px;
+  margin: auto;
+}
+
+.filter-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.search-box, .filter-box {
+  flex: 1;
+  margin: 10px;
+}
+
+.table {
+  background: #555555;
+  color: white;
+  border-radius: 8px;
+}
+
+.table-header {
+  background: #FFC107;
+  color: #000;
+}
+
+.status-available {
+  color: #00FF00;
+  font-weight: bold;
+}
+
+.status-sold {
+  color: #FF0000;
+  font-weight: bold;
+}
+
+.btn-warning {
+  background-color: #FFC107;
+  border: none;
+  color: #000;
+}
+
+.btn-danger {
+  background-color: #FF0000;
+  border: none;
+  color: #fff;
+}
+
+.no-properties-message {
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: #FFC107;
+  margin-top: 20px;
+}

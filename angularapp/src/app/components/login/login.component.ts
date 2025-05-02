@@ -9,40 +9,41 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  
+  form: FormGroup;
+  showPopup: boolean = false; // Tracks whether popup is visible
 
-  form: FormGroup
-
-  constructor(private service: AuthService, private fb: FormBuilder, private router: Router) {
+  constructor(private readonly service: AuthService, private readonly fb: FormBuilder, private readonly router: Router) {
     this.form = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]]
-    })
+      email: ['', [Validators.required, Validators.email]], // Email validation added
+      password: ['', [Validators.required, Validators.minLength(6)]] // Password must be at least 6 characters
+    });
   }
 
   onSubmit() {
     if (this.form.valid) {
       this.service.login(this.form.value).subscribe((response: any) => {
         if (response.token) {
-          // Store the token securely (e.g., in local storage or a cookie)
+          // Store the token securely
           localStorage.setItem('token', response.token);
           localStorage.setItem('username', response.username);
           localStorage.setItem('userRole', response.userRole);
           localStorage.setItem('userId', response.userId);
-          alert("Login successful");
-          if (response.userRole === 'ADMIN')
-            this.router.navigate(['/'])
-          else if (response.userRole === 'USER')
-            this.router.navigate(['/'])
+
+          this.showPopup = true; // Show popup on successful login
         }
-      }, (error) => {
-        alert("Login failed");
+      }, () => {
+        alert("Login failed. Please check your credentials.");
       });
     } else {
       alert("Invalid user input");
     }
   }
 
-  ngOnInit(): void {
+  closePopup() {
+    this.showPopup = false; // Close popup when "OK" button is clicked
+    this.router.navigate(['/']); // Redirect to homepage after closing popup
   }
 
+  ngOnInit(): void {}
 }

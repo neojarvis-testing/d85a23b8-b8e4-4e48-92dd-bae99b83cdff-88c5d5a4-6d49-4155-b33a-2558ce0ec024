@@ -3,14 +3,13 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { PropertyInquiry } from '../models/property-inquiry.model';
 import { apiUrl } from '../constant/ApiUrl';
-import { PropertyInquiryInput } from '../models/propertyInquiryInput.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PropertyInquiryService {
 
-  constructor(private http:HttpClient) { }
+  constructor(private readonly http:HttpClient) { }
   addPropertyInquiry(propertyInquiry:PropertyInquiry):Observable<PropertyInquiry>{
     return this.http.post<PropertyInquiry>(`${apiUrl}/inquiries`,propertyInquiry)
   }
@@ -31,6 +30,11 @@ export class PropertyInquiryService {
   
   deletePropertyInquiryById(inquiryId:number):Observable<void>{
     return this.http.delete<void>(`${apiUrl}/inquiries/${inquiryId}`)
+  }
+
+
+  getInquiryByUserId(userId:number):Observable<PropertyInquiry[]>{
+   return this.http.get<PropertyInquiry[]>(`${apiUrl}/inquiries/user/${userId}`)
   }
 
 }

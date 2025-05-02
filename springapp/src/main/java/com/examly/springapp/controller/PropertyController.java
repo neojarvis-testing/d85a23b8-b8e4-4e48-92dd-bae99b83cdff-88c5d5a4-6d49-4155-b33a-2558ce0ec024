@@ -68,8 +68,17 @@ public class PropertyController {
     // Delete Property: Deletes a property by its ID
     @DeleteMapping("/{propertyId}")
     public ResponseEntity<ApiResponse> deleteProperty(@PathVariable Long propertyId) {
+
         propertyservice.deleteProperty(propertyId);
         ApiResponse response = new ApiResponse("Deleted Successfully");
+
+
+        propertyservice.deleteProperty(propertyId); 
+
+        propertyservice.deleteProperty(propertyId);
+
+        ApiResponse response = new ApiResponse("Deleted Successfully")   ;
+
         return ResponseEntity.status(200).body(response); // Return 200 OK if deletion is successful
     }
 }

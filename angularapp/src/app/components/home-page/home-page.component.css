@@ -1,6 +1,20 @@
 /* Import Bootstrap */
 @import "~bootstrap/dist/css/bootstrap.min.css";
 
+/* Prevent horizontal scrolling */
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    width: 100%;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Ensure elements fit within the viewport */
+* {
+    box-sizing: border-box;
+}
+
 /* Set background image */
 .home-container {
     background: url('https://images.pexels.com/photos/302769/pexels-photo-302769.jpeg') no-repeat center center;
@@ -11,77 +25,197 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    position: relative;
-    animation: fadeIn 1s ease-in-out; /* Smooth entrance */
-}
-
-/* Apply blur effect only behind the square */
-.overlay::before {
-    content: "";
-    position: absolute;
     width: 100%;
-    height: 100%;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-radius: 10px;
-    z-index: -1;
+    position: relative;
+    animation: fadeIn 1s ease-in-out;
 }
 
-/* Transparent black overlay */
+/* Centered overlay without blur */
 .overlay {
     background-color: rgba(0, 0, 0, 0.7);
     padding: 50px;
     border-radius: 10px;
     text-align: center;
-    position: relative;
-    animation: slideUp 1s ease-out; /* Smooth pop-up effect */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: auto;
+    animation: slideUp 1s ease-out;
 }
 
-/* Title styling */
+/* Title styling with Avenir font */
 .brand-title {
-    font-size: 48px;
-    font-weight: 400;
+    font-size: 52px;
+    font-weight: 500;
     font-family: 'Montserrat', sans-serif;
     color: yellow;
     margin-bottom: 20px;
-    animation: textGlow 2s infinite alternate ease-in-out; /* Subtle glowing effect */
+    animation: textGlow 2s infinite alternate ease-in-out;
 }
 
 /* Subtitle styling */
 .brand-subtitle {
-    font-size: 24px;
-    font-weight: 400;
+    font-size: 20px;
+    font-weight: 500;
     font-family: 'Montserrat', sans-serif;
     color: white;
-    animation: fadeIn 2s ease-in-out; /* Soft fade-in */
+    animation: fadeIn 2s ease-in-out;
 }
 
-/* Define animations */
+/* Feature Section */
+.feature-section {
+    padding: 60px 0;
+    text-align: center;
+    background-color: black;
+    width: 100%;
+}
+
+.feature-title {
+    font-size: 36px;
+    font-weight: 500;
+    color: yellow;
+    margin-bottom: 30px;
+}
+
+/* Feature Cards */
+.feature-card {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+/* Hover effect */
+.feature-card:hover {
+    transform: scale(1.03);
+    background-color: #ffd700;
+    color: black;
+}
+
+/* Icon Color */
+.feature-card i {
+    color: #ffcc00;
+    transition: 0.3s;
+}
+
+/* Icon Hover Effect */
+.feature-card:hover i {
+    color: black;
+}
+
+/* About Us Section */
+.about-us {
+    background-color: black;
+    padding: 60px 0;
+    text-align: center;
+    color: white;
+}
+
+.about-content {
+    max-width: 800px;
+    margin: auto;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+/* Section Titles */
+.section-title {
+    font-size: 36px;
+    font-weight: 700;
+    color: yellow;
+    margin-bottom: 20px;
+}
+
+/* Testimonials Section */
+.testimonials {
+    padding: 60px 0;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Testimonial Card Layout */
+.testimonial-cards {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+/* Individual Testimonial Card */
+.testimonial-card {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    transition: all 0.3s ease-in-out;
+    text-align: center;
+}
+
+/* Rounded Images */
+.testimonial-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+/* Hover Effect */
+.testimonial-card:hover {
+    transform: scale(1.05);
+    background-color: yellow;
+    color: black;
+}
+
+/* Footer Section */
+.footer-section {
+    background: black;
+    padding: 30px;
+    text-align: center;
+    color: white;
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Footer Content */
+.footer-content h2 {
+    font-size: 28px;
+    color: yellow;
+    margin-bottom: 10px;
+}
+
+/* Social Media Icons */
+.footer-links {
+    margin-bottom: 15px;
+}
+
+.footer-links a {
+    color: yellow;
+    font-size: 24px;
+    margin: 0 10px;
+    transition: transform 0.3s, color 0.3s;
+}
+
+.footer-links a:hover {
+    transform: scale(1.2);
+    color: white;
+}
+
+/* Contact Details */
+.footer-content p {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.footer-content i {
+    margin-right: 10px;
+    color: #ffcc00;
+}
+
+/* Animations */
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-@keyframes slideUp {
-    from {
-        transform: translateY(50px);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-@keyframes textGlow {
-    from {
-        text-shadow: 0 0 10px rgba(255, 255, 0, 0.7);
-    }
-    to {
-        text-shadow: 0 0 20px rgba(255, 255, 0, 1);
-    }
+    from { opacity: 0; }
+    to { opacity: 1; }
 }

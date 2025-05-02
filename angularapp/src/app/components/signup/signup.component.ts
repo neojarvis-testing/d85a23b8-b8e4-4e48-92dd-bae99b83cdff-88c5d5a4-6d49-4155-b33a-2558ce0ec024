@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -10,22 +11,23 @@ import { AuthService } from 'src/app/services/auth.service';
 export class SignupComponent implements OnInit {
 
   form: FormGroup;
+  showPopup = false; // Controls popup visibility
 
-  constructor(private service: AuthService, private fb: FormBuilder) {
+  constructor(private service: AuthService, private fb: FormBuilder, private router: Router) {
     this.form = this.fb.group(
       {
         email: ['', [Validators.required, Validators.email]],
-        password: ['', [Validators.required]],
+        password: ['', [Validators.required, Validators.minLength(6)]],
         confirmPassword: ['', [Validators.required]],
-        username: ['', [Validators.required]],
-        number: ['', [Validators.required, Validators.pattern('^[0-9]*$')]], // Allows only numeric values
+        username: ['', [Validators.required, Validators.minLength(3)]],
+        number: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
         userRole: ['USER', [Validators.required]]
       },
-      { validators: this.passwordMatchValidator } // Custom validator for password matching
+      { validators: this.passwordMatchValidator }
     );
   }
 
-  // Custom validator for matching passwords
+  // Custom validator for password matching
   passwordMatchValidator(control: AbstractControl): { [key: string]: boolean } | null {
     const password = control.get('password')?.value;
     const confirmPassword = control.get('confirmPassword')?.value;
@@ -37,20 +39,20 @@ export class SignupComponent implements OnInit {
 
   onSubmit() {
     if (this.form.valid) {
-      this.service.register(this.form.value).subscribe(
-        () => {
-          alert("Registration successful");
-          // Navigate to login or another page if needed
-          // this.router.navigate(['/login']);
-        },
-        (error) => {
-          alert("Registration failed");
-        }
-      );
+      this.service.register(this.form.value).subscribe(() => {
+        this.showPopup = true; // Show popup on successful registration
+      }, () => {
+        alert("Registration failed. Please try again.");
+      });
     } else {
       alert("Invalid user input");
     }
   }
 
-  ngOnInit(): void { }
+  closePopup() {
+    this.showPopup = false;
+    this.router.navigate(['/login']); // Navigate to login page after closing popup
+  }
+
+  ngOnInit(): void {}
 }

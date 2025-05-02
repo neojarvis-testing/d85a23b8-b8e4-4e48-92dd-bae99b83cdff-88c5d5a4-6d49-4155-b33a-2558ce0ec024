@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FeedbackService } from 'src/app/services/feedback.service';
 import { Feedback } from 'src/app/models/feedback.model';
-
 import { PropertyService } from 'src/app/services/property.service';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -10,21 +9,21 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './admin-view-feedback.component.html',
   styleUrls: ['./admin-view-feedback.component.css']
 })
+
 export class AdminViewFeedbackComponent implements OnInit {
 
   feedbacks: Feedback[] = []; // Stores all feedbacks submitted by users
-  filteredFeedbacks: Feedback[] = []; // Stores filtered feedbacks based on category selection
+  filteredFeedbacks: Feedback[] = []; // Stores filtered feedbacks based on category selection & search input
   selectedCategory: string = 'All'; // Default filter selection
+  searchTerm: string = ''; // Search input field
   categories: string[] = ['Service', 'Pricing', 'Quality']; // Predefined categories
-  
-
   selectedUser: any = null; // Stores selected user details for modal display
   selectedProperty: any = null; // Stores selected property details for modal display
 
   constructor(
-    private feedbackService: FeedbackService,
-    private authService: AuthService,
-    private propertyService: PropertyService
+    private readonly feedbackService: FeedbackService,
+    private readonly authService: AuthService,
+    private readonly propertyService: PropertyService
   ) {}
 
   ngOnInit(): void {
@@ -39,7 +38,7 @@ export class AdminViewFeedbackComponent implements OnInit {
   getAllFeedbacks(): void {
     this.feedbackService.getFeedbacks().subscribe(
       (data) => {
-        console.log(data)
+        console.log(data);
         this.feedbacks = data;
         this.filteredFeedbacks = data; // Default to displaying all feedbacks
       },
@@ -52,15 +51,24 @@ export class AdminViewFeedbackComponent implements OnInit {
   }
 
   /**
+   * Filters feedback based on the selected category and search term.
+   */
+  filterFeedbacks(): void {
+    let filteredByCategory = this.selectedCategory === 'All' 
+      ? this.feedbacks 
+      : this.feedbacks.filter(f => f.category === this.selectedCategory);
+
+    this.filteredFeedbacks = filteredByCategory.filter(f => 
+      f.feedbackText.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
+  }
+
+  /**
    * Filters feedback based on the selected category.
    * If "All" is selected, displays all feedbacks; otherwise, filters by category.
    */
   filterByCategory(): void {
-    if (this.selectedCategory === 'All') {
-      this.filteredFeedbacks = this.feedbacks;
-    } else {
-      this.filteredFeedbacks = this.feedbacks.filter(f => f.category === this.selectedCategory);
-    }
+    this.filterFeedbacks(); // Calls search filter method to combine search and category selection
   }
 
   /**
@@ -72,17 +80,11 @@ export class AdminViewFeedbackComponent implements OnInit {
     this.authService.getUserById(userId).subscribe(
       (user) => {
         console.log("Fetched User Data:", user); // Debugging user data
-        if (user) {
-          this.selectedUser = user;
-        } else {
-          console.error('User not found.');
-        }
+        this.selectedUser = user || null;
       },
       (error) => console.error('Error fetching user details:', error)
     );
-}
-
-
+  }
 
   /**
    * Fetches and displays property details when "View Property Info" is clicked.
@@ -97,8 +99,7 @@ export class AdminViewFeedbackComponent implements OnInit {
       },
       (error) => console.error('Error fetching property details:', error)
     );
-}
-
+  }
 
   /**
    * Closes the user details modal.

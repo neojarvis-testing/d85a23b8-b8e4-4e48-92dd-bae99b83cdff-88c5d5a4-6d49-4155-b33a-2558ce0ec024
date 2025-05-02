@@ -3,13 +3,12 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Feedback } from '../models/feedback.model';
 import { apiUrl } from '../constant/ApiUrl';
-import { User } from '../models/user.model';
 @Injectable({
   providedIn: 'root' // Singleton service across the application
 })
 export class FeedbackService {
   
-  constructor(private http: HttpClient) {
+  constructor(private readonly http: HttpClient) {
   }
 
   /**
@@ -44,7 +43,7 @@ export class FeedbackService {
    * @param feedbackId - The unique identifier of the feedback entry
    * @returns Observable<void> - Observable indicating completion (no returned data)
    */
-  deleteFeedback(feedbackId: number): Observable<void> {
-    return this.http.delete<void>(`${apiUrl}/feedback/${feedbackId}`);
+  deleteFeedback(feedbackId: number): Observable<any> {
+    return this.http.delete(`${apiUrl}/feedback/${feedbackId}`, { responseType: 'text' });
   }
 }

@@ -13,23 +13,23 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./user-add-feedback.component.css']
 })
 export class UserAddFeedbackComponent implements OnInit {
-  properties: Property[] = []; // Available properties
-  propertyId: number;
+  properties: Property[] = [];
+  propertyId: number = 0;
   successMessage: string = '';
   errorMessage: string = '';
+  showPopup: boolean = false; // Controls popup visibility
 
   feedback: Feedback = {
     feedbackText: '',
     category: '',
-    property: 
-    +{ propertyId: 0 } as Property,
+    property: { propertyId: 0 } as Property,
     user: { userId: 0 } as User
   };
 
   constructor(
-    private router: Router,
-    private feedbackService: FeedbackService,
-    private propertyService: PropertyService
+    private readonly router: Router,
+    private readonly feedbackService: FeedbackService,
+    private readonly propertyService: PropertyService
   ) {}
 
   ngOnInit(): void {
@@ -45,7 +45,7 @@ export class UserAddFeedbackComponent implements OnInit {
   getProperties(): void {
     this.propertyService.getAllProperties().subscribe({
       next: (data) => {
-        this.properties = data || [];
+        this.properties = data;
       },
       error: () => {
         this.errorMessage = 'Failed to load property list.';
@@ -53,12 +53,36 @@ export class UserAddFeedbackComponent implements OnInit {
     });
   }
 
-  onSubmit(feedbackForm: NgForm): void {
-    feedbackForm.value.userId = localStorage.getItem('userId')
-    feedbackForm.value.propertyId = +this.propertyId
-    console.log(feedbackForm.value)
-    this.feedbackService.sendFeedback(feedbackForm.value).subscribe((data)=>{
-      alert("feedback added!")
-    })
+  openPopup(): void {
+    this.showPopup = true;
+  }
+
+  closePopup(): void {
+    this.showPopup = false;
+  }
+
+  confirmSubmit(feedbackForm: NgForm): void {
+    if (!this.propertyId) {
+      this.errorMessage = 'Please select a property before submitting feedback.';
+      return;
+    }
+
+    const feedbackData = {
+      ...feedbackForm.value,
+      userId: this.feedback.user.userId,
+      propertyId: this.propertyId
+    };
+
+    this.feedbackService.sendFeedback(feedbackData).subscribe({
+      next: () => {
+        this.successMessage = '✅ Feedback submitted successfully!';
+        this.showPopup = false;
+        feedbackForm.reset();
+      },
+      error: () => {
+        this.errorMessage = '❌ Failed to submit feedback. Please try again.';
+        this.showPopup = false;
+      }
+    });
   }
 }

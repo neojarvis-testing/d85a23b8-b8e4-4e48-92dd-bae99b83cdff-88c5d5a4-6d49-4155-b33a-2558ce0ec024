@@ -1,0 +1,128 @@
+
+/* General Styling */
+body {
+    font-family: 'Arial', sans-serif;
+   
+    color: #fff;
+  }
+  
+  /* Properties Container */
+  .explore-properties-container {
+    background: #222222;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 12px rgba(17, 17, 17, 0.2);
+    max-width: 1000px;
+    margin: auto;
+  }
+  
+  /* Header Styling */
+  h2 {
+    color: #FFC107;
+    font-weight: bold;
+  }
+  
+  /* Search and Filter Section */
+  .filters {
+    margin-bottom: 20px;
+  }
+  
+  .search-box, .filter-box {
+    flex: 1;
+    margin: 10px;
+  }
+  
+  .search-box label, .filter-box label {
+    color: #FFC107;
+    font-weight: bold;
+  }
+  
+  .form-control, .form-select {
+    border-radius: 6px;
+    padding: 10px;
+    background: #777777;
+    border: 1px solid #999999;
+    color: #fff;
+  }
+  
+  /* Property List Wrapper */
+  .property-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px; /* Space between cards */
+    justify-content: space-between; /* Ensures side-by-side alignment */
+  }
+  
+  /* Property Card */
+  .property-card {
+    background: #FFC107; /* Yellow background */
+    border-radius: 12px;
+    padding: 15px;
+    width: calc(50% - 10px); /* Two cards per row */
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  /* Hover Effect */
+  .property-card:hover {
+    transform: scale(1.05); /* Slight enlargement */
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3); /* Enhanced shadow */
+  }
+  
+  /* Property Details */
+  .property-details {
+    padding-left: 10px;
+  }
+  
+  .property-details p {
+    font-size: 14px;
+    margin-bottom: 6px;
+    color: #333; /* Dark text for contrast */
+  }
+  
+  /* Status Indicators */
+  .status-available {
+    color: #008000;
+    font-weight: bold;
+  }
+  
+  .status-sold {
+    color: #D80000;
+    font-weight: bold;
+  }
+  
+  /* Button Styling */
+  .btn-warning {
+    background-color: #000; /* Black button */
+    border: none;
+    color: #FFC107;
+    transition: background 0.3s ease;
+  }
+  
+  .btn-warning:hover {
+    background-color: #333;
+    color: #FFF;
+  }
+  
+  /* No Properties Message */
+  .no-properties-message {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: #FFC107;
+    margin-top: 20px;
+  }
+  /* Highlighted Price */
+.property-price {
+    font-size: 18px; /* Increase font size */
+    font-weight: bold; /* Make it bold */
+    color: #D80000; /* Strong red color for visibility */
+  }
+  
+  /* Responsive Layout */
+  @media (max-width: 768px) {
+    .property-card {
+      width: 100%; /* Stack cards on smaller screens */
+    }
+  }
+  

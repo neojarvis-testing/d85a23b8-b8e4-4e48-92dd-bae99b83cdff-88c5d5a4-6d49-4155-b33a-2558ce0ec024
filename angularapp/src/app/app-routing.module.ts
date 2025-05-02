@@ -10,16 +10,15 @@ import { UsernavComponent } from './components/usernav/usernav.component';
 import { MyInquiryComponent } from './components/my-inquiry/my-inquiry.component';
 import { AdminViewInquiryComponent } from './components/admin-view-inquiry/admin-view-inquiry.component';
 import { AdminViewFeedbackComponent } from './components/admin-view-feedback/admin-view-feedback.component';
-
 import { UserAddFeedbackComponent } from './components/user-add-feedback/user-add-feedback.component';
+import { UserAddInquiryComponent } from './components/user-add-inquiry/user-add-inquiry.component';
 import { AdminAddPropertyComponent } from './components/admin-add-property/admin-add-property.component';
 import { UserViewPropertiesComponent } from './components/user-view-properties/user-view-properties.component';
 import { AdminControlPanelComponent } from './components/admin-control-panel/admin-control-panel.component';
-
 import { EditInquiryComponent } from './components/edit-inquiry/edit-inquiry.component';
-
 import { UserViewFeedbackComponent } from './components/user-view-feedback/user-view-feedback.component';
 import { UserViewInquiryComponent } from './components/user-view-inquiry/user-view-inquiry.component';
+
 
 
 const routes: Routes = [
@@ -28,28 +27,23 @@ const routes: Routes = [
   {path:'register',component:SignupComponent},
   {path:'adminnav',component:AdminnavComponent},
   {path:'usernav',component:UsernavComponent},
-
   {path:'myinquiries',component:MyInquiryComponent},
   {path:'inquiries',component:AdminViewInquiryComponent},
-
   {path:'viewfeedback',component:AdminViewFeedbackComponent},
-
-  // {path:'viewproperties',component:UserViewPropertiesComponent},
   {path:'addfeedback',component:UserAddFeedbackComponent},
-
-  {path:'controlpanel',component:AdminControlPanelComponent},
-
-  {path:'editInquiry/:id',component:EditInquiryComponent},
-
-  {path:'addfeedback',component:UserAddFeedbackComponent},
-  {path:'user-view-feedback',component:UserViewFeedbackComponent},
-
-  { path: 'admin-add-property', component: AdminAddPropertyComponent},
   {path:"admin-view-property",component:AdminViewPropertyComponent},
   { path: 'admin-edit-property/:id', component: AdminEditPropertyComponent },
   {path:'user-view-property',component:UserViewPropertiesComponent},
-  // {path:'my-inquiry',component:MyInquiryComponent},
-  {path:'user-view-inquiry',component:UserViewInquiryComponent}
+  {path:'user-add-inquiry/:id',component:UserAddInquiryComponent},
+  {path:'controlpanel',component:AdminControlPanelComponent},
+  {path:'editInquiry/:id',component:EditInquiryComponent},
+  {path:'addfeedback',component:UserAddFeedbackComponent},
+  {path:'user-view-feedback',component:UserViewFeedbackComponent},
+  { path: 'admin-add-property', component: AdminAddPropertyComponent},
+  {path:'user-view-inquiry',component:UserViewInquiryComponent},
+
+  {path:'user-view-property',component:UserViewPropertiesComponent}
+
 ];
 
 @NgModule({

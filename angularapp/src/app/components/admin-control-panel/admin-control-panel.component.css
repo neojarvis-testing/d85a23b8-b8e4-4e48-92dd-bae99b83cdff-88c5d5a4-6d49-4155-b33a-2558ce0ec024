@@ -1,0 +1,66 @@
+
+/* Apply Montserrat font */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: black !important;
+    padding: 20px;
+}
+
+/* Control Panel Title */
+h1 {
+    text-align: center;
+    font-size: 36px;
+    font-weight: 700;
+    color:white;
+    margin-bottom: 30px;
+}
+/* Font Awesome in Heading */
+.control-panel-title i {
+    margin-right: 10px;
+    color: #ffcc00;
+}
+/* Yellow Cards Styling */
+.control-panel-card {
+    background-color: #ffcc00; /* Yellow background */
+    color: black;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2); /* Soft shadow */
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Hover Effect */
+.control-panel-card:hover {
+    transform: scale(1.05);
+    box-shadow: 4px 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* Card Title */
+.control-panel-card h2 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+/* Card Data */
+.control-panel-card p {
+    font-size: 20px;
+    font-weight: 500;
+    margin: 0;
+}
+
+/* Font Awesome Icon Styling */
+.control-panel-card i {
+    display: block;
+    margin-bottom: 15px;
+    color: black;
+}
+
+/* Icon Hover Effect */
+.control-panel-card:hover i {
+    color: white;
+}
+
