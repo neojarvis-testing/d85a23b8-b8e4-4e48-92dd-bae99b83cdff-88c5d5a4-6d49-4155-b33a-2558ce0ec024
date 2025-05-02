@@ -1,14 +1,19 @@
 import { Component, OnInit } from '@angular/core';
+
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
+
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-
+ 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
+
 
   form: FormGroup;
   showPopup = false; // Controls popup visibility
@@ -35,11 +40,24 @@ export class SignupComponent implements OnInit {
     return password && confirmPassword && password !== confirmPassword
       ? { passwordMismatch: true }
       : null;
-  }
 
+ 
+  form: FormGroup
+  constructor(private readonly service: AuthService, private readonly fb: FormBuilder,private readonly router:Router) {
+    this.form = this.fb.group({
+      email: ['', [Validators.required]],
+      password: ['', [Validators.required]],
+      username: ['', [Validators.required]],
+      number: ['', [Validators.required]],
+      userRole: ['USER', [Validators.required]]
+    })
+
+  }
+ 
   onSubmit() {
     if (this.form.valid) {
       this.service.register(this.form.value).subscribe(() => {
+
         this.showPopup = true; // Show popup on successful registration
       }, (error) => {
         alert("Registration failed");
@@ -56,3 +74,20 @@ export class SignupComponent implements OnInit {
 
   ngOnInit(): void {}
 }
+
+        alert("Registration successful");
+        this.router.navigate(['/login'])
+      }, (error) => {
+        alert("Registration failed")
+      })
+    }
+    else {
+      alert("Invalid user Input")
+    }
+  }
+ 
+  ngOnInit(): void {
+  }
+ 
+}
+

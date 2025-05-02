@@ -12,6 +12,10 @@ declare var bootstrap: any; // Ensure Bootstrap JS is accessible
 })
 export class AdminViewPropertyComponent implements OnInit {
   properties: Property[] = [];
+
+
+  selectedProperty: Property | null = null;
+
   filteredProperties: Property[] = [];
   searchTerm: string = '';
   selectedType: string = '';
