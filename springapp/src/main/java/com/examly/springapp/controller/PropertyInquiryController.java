@@ -1,8 +1,6 @@
 package com.examly.springapp.controller;
 
 import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,14 +15,17 @@ import com.examly.springapp.dtos.PropertyInquiryInput;
 import com.examly.springapp.model.PropertyInquiry;
 import com.examly.springapp.service.PropertyInquiryServiceImpl;
 
-import jakarta.validation.Valid;
-
-
 @RestController   //Defines this class as a REST controller
 @RequestMapping("/api/inquiries")  //Set Base URL
 public class PropertyInquiryController {
-@Autowired 
-PropertyInquiryServiceImpl  propertyInquiryService; //Injecting the service
+    private final PropertyInquiryServiceImpl propertyInquiryService; // Dependency injected via constructor
+
+    // Constructor-based injection
+    public PropertyInquiryController(PropertyInquiryServiceImpl propertyInquiryService) {
+        this.propertyInquiryService = propertyInquiryService;
+    }
+
+
 
 @PostMapping    // Handles HTTP POST requests for adding a new property inquiry
 public ResponseEntity<PropertyInquiry> addInquiry(@RequestBody PropertyInquiryInput propertyInquiryInput){
@@ -34,7 +35,7 @@ public ResponseEntity<PropertyInquiry> addInquiry(@RequestBody PropertyInquiryIn
 
 @GetMapping("/{inquiryId}")  // Handles HTTP GET requests for retrieving a specific inquiry by ID
 
-public ResponseEntity<?> getInquiryById(@PathVariable long inquiryId){
+public ResponseEntity<Object> getInquiryById(@PathVariable long inquiryId){
     PropertyInquiry propertyInquiry = propertyInquiryService.getInquiryById(inquiryId);  // Fetches inquiry by ID
 
     if(propertyInquiry!=null){
@@ -44,7 +45,7 @@ public ResponseEntity<?> getInquiryById(@PathVariable long inquiryId){
 }
 
 @GetMapping("/user/{userId}")   //Handles HTTP GET requests for retrieving all inquiries for a specific user
-public ResponseEntity<?> getInquiriesByUser(@PathVariable long userId){
+public ResponseEntity<Object> getInquiriesByUser(@PathVariable long userId){
     List<PropertyInquiry> propertyInquiriesList = propertyInquiryService.getInquiriesByUser(userId);
     if(!propertyInquiriesList.isEmpty()){  // Returns list of inquiries if found
     return ResponseEntity.status(200).body(propertyInquiriesList);
@@ -53,7 +54,7 @@ public ResponseEntity<?> getInquiriesByUser(@PathVariable long userId){
 }
 
 @GetMapping
-public ResponseEntity<?> getAllInquiries(){
+public ResponseEntity<Object> getAllInquiries(){
     List<PropertyInquiry> propertyInquiriesList = propertyInquiryService.getAllInquiries();
     if(propertyInquiriesList!=null){
     return ResponseEntity.status(200).body(propertyInquiriesList);
@@ -64,7 +65,7 @@ public ResponseEntity<?> getAllInquiries(){
 
 
 @PutMapping("/{inquiryId}")  // Handles HTTP PUT requests for updating a specific inquiry by ID
-public ResponseEntity<?> updateInquiryById(@PathVariable long inquiryId,@RequestBody PropertyInquiry inquiries){
+public ResponseEntity<Object> updateInquiryById(@PathVariable long inquiryId,@RequestBody PropertyInquiry inquiries){
     PropertyInquiry propertyInquiry = propertyInquiryService.updateInquiryById(inquiryId,inquiries);
     if(propertyInquiry!=null){  // Returns updated inquiry if successful
         return ResponseEntity.status(200).body(propertyInquiry);

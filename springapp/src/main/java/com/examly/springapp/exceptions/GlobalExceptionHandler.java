@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class GlobalExceptionHandler {
     @ExceptionHandler(UserAlreadyExistException.class)
-    public ResponseEntity<?> handleUserAlreadyExistException(UserAlreadyExistException e){
+    public ResponseEntity<String> handleUserAlreadyExistException(UserAlreadyExistException e){
         return ResponseEntity.status(404).body(e.getMessage()); // 404 - Not Found
     }
 
     @ExceptionHandler(PasswordNotMatchedException.class)
-    public ResponseEntity<?> handlePasswordNotMatchedException(PasswordNotMatchedException e){
+    public ResponseEntity<String> handlePasswordNotMatchedException(PasswordNotMatchedException e){
         return ResponseEntity.status(409).body(e.getMessage());
     }
 
@@ -34,31 +34,31 @@ public class GlobalExceptionHandler {
     }
 
 
-    public ResponseEntity<?>method1(UserAlreadyExistException e){
+    public ResponseEntity<String>method1(UserAlreadyExistException e){
         return ResponseEntity.status(404).body(e.getMessage());
     }
   //property Exception
 
   @ExceptionHandler(DuplicatePropertyException.class)
-  public ResponseEntity<?>duplicateProperty(DuplicatePropertyException e){
+  public ResponseEntity<String>duplicateProperty(DuplicatePropertyException e){
     return ResponseEntity.status(403).body(e.getMessage());
 }
 @ExceptionHandler(PropertyException.class)
-public ResponseEntity<?>propertyException(PropertyException e){
+public ResponseEntity<String>propertyException(PropertyException e){
     return ResponseEntity.status(403).body(e.getMessage());
 }
 
 @ExceptionHandler(UserNotFoundException.class)
-public ResponseEntity<?> userNotFound(UserNotFoundException e){
+public ResponseEntity<String> userNotFound(UserNotFoundException e){
     return ResponseEntity.status(500).body(e.getMessage());
 }
 
 @ExceptionHandler(InquiryNotFound.class)
-public ResponseEntity<?> inquiryNotFound(InquiryNotFound e){
+public ResponseEntity<String> inquiryNotFound(InquiryNotFound e){
     return ResponseEntity.status(500).body(e.getMessage());
 }
 @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<?> handleValidationErrors(MethodArgumentNotValidException e) {
+    public ResponseEntity<Object> handleValidationErrors(MethodArgumentNotValidException e) {
         List<FieldError> errors = e.getBindingResult().getFieldErrors();
         Map<String, String> map = new HashMap<>();
         for(FieldError err: errors){
