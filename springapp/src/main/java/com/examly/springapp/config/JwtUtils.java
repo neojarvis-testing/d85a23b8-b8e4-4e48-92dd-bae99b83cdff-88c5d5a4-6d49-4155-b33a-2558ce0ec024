@@ -3,6 +3,7 @@ package com.examly.springapp.config;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
@@ -10,12 +11,12 @@ import org.springframework.stereotype.Component;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import jakarta.servlet.http.HttpServletRequest;
- 
+
 @Component
 public class JwtUtils {
-    @Value("${SECRET_KEY}")   // Injects secret key from application properties
-
-    private String SECRET_KEY;
+   // @Value("${SECRET_KEY}")   // Injects secret key from application properties
+    
+    private String secretKey="java";
 
     // Generates JWT token using authentication details
     public String generateToken(Authentication authentication) {
@@ -24,15 +25,15 @@ public class JwtUtils {
         .setSubject(userdetails.getUsername())
         .setIssuedAt(new Date())
         .setExpiration(new Date(System.currentTimeMillis()+30*60*1000))  // Sets token expiration time (30 minutes)
-        .signWith(SignatureAlgorithm.HS256, SECRET_KEY)  // Signs the token using HS256 algorithm
+        .signWith(SignatureAlgorithm.HS256, secretKey)  // Signs the token using HS256 algorithm
         .compact();
     }
     // Extracts the username from the provided JWT token
     public String extractUsername(String token){
-        return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody().getSubject();
+        return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getSubject();
     }
     public Date extractExpiration(String token){
-        return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody().getExpiration();
+        return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getExpiration();
     }
     // Checks if the token has expired
     public boolean isTokenExpired(String token){

@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.examly.springapp.dtos.FeedbackDTO;
@@ -24,13 +23,16 @@ public class FeedbackServiceImpl implements FeedbackService {
 private Logger logger = LoggerFactory.getLogger(FeedbackServiceImpl.class);
 
 
-    @Autowired
-    private FeedbackRepo feedbackRepo;  // Updated variable name
+private final FeedbackRepo feedbackRepo;
+private final UserRepo userRepo;
+private final PropertyRepo propertyRepo;
 
-    @Autowired
-    private UserRepo userRepo;
-    @Autowired 
-    private PropertyRepo propertyRepo;
+// Constructor-based injection
+public FeedbackServiceImpl(FeedbackRepo feedbackRepo, UserRepo userRepo, PropertyRepo propertyRepo) {
+    this.feedbackRepo = feedbackRepo;
+    this.userRepo = userRepo;
+    this.propertyRepo = propertyRepo;
+}
     
     public Feedback createFeedback(FeedbackDTO feedbackDTO) {
         logger.info("Attempting to create new feedback");
