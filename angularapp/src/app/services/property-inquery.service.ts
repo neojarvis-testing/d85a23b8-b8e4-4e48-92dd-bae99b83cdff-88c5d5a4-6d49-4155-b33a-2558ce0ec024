@@ -32,4 +32,9 @@ export class PropertyInquiryService {
     return this.http.delete<void>(`${apiUrl}/inquiries/${inquiryId}`)
   }
 
+
+  getInquiryByUserId(userId:number):Observable<PropertyInquiry[]>{
+   return this.http.get<PropertyInquiry[]>(`${apiUrl}/inquiries/user/${userId}`)
+  }
+
 }

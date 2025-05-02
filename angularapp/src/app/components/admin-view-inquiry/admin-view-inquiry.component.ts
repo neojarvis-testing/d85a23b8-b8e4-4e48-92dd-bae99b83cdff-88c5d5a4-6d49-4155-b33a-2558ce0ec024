@@ -97,8 +97,10 @@ export class AdminViewInquiryComponent implements OnInit {
    * @param id The ID of the inquiry to be deleted.
    */
   deleteInquiry(id: number): void {
+    if(confirm("Are you sure!")){
     this.inquiryService.deletePropertyInquiryById(id).subscribe(() => {
-      this.loadInquiries(); // Refresh list after deletion
+      this.ngOnInit(); // Refresh list after deletion
     });
+  }
   }
 }

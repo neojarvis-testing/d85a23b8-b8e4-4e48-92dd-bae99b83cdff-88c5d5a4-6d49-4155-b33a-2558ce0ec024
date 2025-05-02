@@ -12,7 +12,6 @@ export class AdminViewPropertyComponent implements OnInit {
   properties: Property[] = [];
 
   selectedProperty: Property | null = null;
-  constructor(private readonly propertyService: PropertyService, private router:Router) {}
   filteredProperties: Property[] = [];
   searchTerm: string = ''; // Stores user input for search
   selectedType: string = ''; // Stores selected type for filtering
