@@ -1,13 +1,26 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-
+ 
 @Component({
   selector: 'app-adminnav',
   templateUrl: './adminnav.component.html',
   styleUrls: ['./adminnav.component.css']
 })
 export class AdminnavComponent implements OnInit {
+
+logout() {
+  this.service.loggedOut();
+  this.router.navigate(["/login"])
+ 
+}
+ 
+  constructor(public service:AuthService,private router:Router) { }
+ 
+  ngOnInit(): void {
+  }
+ 
+
 
   constructor(
     public readonly service: AuthService,
@@ -23,4 +36,7 @@ export class AdminnavComponent implements OnInit {
     this.router.navigate(['/login']);
     this.cdRef.detectChanges(); // Force UI refresh
   }
+
 }
+ 
+ 

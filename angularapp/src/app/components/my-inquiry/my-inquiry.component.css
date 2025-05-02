@@ -1,3 +1,29 @@
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f8f9fa;
+}
+
+.container h2 {
+  font-weight: bold;
+}
+
+.table {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.table-hover tbody tr:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .table-responsive {
+    overflow-x: auto;
+  }
+}
+
 /* General Styling */
 .container {
   max-width: 1000px;
@@ -102,3 +128,4 @@ tbody tr:hover {
 .fa-calendar-day { color: #9C27B0; } /* Purple for Inquiry Date */
 .fa-user-check { color: #009688; } /* Teal for Admin Response */
 .fa-phone { color: #F44336; } /* Red for Contact Details */
+
