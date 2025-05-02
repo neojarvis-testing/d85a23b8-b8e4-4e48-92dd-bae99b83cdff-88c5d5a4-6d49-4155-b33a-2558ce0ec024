@@ -1,36 +1,100 @@
-<div class="container">
-  <h2>Your Inquiries</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Property</th>
-        <th>Message</th>
-        <th>Priority</th>
-        <th>Status</th>
-        <th>Inquiry Date</th>
-        <th>Admin Response</th>
-        <th>Contact Details</th>
-      </tr>
-    </thead>
-    
-<tbody>
-<tr *ngFor="let inquiry of inquiries">
-<td>{{ inquiry.property.title }}</td>
-<td>{{ inquiry.message }}</td>
-<td>{{ inquiry.priority }}</td>
-<td>{{ inquiry.status }}</td>
-<td>{{inquiry.inquiryDate}}</td>
-<td *ngIf="inquiry.adminResponse">{{ inquiry.adminResponse }}</td>
-<td *ngIf="!inquiry.adminResponse">Admin did not respond yet!</td>
-<td>{{inquiry.contactDetails}}</td>
-</tr>
-</tbody>
+<!-- Include Bootstrap & Font Awesome -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
-</table>
+<div class="container py-4">
+    <h2 class="text-warning text-center">
+        <i class="fa-solid fa-envelope-open-text"></i> Your Inquiries
+    </h2>
+
+    <!-- Search & Filter Controls -->
+    <div class="d-flex justify-content-between mb-3">
+        <!-- Search Inquiry -->
+        <div class="input-group w-50">
+            <span class="input-group-text bg-warning text-dark">
+                <i class="fa-solid fa-search"></i>
+            </span>
+            <input type="text" class="form-control" placeholder="Search inquiries..." [(ngModel)]="searchText" (input)="filterInquiries()">
+        </div>
+
+        <!-- Filter by Priority -->
+        <div class="input-group w-25">
+            <span class="input-group-text bg-warning text-dark">
+                <i class="fa-solid fa-filter"></i>
+            </span>
+            <select class="form-select" [(ngModel)]="selectedPriority" (change)="filterInquiries()">
+                <option value="">All Priorities</option>
+                <option value="High">High</option>
+                <option value="Medium">Medium</option>
+                <option value="Low">Low</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Inquiry Table -->
+    <div class="table-responsive">
+        <table *ngIf="filteredInquiries.length > 0" class="table table-dark table-striped">
+          <thead>
+            <tr>
+                <th><i class="fa-solid fa-building"></i> Property</th>
+                <th><i class="fa-solid fa-comment-dots"></i> Message</th>
+                <th><i class="fa-solid fa-star"></i> Priority</th>
+                <th><i class="fa-solid fa-spinner"></i> Status</th>
+                <th><i class="fa-solid fa-calendar-day"></i> Inquiry Date</th>
+                <th><i class="fa-solid fa-user-check"></i> Admin Response</th>
+                <th><i class="fa-solid fa-phone"></i> Contact Details</th>
+            </tr>
+        </thead>
+        
+        <tbody>
+          <tr *ngFor="let inquiry of paginatedInquiries; let i = index">
+              <td>{{ inquiry.property.title }}</td>
+              <td>{{ inquiry.message }}</td>
+              <td>{{ inquiry.priority }}</td>
+              <td>
+                  <span [ngClass]="{'text-success fw-bold': inquiry.status === 'Resolved', 'text-danger fw-bold': inquiry.status === 'Pending'}">
+                      {{ inquiry.status }}
+                  </span>
+              </td>
+              <td>{{ inquiry.inquiryDate | date:'dd-MM-yyyy' }}</td>
+              <td>
+                  <span [ngClass]="{'text-success fw-bold': inquiry.adminResponse, 'text-danger fw-bold': !inquiry.adminResponse}">
+                      {{ inquiry.adminResponse ? inquiry.adminResponse : 'Admin did not respond yet!' }}
+                  </span>
+              </td>
+              <td>{{ inquiry.contactDetails }}</td>
+          </tr>
+      </tbody>
+      
+      
+        </table>
+    </div>
+
+    <!-- Pagination -->
+    <nav *ngIf="filteredInquiries.length > pageSize">
+        <ul class="pagination justify-content-center">
+            <li class="page-item" [class.disabled]="currentPage === 1">
+                <button class="page-link" (click)="changePage(currentPage - 1)">
+                    <i class="fa-solid fa-chevron-left"></i> Previous
+                </button>
+            </li>
+
+            <li class="page-item" *ngFor="let page of totalPages">
+                <button class="page-link" (click)="changePage(page)">
+                    {{ page }}
+                </button>
+            </li>
+
+            <li class="page-item" [class.disabled]="currentPage === totalPages.length">
+                <button class="page-link" (click)="changePage(currentPage + 1)">
+                    Next <i class="fa-solid fa-chevron-right"></i>
+                </button>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- No Inquiries Message -->
+    <div *ngIf="filteredInquiries.length === 0" class="no-data text-center text-warning">
+        <p class="fs-4 fw-bold"><i class="fa-solid fa-circle-exclamation"></i> No Inquiries Found</p>
+    </div>
 </div>
-
-
-
-  
-
-

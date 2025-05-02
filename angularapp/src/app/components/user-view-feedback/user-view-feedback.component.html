@@ -1,33 +1,91 @@
-<div class="container py-4">
-    <h2 class="text-warning text-center">My Feedback</h2>
+<!-- Include Bootstrap & Font Awesome -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
-    <!-- Feedback table to display user-submitted feedback -->
+<div class="container py-4">
+    <h2 class="text-warning text-center">
+        <i class="fa-solid fa-file-signature"></i> My Feedback
+    </h2>
+
+    <div class="d-flex justify-content-between mb-3">
+        <!-- Search Feedback -->
+        <div class="input-group w-50">
+            <span class="input-group-text bg-warning text-dark">
+                <i class="fa-solid fa-search"></i>
+            </span>
+            <input type="text" class="form-control" placeholder="Search feedback..." [(ngModel)]="searchText" (input)="filterFeedbacks()">
+        </div>
+    
+        <!-- Filter by Category -->
+        <div class="input-group w-25">
+            <span class="input-group-text bg-warning text-dark">
+                <i class="fa-solid fa-filter"></i>
+            </span>
+            <select class="form-select" [(ngModel)]="selectedCategory" (change)="filterFeedbacks()">
+                <option value="">All Categories</option>
+                <option value="Service">Service</option>
+                <option value="Pricing">Pricing</option>
+                <option value="Quality">Quality</option>
+            </select>
+        </div>
+    </div>
+    
+
+    <!-- Feedback Table -->
     <div class="table-responsive">
-        <table *ngIf="feedbacks.length > 0" class="table table-dark table-striped">
-            <thead class="bg-warning text-dark">
+        <table *ngIf="filteredFeedbacks.length > 0" class="table table-dark table-striped">
+            <thead>
                 <tr>
-                    <th>#</th> <!-- Serial number for each feedback entry -->
-                    <th>Message</th> <!-- Displays feedback content -->
-                    <th>Date</th> <!-- Displays the date the feedback was submitted -->
-                    <th>Category</th> <!-- Displays the feedback category -->
-                    <th>Property</th> <!-- Displays the associated property for the feedback -->
+                    <th>#</th>
+                    <th><i class="fa-solid fa-comment-dots"></i> Message</th>
+                    <th><i class="fa-regular fa-calendar-check"></i> Date</th>
+                    <th><i class="fa-solid fa-filter-circle-dollar"></i> Category</th>
+                    <th><i class="fa-solid fa-house-chimney"></i> Property</th>
+                    <th><i class="fa-solid fa-trash-can"></i> Action</th>
                 </tr>
             </thead>
             <tbody>
-                <!-- Loop through filtered feedback list and display each entry -->
-                <tr *ngFor="let feedback of feedbacks; let i = index">
-                    <td>{{ i + 1 }}</td> <!-- Auto-incremented row number -->
-                    <td>{{ feedback.feedbackText }}</td> <!-- Feedback message text -->
-                    <td>{{ feedback.date | date:'dd-MM-yyyy' }}</td> <!-- Format date in DD-MM-YYYY -->
-                    <td>{{ feedback.category }}</td> <!-- Feedback category text -->
-                    <td>{{ feedback.property.title }}</td> <!-- Property linked to the feedback -->
+                <tr *ngFor="let feedback of paginatedFeedbacks; let i = index">
+                    <td>{{ (currentPage - 1) * pageSize + i + 1 }}</td>
+                    <td>{{ feedback.feedbackText }}</td>
+                    <td>{{ feedback.date | date:'dd-MM-yyyy' }}</td>
+                    <td>{{ feedback.category }}</td>
+                    <td>{{ feedback.property.title }}</td>
+                    <td>
+                        <button class="btn btn-danger btn-sm" (click)="deleteFeedback(feedback.feedbackId)">
+                            <i class="fa-solid fa-trash"></i> Delete
+                        </button>
+                    </td>
                 </tr>
             </tbody>
         </table>
     </div>
 
-    <!-- Display a message when no feedback exists -->
-    <div *ngIf="feedbacks.length === 0" class="no-data text-center text-warning">
-        <p class="fs-4 fw-bold">No Feedbacks Found</p>
+    <!-- Pagination -->
+    <nav *ngIf="filteredFeedbacks.length > pageSize">
+        <ul class="pagination justify-content-center">
+            <li class="page-item" [class.disabled]="currentPage === 1">
+                <button class="page-link" (click)="changePage(currentPage - 1)">
+                    <i class="fa-solid fa-chevron-left"></i> Previous
+                </button>
+            </li>
+
+            <li class="page-item" *ngFor="let page of totalPages">
+                <button class="page-link" (click)="changePage(page)">
+                    {{ page }}
+                </button>
+            </li>
+
+            <li class="page-item" [class.disabled]="currentPage === totalPages.length">
+                <button class="page-link" (click)="changePage(currentPage + 1)">
+                    Next <i class="fa-solid fa-chevron-right"></i>
+                </button>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- No Feedbacks Message -->
+    <div *ngIf="filteredFeedbacks.length === 0" class="no-data text-center text-warning">
+        <p class="fs-4 fw-bold"><i class="fa-solid fa-circle-exclamation"></i> No Feedbacks Found</p>
     </div>
 </div>
