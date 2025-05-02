@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PropertyService } from 'src/app/services/property.service';
 import { Property } from 'src/app/models/property.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-view-properties',
@@ -16,7 +17,7 @@ export class UserViewPropertiesComponent implements OnInit {
   propertyTypes: string[] = ['All', 'Residential', 'Commercial']; // Property type filter options
   propertyStatuses: string[] = ['All', 'Available', 'Sold']; // Property status filter options
 
-  constructor(private propertyService: PropertyService) {}
+  constructor(private propertyService: PropertyService, private router:Router) {}
 
   ngOnInit(): void {
     this.loadProperties();
@@ -56,7 +57,7 @@ export class UserViewPropertiesComponent implements OnInit {
    * @param propertyId The ID of the property to inquire about.
    */
   inquireProperty(propertyId: number): void {
-    console.log(`User inquiring about property ID: ${propertyId}`);
+   this.router.navigate(['user-add-inquiry',propertyId])
     // Implement inquiry logic here (e.g., open inquiry form or send request)
   }
 }

@@ -49,11 +49,15 @@ export class AdminViewPropertyComponent implements OnInit {
 
   // Confirm delete action
   confirmDelete(propertyId: number): void {
+    if(confirm("are you sure ?")){
     this.deletePropertyId = propertyId;
+    this.deleteProperty()
+    }
   }
 
   // Delete property after confirmation
   deleteProperty(): void {
+    console.log("i'm called!")
     if (this.deletePropertyId !== null) {
       this.propertyService.deleteProperty(this.deletePropertyId).subscribe(
         () => {
