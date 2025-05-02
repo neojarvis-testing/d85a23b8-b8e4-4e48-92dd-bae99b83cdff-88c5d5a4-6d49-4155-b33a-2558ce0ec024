@@ -81,9 +81,9 @@
     <div *ngIf="selectedInquiry" class="modal fade show d-block" tabindex="-1">
       <form class="modal-content p-4 bg-dark text-light" [formGroup]="responseForm" (ngSubmit)="submitResponse()">
         <h3 class="text-warning"><i class="fas fa-envelope"></i> Respond to Inquiry</h3>
-        <label>Response:</label>
+        <label for="response">Response:</label>
         <textarea formControlName="adminResponse" class="form-control mb-3" rows="3"></textarea>
-        <label>Contact Details:</label>
+        <label for="contactDetails">Contact Details:</label>
         <input type="text" class="form-control mb-3" formControlName="contactDetails"/>
         <div class="d-flex justify-content-end">
           <button class="btn btn-success me-2" type="submit">Submit</button>

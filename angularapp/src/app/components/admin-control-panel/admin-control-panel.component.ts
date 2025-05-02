@@ -36,13 +36,20 @@ export class AdminControlPanelComponent implements OnInit {
   }
   
   getHighPriorityInquiries(){
-    this.highPriorityInquiries=this.inquiries.filter((i)=>i.priority=="High")
+    this.service.getAllPropertyInquiry().subscribe((data)=>{
+    this.inquiries=data
+    this.highPriorityInquiries=this.inquiries.filter((i)=>i.priority.includes("High"))
+    console.log(this.highPriorityInquiries)
     this.allHighPriorityInquiries=this.highPriorityInquiries.length
+    })
   }
 
   getUnresolvedInquiries(){
+    this.service.getAllPropertyInquiry().subscribe((data)=>{
+    this.inquiries=data
     this.unresolvedInquiries=this.inquiries.filter((i)=>i.status=="Pending")
     this.allUnresolvedInquiries = this.unresolvedInquiries.length;
+    })
   }
 
   getAllProperties(){
@@ -57,6 +64,8 @@ export class AdminControlPanelComponent implements OnInit {
     this.getAllPropertyInquiries()
     this.getAllFeedbacks()
     this.getAllProperties()
+    this.getHighPriorityInquiries()
+    this.getUnresolvedInquiries()
   }
 
 }
