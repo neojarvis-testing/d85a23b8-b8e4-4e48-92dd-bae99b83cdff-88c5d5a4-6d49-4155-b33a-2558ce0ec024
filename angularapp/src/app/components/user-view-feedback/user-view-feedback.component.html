@@ -1,31 +1,33 @@
-<div class="feedback-container">
-    <h2>My Feedback</h2>
+<div class="container py-4">
+    <h2 class="text-warning text-center">My Feedback</h2>
 
     <!-- Feedback table to display user-submitted feedback -->
-    <table *ngIf="feedbacks.length > 0">
-        <thead>
-            <tr>
-                <th>#</th> <!-- Serial number for each feedback entry -->
-                <th>Message</th> <!-- Displays feedback content -->
-                <th>Date</th> <!-- Displays the date the feedback was submitted -->
-                <th>Category</th> <!-- Displays the feedback category -->
-                <th>Property</th> <!-- Displays the associated property for the feedback -->
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Loop through filtered feedback list and display each entry -->
-            <tr *ngFor="let feedback of filteredFeedbacks; let i = index">
-                <td>{{ i + 1 }}</td> <!-- Auto-incremented row number -->
-                <td>{{ feedback.feedbackText }}</td> <!-- Feedback message text -->
-                <td>{{ feedback.date | date:'dd-MM-yyyy' }}</td> <!-- Format date in DD-MM-YYYY -->
-                <td>{{ feedback.category }}</td> <!-- Feedback category text -->
-                <td>{{ feedback.property }}</td> <!-- Property linked to the feedback -->
-            </tr>
-        </tbody>
-    </table>
+    <div class="table-responsive">
+        <table *ngIf="feedbacks.length > 0" class="table table-dark table-striped">
+            <thead class="bg-warning text-dark">
+                <tr>
+                    <th>#</th> <!-- Serial number for each feedback entry -->
+                    <th>Message</th> <!-- Displays feedback content -->
+                    <th>Date</th> <!-- Displays the date the feedback was submitted -->
+                    <th>Category</th> <!-- Displays the feedback category -->
+                    <th>Property</th> <!-- Displays the associated property for the feedback -->
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Loop through filtered feedback list and display each entry -->
+                <tr *ngFor="let feedback of feedbacks; let i = index">
+                    <td>{{ i + 1 }}</td> <!-- Auto-incremented row number -->
+                    <td>{{ feedback.feedbackText }}</td> <!-- Feedback message text -->
+                    <td>{{ feedback.date | date:'dd-MM-yyyy' }}</td> <!-- Format date in DD-MM-YYYY -->
+                    <td>{{ feedback.category }}</td> <!-- Feedback category text -->
+                    <td>{{ feedback.property.title }}</td> <!-- Property linked to the feedback -->
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
     <!-- Display a message when no feedback exists -->
-    <div *ngIf="feedbacks.length === 0" class="no-data">
-        No Feedbacks Found
+    <div *ngIf="feedbacks.length === 0" class="no-data text-center text-warning">
+        <p class="fs-4 fw-bold">No Feedbacks Found</p>
     </div>
 </div>

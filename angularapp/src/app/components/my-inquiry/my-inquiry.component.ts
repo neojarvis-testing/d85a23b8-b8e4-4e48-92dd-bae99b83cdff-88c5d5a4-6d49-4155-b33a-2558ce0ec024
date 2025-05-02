@@ -14,7 +14,7 @@ export class MyInquiryComponent implements OnInit {
 
 
   inquiries: PropertyInquiry[] = [];
-
+  userId:number
   constructor(private readonly service:PropertyInquiryService) {}
 
   ngOnInit(): void {
@@ -23,7 +23,8 @@ export class MyInquiryComponent implements OnInit {
 
   loadInquiries(): void {
     // Fetch the user's inquiries from the service
-    this.service.getAllPropertyInquiry().subscribe(
+    this.userId = +localStorage.getItem('userId')
+    this.service.getInquiryByUserId(this.userId).subscribe(
       (data: PropertyInquiry[]) => {
         this.inquiries = data;
       },
