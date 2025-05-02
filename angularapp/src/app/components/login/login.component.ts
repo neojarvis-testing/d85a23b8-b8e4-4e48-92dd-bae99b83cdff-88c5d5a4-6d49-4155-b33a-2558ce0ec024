@@ -45,5 +45,8 @@ export class LoginComponent implements OnInit {
     this.router.navigate(['/']); // Redirect to homepage after closing popup
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    throw new Error("notImplemented() cannot be performed because ...");
+
+  }
 }

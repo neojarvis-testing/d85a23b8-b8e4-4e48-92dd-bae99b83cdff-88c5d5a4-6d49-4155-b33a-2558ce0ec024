@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router'; // Import Router
 import { PropertyInquiryService } from 'src/app/services/property-inquery.service';
 
-declare var bootstrap: any; // Import Bootstrap globally
+declare let bootstrap: any; // Import Bootstrap globally
 
 @Component({
   selector: 'app-user-add-inquiry',
