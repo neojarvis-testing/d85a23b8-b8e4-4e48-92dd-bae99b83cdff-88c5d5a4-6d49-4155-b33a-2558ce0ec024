@@ -1,38 +1,24 @@
-.container {
-    width: 80%;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: yellowgreen; 
-  }
-  
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-  }
-  
-  th, td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  th {
-    background-color: yellow; /* Changed to yellow */
-  }
-  
-  tr:hover {
-    background-color: #f1f1f1;
-  }
-  
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f8f9fa;
+}
 
-/* styles to be added */
+.container h2 {
+  font-weight: bold;
+}
 
+.table {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.table-hover tbody tr:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .table-responsive {
+    overflow-x: auto;
+  }
+}
