@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -8,16 +8,19 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./adminnav.component.css']
 })
 export class AdminnavComponent implements OnInit {
-logout() {
-  this.service.loggedOut();
-  this.router.navigate(["/login"])
 
-}
+  constructor(
+    public readonly service: AuthService,
+    private readonly router: Router,
+    private readonly cdRef: ChangeDetectorRef
+  ) {}
 
-  constructor(public readonly service:AuthService,private readonly router:Router) { }
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
-    throw new Error("notImplemented()")
+  logout(): void {
+    this.service.loggedOut();  // Clears authentication state
+    localStorage.removeItem('userToken'); // Remove token if stored in localStorage
+    this.router.navigate(['/login']);
+    this.cdRef.detectChanges(); // Force UI refresh
   }
-
 }

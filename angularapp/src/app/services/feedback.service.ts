@@ -43,7 +43,7 @@ export class FeedbackService {
    * @param feedbackId - The unique identifier of the feedback entry
    * @returns Observable<void> - Observable indicating completion (no returned data)
    */
-  deleteFeedback(feedbackId: number): Observable<void> {
-    return this.http.delete<void>(`${apiUrl}/feedback/${feedbackId}`);
+  deleteFeedback(feedbackId: number): Observable<any> {
+    return this.http.delete(`${apiUrl}/feedback/${feedbackId}`, { responseType: 'text' });
   }
 }
