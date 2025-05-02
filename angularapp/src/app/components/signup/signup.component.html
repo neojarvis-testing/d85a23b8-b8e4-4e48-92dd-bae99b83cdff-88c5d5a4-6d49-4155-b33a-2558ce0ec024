@@ -1,9 +1,8 @@
 <head>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 </head>
- 
-<body>
 
+<body>
 <!-- Registration Page Wrapper -->
 <div class="wrapper">
   <div class="content">
@@ -24,10 +23,6 @@
               <i class="fas fa-envelope"></i>
               <input type="email" id="email" formControlName="email" placeholder="Enter your email" />
             </div>
-            <div *ngIf="form.controls.email.touched && form.controls.email.invalid">
-              <small *ngIf="form.controls.email.errors?.required" class="error">Email is required.</small>
-              <small *ngIf="form.controls.email.errors?.email" class="error">Enter a valid email address.</small>
-            </div>
           </div>
 
           <div>
@@ -35,10 +30,6 @@
             <div class="input-icon">
               <i class="fas fa-lock"></i>
               <input type="password" id="password" formControlName="password" placeholder="Enter your password" />
-            </div>
-            <div *ngIf="form.controls.password.touched && form.controls.password.invalid">
-              <small *ngIf="form.controls.password.errors?.required" class="error">Password is required.</small>
-              <small *ngIf="form.controls.password.errors?.minlength" class="error">Password must be at least 6 characters.</small>
             </div>
           </div>
 
@@ -59,10 +50,6 @@
               <i class="fas fa-user"></i>
               <input type="text" id="username" formControlName="username" placeholder="Enter your username" />
             </div>
-            <div *ngIf="form.controls.username.touched && form.controls.username.invalid">
-              <small *ngIf="form.controls.username.errors?.required" class="error">Username is required.</small>
-              <small *ngIf="form.controls.username.errors?.minlength" class="error">Username must be at least 3 characters.</small>
-            </div>
           </div>
 
           <div>
@@ -70,10 +57,6 @@
             <div class="input-icon">
               <i class="fas fa-phone-alt"></i>
               <input type="text" id="number" formControlName="number" placeholder="Enter your number" />
-            </div>
-            <div *ngIf="form.controls.number.touched && form.controls.number.invalid">
-              <small *ngIf="form.controls.number.errors?.required" class="error">Number is required.</small>
-              <small *ngIf="form.controls.number.errors?.pattern" class="error">Enter a valid 10-digit number.</small>
             </div>
           </div>
 
@@ -86,7 +69,7 @@
   </div>
 </div>
 
-<!-- Registration Success Popup -->
+<!-- Registration Successful Popup -->
 <div *ngIf="showPopup" class="popup-overlay">
   <div class="popup-content">
     <h2>User Registration Successful!</h2>
@@ -94,102 +77,3 @@
   </div>
 </div>
 </body>
-
-  <div class="wrapper">
-    <div class="content">
-      <!-- Heading -->
-      <h2 class="form-heading">Register</h2>
- 
-      <div class="container">
-        <!-- Image Section -->
-        <div class="image-container">
-          <img src="https://images.pexels.com/photos/65438/pexels-photo-65438.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Registration Illustration">
-        </div>
- 
-        <!-- Registration Form Section -->
-        <div class="form-container">
-          <form [formGroup]="form" (ngSubmit)="onSubmit()">
-            <!-- Email Field -->
-            <div>
-              <label for="email">Email:</label>
-              <div class="input-icon">
-                <i class="fas fa-envelope"></i>
-                <input type="email" id="email" formControlName="email" placeholder="Enter your email" />
-              </div>
-              <div *ngIf="form.controls.email.touched && form.controls.email.invalid">
-                <small *ngIf="form.controls.email.errors?.required" class="error">
-                  <i class="fas fa-exclamation-circle"></i> Email is required.
-                </small>
-                <small *ngIf="form.controls.email.errors?.email" class="error">
-                  <i class="fas fa-exclamation-circle"></i> Enter a valid email address.
-                </small>
-              </div>
-            </div>
- 
-            <!-- Password Field -->
-            <div>
-              <label for="password">Password:</label>
-              <div class="input-icon">
-                <i class="fas fa-lock"></i>
-                <input type="password" id="password" formControlName="password" placeholder="Enter your password" />
-              </div>
-              <div *ngIf="form.controls.password.touched && form.controls.password.invalid">
-                <small *ngIf="form.controls.password.errors?.required" class="error">
-                  <i class="fas fa-exclamation-circle"></i> Password is required.
-                </small>
-              </div>
-            </div>
- 
-            <!-- Confirm Password Field -->
-            <div>
-              <label for="confirmPassword">Confirm Password:</label>
-              <div class="input-icon">
-                <i class="fas fa-lock"></i>
-                <input type="password" id="confirmPassword" formControlName="confirmPassword" placeholder="Confirm your password" />
-              </div>
-              <div *ngIf="form.hasError('passwordMismatch')">
-                <small class="error">
-                  <i class="fas fa-exclamation-circle"></i> Passwords do not match.
-                </small>
-              </div>
-            </div>
- 
-            <!-- Username Field -->
-            <div>
-              <label for="username">Username:</label>
-              <div class="input-icon">
-                <i class="fas fa-user"></i>
-                <input type="text" id="username" formControlName="username" placeholder="Enter your username" />
-              </div>
-              <div *ngIf="form.controls.username.touched && form.controls.username.invalid">
-                <small *ngIf="form.controls.username.errors?.required" class="error">
-                  <i class="fas fa-exclamation-circle"></i> Username is required.
-                </small>
-              </div>
-            </div>
- 
-            <!-- Number Field -->
-            <div>
-              <label for="number">Number:</label>
-              <div class="input-icon">
-                <i class="fas fa-phone-alt"></i>
-                <input type="text" id="number" formControlName="number" placeholder="Enter your number" />
-              </div>
-              <div *ngIf="form.controls.number.touched && form.controls.number.invalid">
-                <small *ngIf="form.controls.number.errors?.required" class="error">
-                  <i class="fas fa-exclamation-circle"></i> Number is required.
-                </small>
-              </div>
-            </div>
- 
-            <!-- Submit Button -->
-            <div>
-              <button type="submit" [disabled]="form.invalid">Register</button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-</body>
-
