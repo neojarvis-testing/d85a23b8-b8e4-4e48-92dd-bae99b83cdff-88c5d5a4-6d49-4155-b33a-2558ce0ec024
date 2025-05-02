@@ -1,98 +1,99 @@
 <div class="wrapper">
-  <div class="content">
-      <h2 class="form-heading">Add New Property</h2>
-
-      <!-- Success Notification -->
-      <div class="success-modal" *ngIf="showSuccessModal">
-          <div class="modal-content">
-              <i class="fas fa-check-circle"></i>
-              <p>Property added successfully!</p>
-              <button (click)="closeModal()">OK</button>
-          </div>
-      </div>
-
-      <div class="container">
-          <!-- Image Section -->
-          <div class="property-image">
-              <img src="https://images.pexels.com/photos/3625734/pexels-photo-3625734.jpeg" alt="Property Image">
-          </div>
-
-          <!-- Property Form -->
-          <div class="property-form">
-              <form #propertyForm="ngForm" (ngSubmit)="addProperty()" novalidate>
-                  <div>
-                      <label for="title">Title:</label>
-                      <div class="input-icon">
-                          <i class="fas fa-home"></i>
-                          <input id="title" type="text" class="form-control" [(ngModel)]="newProperty.title" name="title" required #title="ngModel" placeholder="Enter Title">
-                      </div>
-                      <div class="error-message" *ngIf="title.invalid && title.touched">
-                          <i class="fas fa-exclamation-circle"></i> *Title is required
-                      </div>
-                  </div>
-
-                  <div>
-                      <label for="description">Description:</label>
-                      <div class="input-icon">
-                          <i class="fas fa-file-alt"></i>
-                          <textarea id="description" class="form-control" [(ngModel)]="newProperty.description" name="description" required #description="ngModel" placeholder="Enter Description"></textarea>
-                      </div>
-                      <div class="error-message" *ngIf="description.invalid && description.touched">
-                          <i class="fas fa-exclamation-circle"></i> *Description is required
-                      </div>
-                  </div>
-
-                  <div>
-                      <label for="location">Location:</label>
-                      <div class="input-icon">
-                          <i class="fas fa-map-marker-alt"></i>
-                          <input id="location" type="text" class="form-control" [(ngModel)]="newProperty.location" name="location" required #location="ngModel" placeholder="Enter Location">
-                      </div>
-                      <div class="error-message" *ngIf="location.invalid && location.touched">
-                          <i class="fas fa-exclamation-circle"></i> *Location is required
-                      </div>
-                  </div>
-
-                  <div>
-                      <label for="price">Price:</label>
-                      <div class="input-icon">
-                          <i class="fas fa-dollar-sign"></i>
-                          <input id="price" type="number" class="form-control" [(ngModel)]="newProperty.price" name="price" required #price="ngModel" min="1">
-                      </div>
-                      <div class="error-message" *ngIf="price.invalid && price.touched">
-                          <i class="fas fa-exclamation-circle"></i> *Price must be at least 1
-                      </div>
-                  </div>
-
-                  <div>
-                      <label for="type">Type:</label>
-                      <select id="type" class="form-select" [(ngModel)]="newProperty.type" name="type" required #type="ngModel">
-                          <option value="">Select Type</option>
-                          <option value="Residential">Residential</option>
-                          <option value="Commercial">Commercial</option>
-                      </select>
-                      <div class="error-message" *ngIf="type.invalid && type.touched">
-                          <i class="fas fa-exclamation-circle"></i> *Property Type is required
-                      </div>
-                  </div>
-
-                  <div>
-                      <label for="status">Status:</label>
-                      <select id="status" class="form-select" [(ngModel)]="newProperty.status" name="status" required #status="ngModel">
-                          <option value="">Select Status</option>
-                          <option value="Available">Available</option>
-                          <option value="Sold">Sold</option>
-                      </select>
-                      <div class="error-message" *ngIf="status.invalid && status.touched">
-                          <i class="fas fa-exclamation-circle"></i> *Property Status is required
-                      </div>
-                  </div>
-
-                  <div>
-                      <button type="submit" [disabled]="!propertyForm.valid">Add Property</button>
-                  </div>
-              </form>
-          </div>
-      </div>
+    <div class="content">
+        <h2 class="form-heading">Add New Property</h2>
+   
+        <!-- Success Notification -->
+        <div class="success-modal" *ngIf="showSuccessModal">
+            <div class="modal-content">
+                <i class="fas fa-check-circle"></i>
+                <p>Property added successfully!</p>
+                <button (click)="closeModal()">OK</button>
+            </div>
+        </div>
+   
+        <div class="container">
+            <!-- Image Section -->
+            <div class="property-image">
+                <img src="https://images.pexels.com/photos/3625734/pexels-photo-3625734.jpeg" alt="Property Image">
+            </div>
+   
+            <!-- Property Form -->
+            <div class="property-form">
+                <form #propertyForm="ngForm" (ngSubmit)="addProperty()" novalidate>
+                    <div>
+                        <label for="title">Title:</label>
+                        <div class="input-icon">
+                            <i class="fas fa-home"></i>
+                            <input id="title" type="text" class="form-control" [(ngModel)]="newProperty.title" name="title" required #title="ngModel" placeholder="Enter Title">
+                        </div>
+                        <div class="error-message" *ngIf="title.invalid && title.touched">
+                            <i class="fas fa-exclamation-circle"></i> *Title is required
+                        </div>
+                    </div>
+   
+                    <div>
+                        <label for="description">Description:</label>
+                        <div class="input-icon">
+                            <i class="fas fa-file-alt"></i>
+                            <textarea id="description" class="form-control" [(ngModel)]="newProperty.description" name="description" required #description="ngModel" placeholder="Enter Description"></textarea>
+                        </div>
+                        <div class="error-message" *ngIf="description.invalid && description.touched">
+                            <i class="fas fa-exclamation-circle"></i> *Description is required
+                        </div>
+                    </div>
+   
+                    <div>
+                        <label for="location">Location:</label>
+                        <div class="input-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <input id="location" type="text" class="form-control" [(ngModel)]="newProperty.location" name="location" required #location="ngModel" placeholder="Enter Location">
+                        </div>
+                        <div class="error-message" *ngIf="location.invalid && location.touched">
+                            <i class="fas fa-exclamation-circle"></i> *Location is required
+                        </div>
+                    </div>
+   
+                    <div>
+                        <label for="price">Price:</label>
+                        <div class="input-icon">
+                            <i class="fas fa-dollar-sign"></i>
+                            <input id="price" type="number" class="form-control" [(ngModel)]="newProperty.price" name="price" required #price="ngModel" min="1">
+                        </div>
+                        <div class="error-message" *ngIf="price.invalid && price.touched">
+                            <i class="fas fa-exclamation-circle"></i> *Price must be at least 1
+                        </div>
+                    </div>
+   
+                    <div>
+                        <label for="type">Type:</label>
+                        <select id="type" class="form-select" [(ngModel)]="newProperty.type" name="type" required #type="ngModel">
+                            <option value="">Select Type</option>
+                            <option value="Residential">Residential</option>
+                            <option value="Commercial">Commercial</option>
+                        </select>
+                        <div class="error-message" *ngIf="type.invalid && type.touched">
+                            <i class="fas fa-exclamation-circle"></i> *Property Type is required
+                        </div>
+                    </div>
+   
+                    <div>
+                        <label for="status">Status:</label>
+                        <select id="status" class="form-select" [(ngModel)]="newProperty.status" name="status" required #status="ngModel">
+                            <option value="">Select Status</option>
+                            <option value="Available">Available</option>
+                            <option value="Sold">Sold</option>
+                        </select>
+                        <div class="error-message" *ngIf="status.invalid && status.touched">
+                            <i class="fas fa-exclamation-circle"></i> *Property Status is required
+                        </div>
+                    </div>
+   
+                    <div>
+                        <button type="submit" [disabled]="!propertyForm.valid">Add Property</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
   </div>
-</div>
+   
