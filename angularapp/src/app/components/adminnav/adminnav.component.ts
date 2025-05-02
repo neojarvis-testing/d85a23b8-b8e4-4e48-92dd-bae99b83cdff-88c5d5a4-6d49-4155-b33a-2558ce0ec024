@@ -8,14 +8,6 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./adminnav.component.css']
 })
 export class AdminnavComponent implements OnInit {
-
-logout() {
-  this.service.loggedOut();
-  this.router.navigate(["/login"])
- 
-}
- 
-  constructor(public service:AuthService,private router:Router) { }
  
   ngOnInit(): void {
   }
@@ -28,7 +20,7 @@ logout() {
     private readonly cdRef: ChangeDetectorRef
   ) {}
 
-  ngOnInit(): void {}
+
 
   logout(): void {
     this.service.loggedOut();  // Clears authentication state
