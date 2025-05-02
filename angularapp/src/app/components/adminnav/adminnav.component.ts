@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class AdminnavComponent implements OnInit {
  
   ngOnInit(): void {
+    throw new Error("notImplemented() cannot be performed because ...");
   }
  
 

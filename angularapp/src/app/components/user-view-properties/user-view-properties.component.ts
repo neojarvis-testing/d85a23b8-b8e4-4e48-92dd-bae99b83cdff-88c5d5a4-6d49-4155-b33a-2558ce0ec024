@@ -31,7 +31,6 @@ export class UserViewPropertiesComponent implements OnInit {
     this.propertyService.getAllProperties().subscribe(
       (data) => {
         this.properties = data.filter(property => property.deleted === 0);
-        // this.properties = data || []; // Ensures no null data
         this.applyFilters(); // Apply filters after fetching properties
       },
       (error) => {

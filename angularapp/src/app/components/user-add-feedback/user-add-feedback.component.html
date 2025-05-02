@@ -68,14 +68,14 @@
 </div>
 
 <!-- Feedback Confirmation Popup -->
-<div *ngIf="showPopup" class="modal-overlay" role="dialog">
+<dialog *ngIf="showPopup" class="modal-overlay">
     <div class="modal-content">
         <h3>Confirm Feedback Submission</h3>
         <p>Are you sure you want to submit this feedback?</p>
-        
+
         <div class="modal-buttons">
             <button class="btn btn-success" (click)="confirmSubmit(feedbackForm)">Yes, Submit</button>
             <button class="btn btn-danger" (click)="closePopup()">Cancel</button>
         </div>
     </div>
-</div>
+</dialog>
