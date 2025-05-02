@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup} from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { PropertyInquiryService } from 'src/app/services/property-inquery.service';
 
@@ -12,7 +12,7 @@ export class UserAddInquiryComponent implements OnInit {
   inquiryForm:FormGroup
   userId:number
   propertyId:number
-  constructor(private service:PropertyInquiryService,private fb:FormBuilder,private activatedRoute:ActivatedRoute) { 
+  constructor(private readonly service:PropertyInquiryService,private readonly fb:FormBuilder,private readonly activatedRoute:ActivatedRoute) { 
   this.inquiryForm = fb.group({
   message:[''],
   status:[''],

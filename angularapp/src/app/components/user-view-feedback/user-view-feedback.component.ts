@@ -12,7 +12,7 @@ export class UserViewFeedbackComponent implements OnInit {
   feedbacks: Feedback[] = []; // Stores feedbacks specific to the logged-in user
   userId:any= localStorage.getItem('userId')// Stores the user ID for fetching relevant feedback
 
-  constructor(private feedbackService: FeedbackService) {} // Injects the FeedbackService for API calls
+  constructor(private readonly feedbackService: FeedbackService) {} // Injects the FeedbackService for API calls
 
   ngOnInit(): void {
     this.getFeedbacksByUser(); // Calls method to fetch user-specific feedback when component initializes

@@ -40,11 +40,11 @@ public class GlobalExceptionHandler {
   //property Exception
 
   @ExceptionHandler(DuplicatePropertyException.class)
-  public ResponseEntity<?>DuplicateProperty(DuplicatePropertyException e){
+  public ResponseEntity<?>duplicateProperty(DuplicatePropertyException e){
     return ResponseEntity.status(403).body(e.getMessage());
 }
 @ExceptionHandler(PropertyException.class)
-public ResponseEntity<?>PropertyException(PropertyException e){
+public ResponseEntity<?>propertyException(PropertyException e){
     return ResponseEntity.status(403).body(e.getMessage());
 }
 

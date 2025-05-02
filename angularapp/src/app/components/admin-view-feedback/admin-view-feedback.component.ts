@@ -21,9 +21,9 @@ export class AdminViewFeedbackComponent implements OnInit {
   selectedProperty: any = null; // Stores selected property details for modal display
 
   constructor(
-    private feedbackService: FeedbackService,
-    private authService: AuthService,
-    private propertyService: PropertyService
+    private readonly feedbackService: FeedbackService,
+    private readonly authService: AuthService,
+    private readonly propertyService: PropertyService
   ) {}
 
   ngOnInit(): void {

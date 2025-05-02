@@ -10,7 +10,7 @@ import { apiUrl } from '../constant/ApiUrl';
 export class PropertyService {
   apiUrl:any=apiUrl;
 
-  constructor(private http: HttpClient) {}
+  constructor(private readonly http: HttpClient) {}
 
   // Fetch all properties
   getAllProperties(): Observable<Property[]> {
