@@ -2,7 +2,6 @@ package com.examly.springapp.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -20,19 +19,22 @@ import com.examly.springapp.repository.UserRepo;
 
 public class UserServiceImpl implements UserService, UserDetailsService {
  
-    private UserRepo userRepo;
 
-    @Autowired
-    public UserServiceImpl(UserRepo userRepo) {
+    private final UserRepo userRepo;
+    private final PasswordEncoder encoder;
+
+
+    // Constructor-based injection
+    public UserServiceImpl(UserRepo userRepo, PasswordEncoder encoder) {
         this.userRepo = userRepo;
+        this.encoder = encoder;
     }
- 
-    @Autowired
-    private PasswordEncoder encoder;
+
+
     private Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);  // Logger for logging events
     // Registers a new user by encrypting their password and saving them to the database
     public User registerUser(User user) {
-    	logger.info("Attempting to create new registration"+user.getUserRole());
+    	logger.info("Attempting to create new registration with role: {}", user.getUserRole());
         user.setPassword(encoder.encode(user.getPassword()));
         user=userRepo.save(user);
         return user;

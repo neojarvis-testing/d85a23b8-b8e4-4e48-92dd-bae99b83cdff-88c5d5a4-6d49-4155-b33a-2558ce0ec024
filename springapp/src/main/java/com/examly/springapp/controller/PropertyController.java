@@ -3,7 +3,6 @@ package com.examly.springapp.controller;
 import java.util.List;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,8 +20,14 @@ import  com.examly.springapp.dtos.ApiResponse;
 @RequestMapping("/api/properties")
 public class PropertyController {
 
-    @Autowired 
-    private PropertyService propertyservice; // Service layer to handle business logic
+    private final PropertyService propertyservice; // Dependency injected via constructor
+
+    // Constructor-based injection
+    public PropertyController(PropertyService propertyservice) {
+        this.propertyservice = propertyservice;
+    }
+
+
 
     // Add Property: Adds a new property to the system
     @PostMapping
@@ -64,11 +69,9 @@ public class PropertyController {
     @DeleteMapping("/{propertyId}")
     public ResponseEntity<ApiResponse> deleteProperty(@PathVariable Long propertyId) {
 
-        propertyservice.deleteProperty(propertyId); 
-
         propertyservice.deleteProperty(propertyId);
+        ApiResponse response = new ApiResponse("Deleted Successfully");
 
-        ApiResponse response = new ApiResponse("Deleted Successfully")   ;
         return ResponseEntity.status(200).body(response); // Return 200 OK if deletion is successful
     }
 }

@@ -1,8 +1,3 @@
-<head>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-</head>
-
-<body>
 <div class="container mt-5">
   <div class="admin-inquiry-container">
     <h2 class="text-center"><i class="fas fa-question-circle"></i> Manage Inquiries</h2>
@@ -21,6 +16,7 @@
         <div class="filter-box">
           <label for="priorityFilter"><i class="fas fa-exclamation-circle"></i> Filter by Priority:</label>
           <select id="priorityFilter" class="form-select me-2" [(ngModel)]="filterPriority" (change)="applyFilters()">
+            <option value="">All</option> <!-- Added default option -->
             <option *ngFor="let p of priorities" [value]="p">{{ p }}</option>
           </select>
         </div>
@@ -29,6 +25,7 @@
         <div class="filter-box">
           <label for="statusFilter"><i class="fas fa-check-circle"></i> Filter by Status:</label>
           <select id="statusFilter" class="form-select" [(ngModel)]="filterStatus" (change)="applyFilters()">
+            <option value="">All</option> <!-- Added default option -->
             <option *ngFor="let s of statuses" [value]="s">{{ s }}</option>
           </select>
         </div>
@@ -78,13 +75,13 @@
     </div>
 
     <!-- Inquiry Response Modal -->
-    <div *ngIf="selectedInquiry" class="modal fade show d-block" tabindex="-1">
+    <div *ngIf="selectedInquiry" class="modal fade show" tabindex="-1">
       <form class="modal-content p-4 bg-dark text-light" [formGroup]="responseForm" (ngSubmit)="submitResponse()">
         <h3 class="text-warning"><i class="fas fa-envelope"></i> Respond to Inquiry</h3>
-        <label>Response:</label>
-        <textarea formControlName="adminResponse" class="form-control mb-3" rows="3"></textarea>
-        <label>Contact Details:</label>
-        <input type="text" class="form-control mb-3" formControlName="contactDetails"/>
+        <label for="adminResponse">Response:</label>
+        <textarea id="adminResponse" formControlName="adminResponse" class="form-control mb-3" rows="3"></textarea>
+        <label for="contactDetails">Contact Details:</label>
+        <input id="contactDetails" type="text" class="form-control mb-3" formControlName="contactDetails"/>
         <div class="d-flex justify-content-end">
           <button class="btn btn-success me-2" type="submit">Submit</button>
           <button class="btn btn-secondary" type="button" (click)="selectedInquiry = null">Cancel</button>
@@ -93,4 +90,3 @@
     </div>
   </div>
 </div>
-</body>

@@ -2,7 +2,12 @@ package com.examly.springapp.dtos;
 
 import jakarta.validation.constraints.*;
 import java.time.LocalDate;
-
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class FeedbackDTO {
 
     private long feedbackId;
@@ -23,52 +28,4 @@ public class FeedbackDTO {
     @NotBlank(message = "Category cannot be blank") // Ensure category is not blank
     private String category;
 
-    // Generate Getters and Setters
-    public long getFeedbackId() {
-        return feedbackId;
-    }
-
-    public void setFeedbackId(long feedbackId) {
-        this.feedbackId = feedbackId;
-    }
-
-    public String getFeedbackText() {
-        return feedbackText;
-    }
-
-    public void setFeedbackText(String feedbackText) {
-        this.feedbackText = feedbackText;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(long userId) {
-        this.userId = userId;
-    }
-
-    public Long getPropertyId() {
-        return propertyId;
-    }
-
-    public void setPropertyId(long propertyId) {
-        this.propertyId = propertyId;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
 }

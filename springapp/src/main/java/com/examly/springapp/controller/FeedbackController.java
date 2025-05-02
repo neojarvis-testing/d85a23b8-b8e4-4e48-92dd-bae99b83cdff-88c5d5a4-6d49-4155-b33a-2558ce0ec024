@@ -1,23 +1,25 @@
 package com.examly.springapp.controller;
 
 import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.examly.springapp.dtos.FeedbackDTO;
 import com.examly.springapp.model.Feedback;
 import com.examly.springapp.service.FeedbackServiceImpl;
-
 import jakarta.validation.Valid;
 
 @RequestMapping("/api/feedback")
 @RestController
 public class FeedbackController {
     
-    @Autowired
-    private FeedbackServiceImpl feedbackservice; // Using the requested service name
+    private final FeedbackServiceImpl feedbackservice; // Dependency injected via constructor
+
+    // Constructor-based injection
+    public FeedbackController(FeedbackServiceImpl feedbackservice) {
+        this.feedbackservice = feedbackservice;
+    }
+
 
     // Create a new feedback entry
      @PostMapping

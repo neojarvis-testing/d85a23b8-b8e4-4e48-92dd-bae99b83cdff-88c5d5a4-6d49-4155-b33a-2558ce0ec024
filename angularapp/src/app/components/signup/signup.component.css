@@ -177,3 +177,10 @@ form button:hover {
     width: 250px; /* Adjust popup width for smaller screens */
   }
 }
+.error {
+  color: red;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}

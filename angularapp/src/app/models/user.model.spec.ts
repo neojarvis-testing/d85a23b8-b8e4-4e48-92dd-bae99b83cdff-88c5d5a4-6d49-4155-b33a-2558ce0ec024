@@ -5,7 +5,7 @@ describe('UserModel', () => {
   fit('frontend_User_model_should_create_an_instance', () => {
     const user: User = {
       email: 'testuser@example.com',
-      password: 'testpassword',
+      pwd: 'testpassword',
       username: 'testuser',
       mobileNumber: '1234567890',
       userRole: 'admin'
@@ -13,7 +13,7 @@ describe('UserModel', () => {
 
     expect(user).toBeTruthy();
     expect(user.email).toBeDefined();
-    expect(user.password).toBeDefined();
+    expect(user.pwd).toBeDefined();
     expect(user.username).toBeDefined();
     expect(user.mobileNumber).toBeDefined();
     expect(user.userRole).toBeDefined();

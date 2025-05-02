@@ -1,8 +1,12 @@
 package com.examly.springapp.dtos;
-
-import jakarta.validation.constraints.*;
 import java.time.LocalDate;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class PropertyInquiryInput {
 
     //@Positive(message = "User ID must be a positive number") // Validate userId as positive
@@ -36,76 +40,5 @@ public class PropertyInquiryInput {
     //@Pattern(regexp = "^[0-9]{10}$", message = "Contact details must be a valid 10-digit phone number") // Validate contact details as phone number
     private String contactDetails;
 
-    // Generate Getters and Setters
-    public long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(long userId) {
-        this.userId = userId;
-    }
-
-    public long getPropertyId() {
-        return propertyId;
-    }
-
-    public void setPropertyId(long propertyId) {
-        this.propertyId = propertyId;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public String getPriority() {
-        return priority;
-    }
-
-    public void setPriority(String priority) {
-        this.priority = priority;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public LocalDate getInquiryDate() {
-        return inquiryDate;
-    }
-
-    public void setInquiryDate(LocalDate inquiryDate) {
-        this.inquiryDate = inquiryDate;
-    }
-
-    public LocalDate getResponseDate() {
-        return responseDate;
-    }
-
-    public void setResponseDate(LocalDate responseDate) {
-        this.responseDate = responseDate;
-    }
-
-    public String getAdminResponse() {
-        return adminResponse;
-    }
-
-    public void setAdminResponse(String adminResponse) {
-        this.adminResponse = adminResponse;
-    }
-
-    public String getContactDetails() {
-        return contactDetails;
-    }
-
-    public void setContactDetails(String contactDetails) {
-        this.contactDetails = contactDetails;
-    }
+    
 }

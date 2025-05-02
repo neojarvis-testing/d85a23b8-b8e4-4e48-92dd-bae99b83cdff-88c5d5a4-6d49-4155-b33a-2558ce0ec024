@@ -2,11 +2,14 @@ package com.examly.springapp.model;
 
 import java.time.LocalDate;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
-
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+ 
 @Entity  // Maps the class with database
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Feedback {
 
     @Id // Defines the primary Key
@@ -29,52 +32,5 @@ public class Feedback {
     
     private String category;
 
-    // Generate setter and getter methods:
-    public long getFeedbackId() {
-        return feedbackId;
-    }
-
-    public void setFeedbackId(long feedbackId) {
-        this.feedbackId = feedbackId;
-    }
-
-    public String getFeedbackText() {
-        return feedbackText;
-    }
-
-    public void setFeedbackText(String feedbackText) {
-        this.feedbackText = feedbackText;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public Property getProperty() {
-        return property;
-    }
-
-    public void setProperty(Property property) {
-        this.property = property;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
+   
 }
