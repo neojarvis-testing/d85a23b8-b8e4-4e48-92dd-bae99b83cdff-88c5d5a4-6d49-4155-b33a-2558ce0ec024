@@ -80,7 +80,7 @@ export class AdminViewFeedbackComponent implements OnInit {
     this.authService.getUserById(userId).subscribe(
       (user) => {
         console.log("Fetched User Data:", user); // Debugging user data
-        this.selectedUser = user || null;
+        this.selectedUser = user ?? null;
       },
       (error) => console.error('Error fetching user details:', error)
     );

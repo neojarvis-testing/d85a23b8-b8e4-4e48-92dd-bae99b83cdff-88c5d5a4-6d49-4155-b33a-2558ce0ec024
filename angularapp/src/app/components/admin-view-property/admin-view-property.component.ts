@@ -3,7 +3,7 @@ import { PropertyService } from 'src/app/services/property.service';
 import { Property } from 'src/app/models/property.model';
 import { Router } from '@angular/router';
 
-declare var bootstrap: any; // Ensure Bootstrap JS is accessible
+declare let bootstrap: any; // Ensure Bootstrap JS is accessible
 
 @Component({
   selector: 'app-admin-view-property',

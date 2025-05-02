@@ -13,7 +13,7 @@ export class SignupComponent implements OnInit {
   form: FormGroup;
   showPopup = false; // Controls popup visibility
 
-  constructor(private service: AuthService, private fb: FormBuilder, private router: Router) {
+  constructor(private readonly service: AuthService, private readonly fb: FormBuilder, private readonly router: Router) {
     this.form = this.fb.group(
       {
         email: ['', [Validators.required, Validators.email]],
@@ -54,5 +54,8 @@ export class SignupComponent implements OnInit {
     this.router.navigate(['/login']); // Navigate to login page after closing popup
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    throw new Error("notImplemented() cannot be performed because ...");
+
+  }
 }
