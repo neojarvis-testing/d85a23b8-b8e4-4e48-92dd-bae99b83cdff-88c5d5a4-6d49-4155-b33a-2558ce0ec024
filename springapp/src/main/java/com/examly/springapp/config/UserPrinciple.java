@@ -9,7 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.examly.springapp.model.User;
  
 public class UserPrinciple implements UserDetails{
-    private transient User user;
+    private User user;
    
  
     public UserPrinciple(User user) {
