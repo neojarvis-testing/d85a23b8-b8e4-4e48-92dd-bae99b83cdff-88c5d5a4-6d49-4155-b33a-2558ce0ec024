@@ -9,22 +9,48 @@ import { Property } from 'src/app/models/property.model';
   styleUrls: ['./admin-edit-property.component.css']
 })
 export class AdminEditPropertyComponent implements OnInit {
+  
+  /*
+    Holds the property details for editing.
+    Initially set to null until data is retrieved.
+  */
   property: Property | null = null;
+  
+  /*
+    Stores the property ID fetched from route parameters.
+  */
   propertyId: number = 0;
-  showSuccessPopup: boolean = false; // Controls success message display
+  
+  /*
+    Controls the visibility of the success message popup.
+  */
+  showSuccessPopup: boolean = false;
 
+  /*
+    Constructor to inject necessary services:
+    - `PropertyService` for API calls related to properties.
+    - `ActivatedRoute` to fetch route parameters.
+    - `Router` to navigate between components.
+  */
   constructor(
     private readonly propertyService: PropertyService,
     private readonly route: ActivatedRoute,
     private readonly router: Router
   ) {}
 
+  /*
+    Lifecycle hook that runs when the component is initialized.
+    Retrieves the property ID from route parameters and fetches property details.
+  */
   ngOnInit(): void {
     this.propertyId = Number(this.route.snapshot.paramMap.get('id'));
     this.getPropertyDetails();
   }
 
-  // Fetch property details
+  /*
+    Fetches the details of the property based on `propertyId`.
+    Updates the `property` variable with the retrieved data.
+  */
   getPropertyDetails(): void {
     this.propertyService.getPropertyById(this.propertyId).subscribe(
       (response) => {
@@ -36,7 +62,11 @@ export class AdminEditPropertyComponent implements OnInit {
     );
   }
 
-  // Update property details
+  /*
+    Updates the property details.
+    Sends the updated property data to the server.
+    Displays a success popup upon successful update.
+  */
   updateProperty(): void {
     if (this.property) {
       this.propertyService.updateProperty(this.propertyId, this.property).subscribe(
@@ -50,7 +80,9 @@ export class AdminEditPropertyComponent implements OnInit {
     }
   }
 
-  // Close success popup and navigate back
+  /*
+    Closes the success popup and navigates back to the property view page.
+  */
   closePopup(): void {
     this.showSuccessPopup = false;
     this.router.navigate(['/admin-view-property']);
