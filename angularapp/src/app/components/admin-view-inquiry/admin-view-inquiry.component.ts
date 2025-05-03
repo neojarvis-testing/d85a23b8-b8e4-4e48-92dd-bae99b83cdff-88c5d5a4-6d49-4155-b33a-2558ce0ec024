@@ -9,18 +9,44 @@ import { PropertyInquiryService } from 'src/app/services/property-inquery.servic
   styleUrls: ['./admin-view-inquiry.component.css']
 })
 export class AdminViewInquiryComponent implements OnInit {
+
+  /*
+    Stores all inquiries retrieved from the service.
+    Also maintains a filtered list of inquiries based on user-selected filters.
+  */
   inquiries: PropertyInquiry[] = [];
   filteredInquiries: PropertyInquiry[] = [];
+
+  /*
+    Form group used to manage the admin's response to an inquiry.
+  */
   responseForm: FormGroup;
+
+  /*
+    Stores the currently selected inquiry for response.
+    Initially set to null until an inquiry is selected.
+  */
   selectedInquiry: PropertyInquiry | null = null;
 
+  /*
+    Available priority levels and statuses used for filtering inquiries.
+  */
   priorities = ['All', 'Low', 'Medium', 'High'];
   statuses = ['All', 'Pending', 'Resolved'];
 
+  /*
+    Stores filter selections for priority and status.
+    Also includes a search field for dynamically filtering inquiries.
+  */
   filterPriority = 'All';
   filterStatus = 'All';
-  searchInquiry = ''; // Search field for filtering inquiries dynamically
+  searchInquiry = '';
 
+  /*
+    Constructor injects necessary services:
+    - `PropertyInquiryService` for fetching, updating, and deleting inquiries.
+    - `FormBuilder` to manage inquiry response form creation.
+  */
   constructor(
     private readonly inquiryService: PropertyInquiryService,
     private readonly fb: FormBuilder
@@ -31,14 +57,18 @@ export class AdminViewInquiryComponent implements OnInit {
     });
   }
 
+  /*
+    Lifecycle hook executed when the component initializes.
+    Loads inquiries for display.
+  */
   ngOnInit(): void {
     this.loadInquiries();
   }
 
-  /**
-   * Fetches all inquiries for admin view.
-   * Populates both inquiries and filteredInquiries on successful retrieval.
-   */
+  /*
+    Fetches all inquiries from the service.
+    Updates both `inquiries` and `filteredInquiries` upon successful retrieval.
+  */
   loadInquiries(): void {
     this.inquiryService.getAllPropertyInquiry().subscribe(
       (data) => {
@@ -53,9 +83,9 @@ export class AdminViewInquiryComponent implements OnInit {
     );
   }
 
-  /**
-   * Applies filters for priority, status, and search.
-   */
+  /*
+    Applies filters to the inquiries based on priority, status, and search field.
+  */
   applyFilters(): void {
     this.filteredInquiries = this.inquiries.filter(inquiry =>
       (this.filterPriority === 'All' || inquiry.priority === this.filterPriority) &&
@@ -64,18 +94,19 @@ export class AdminViewInquiryComponent implements OnInit {
     );
   }
 
-  /**
-   * Opens the inquiry response modal.
-   * @param inquiry The selected inquiry for response.
-   */
+  /*
+    Opens the inquiry response modal for the selected inquiry.
+    Resets the response form before displaying the modal.
+  */
   openResponseModal(inquiry: PropertyInquiry): void {
     this.selectedInquiry = inquiry;
     this.responseForm.reset();
   }
 
-  /**
-   * Submits an admin response to the selected inquiry.
-   */
+  /*
+    Submits the admin response to the selected inquiry.
+    Updates the inquiry status to "Resolved" and refreshes the inquiry list.
+  */
   submitResponse(): void {
     if (this.selectedInquiry) {
       const updatedInquiry: PropertyInquiry = {
@@ -92,15 +123,16 @@ export class AdminViewInquiryComponent implements OnInit {
     }
   }
 
-  /**
-   * Deletes an inquiry by ID.
-   * @param id The ID of the inquiry to be deleted.
-   */
+  /*
+    Deletes an inquiry by its ID.
+    Prompts for confirmation before proceeding with deletion.
+    Refreshes the list upon successful deletion.
+  */
   deleteInquiry(id: number): void {
-    if(confirm("Are you sure!")){
-    this.inquiryService.deletePropertyInquiryById(id).subscribe(() => {
-      this.ngOnInit(); // Refresh list after deletion
-    });
-  }
+    if (confirm("Are you sure!")) {
+      this.inquiryService.deletePropertyInquiryById(id).subscribe(() => {
+        this.ngOnInit(); // Refresh list after deletion
+      });
+    }
   }
 }

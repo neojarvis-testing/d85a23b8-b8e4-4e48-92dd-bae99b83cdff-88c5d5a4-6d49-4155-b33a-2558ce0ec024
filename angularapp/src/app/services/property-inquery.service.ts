@@ -9,32 +9,59 @@ import { apiUrl } from '../constant/ApiUrl';
 })
 export class PropertyInquiryService {
 
-  constructor(private readonly http:HttpClient) { }
-  addPropertyInquiry(propertyInquiry:PropertyInquiry):Observable<PropertyInquiry>{
-    return this.http.post<PropertyInquiry>(`${apiUrl}/inquiries`,propertyInquiry)
+  /*
+    Constructor injects the HttpClient service for making API requests.
+  */
+  constructor(private readonly http: HttpClient) {}
+
+  /*
+    Adds a new property inquiry.
+    Sends inquiry data to the API and returns an observable containing the created inquiry.
+  */
+  addPropertyInquiry(propertyInquiry: PropertyInquiry): Observable<PropertyInquiry> {
+    return this.http.post<PropertyInquiry>(`${apiUrl}/inquiries`, propertyInquiry);
   }
 
-  getAllPropertyInquiry():Observable<PropertyInquiry[]>{
-    return this.http.get<PropertyInquiry[]>(`${apiUrl}/inquiries`)
+  /*
+    Retrieves all property inquiries.
+    Returns an observable containing a list of inquiries fetched from the API.
+  */
+  getAllPropertyInquiry(): Observable<PropertyInquiry[]> {
+    return this.http.get<PropertyInquiry[]>(`${apiUrl}/inquiries`);
   }
 
-  getPropertyInquiryById(inquiryId:number):Observable<PropertyInquiry>{
-    return this.http.get<PropertyInquiry>(`${apiUrl}/inquiries/${inquiryId}`)
+  /*
+    Fetches a specific property inquiry by its ID.
+    Returns an observable containing the inquiry details.
+  */
+  getPropertyInquiryById(inquiryId: number): Observable<PropertyInquiry> {
+    return this.http.get<PropertyInquiry>(`${apiUrl}/inquiries/${inquiryId}`);
   }
 
-  editPropertyInquiryById(inquiryId:number,propertyInquiry:PropertyInquiry):Observable<PropertyInquiry>{
-    console.log(inquiryId)
-    console.log(propertyInquiry)
-    return this.http.put<PropertyInquiry>(`${apiUrl}/inquiries/${inquiryId}`,propertyInquiry)
-  }
-  
-  deletePropertyInquiryById(inquiryId:number):Observable<void>{
-    return this.http.delete<void>(`${apiUrl}/inquiries/${inquiryId}`)
+  /*
+    Updates an existing property inquiry by its ID.
+    Sends updated inquiry data to the API and returns an observable containing the modified inquiry.
+  */
+  editPropertyInquiryById(inquiryId: number, propertyInquiry: PropertyInquiry): Observable<PropertyInquiry> {
+    console.log(inquiryId);
+    console.log(propertyInquiry);
+    return this.http.put<PropertyInquiry>(`${apiUrl}/inquiries/${inquiryId}`, propertyInquiry);
   }
 
+  /*
+    Deletes a property inquiry by its ID.
+    Sends a delete request to the API and returns an observable to confirm deletion.
+  */
+  deletePropertyInquiryById(inquiryId: number): Observable<void> {
+    return this.http.delete<void>(`${apiUrl}/inquiries/${inquiryId}`);
+  }
 
-  getInquiryByUserId(userId:number):Observable<PropertyInquiry[]>{
-   return this.http.get<PropertyInquiry[]>(`${apiUrl}/inquiries/user/${userId}`)
+  /*
+    Retrieves all inquiries submitted by a specific user.
+    Returns an observable containing the list of inquiries filtered by user ID.
+  */
+  getInquiryByUserId(userId: number): Observable<PropertyInquiry[]> {
+    return this.http.get<PropertyInquiry[]>(`${apiUrl}/inquiries/user/${userId}`);
   }
 
 }
