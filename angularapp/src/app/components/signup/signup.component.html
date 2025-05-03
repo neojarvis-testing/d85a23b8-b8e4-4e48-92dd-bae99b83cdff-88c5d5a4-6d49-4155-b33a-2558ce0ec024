@@ -1,5 +1,5 @@
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 <!-- Registration Page Wrapper -->
 <div class="wrapper">
   <div class="content">
@@ -14,49 +14,68 @@
       <!-- Registration Form -->
       <div class="form-container">
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          
+          <!-- Email Input -->
           <div>
             <label for="email">Email:</label>
             <div class="input-icon">
               <i class="fas fa-envelope"></i>
-              <input type="email" id="email" formControlName="email" placeholder="Enter your email" />
+              <input type="email" id="email" formControlName="email" placeholder="Enter your email" required>
             </div>
+            <small class="error" *ngIf="form.controls.email?.invalid && form.controls.email?.touched">
+              Invalid email format
+            </small>
           </div>
 
+          <!-- Password Input -->
           <div>
             <label for="password">Password:</label>
             <div class="input-icon">
               <i class="fas fa-lock"></i>
-              <input type="password" id="password" formControlName="password" placeholder="Enter your password" />
+              <input type="password" id="password" formControlName="password" placeholder="Enter your password" required>
             </div>
+            <small class="error" *ngIf="form.controls.password?.invalid && form.controls.password?.touched">
+              Password must be at least 8 characters, with uppercase, lowercase, number & special character
+            </small>
           </div>
 
+          <!-- Confirm Password -->
           <div>
             <label for="confirmPassword">Confirm Password:</label>
             <div class="input-icon">
               <i class="fas fa-lock"></i>
-              <input type="password" id="confirmPassword" formControlName="confirmPassword" placeholder="Confirm your password" />
+              <input type="password" id="confirmPassword" formControlName="confirmPassword" placeholder="Confirm your password" required>
             </div>
-            <div *ngIf="form.hasError('passwordMismatch')">
-              <small class="error">Passwords do not match.</small>
-            </div>
+            <small class="error" *ngIf="form.hasError('passwordMismatch')">
+              Passwords do not match
+            </small>
           </div>
 
+          <!-- Username -->
           <div>
             <label for="username">Username:</label>
             <div class="input-icon">
               <i class="fas fa-user"></i>
-              <input type="text" id="username" formControlName="username" placeholder="Enter your username" />
+              <input type="text" id="username" formControlName="username" placeholder="Enter your username" required>
             </div>
+            <small class="error" *ngIf="form.controls.username?.invalid && form.controls.username?.touched">
+              Username must be at least 3 characters and contain only letters, numbers & underscores
+            </small>
           </div>
 
+          <!-- Mobile Number -->
           <div>
             <label for="number">Number:</label>
             <div class="input-icon">
               <i class="fas fa-phone-alt"></i>
-              <input type="text" id="number" formControlName="number" placeholder="Enter your number" />
+              <input type="text" id="number" formControlName="number" placeholder="Enter your number" required>
             </div>
+            <small class="error" *ngIf="form.controls.number?.invalid && form.controls.number?.touched">
+              Please enter a valid 10-digit mobile number
+            </small>
           </div>
 
+          <!-- Submit Button -->
           <div>
             <button type="submit" [disabled]="form.invalid">Register</button>
           </div>
