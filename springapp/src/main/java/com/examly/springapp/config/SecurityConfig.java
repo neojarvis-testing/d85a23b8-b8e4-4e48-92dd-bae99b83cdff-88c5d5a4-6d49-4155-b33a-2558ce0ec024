@@ -10,7 +10,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
- 
+import org.springframework.http.HttpMethod;
 
  
  
@@ -56,23 +56,21 @@ public class SecurityConfig {
         http.csrf(csrf->csrf.disable())
         .cors(cors->cors.disable())
         .authorizeHttpRequests(auth->auth
-        // .requestMatchers(HttpMethod.GET, "/api/properties").hasAnyRole("USER","ADMIN")
-        // .requestMatchers(HttpMethod.GET, "/api/properties/{propertyId}").hasAnyRole("ADMIN")
-        // .requestMatchers(HttpMethod.POST, "/api/properties").hasRole("ADMIN")
-        // .requestMatchers(HttpMethod.PUT, "/api/properties/{propertyId}").hasAnyRole("ADMIN")
-        // .requestMatchers(HttpMethod.DELETE, "/api/properties/{propertyId}").hasAnyRole("ADMIN")
-        // .requestMatchers(HttpMethod.POST, "/api/feedback").hasAnyRole("USER")
-        // .requestMatchers(HttpMethod.GET, "/api/feedback/user/{userId}").hasAnyRole("USER")
-        // .requestMatchers(HttpMethod.DELETE,"/api/feedback/{feedbackId}").hasAnyRole("USER")
-        // .requestMatchers(HttpMethod.GET,"/api/feedback").hasAnyRole("ADMIN")
-        // .requestMatchers(HttpMethod.GET,"/api/feedback/user/{userId}").hasAnyRole("USER")
-        // .requestMatchers(HttpMethod.GET,"/api/feedback/{feedbackId}").hasAnyRole("USER","ADMIN")
-        // .requestMatchers(HttpMethod.POST,"/api/inquiries").hasAnyRole("USER")
-        // .requestMatchers(HttpMethod.GET,"/api/inquiries/{inquiryId}").hasAnyRole("ADMIN")
-        // .requestMatchers(HttpMethod.GET,"/api/inquiries/user/{userId}").hasAnyRole("USER")
-        // .requestMatchers(HttpMethod.GET,"/api/inquiries").hasAnyRole("ADMIN")
-        // .requestMatchers(HttpMethod.PUT,"/api/inquiries/{inquiryId}").hasAnyRole("ADMIN")
-        // .requestMatchers(HttpMethod.DELETE,"/api/inquiries/{inquiryId}").hasAnyRole("ADMIN","USER")
+        .requestMatchers(HttpMethod.GET, "/api/properties").hasAnyRole("USER","ADMIN")
+        .requestMatchers(HttpMethod.POST, "/api/properties").hasRole("ADMIN")
+        .requestMatchers(HttpMethod.PUT, "/api/properties/{propertyId}").hasAnyRole("ADMIN")
+        .requestMatchers(HttpMethod.DELETE, "/api/properties/{propertyId}").hasAnyRole("ADMIN")
+        .requestMatchers(HttpMethod.POST, "/api/feedback").hasAnyRole("USER")
+        .requestMatchers(HttpMethod.GET, "/api/feedback/user/{userId}").hasAnyRole("USER")
+        .requestMatchers(HttpMethod.DELETE,"/api/feedback/{feedbackId}").hasAnyRole("USER")
+        .requestMatchers(HttpMethod.GET,"/api/feedback").hasAnyRole("ADMIN")
+        .requestMatchers(HttpMethod.GET,"/api/feedback/user/{userId}").hasAnyRole("USER")
+        .requestMatchers(HttpMethod.GET,"/api/feedback/{feedbackId}").hasAnyRole("USER","ADMIN")
+        .requestMatchers(HttpMethod.POST,"/api/inquiries").hasAnyRole("USER")
+        .requestMatchers(HttpMethod.GET,"/api/inquiries/user/{userId}").hasAnyRole("USER")
+        .requestMatchers(HttpMethod.GET,"/api/inquiries").hasAnyRole("ADMIN")
+        .requestMatchers(HttpMethod.PUT,"/api/inquiries/{inquiryId}").hasAnyRole("ADMIN")
+        .requestMatchers(HttpMethod.DELETE,"/api/inquiries/{inquiryId}").hasAnyRole("ADMIN","USER")
         .anyRequest().permitAll())
         .exceptionHandling(exception-> exception.authenticationEntryPoint(jwtAuthenticationEntryPoint))
         .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);    
