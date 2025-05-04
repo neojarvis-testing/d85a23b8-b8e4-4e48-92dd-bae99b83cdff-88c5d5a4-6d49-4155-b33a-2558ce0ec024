@@ -14,7 +14,7 @@ import jakarta.servlet.http.HttpServletRequest;
 
 @Component
 public class JwtUtils {
-   // @Value("${SECRET_KEY}")   // Injects secret key from application properties
+//@Value("${SECRET_KEY}")   // Injects secret key from application properties
     
     private String secretKey="java";
 
