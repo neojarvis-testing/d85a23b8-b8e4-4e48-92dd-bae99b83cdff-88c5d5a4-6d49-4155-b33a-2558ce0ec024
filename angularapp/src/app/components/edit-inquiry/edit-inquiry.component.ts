@@ -10,35 +10,67 @@ import { PropertyInquiryService } from 'src/app/services/property-inquery.servic
 })
 export class EditInquiryComponent implements OnInit {
 
-  form:FormGroup
-  inquiryId:number
-  userId:number
-  propertyId:number
-  constructor(private readonly service:PropertyInquiryService,private readonly fb:FormBuilder,private readonly activatedRoute:ActivatedRoute) { 
-  this.form = fb.group({
-  message:['',[Validators.required]],
-  status:['',[Validators.required]],
-  inquiryDate:['',[Validators.required]],
-  responseDate:['',[Validators.required]],
-  adminResponse:['',[Validators.required]],
-  priority:['',[Validators.required]],
-  contactDetails:['',[Validators.required]]
-  })
+  /*
+    Form group that holds inquiry details for editing.
+    Includes validation rules for required fields.
+  */
+  form: FormGroup;
 
+  /*
+    Stores inquiry ID fetched from route parameters.
+  */
+  inquiryId: number;
+
+  /*
+    Stores user and property IDs (currently hardcoded for simplicity).
+  */
+  userId: number;
+  propertyId: number;
+
+  /*
+    Constructor injects necessary services:
+    - `PropertyInquiryService` for API interactions related to inquiries.
+    - `FormBuilder` for creating and managing inquiry form.
+    - `ActivatedRoute` to retrieve route parameters.
+  */
+  constructor(
+    private readonly service: PropertyInquiryService,
+    private readonly fb: FormBuilder,
+    private readonly activatedRoute: ActivatedRoute
+  ) { 
+    this.form = fb.group({
+      message: ['', [Validators.required]],
+      status: ['', [Validators.required]],
+      inquiryDate: ['', [Validators.required]],
+      responseDate: ['', [Validators.required]],
+      adminResponse: ['', [Validators.required]],
+      priority: ['', [Validators.required]],
+      contactDetails: ['', [Validators.required]]
+    });
   }
+
+  /*
+    Lifecycle hook executed when the component initializes.
+    Fetches inquiry ID from route parameters and loads inquiry details.
+  */
   ngOnInit(): void {
-    this.inquiryId = this.activatedRoute.snapshot.params['id']
-    this.service.getPropertyInquiryById(this.inquiryId).subscribe((data)=>{
-      this.form.patchValue({...data})
-    })
+    this.inquiryId = this.activatedRoute.snapshot.params['id'];
+    this.service.getPropertyInquiryById(this.inquiryId).subscribe((data) => {
+      this.form.patchValue({ ...data });
+    });
   }
 
+  /*
+    Saves the updated inquiry details.
+    Hardcodes `userId` and `propertyId` values for demonstration.
+    Sends updated inquiry data to the server and displays an alert upon success.
+  */
+  save(): void {
+    this.form.value.userId = 1;
+    this.form.value.propertyId = 2;
 
-  save(){
-    this.form.value.userId = 1
-    this.form.value.propertyId = 2
-    this.service.editPropertyInquiryById(this.inquiryId,this.form.value).subscribe((data)=>{
-      alert("edited inquiry!")
-    })
+    this.service.editPropertyInquiryById(this.inquiryId, this.form.value).subscribe(() => {
+      alert("Edited inquiry!");
+    });
   }
 }

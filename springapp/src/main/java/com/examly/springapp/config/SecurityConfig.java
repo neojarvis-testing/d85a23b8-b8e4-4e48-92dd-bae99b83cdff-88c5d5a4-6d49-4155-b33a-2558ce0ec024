@@ -55,9 +55,8 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         http.csrf(csrf->csrf.disable())
         .cors(cors->cors.disable())
-         .authorizeHttpRequests(auth->auth
+        .authorizeHttpRequests(auth->auth
         .requestMatchers(HttpMethod.GET, "/api/properties").hasAnyRole("USER","ADMIN")
-        .requestMatchers(HttpMethod.GET, "/api/properties/{propertyId}").hasAnyRole("ADMIN")
         .requestMatchers(HttpMethod.POST, "/api/properties").hasRole("ADMIN")
         .requestMatchers(HttpMethod.PUT, "/api/properties/{propertyId}").hasAnyRole("ADMIN")
         .requestMatchers(HttpMethod.DELETE, "/api/properties/{propertyId}").hasAnyRole("ADMIN")
@@ -68,7 +67,6 @@ public class SecurityConfig {
         .requestMatchers(HttpMethod.GET,"/api/feedback/user/{userId}").hasAnyRole("USER")
         .requestMatchers(HttpMethod.GET,"/api/feedback/{feedbackId}").hasAnyRole("USER","ADMIN")
         .requestMatchers(HttpMethod.POST,"/api/inquiries").hasAnyRole("USER")
-        .requestMatchers(HttpMethod.GET,"/api/inquiries/{inquiryId}").hasAnyRole("ADMIN")
         .requestMatchers(HttpMethod.GET,"/api/inquiries/user/{userId}").hasAnyRole("USER")
         .requestMatchers(HttpMethod.GET,"/api/inquiries").hasAnyRole("ADMIN")
         .requestMatchers(HttpMethod.PUT,"/api/inquiries/{inquiryId}").hasAnyRole("ADMIN")
@@ -79,4 +77,5 @@ public class SecurityConfig {
         return http.build();
     }
  
+
 }

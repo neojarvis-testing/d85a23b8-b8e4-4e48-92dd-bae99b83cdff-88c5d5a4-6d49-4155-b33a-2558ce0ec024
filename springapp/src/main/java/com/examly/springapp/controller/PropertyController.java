@@ -70,9 +70,7 @@ public class PropertyController {
     public ResponseEntity<ApiResponse> deleteProperty(@PathVariable Long propertyId) {
 
         propertyservice.deleteProperty(propertyId);
-
-        ApiResponse response = new ApiResponse("Deleted Successfully")   ;
-
+        ApiResponse response = new ApiResponse("Deleted Successfully");
         return ResponseEntity.status(200).body(response); // Return 200 OK if deletion is successful
     }
 }
