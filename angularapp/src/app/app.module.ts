@@ -25,6 +25,7 @@ import { AuthguardComponent } from './components/authguard/authguard.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthInterceptor } from './auth.interceptor';
 import { MyInquiryComponent } from './components/my-inquiry/my-inquiry.component';
+import { ChatbotComponent } from './components/chatbot/chatbot.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { MyInquiryComponent } from './components/my-inquiry/my-inquiry.component
     UserViewPropertiesComponent,
     UsernavComponent,
     AuthguardComponent,
-    MyInquiryComponent
+    MyInquiryComponent,
+    ChatbotComponent
   ],
   imports: [
     BrowserModule,
