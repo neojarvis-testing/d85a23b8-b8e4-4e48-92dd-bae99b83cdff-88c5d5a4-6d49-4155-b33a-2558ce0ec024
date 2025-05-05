@@ -10,70 +10,39 @@ import { PropertyInquiryService } from 'src/app/services/property-inquery.servic
 })
 export class AdminViewInquiryComponent implements OnInit {
 
-  /*
-    Stores all inquiries retrieved from the service.
-    Also maintains a filtered list of inquiries based on user-selected filters.
-  */
   inquiries: PropertyInquiry[] = [];
   filteredInquiries: PropertyInquiry[] = [];
 
-  /*
-    Form group used to manage the admin's response to an inquiry.
-  */
   responseForm: FormGroup;
-
-  /*
-    Stores the currently selected inquiry for response.
-    Initially set to null until an inquiry is selected.
-  */
   selectedInquiry: PropertyInquiry | null = null;
 
-  /*
-    Available priority levels and statuses used for filtering inquiries.
-  */
   priorities = ['All', 'Low', 'Medium', 'High'];
-  statuses = ['All', 'Pending', 'Resolved'];
+  statuses = ['All', 'Resolved', 'Pending', 'Unresolved']; // ✅ Updated status options
 
-  /*
-    Stores filter selections for priority and status.
-    Also includes a search field for dynamically filtering inquiries.
-  */
   filterPriority = 'All';
   filterStatus = 'All';
   searchInquiry = '';
 
-  /*
-    Constructor injects necessary services:
-    - `PropertyInquiryService` for fetching, updating, and deleting inquiries.
-    - `FormBuilder` to manage inquiry response form creation.
-  */
   constructor(
     private readonly inquiryService: PropertyInquiryService,
     private readonly fb: FormBuilder
   ) {
     this.responseForm = this.fb.group({
       adminResponse: [''],
-      contactDetails: ['']
+      contactDetails: [''],
+      status: ['Unresolved'] // ✅ Default status selection
     });
   }
 
-  /*
-    Lifecycle hook executed when the component initializes.
-    Loads inquiries for display.
-  */
   ngOnInit(): void {
     this.loadInquiries();
   }
 
-  /*
-    Fetches all inquiries from the service.
-    Updates both `inquiries` and `filteredInquiries` upon successful retrieval.
-  */
   loadInquiries(): void {
     this.inquiryService.getAllPropertyInquiry().subscribe(
       (data) => {
         this.inquiries = data;
-        this.applyFilters(); // Apply filters to update the view
+        this.applyFilters();
       },
       (error) => {
         console.error('Error fetching inquiries:', error);
@@ -83,9 +52,6 @@ export class AdminViewInquiryComponent implements OnInit {
     );
   }
 
-  /*
-    Applies filters to the inquiries based on priority, status, and search field.
-  */
   applyFilters(): void {
     this.filteredInquiries = this.inquiries.filter(inquiry =>
       (this.filterPriority === 'All' || inquiry.priority === this.filterPriority) &&
@@ -94,44 +60,31 @@ export class AdminViewInquiryComponent implements OnInit {
     );
   }
 
-  /*
-    Opens the inquiry response modal for the selected inquiry.
-    Resets the response form before displaying the modal.
-  */
   openResponseModal(inquiry: PropertyInquiry): void {
     this.selectedInquiry = inquiry;
     this.responseForm.reset();
+    this.responseForm.patchValue({ status: inquiry.status }); // ✅ Ensure status dropdown is pre-filled
   }
 
-  /*
-    Submits the admin response to the selected inquiry.
-    Updates the inquiry status to "Resolved" and refreshes the inquiry list.
-  */
   submitResponse(): void {
     if (this.selectedInquiry) {
       const updatedInquiry: PropertyInquiry = {
         ...this.selectedInquiry,
         ...this.responseForm.value,
-        status: 'Resolved',
         responseDate: new Date()
       };
-  
+
       this.inquiryService.editPropertyInquiryById(updatedInquiry.inquiryId, updatedInquiry).subscribe(() => {
         this.selectedInquiry = null;
-        this.loadInquiries(); // Refresh the inquiry list
+        this.loadInquiries();
       });
     }
   }
 
-  /*
-    Deletes an inquiry by its ID.
-    Prompts for confirmation before proceeding with deletion.
-    Refreshes the list upon successful deletion.
-  */
   deleteInquiry(id: number): void {
     if (confirm("Are you sure!")) {
       this.inquiryService.deletePropertyInquiryById(id).subscribe(() => {
-        this.ngOnInit(); // Refresh list after deletion
+        this.ngOnInit();
       });
     }
   }

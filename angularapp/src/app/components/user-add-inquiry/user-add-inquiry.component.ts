@@ -61,8 +61,8 @@ export class UserAddInquiryComponent implements OnInit {
     Logs inquiry data and triggers popup upon successful submission.
   */
   addInquiry(): void {
-    this.inquiryForm.value.userId = localStorage.getItem('userId');
-    this.inquiryForm.value.propertyId = this.propertyId;
+    this.inquiryForm.value.userId = +localStorage.getItem('userId');
+    this.inquiryForm.value.propertyId = +this.propertyId;
     this.inquiryForm.value.status = 'Pending';
     this.inquiryForm.value.inquiryDate = new Date();
 
