@@ -127,6 +127,7 @@ export class UserAddFeedbackComponent implements OnInit {
         this.successMessage = '✅ Feedback submitted successfully!';
         this.showPopup = false;
         feedbackForm.reset();
+        this.router.navigate(['/user-view-feedback']);
       },
       error: () => {
         this.errorMessage = '❌ Failed to submit feedback. Please try again.';

@@ -1,66 +1,87 @@
-
-/* Apply Montserrat font */
+/* Import Montserrat Font */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 
-body {
+/* Universal Styling */
+html, body {
     font-family: 'Montserrat', sans-serif;
-    background-color: black !important;
-    padding: 20px;
+    background-color: #000 !important;
+    /* color: #fff; */
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+/* Wrapper */
+.wrapper {
+    padding: 40px;
 }
 
 /* Control Panel Title */
-h1 {
-    text-align: center;
-    font-size: 36px;
+h1.control-panel-title {
+    font-size: 38px;
     font-weight: 700;
-    color:white;
-    margin-bottom: 30px;
-}
-/* Font Awesome in Heading */
-.control-panel-title i {
-    margin-right: 10px;
     color: #ffcc00;
-}
-/* Yellow Cards Styling */
-.control-panel-card {
-    background-color: #ffcc00; /* Yellow background */
-    color: black;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2); /* Soft shadow */
-    text-align: center;
-    transition: transform 0.3s ease-in-out;
+    text-shadow: 2px 2px 8px rgba(255, 204, 0, 0.6);
+    margin-bottom: 40px;
 }
 
-/* Hover Effect */
+/* Font Awesome Icon in Title */
+.control-panel-title i {
+    margin-right: 12px;
+    color: #ffcc00;
+}
+
+/* Control Panel Cards */
+.control-panel-card {
+    background: linear-gradient(135deg, #ffdc00, #ffbb00); /* Sleek gradient effect */
+    color: #000;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 5px 7px 15px rgba(255, 255, 255, 0.3);
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Hover Effects */
 .control-panel-card:hover {
-    transform: scale(1.05);
-    box-shadow: 4px 8px 16px rgba(0, 0, 0, 0.3);
+    transform: scale(1.06);
+    box-shadow: 6px 10px 20px rgba(255, 255, 255, 0.4);
 }
 
 /* Card Title */
 .control-panel-card h2 {
-    font-size: 24px;
+    font-size: 26px;
     font-weight: 700;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
 }
 
 /* Card Data */
 .control-panel-card p {
-    font-size: 20px;
-    font-weight: 500;
-    margin: 0;
+    font-size: 22px;
+    font-weight: 600;
 }
 
-/* Font Awesome Icon Styling */
+/* Font Awesome Icons */
 .control-panel-card i {
     display: block;
-    margin-bottom: 15px;
-    color: black;
+    margin-bottom: 18px;
+    color: #000;
+    transition: color 0.3s ease-in-out;
 }
 
-/* Icon Hover Effect */
+/* Hover Effect for Icons */
 .control-panel-card:hover i {
     color: white;
 }
 
+/* Responsive Tweaks */
+@media (max-width: 768px) {
+    .control-panel-card {
+        padding: 20px;
+        font-size: 18px;
+    }
+
+    h1.control-panel-title {
+        font-size: 30px;
+    }
+}

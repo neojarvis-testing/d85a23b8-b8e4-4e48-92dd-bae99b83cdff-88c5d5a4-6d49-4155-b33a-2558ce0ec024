@@ -15,7 +15,7 @@
             </span>
             <input type="text" class="form-control" placeholder="Search feedback..." [(ngModel)]="searchText" (input)="filterFeedbacks()">
         </div>
-    
+
         <!-- Filter by Category -->
         <div class="input-group w-25">
             <span class="input-group-text bg-warning text-dark">
@@ -29,21 +29,21 @@
             </select>
         </div>
     </div>
-    
 
     <!-- Feedback Table -->
-    <div class="table-responsive">
-        <table *ngIf="filteredFeedbacks.length > 0" class="table table-dark table-striped">
-            <thead>
+    <div class="table-responsive shadow-lg rounded">
+        <table *ngIf="filteredFeedbacks.length > 0" class="table table-dark table-hover align-middle">
+            <thead class="table-warning text-dark">
                 <tr>
                     <th>#</th>
                     <th><i class="fa-solid fa-comment-dots"></i> Message</th>
                     <th><i class="fa-regular fa-calendar-check"></i> Date</th>
-                    <th><i class="fa-solid fa-filter-circle-dollar"></i> Category</th>
-                    <th><i class="fa-solid fa-house-chimney"></i> Property</th>
+                    <th>Category</th>
+                    <th>Property</th>
                     <th><i class="fa-solid fa-trash-can"></i> Action</th>
                 </tr>
             </thead>
+
             <tbody>
                 <tr *ngFor="let feedback of paginatedFeedbacks; let i = index">
                     <td>{{ (currentPage - 1) * pageSize + i + 1 }}</td>
@@ -62,7 +62,7 @@
     </div>
 
     <!-- Pagination -->
-    <nav *ngIf="filteredFeedbacks.length > pageSize">
+    <nav *ngIf="filteredFeedbacks.length > pageSize" class="mt-4">
         <ul class="pagination justify-content-center">
             <li class="page-item" [class.disabled]="currentPage === 1">
                 <button class="page-link" (click)="changePage(currentPage - 1)">

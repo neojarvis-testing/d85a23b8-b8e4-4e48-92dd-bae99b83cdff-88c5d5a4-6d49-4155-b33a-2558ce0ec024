@@ -35,20 +35,23 @@
     <!-- Inquiry Table -->
     <div class="table-responsive">
         <table *ngIf="filteredInquiries.length > 0" class="table table-dark table-striped">
-          <thead>
-            <tr>
-                <th><i class="fa-solid fa-building"></i> Property</th>
-                <th><i class="fa-solid fa-comment-dots"></i> Message</th>
-                <th><i class="fa-solid fa-star"></i> Priority</th>
-                <th><i class="fa-solid fa-spinner"></i> Status</th>
-                <th><i class="fa-solid fa-calendar-day"></i> Inquiry Date</th>
-                <th><i class="fa-solid fa-user-check"></i> Admin Response</th>
-                <th><i class="fa-solid fa-phone"></i> Contact Details</th>
-            </tr>
-        </thead>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th><i class="fa-solid fa-building"></i> Property</th>
+                    <th><i class="fa-solid fa-comment-dots"></i> Message</th>
+                    <th>Priority</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                    <th><i class="fa-solid fa-user-check"></i> Admin Response</th>
+                    <th><i class="fa-solid fa-phone"></i> Contact </th>
+                </tr>
+            </thead>
+            
         
         <tbody>
-          <tr *ngFor="let inquiry of paginatedInquiries; let i = index">
+            <tr *ngFor="let inquiry of paginatedInquiries; let i = index">
+              <td>{{ i + 1 }}.</td>
               <td>{{ inquiry.property.title }}</td>
               <td>{{ inquiry.message }}</td>
               <td>{{ inquiry.priority }}</td>

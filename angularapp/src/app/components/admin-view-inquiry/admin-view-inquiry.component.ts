@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { PropertyInquiry } from 'src/app/models/property-inquiry.model';
 import { PropertyInquiryService } from 'src/app/services/property-inquery.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-admin-view-inquiry',
@@ -81,11 +82,34 @@ export class AdminViewInquiryComponent implements OnInit {
     }
   }
 
-  deleteInquiry(id: number): void {
-    if (confirm("Are you sure!")) {
-      this.inquiryService.deletePropertyInquiryById(id).subscribe(() => {
-        this.ngOnInit();
+  /*
+    Deletes an inquiry by its ID.
+    Prompts for confirmation before proceeding with deletion.
+    Refreshes the list upon successful deletion.
+  */
+    deleteInquiry(id: number): void {
+      Swal.fire({
+        title: 'Are you sure?',
+        text: 'This inquiry will be permanently deleted!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#dc3545', // Red for delete confirmation
+        cancelButtonColor: '#6c757d', // Gray for cancel
+        confirmButtonText: 'Yes, Delete!',
+        cancelButtonText: 'No, Keep it'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.inquiryService.deletePropertyInquiryById(id).subscribe(() => {
+            Swal.fire({
+              title: 'Deleted!',
+              text: 'The inquiry has been removed.',
+              icon: 'success',
+              confirmButtonColor: '#ffcc00' // Yellow for success confirmation
+            });
+            this.loadInquiries(); // Refresh inquiry list
+          });
+        }
       });
     }
-  }
 }
+

@@ -1,59 +1,38 @@
-
-body {
-  font-family: 'Arial', sans-serif;
-  background-color: #f8f9fa;
-}
-
-.container h2 {
-  font-weight: bold;
-}
-
-.table {
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-.table-hover tbody tr:hover {
-  background-color: rgba(0, 0, 0, 0.05);
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .table-responsive {
-    overflow-x: auto;
-  }
-}
-
 /* General Styling */
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #0b0b0b; /* Black background */
+  color: white;
+}
+
+/* Container Styling */
 .container {
   max-width: 1000px;
-  font-family: 'Poppins', sans-serif;
-  padding: 20px;
-  background-color: #f8f9fa;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 40px; /* Increased padding */
+  margin-top: 30px; /* Added margin to push it down */
+  background-color: #222222; /* Dark grey for contrast */
+  border-radius: 12px;
+  box-shadow: 0px 4px 12px rgba(255, 255, 0, 0.2);
 }
 
-/* Header Styling */
+/* Header */
 h2 {
-  font-weight: 600;
-  font-size: 28px;
+  font-weight: bold;
+  color: yellow;
   text-align: center;
-  color: #212529;
-  margin-bottom: 20px;
 }
 
 /* Table Styling */
 .table-dark {
   border-radius: 10px;
   overflow: hidden;
-  background-color: #343a40; /* Dark grey */
-  color: #f8f9fa;
+  background-color: #333333; /* Darker shade */
+  color: white;
 }
 
 thead {
   background: linear-gradient(to right, #FFA000, #FFC107);
-  color: #212529;
+  color: black;
   font-weight: bold;
 }
 
@@ -62,55 +41,50 @@ th, td {
   text-align: left;
 }
 
+/* Hover effect */
 tbody tr:hover {
-  background-color: #6c757d; /* Hover effect for better readability */
-}
-
-/* Pagination Styling */
-.pagination .page-item .page-link {
-  background-color: #343a40;
-  color: #FFC107;
-  border: 1px solid #343a40;
-  transition: all 0.3s ease-in-out;
-}
-
-.pagination .page-item .page-link:hover {
-  background-color: #FFC107;
-  color: black;
+  background-color: rgba(255, 255, 0, 0.2);
 }
 
 /* Search & Filter Styling */
 .input-group-text {
-  border: 1px solid #FFC107;
-  background-color: #FFC107;
-  color: #212529;
+  background-color: yellow;
+  color: black;
 }
 
 .form-control, .form-select {
-  border: 1px solid #FFC107;
-  background-color: #ffffff;
-  color: #212529;
+  background-color: #444444;
+  border: 1px solid yellow;
+  color: white;
 }
 
 .form-control::placeholder {
-  color: #6c757d;
+  color: #AAAAAA;
 }
 
-.form-select option {
+/* Pagination Styling */
+.pagination .page-item .page-link {
+  background-color: #444444;
+  color: yellow;
+  border: 1px solid yellow;
+  transition: all 0.3s ease-in-out;
+}
+
+.pagination .page-item .page-link:hover {
+  background-color: yellow;
   color: black;
 }
 
 /* No Data Styling */
 .no-data {
-  margin-top: 20px;
-  font-weight: 500;
-  font-size: 20px;
-  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
   padding: 15px;
   border-radius: 8px;
-  background-color: #343a40;
-  color: #FFC107;
+  background-color: #444444;
+  color: yellow;
 }
+
 /* Status Colors */
 .text-success {
   color: #28a745 !important; /* Green for resolved inquiries & admin response */
@@ -120,12 +94,8 @@ tbody tr:hover {
   color: #dc3545 !important; /* Red for pending inquiries & no admin response */
 }
 
-/* Colorful Font Awesome Icons */
-.fa-building { color: #4CAF50; }   /* Green for Property */
-.fa-comment-dots { color: #2196F3; }  /* Blue for Messages */
-.fa-star { color: #FF9800; } /* Orange for Priority */
-.fa-spinner { color: #E91E63; } /* Pink for Status */
-.fa-calendar-day { color: #9C27B0; } /* Purple for Inquiry Date */
-.fa-user-check { color: #009688; } /* Teal for Admin Response */
-.fa-phone { color: #F44336; } /* Red for Contact Details */
-
+/* Icon Colors */
+.fa-building { color: #4CAF50; }   
+.fa-comment-dots { color: #2196F3; }  
+.fa-user-check { color: #009688; } 
+.fa-phone { color: #F44336; }
