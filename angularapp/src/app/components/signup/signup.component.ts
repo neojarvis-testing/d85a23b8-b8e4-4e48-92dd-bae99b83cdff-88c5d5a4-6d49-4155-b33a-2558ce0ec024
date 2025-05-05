@@ -31,7 +31,7 @@ export class SignupComponent implements OnInit {
     this.form = this.fb.group(
       {
         email: ['', [Validators.required, Validators.email]], // Ensures valid email format
-        password: ['', [Validators.required, Validators.minLength(6)]], // Password must be at least 6 characters long
+        password: ['', [Validators.required,Validators.pattern("^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[!@#$%^&*])[A-Za-z\\d!@#$%^&*]{6,}$")]], // Password must be at least 6 characters long
         confirmPassword: ['', [Validators.required]], // Confirms password input
         username: ['', [Validators.required, Validators.minLength(3)]], // Username must be at least 3 characters
         number: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]], // Validates phone number format (10 digits)

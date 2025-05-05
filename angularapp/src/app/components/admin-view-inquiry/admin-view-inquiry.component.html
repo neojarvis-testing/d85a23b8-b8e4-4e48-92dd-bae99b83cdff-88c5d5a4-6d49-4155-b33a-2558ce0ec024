@@ -33,41 +33,42 @@
     </div>
 
     <!-- Inquiry Table -->
-    <div *ngIf="filteredInquiries.length > 0">
-      <table class="table table-striped table-hover mt-3">
-        <thead class="table-dark">
-          <tr class="table-header">
-            <th>ID</th>
-            <th>User</th>
-            <th>Property</th>
-            <th>Message</th>
-            <th>Status</th>
-            <th>Priority</th>
-            <th>Inquiry Date</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let inquiry of filteredInquiries">
-            <td>{{ inquiry.inquiryId }}</td>
-            <td>{{ inquiry.user.username }}</td>
-            <td>{{ inquiry.property.title }}</td>
-            <td>{{ inquiry.message }}</td>
-            <td>{{ inquiry.status }}</td>
-            <td>{{ inquiry.priority }}</td>
-            <td>{{ inquiry.inquiryDate | date:'dd-MM-yyyy' }}</td>
-            <td>
-              <button class="btn btn-warning btn-sm me-2" (click)="openResponseModal(inquiry)">
-                <i class="fas fa-reply"></i> Add Response
-              </button>
-              <button class="btn btn-danger btn-sm" (click)="deleteInquiry(inquiry.inquiryId)">
-                <i class="fas fa-trash"></i> Delete
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+<div *ngIf="filteredInquiries.length > 0">
+  <table class="table table-striped table-hover mt-3">
+    <thead class="table-dark">
+      <tr class="table-header">
+        <th>#</th>
+        <th>User</th>
+        <th>Property</th>
+        <th>Message</th>
+        <th>Status</th>
+        <th>Priority</th>
+        <th>Inquiry Date</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let inquiry of filteredInquiries; let i = index">
+        <td>{{ i + 1 }}</td> <!-- Serial Number (Sno.) -->
+        <td>{{ inquiry.user.username }}</td>
+        <td>{{ inquiry.property.title }}</td>
+        <td>{{ inquiry.message }}</td>
+        <td>{{ inquiry.status }}</td>
+        <td>{{ inquiry.priority }}</td>
+        <td>{{ inquiry.inquiryDate | date:'dd-MM-yyyy' }}</td>
+        <td>
+          <button class="btn btn-warning btn-sm me-2" (click)="openResponseModal(inquiry)">
+            <i class="fas fa-reply"></i> Add Response
+          </button>
+          <button class="btn btn-danger btn-sm" (click)="deleteInquiry(inquiry.inquiryId)">
+            <i class="fas fa-trash"></i> Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
 
     <!-- No Inquiry Found Message -->
     <div *ngIf="filteredInquiries.length === 0">

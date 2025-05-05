@@ -7,10 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomePageComponent implements OnInit {
 
+  isLoading: boolean = true;
   constructor() { }
 
   ngOnInit(): void {
-    throw new Error("notImplemented()")
+    setTimeout(() => {
+      this.isLoading = false; // Hide loader after content loads
+    }, 2000);
   }
-
 }

@@ -1,52 +1,78 @@
 /* General Styling */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #0b0b0b; /* Black background */
+    color: white;
+}
+
+/* Container Styling */
 .container {
     max-width: 1000px;
-    font-family: 'Poppins', sans-serif;
-    padding: 20px;
+    padding: 40px;
+    margin-top: 30px;
+    background-color: #222222;
+    border-radius: 12px;
+    box-shadow: 0px 4px 12px rgba(255, 255, 0, 0.2);
 }
 
 /* Header Styling */
 h2 {
-    font-weight: 600;
-    font-size: 28px;
+    font-weight: bold;
+    color: yellow;
     text-align: center;
-    margin-bottom: 20px;
 }
 
 /* Table Styling */
 .table-dark {
     border-radius: 10px;
     overflow: hidden;
-    background-color: #1E1E1E; /* Refined dark tone */
-    color: #f8f9fa;
+    background-color: #333333;
+    color: white;
 }
 
 thead {
-    background: linear-gradient(to right, #FFA000, #FFC107); /* Improved gradient */
-    color: #212529;
+    background: linear-gradient(to right, #FFA000, #FFC107);
+    color: black;
     font-weight: bold;
 }
 
 th, td {
     padding: 12px;
+    text-align: left;
+}
+
+/* Hover Effect */
+tbody tr:hover {
+    background-color: rgba(255, 255, 0, 0.2);
+}
+
+/* Search & Filter Styling */
+.input-group-text {
+    background-color: yellow;
+    color: black;
+}
+
+.form-control, .form-select {
+    background-color: #444444;
+    border: 1px solid yellow;
+    color: white;
+}
+
+.form-control::placeholder {
+    color: #AAAAAA;
 }
 
 /* Pagination Styling */
-.pagination {
-    margin-top: 20px;
-}
-
 .pagination .page-item .page-link {
-    background-color: #212529; /* Default black */
-    color: #FFC107;
-    border: 1px solid #212529;
+    background-color: #444444;
+    color: yellow;
+    border: 1px solid yellow;
     transition: all 0.3s ease-in-out;
 }
 
 .pagination .page-item .page-link:hover {
-    background-color: #FFC107; /* Yellow on hover */
+    background-color: yellow;
     color: black;
-    border: 1px solid #FFC107;
 }
 
 /* Delete Button Styling */
@@ -60,29 +86,25 @@ th, td {
     background-color: #a71d2a;
 }
 
-/* Search & Filter Styling */
-.form-control, .form-select {
-    border: 1px solid #FFC107;
-    background-color: #212529;
-    color: #f8f9fa;
-}
-
-.form-control::placeholder {
-    color: #b3b3b3;
-}
-
-.form-select option {
-    color: black;
-}
-
 /* No Data Styling */
 .no-data {
-    margin-top: 20px;
-    font-weight: 500;
-    font-size: 20px;
-    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
     padding: 15px;
     border-radius: 8px;
-    background-color: #333; /* Subtle contrast */
-    color: #FFC107;
+    background-color: #444444;
+    color: yellow;
 }
+
+/* Status Colors */
+.text-success {
+    color: #28a745 !important;
+}
+
+.text-danger {
+    color: #dc3545 !important;
+}
+
+/* Icon Colors */
+.fa-comment-dots { color: #2196F3; }  
+.fa-trash-can { color: #F44336; }  

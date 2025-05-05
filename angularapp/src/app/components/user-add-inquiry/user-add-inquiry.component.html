@@ -1,43 +1,59 @@
-<!-- Inquiry Submission Form -->
 <form class="container p-4 border rounded bg-black text-light shadow-sm"
   [formGroup]="inquiryForm" (ngSubmit)="addInquiry()">
   
+  <h2 class="text-center text-warning mb-3">
+    <i class="fas fa-comment-dots"></i> Submit Inquiry
+  </h2>
+
+  <!-- Message -->
   <div class="mb-3">
-    <label for="message" class="form-label text-warning">Message:</label>
+    <label for="message" class="form-label text-warning">
+      <i class="fas fa-envelope"></i> Message:
+    </label>
     <input id="message" type="text" formControlName="message"
       class="form-control bg-dark text-light border-warning" required />
     <div class="text-danger mt-1"
       *ngIf="inquiryForm.get('message')?.invalid && inquiryForm.get('message')?.touched">
-      Message is required.
+      <i class="fas fa-exclamation-circle"></i> Message is required.
     </div>
   </div>
 
+  <!-- Priority -->
   <div class="mb-3">
-    <label for="priority" class="form-label text-warning">Priority:</label>
+    <label for="priority" class="form-label text-warning">
+      <i class="fas fa-exclamation-triangle"></i> Priority:
+    </label>
     <select id="priority" formControlName="priority"
       class="form-select bg-dark text-light border-warning">
       <option selected disabled>Select Priority</option>
       <option value="High">High</option>
-      <option value="Low">Low</option>
       <option value="Medium">Medium</option>
+      <option value="Low">Low</option>
     </select>
   </div>
 
-  <button type="submit" class="btn btn-warning text-dark fw-bold" [disabled]="inquiryForm.invalid">
-    Submit
-  </button>
+  <!-- Submit Button -->
+  <div class="text-center">
+    <button type="submit" class="btn btn-warning text-dark fw-bold" [disabled]="inquiryForm.invalid">
+      <i class="fas fa-paper-plane"></i> Submit
+    </button>
+  </div>
 </form>
 
 <!-- Success Modal -->
 <div id="successModal" class="modal fade" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered"> <!-- Centered Modal -->
-    <div class="modal-content bg-white text-dark border-warning"> <!-- White Background -->
-      <div class="modal-body text-center"> <!-- Centered Content -->
-        <p style="color: green; font-size: 18px; font-weight: bold;">Inquiry submitted successfully!</p>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content bg-white text-dark border-warning">
+      <div class="modal-body text-center">
+        <p style="color: green; font-size: 18px; font-weight: bold;">
+          <i class="fas fa-check-circle"></i> Inquiry submitted successfully!
+        </p>
       </div>
-      <div class="modal-footer justify-content-center"> <!-- Centered Button -->
+      <div class="modal-footer justify-content-center">
         <button type="button" class="btn btn-primary text-light fw-bold" 
-          (click)="navigateToInquiries()" data-bs-dismiss="modal">OK</button>
+          (click)="navigateToInquiries()" data-bs-dismiss="modal">
+          OK
+        </button>
       </div>
     </div>
   </div>

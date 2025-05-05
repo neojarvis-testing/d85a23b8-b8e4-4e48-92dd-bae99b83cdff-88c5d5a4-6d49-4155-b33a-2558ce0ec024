@@ -30,7 +30,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
+  padding: 10px;
 }
  
 .property-image img {
@@ -162,4 +162,9 @@ button:hover {
  
 .success-modal button:hover {
   background-color: #f8f9fa;
+}
+
+h2 {
+  font-size: calc(1.325rem + .9vw);
+  text-align: center;
 }
