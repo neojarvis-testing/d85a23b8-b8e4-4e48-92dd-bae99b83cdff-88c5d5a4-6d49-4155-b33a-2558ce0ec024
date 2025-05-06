@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.examly.springapp.dtos.ApiResponse;
 import com.examly.springapp.dtos.PropertyInquiryInput;
 import com.examly.springapp.model.PropertyInquiry;
 import com.examly.springapp.service.PropertyInquiryServiceImpl;
@@ -75,12 +76,12 @@ public ResponseEntity<Object> updateInquiryById(@PathVariable long inquiryId,@Re
 
 @DeleteMapping("/{inquiryId}")   //Handles HTTP DELETE requests for removing a specific inquiry by ID
 
-public ResponseEntity<String> deleteInquiryById(@PathVariable long inquiryId){
+public ResponseEntity<ApiResponse> deleteInquiryById(@PathVariable long inquiryId){
     boolean flag = propertyInquiryService.deleteInquiryById(inquiryId);
     if(flag){
-        return ResponseEntity.status(200).body("Deletion is successfull!");  // Confirms successful deletion
+        return ResponseEntity.status(200).body(new ApiResponse("Deletion is successfull!"));  // Confirms successful deletion
     }
-    return ResponseEntity.status(404).body("Deletion is unsuccessfull!");  // Returns error response if deletion fails
+    return ResponseEntity.status(404).body(new ApiResponse("Deletion is unsuccessfull!"));  // Returns error response if deletion fails
 
 }
 

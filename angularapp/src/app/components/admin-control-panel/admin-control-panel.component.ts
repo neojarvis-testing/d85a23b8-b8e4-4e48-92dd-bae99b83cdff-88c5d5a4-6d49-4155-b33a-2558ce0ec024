@@ -53,8 +53,11 @@ export class AdminControlPanelComponent implements OnInit {
     Filter inquiries to get only high-priority ones.
   */
   getHighPriorityInquiries() {
-    this.highPriorityInquiries = this.inquiries.filter((i) => i.priority === "High");
+    this.service.getAllPropertyInquiry().subscribe((data)=>{
+     this.highPriorityInquiries = this.inquiries.filter((i) => i.priority === "High");
     this.allHighPriorityInquiries = this.highPriorityInquiries.length;
+    })
+   
   }
 
   /*
