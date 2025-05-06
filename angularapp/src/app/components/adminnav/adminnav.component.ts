@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-import Swal from 'sweetalert2';
+ import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-adminnav',
