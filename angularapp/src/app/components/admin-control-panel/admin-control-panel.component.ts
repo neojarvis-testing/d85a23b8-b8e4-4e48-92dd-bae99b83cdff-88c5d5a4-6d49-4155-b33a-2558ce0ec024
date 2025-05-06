@@ -54,23 +54,18 @@ export class AdminControlPanelComponent implements OnInit {
   */
   getHighPriorityInquiries() {
     this.service.getAllPropertyInquiry().subscribe((data)=>{
-      this.inquiries = data
-      this.highPriorityInquiries = this.inquiries.filter((i) => i.priority.includes("High"));
-      this.allHighPriorityInquiries = this.highPriorityInquiries.length;
+     this.highPriorityInquiries = this.inquiries.filter((i) => i.priority === "High");
+    this.allHighPriorityInquiries = this.highPriorityInquiries.length;
     })
-    
+   
   }
 
   /*
     Filter inquiries to get only unresolved ones.
   */
   getUnresolvedInquiries() {
-    this.service.getAllPropertyInquiry().subscribe((data)=>{
-      this.inquiries=data
-      this.unresolvedInquiries = this.inquiries.filter((i) => i.status === "Unresolved");
-      this.allUnresolvedInquiries = this.unresolvedInquiries.length;
-    })
-    
+    this.unresolvedInquiries = this.inquiries.filter((i) => i.status === "Pending");
+    this.allUnresolvedInquiries = this.unresolvedInquiries.length;
   }
 
   /*
@@ -102,4 +97,5 @@ export class AdminControlPanelComponent implements OnInit {
     this.getHighPriorityInquiries();
     this.getUnresolvedInquiries();
   }
+
 }

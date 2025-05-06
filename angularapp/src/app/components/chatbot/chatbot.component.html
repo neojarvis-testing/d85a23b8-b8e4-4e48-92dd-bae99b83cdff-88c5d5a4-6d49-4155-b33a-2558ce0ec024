@@ -1,0 +1,41 @@
+<!-- Chatbot Toggle Button -->
+<div class="chatbot-toggle" (click)="toggleChatbot()">
+    <i class="fas fa-comment-dots"></i>
+</div>
+
+<!-- Chatbot Popup -->
+<div class="chatbot-container" [class.active]="showChatbot" [class.maximized]="isMaximized">
+    <!-- Chatbot Header -->
+    <div class="chatbot-header">
+        <img src="https://cdn-icons-png.flaticon.com/512/6819/6819674.png" alt="EstateBot Logo">
+        <h3>EstateBot</h3>
+        <div class="chatbot-controls">
+            <button (click)="clearChat()"><i class="fas fa-sync"></i></button>
+
+            <button (click)="toggleSize()"><i class="fas fa-expand"></i></button>
+        </div>
+    </div>
+
+    <!-- Chatbox -->
+    <div class="chatbox">
+        <div *ngFor="let message of chatHistory" class="message" [ngClass]="{'user-message': message.sender === 'User', 'bot-message': message.sender === 'Bot'}">
+            <strong>{{ message.sender }}:</strong> {{ message.text }}
+        </div>
+    </div>
+
+    <!-- Dropdown for Questions -->
+    <div class="question-dropdown">
+        <select [(ngModel)]="selectedQuestion" (change)="sendSelectedQuestion()">
+            <option value="" disabled selected>Select a question</option>
+            <option *ngFor="let question of predefinedQuestions" [value]="question">{{ question }}</option>
+        </select>
+    </div>
+
+    <!-- Input & Submit Button -->
+    <div class="chat-input-container">
+        <input type="text" [(ngModel)]="userMessage" placeholder="Ask something...">
+        <button (click)="sendMessage()"><i class="fas fa-paper-plane"></i> Send</button>
+    </div>
+</div>
+
+
