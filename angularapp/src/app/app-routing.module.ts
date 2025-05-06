@@ -18,6 +18,9 @@ import { AdminControlPanelComponent } from './components/admin-control-panel/adm
 import { EditInquiryComponent } from './components/edit-inquiry/edit-inquiry.component';
 import { UserViewFeedbackComponent } from './components/user-view-feedback/user-view-feedback.component';
 import { UserViewInquiryComponent } from './components/user-view-inquiry/user-view-inquiry.component';
+import { UserGuard } from './components/user.guard';
+import { AdminGuard } from './components/admin.guard';
+import { BothGuard } from './components/both.guard';
 
 
 
@@ -27,22 +30,22 @@ const routes: Routes = [
   {path:'register',component:SignupComponent},
   {path:'adminnav',component:AdminnavComponent},
   {path:'usernav',component:UsernavComponent},
-  {path:'myinquiries',component:MyInquiryComponent},
-  {path:'inquiries',component:AdminViewInquiryComponent},
-  {path:'viewfeedback',component:AdminViewFeedbackComponent},
-  {path:'addfeedback',component:UserAddFeedbackComponent},
-  {path:"admin-view-property",component:AdminViewPropertyComponent},
-  { path: 'admin-edit-property/:id', component: AdminEditPropertyComponent },
-  {path:'user-view-property',component:UserViewPropertiesComponent},
-  {path:'user-add-inquiry/:id',component:UserAddInquiryComponent},
-  {path:'controlpanel',component:AdminControlPanelComponent},
-  {path:'editInquiry/:id',component:EditInquiryComponent},
-  {path:'addfeedback',component:UserAddFeedbackComponent},
-  {path:'user-view-feedback',component:UserViewFeedbackComponent},
-  { path: 'admin-add-property', component: AdminAddPropertyComponent},
-  {path:'user-view-inquiry',component:UserViewInquiryComponent},
-
-  {path:'user-view-property',component:UserViewPropertiesComponent}
+  {path:'myinquiries',component:MyInquiryComponent,canActivate:[UserGuard]},
+  {path:'inquiries',component:AdminViewInquiryComponent,canActivate:[AdminGuard]},
+  {path:'viewfeedback',component:AdminViewFeedbackComponent,canActivate:[BothGuard]},
+  {path:'addfeedback',component:UserAddFeedbackComponent,canActivate:[UserGuard]},
+  {path:"admin-view-property",component:AdminViewPropertyComponent,canActivate:[AdminGuard]},
+  { path: 'admin-edit-property/:id', component: AdminEditPropertyComponent,canActivate:[AdminGuard] },
+  {path:'user-view-property',component:UserViewPropertiesComponent,canActivate:[UserGuard]},
+  {path:'user-add-inquiry/:id',component:UserAddInquiryComponent,canActivate:[UserGuard]},
+  {path:'controlpanel',component:AdminControlPanelComponent,canActivate:[AdminGuard]},
+  {path:'editInquiry/:id',component:EditInquiryComponent,canActivate:[AdminGuard]},
+  {path:'addfeedback',component:UserAddFeedbackComponent,canActivate:[UserGuard]},
+  {path:'user-view-feedback',component:UserViewFeedbackComponent,canActivate:[UserGuard]},
+  {path: 'admin-add-property', component: AdminAddPropertyComponent,canActivate:[AdminGuard]},
+  {path:'user-view-inquiry',component:UserViewInquiryComponent,canActivate:[UserGuard]},
+  {path:'user-view-property',component:UserViewPropertiesComponent,canActivate:[UserGuard]},
+  
 
 ];
 

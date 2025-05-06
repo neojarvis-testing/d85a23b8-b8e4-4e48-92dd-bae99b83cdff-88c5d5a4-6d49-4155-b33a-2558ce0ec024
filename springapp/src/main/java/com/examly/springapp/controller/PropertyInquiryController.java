@@ -1,90 +1,111 @@
 package com.examly.springapp.controller;
 
 import java.util.List;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import com.examly.springapp.dtos.ApiResponse;
 import com.examly.springapp.dtos.PropertyInquiryInput;
 import com.examly.springapp.model.PropertyInquiry;
 import com.examly.springapp.service.PropertyInquiryServiceImpl;
 
-@RestController   //Defines this class as a REST controller
-@RequestMapping("/api/inquiries")  //Set Base URL
+/**
+ * REST Controller for managing property inquiries.
+ * Handles CRUD operations for inquiries, including retrieval, creation, update, and deletion.
+ */
+@RestController
+@RequestMapping("/api/inquiries")
 public class PropertyInquiryController {
-    private final PropertyInquiryServiceImpl propertyInquiryService; // Dependency injected via constructor
 
-    // Constructor-based injection
+    private final PropertyInquiryServiceImpl propertyInquiryService;
+
+    /**
+     * Constructor-based dependency injection for the property inquiry service.
+     * @param propertyInquiryService Service for handling property inquiries
+     */
     public PropertyInquiryController(PropertyInquiryServiceImpl propertyInquiryService) {
         this.propertyInquiryService = propertyInquiryService;
     }
 
-
-
-@PostMapping    // Handles HTTP POST requests for adding a new property inquiry
-public ResponseEntity<PropertyInquiry> addInquiry(@RequestBody PropertyInquiryInput propertyInquiryInput){
-    PropertyInquiry propertyInquiry = propertyInquiryService.addInquiry(propertyInquiryInput);
-    return ResponseEntity.status(201).body(propertyInquiry);
-}
-
-@GetMapping("/{inquiryId}")  // Handles HTTP GET requests for retrieving a specific inquiry by ID
-
-public ResponseEntity<Object> getInquiryById(@PathVariable long inquiryId){
-    PropertyInquiry propertyInquiry = propertyInquiryService.getInquiryById(inquiryId);  // Fetches inquiry by ID
-
-    if(propertyInquiry!=null){
-    return ResponseEntity.status(200).body(propertyInquiry); //Returns success status if propertyInquiry not null
+    /**
+     * Creates a new property inquiry.
+     * @param propertyInquiryInput Input data for the inquiry
+     * @return ResponseEntity containing the created inquiry and HTTP status
+     */
+    @PostMapping
+    public ResponseEntity<PropertyInquiry> addInquiry(@RequestBody PropertyInquiryInput propertyInquiryInput) {
+        PropertyInquiry propertyInquiry = propertyInquiryService.addInquiry(propertyInquiryInput);
+        return ResponseEntity.status(HttpStatus.CREATED).body(propertyInquiry);
     }
-    return ResponseEntity.status(404).body("Inquiry not found!"); //Returns 404 if not found
-}
 
-@GetMapping("/user/{userId}")   //Handles HTTP GET requests for retrieving all inquiries for a specific user
-public ResponseEntity<Object> getInquiriesByUser(@PathVariable long userId){
-    List<PropertyInquiry> propertyInquiriesList = propertyInquiryService.getInquiriesByUser(userId);
-    if(!propertyInquiriesList.isEmpty()){  // Returns list of inquiries if found
-    return ResponseEntity.status(200).body(propertyInquiriesList);
+    /**
+     * Retrieves a specific inquiry by its ID.
+     * @param inquiryId ID of the inquiry
+     * @return ResponseEntity containing the inquiry details or error message
+     */
+    @GetMapping("/{inquiryId}")
+    public ResponseEntity<Object> getInquiryById(@PathVariable long inquiryId) {
+        PropertyInquiry propertyInquiry = propertyInquiryService.getInquiryById(inquiryId);
+        if (propertyInquiry != null) {
+            return ResponseEntity.status(HttpStatus.OK).body(propertyInquiry);
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Inquiry not found!");
     }
-    return ResponseEntity.status(404).body("No Inquiries found!");  // Returns error response if no inquiries exist
-}
 
-@GetMapping
-public ResponseEntity<Object> getAllInquiries(){
-    List<PropertyInquiry> propertyInquiriesList = propertyInquiryService.getAllInquiries();
-    if(propertyInquiriesList!=null){
-    return ResponseEntity.status(200).body(propertyInquiriesList);
+    /**
+     * Retrieves all inquiries for a specific user.
+     * @param userId ID of the user
+     * @return ResponseEntity containing a list of inquiries or error message
+     */
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<Object> getInquiriesByUser(@PathVariable long userId) {
+        List<PropertyInquiry> propertyInquiriesList = propertyInquiryService.getInquiriesByUser(userId);
+        if (!propertyInquiriesList.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.OK).body(propertyInquiriesList);
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No inquiries found!");
     }
-    return ResponseEntity.status(404).body("No Inquiries found!");
-    
-}
 
-
-@PutMapping("/{inquiryId}")  // Handles HTTP PUT requests for updating a specific inquiry by ID
-public ResponseEntity<Object> updateInquiryById(@PathVariable long inquiryId,@RequestBody PropertyInquiry inquiries){
-    PropertyInquiry propertyInquiry = propertyInquiryService.updateInquiryById(inquiryId,inquiries);
-    if(propertyInquiry!=null){  // Returns updated inquiry if successful
-        return ResponseEntity.status(200).body(propertyInquiry);
+    /**
+     * Retrieves all inquiries from the database.
+     * @return ResponseEntity containing a list of inquiries or error message
+     */
+    @GetMapping
+    public ResponseEntity<Object> getAllInquiries() {
+        List<PropertyInquiry> propertyInquiriesList = propertyInquiryService.getAllInquiries();
+        if (propertyInquiriesList != null) {
+            return ResponseEntity.status(HttpStatus.OK).body(propertyInquiriesList);
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No inquiries found!");
     }
-    return ResponseEntity.status(404).body("Update is Unsuccessful!");
-}
 
-@DeleteMapping("/{inquiryId}")   //Handles HTTP DELETE requests for removing a specific inquiry by ID
-
-public ResponseEntity<ApiResponse> deleteInquiryById(@PathVariable long inquiryId){
-    boolean flag = propertyInquiryService.deleteInquiryById(inquiryId);
-    if(flag){
-        return ResponseEntity.status(200).body(new ApiResponse("Deletion is successfull!"));  // Confirms successful deletion
+    /**
+     * Updates an existing inquiry by its ID.
+     * @param inquiryId ID of the inquiry to update
+     * @param inquiries Updated inquiry object
+     * @return ResponseEntity containing updated inquiry or error message
+     */
+    @PutMapping("/{inquiryId}")
+    public ResponseEntity<Object> updateInquiryById(@PathVariable long inquiryId, @RequestBody PropertyInquiry inquiries) {
+        PropertyInquiry propertyInquiry = propertyInquiryService.updateInquiryById(inquiryId, inquiries);
+        if (propertyInquiry != null) {
+            return ResponseEntity.status(HttpStatus.OK).body(propertyInquiry);
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Update unsuccessful!");
     }
-    return ResponseEntity.status(404).body(new ApiResponse("Deletion is unsuccessfull!"));  // Returns error response if deletion fails
 
-}
-
-
-
+    /**
+     * Deletes an inquiry by its ID. 
+     * @param inquiryId ID of the inquiry to delete
+     * @return ResponseEntity containing success or failure message
+     */
+    @DeleteMapping("/{inquiryId}")
+    public ResponseEntity<ApiResponse> deleteInquiryById(@PathVariable long inquiryId) {
+        boolean flag = propertyInquiryService.deleteInquiryById(inquiryId);
+        if (flag) {
+            return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse("Deletion successful!"));
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiResponse("Deletion unsuccessful!"));
+    }
 }
