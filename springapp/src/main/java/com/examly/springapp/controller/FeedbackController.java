@@ -1,57 +1,79 @@
 package com.examly.springapp.controller;
 
 import java.util.List;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import com.examly.springapp.dtos.FeedbackDTO;
 import com.examly.springapp.model.Feedback;
 import com.examly.springapp.service.FeedbackServiceImpl;
 import jakarta.validation.Valid;
 
-@RequestMapping("/api/feedback")
+/**
+ * REST Controller for managing feedback-related operations.
+ * Provides endpoints for creating, retrieving, and deleting feedback entries.
+ */
 @RestController
+@RequestMapping("/api/feedback")
 public class FeedbackController {
     
-    private final FeedbackServiceImpl feedbackservice; // Dependency injected via constructor
+    private final FeedbackServiceImpl feedbackService;
 
-    // Constructor-based injection
-    public FeedbackController(FeedbackServiceImpl feedbackservice) {
-        this.feedbackservice = feedbackservice;
+    /**
+     * Constructor-based dependency injection for the feedback service.
+     * @param feedbackService Service for handling feedback operations
+     */
+    public FeedbackController(FeedbackServiceImpl feedbackService) {
+        this.feedbackService = feedbackService;
     }
 
-
-    // Create a new feedback entry
-     @PostMapping
-    public ResponseEntity<Feedback> createFeedback(@Valid @RequestBody  FeedbackDTO feedbackDTO) {
-    	Feedback feedback = feedbackservice.createFeedback(feedbackDTO);
-        return ResponseEntity.status(201).body(feedback); // Returns 201 Created
+    /**
+     * Creates a new feedback entry.
+     * @param feedbackDTO Data transfer object containing feedback details
+     * @return ResponseEntity containing the created feedback and HTTP status
+     */
+    @PostMapping
+    public ResponseEntity<Feedback> createFeedback(@Valid @RequestBody FeedbackDTO feedbackDTO) {
+        Feedback feedback = feedbackService.createFeedback(feedbackDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(feedback);
     }
 
-    // Get feedback by ID
+    /**
+     * Retrieves a feedback entry by its ID.
+     * @param feedbackId ID of the feedback entry
+     * @return ResponseEntity containing the feedback details or error message
+     */
     @GetMapping("/{feedbackId}")
     public ResponseEntity<Feedback> getFeedbackById(@PathVariable Long feedbackId) {
-        return ResponseEntity.status(200).body(feedbackservice.getFeedbackById(feedbackId)); // Returns 200 OK
+        return ResponseEntity.status(HttpStatus.OK).body(feedbackService.getFeedbackById(feedbackId));
     }
 
-    // Get all feedback entries
+    /**
+     * Retrieves all feedback entries.
+     * @return ResponseEntity containing a list of feedback entries or error message
+     */
     @GetMapping
     public ResponseEntity<List<Feedback>> getAllFeedbacks() {
-        return ResponseEntity.status(200).body(feedbackservice.getAllFeedbacks()); // Returns 200 OK
+        return ResponseEntity.status(HttpStatus.OK).body(feedbackService.getAllFeedbacks());
     }
 
-    // Get feedback by user ID
+    /**
+     * Retrieves all feedback entries provided by a specific user.
+     * @param userId ID of the user whose feedback entries need to be retrieved
+     * @return ResponseEntity containing a list of feedback entries or error message
+     */
     @GetMapping("/user/{userId}")
     public ResponseEntity<List<Feedback>> getFeedbacksByUserId(@PathVariable Long userId) {
-        return ResponseEntity.status(200).body(feedbackservice.getFeedbacksByUserId(userId)); // Returns 200 OK
+        return ResponseEntity.status(HttpStatus.OK).body(feedbackService.getFeedbacksByUserId(userId));
     }
 
-    /*
-     * 
-     * 
+    /**
+     * Deletes a feedback entry by its ID.
+     * @param feedbackId ID of the feedback entry to delete
+     * @return ResponseEntity containing a success message
      */
     @DeleteMapping("/{feedbackId}")
     public ResponseEntity<String> deleteFeedback(@PathVariable Long feedbackId) {
-        return ResponseEntity.status(200).body("Feedback deleted successfully."); // Returns 200 OK
+        return ResponseEntity.status(HttpStatus.OK).body("Feedback deleted successfully.");
     }
 }

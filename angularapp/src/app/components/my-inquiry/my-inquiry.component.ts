@@ -49,7 +49,7 @@ export class MyInquiryComponent implements OnInit {
    */
   filterInquiries(): void {
     this.filteredInquiries = this.inquiries.filter(inquiry => {
-      const matchesSearch = inquiry.message.toLowerCase().includes(this.searchText.toLowerCase());
+      const matchesSearch =  inquiry.property.title.toLowerCase().includes(this.searchText.toLowerCase());
       const matchesPriority = this.selectedPriority ? inquiry.priority === this.selectedPriority : true;
       return matchesSearch && matchesPriority;
     });

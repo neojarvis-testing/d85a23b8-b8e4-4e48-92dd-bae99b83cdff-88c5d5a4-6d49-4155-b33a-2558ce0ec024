@@ -122,17 +122,22 @@ export class UserAddFeedbackComponent implements OnInit {
       propertyId: this.propertyId
     };
 
+    console.log("Submitting Feedback: ", feedbackData); // Debugging log
+
     this.feedbackService.sendFeedback(feedbackData).subscribe({
       next: () => {
+        console.log("Feedback submitted successfully!"); // Debugging log
         this.successMessage = '✅ Feedback submitted successfully!';
         this.showPopup = false;
         feedbackForm.reset();
         this.router.navigate(['/user-view-feedback']);
       },
-      error: () => {
+      error: (err) => {
+        console.error("Failed to submit feedback:", err); // Debugging log
         this.errorMessage = '❌ Failed to submit feedback. Please try again.';
         this.showPopup = false;
       }
     });
-  }
+}
+
 }
